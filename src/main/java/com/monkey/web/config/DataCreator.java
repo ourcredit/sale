@@ -1,4 +1,4 @@
-package com.monkey.application;
+package com.monkey.web.config;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.monkey.application.Menus.IMenuService;
