@@ -1,0 +1,74 @@
+package com.monkey.web.controller;
+
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+
+import com.monkey.application.OperationLogs.IOperationLogService;
+import com.monkey.application.dtos.PagedAndFilterInputDto;
+import com.monkey.common.base.PublicResult;
+import com.monkey.common.base.PublicResultConstant;
+import com.monkey.core.entity.Log;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * <p>
+ * 操作日志 前端控制器
+ * </p>
+ *
+ * @author liugh123
+ * @since 2018-05-08
+ */
+@RestController
+@RequestMapping("/api/log")
+public class LogController {
+    @Autowired
+    IOperationLogService _logService;
+
+    // @Log(description="获取用户列表:/list")
+    @ApiOperation(value = "获取日志列表",notes = "日志列表")
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequiresPermissions(value = {"log:list"})
+    public PublicResult<Page<Log>> logs(@RequestBody PagedAndFilterInputDto page) throws Exception{
+        EntityWrapper<Log> filter = new EntityWrapper<>();
+        if (!page.filter.isEmpty()) {
+            filter.eq("roleName", page.filter);
+        }
+        Page<Log> res= _logService.selectPage(page.get_page(), filter);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, res);
+    }
+    @ApiOperation(value = "获取日志详情",notes = "日志列表")
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequiresPermissions(value = {"log:list"})
+    public PublicResult<Object> log(@PathVariable Integer id) throws Exception{
+        Log l=_logService.selectById(id);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, l);
+    }
+    @ApiOperation(value = "添加或编辑日志",notes = "日志列表")
+    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    @RequiresPermissions(value = {"log:add"})
+    public PublicResult<Object> insert(@RequestBody Log model) throws Exception{
+        Boolean r=_logService.insertOrUpdate(model);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    }
+    @ApiOperation(value = "删除日志",notes = "日志列表")
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequiresPermissions(value = {"log:delete"})
+    public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
+        Boolean r=_logService.deleteById(id);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    }
+    @ApiOperation(value = "批量删除日志",notes = "日志列表")
+    @RequestMapping(value = "/batch",method = RequestMethod.POST)
+    @RequiresPermissions(value = {"user:delette"})
+    public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
+        Boolean r=_logService.deleteBatchIds(ids);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    }
+}
+
