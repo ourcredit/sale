@@ -45,5 +45,4 @@ FROM
 	LEFT JOIN sale_role c ON b.roleId = c.id
 	where a.id=${id}
      </select>
-
 </mapper>
