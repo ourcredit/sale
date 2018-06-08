@@ -14,10 +14,10 @@
       </div>
       <div class="main">
       <Form ref="loginform" :rules="rules" :model="loginModel">
-          <FormItem prop="userNameOrEmailAddress">
+          <FormItem prop="userName">
             <div class="ivu-input-wrapper ivu-input-wrapper-large ivu-input-type">
               <i class="ivu-icon ivu-icon-ios-person-outline ivu-input-icon ivu-input-icon-normal" style="left:0"></i>
-              <input v-model="loginModel.userNameOrEmailAddress" 
+              <input v-model="loginModel.userName" 
               autocomplete="off" spellcheck="false" type="text"
                placeholder="用户名" class="ivu-input ivu-input-large" style="padding-left:32px;padding-right:0">
             </div>
@@ -54,8 +54,8 @@ import AbpBase from '../lib/abpbase'
 })
 export default class Login extends AbpBase {
   loginModel={
-    userNameOrEmailAddress:'',
-    password:'',
+    userName:'admin',
+    password:'1234567',
     rememberMe:false
   }
   async login(){
@@ -75,7 +75,7 @@ export default class Login extends AbpBase {
     });      
   }
   rules={
-    userNameOrEmailAddress: [
+    userName: [
       { required: true, message:'用户名必填', trigger: 'blur' }
     ],
     password: [

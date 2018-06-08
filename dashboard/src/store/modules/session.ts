@@ -15,14 +15,8 @@ class SessionStore implements Module<SessionState,any>{
     }
     actions={
         async init(content:ActionContext<SessionState,any>){
-            // let rep=await ajax.get('/api/services/app/Session/GetCurrentLoginInformations',{
-            //     headers:{
-            //         'Abp.TenantId': util.abp.multiTenancy.getTenantIdCookie()
-            //     }}
-            // );
-            // content.state.application=rep.data.result.application;
-            // content.state.user=rep.data.result.user;
-            // content.state.tenant=rep.data.result.tenant;
+            let rep=await ajax.get('/api/user/current');
+            content.state.user=rep.data;
         }
     }
 }

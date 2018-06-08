@@ -18,6 +18,7 @@ export const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
+    var token = Cookies.get('Abp.AuthToken');
     if (Cookies.get('locking') === '1' && to.name !== 'locking') {
         next({
             replace: true,
@@ -26,11 +27,11 @@ router.beforeEach((to, from, next) => {
     }else if (Cookies.get('locking') === '0' && to.name === 'locking') {
         next(false);
     } else {
-        if (!Util.abp.session.userId&& to.name !== 'login') {
+        if (!token&& to.name !== 'login') {
             next({
                 name: 'login'
             });
-        } else if (!!Util.abp.session.userId && to.name === 'login') {
+        } else if (!!token && to.name === 'login') {
             Util.title(to.meta.title);
             next({
                 name: 'home'

@@ -8,7 +8,6 @@ import './theme.less';
 import Vuex from 'vuex';
 import Ajax from './lib/ajax';
 import Util from './lib/util'
-import SignalRAspNetCoreHelper from './lib/SignalRAspNetCoreHelper'
 Vue.use(iView);
 //Vue.use(Vuex)
 import store from './store/index';
@@ -16,7 +15,10 @@ Vue.config.productionTip = false
 import { appRouters,otherRouters} from './router/router'
 if(!abp.utils.getCookieValue('Abp.Localization.CultureName')){
   let language=navigator.language;
-  abp.utils.setCookieValue('Abp.Localization.CultureName',language,new Date(new Date().getTime() + 5 * 365 * 86400000),abp.appPath);
+  abp.utils.setCookieValue('Abp.Localization.CultureName',
+    language,
+    new Date(new Date().getTime() + 5 * 365 * 86400000),
+    abp.appPath);
 }
 new Vue({
   render: h => h(App),
@@ -30,11 +32,6 @@ new Vue({
     await this.$store.dispatch({
       type:'session/init'
     })
-    if(!!this.$store.state.session.user&&this.$store.state.session.application.features['SignalR']){
-      if (this.$store.state.session.application.features['SignalR.AspNetCore']) {
-          SignalRAspNetCoreHelper.initSignalR();
-      }
-    }
     this.$store.commit('app/initCachepage');
     this.$store.commit('app/updateMenulist');
   },
