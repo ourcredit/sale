@@ -5,53 +5,52 @@
         <div class="header">
           <a>
             <img class="logo"/>
-            <span class="title">{{L('AppName')}}</span>
+            <span class="title">应用名称</span>
           </a>
         </div>
         <div class="desc">
-          {{L('WellcomeMessage')}}
+         欢迎信息
         </div>
       </div>
       <div class="main">
-        <div v-if="!!tenant" class="tenant-title"><a @click="showChangeTenant=true">{{L('CurrentTenant')}}:{{tenant.name}}</a></div>
-        <div v-if="!tenant" class="tenant-title"><a @click="showChangeTenant=true">{{L('NotSelected')}}</a></div>
-        <Form ref="loginform" :rules="rules" :model="loginModel">
+      <Form ref="loginform" :rules="rules" :model="loginModel">
           <FormItem prop="userNameOrEmailAddress">
             <div class="ivu-input-wrapper ivu-input-wrapper-large ivu-input-type">
               <i class="ivu-icon ivu-icon-ios-person-outline ivu-input-icon ivu-input-icon-normal" style="left:0"></i>
-              <input v-model="loginModel.userNameOrEmailAddress" autocomplete="off" spellcheck="false" type="text" :placeholder="L('UserNamePlaceholder')" class="ivu-input ivu-input-large" style="padding-left:32px;padding-right:0">
+              <input v-model="loginModel.userNameOrEmailAddress" 
+              autocomplete="off" spellcheck="false" type="text"
+               placeholder="用户名" class="ivu-input ivu-input-large" style="padding-left:32px;padding-right:0">
             </div>
           </FormItem>
           <FormItem prop="password">
             <div class="ivu-input-wrapper ivu-input-wrapper-large ivu-input-type">
               <i class="ivu-icon ivu-icon-ios-locked-outline ivu-input-icon ivu-input-icon-normal" style="left:0"></i>
-              <input v-model="loginModel.password" autocomplete="off" spellcheck="false" type="password" :placeholder="L('PasswordPlaceholder')" class="ivu-input ivu-input-large" style="padding-left:32px;padding-right:0">
+              <input v-model="loginModel.password" autocomplete="off"
+               spellcheck="false" type="password" 
+               placeholder="密码" class="ivu-input ivu-input-large" style="padding-left:32px;padding-right:0">
             </div>
           </FormItem>
         </Form>
         <div>
-          <Checkbox v-model="loginModel.rememberMe" size="large">{{L('RememberMe')}}</Checkbox>
-          <a style="float:right;font-size: 14px;margin-top: 3px;">{{L('ForgetPassword')}}</a>
+          <Checkbox v-model="loginModel.rememberMe" size="large">记住我</Checkbox>
+          <a style="float:right;font-size: 14px;margin-top: 3px;">忘记密码</a>
         </div>
         <div style="margin-top:15px">
-          <Button type="primary" @click="login" long size="large">{{L('LogIn')}}</Button>
+          <Button type="primary" @click="login" long size="large">登入</Button>
         </div>
-        <language-switch></language-switch>
       </div>
     </div>
-    <Footer :copyright="L('CopyRight')"></Footer>
-    <tenant-switch v-model="showChangeTenant"></tenant-switch>
+    <Footer copyright="@CopyRight"></Footer>
   </div>
 </template>
 <script lang="ts">
 import { Component, Vue,Inject } from 'vue-property-decorator';
 import Footer from '../components/Footer.vue'
-import TenantSwitch from '../components/tenant-switch.vue'
-import LanguageSwitch from '../components/language-switch.vue'
 import iView from 'iview';
 import AbpBase from '../lib/abpbase'
 @Component({
-  components:{Footer,TenantSwitch,LanguageSwitch}
+  components:{
+    Footer}
 })
 export default class Login extends AbpBase {
   loginModel={
@@ -59,12 +58,11 @@ export default class Login extends AbpBase {
     password:'',
     rememberMe:false
   }
-  showChangeTenant:boolean=false
   async login(){
     (this.$refs.loginform as any).validate(async (valid:boolean)=>{
        if(valid){
           this.$Message.loading({
-            content:this.L('LoginPrompt'),
+            content:"登陆中",
             duration:0
           })
           await this.$store.dispatch({
@@ -76,15 +74,12 @@ export default class Login extends AbpBase {
        }
     });      
   }
-  get tenant(){
-    return this.$store.state.session.tenant;
-  }
   rules={
     userNameOrEmailAddress: [
-      { required: true, message: this.L('UserNameRequired'), trigger: 'blur' }
+      { required: true, message:'用户名必填', trigger: 'blur' }
     ],
     password: [
-      { required: true, message: this.L('PasswordRequired'), trigger: 'blur' }
+      { required: true, message: '密码必填', trigger: 'blur' }
     ]
   }
   created(){
