@@ -1,5 +1,5 @@
 <style lang="less">
-    @import '../styles/menu.less';
+@import "../styles/menu.less";
 </style>
 
 <template>
@@ -18,7 +18,7 @@
                 <template v-for="child in item.children">
                     <MenuItem :name="child.name" :key="child.name"> 
                         <i class="iconfont" v-html="child.icon"></i>                       
-                        <span>{{ L(child.meta.title) }}</span>
+                        <span>{{child.meta.title }}</span>
                     </MenuItem>
                 </template>
             </Submenu>
@@ -27,28 +27,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue,Inject,Prop,Emit } from 'vue-property-decorator';
-import AbpBase from '../../../lib/abpbase'
+import { Component, Vue, Inject, Prop, Emit } from "vue-property-decorator";
+import AbpBase from "../../../lib/abpbase";
 @Component({})
 export default class SidebarMenu extends AbpBase {
-    name:string='sidebarMenu';
-    @Prop({type:Array}) menuList:Array<any>;
-    @Prop({type:Number}) iconSize:number;
-    @Prop({type:String,default:'dark'}) menuTheme:string;
-    @Prop({type:Array}) openNames:Array<string>;
-    itemTitle(item:any):string{
-        return this.L(item.meta.title);
-    }
-    @Emit('on-change')
-    changeMenu(active:string){
-    }
-    updated () {
-        this.$nextTick(() => {
-            if (this.$refs.sideMenu) {
-                (this.$refs.sideMenu as any).updateActiveName();
-            }
-        });
-    }
-
+  name: string = "sidebarMenu";
+  @Prop({ type: Array })
+  menuList: Array<any>;
+  @Prop({ type: Number })
+  iconSize: number;
+  @Prop({ type: String, default: "dark" })
+  menuTheme: string;
+  @Prop({ type: Array })
+  openNames: Array<string>;
+  itemTitle(item: any): string {
+    return this.L(item.meta.title);
+  }
+  @Emit("on-change")
+  changeMenu(active: string) {}
+  updated() {
+    this.$nextTick(() => {
+      if (this.$refs.sideMenu) {
+        (this.$refs.sideMenu as any).updateActiveName();
+      }
+    });
+  }
 }
 </script>

@@ -91,8 +91,8 @@
         async getpage(){
             let where= Util.buildFilters(this.filters);
             let pagerequest=new PageRequest();
-            pagerequest.maxResultCount=this.pageSize;
-            pagerequest.skipCount=(this.currentPage-1)*this.pageSize;
+            pagerequest.size=this.pageSize;
+            pagerequest.index=this.currentPage;
             pagerequest.where=where;
             await this.$store.dispatch({
                 type:'tenant/getAll',

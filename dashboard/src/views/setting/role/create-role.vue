@@ -10,13 +10,13 @@
                 <Tabs value="detail">
                     <TabPane :label="L('RoleDetails')" name="detail">
                         <FormItem :label="L('RoleName')" prop="name">
-                            <Input v-model="role.name" :maxlength="32" :minlength="2"></Input>
+                            <Input v-model="role.name" :maxlength="32" :minlength="2"/>
                         </FormItem>
                         <FormItem :label="L('DisplayName')" prop="displayName">
-                            <Input v-model="role.displayName" :maxlength="32" :minlength="2"></Input>
+                            <Input v-model="role.displayName" :maxlength="32" :minlength="2"/>
                         </FormItem>
                         <FormItem :label="L('Description')" prop="description">
-                            <Input v-model="role.description" :maxlength="1024"></Input>
+                            <Input v-model="role.description" :maxlength="1024"/>
                         </FormItem>
                       </TabPane>
                     <TabPane :label="L('RolePermission')" name="permission">

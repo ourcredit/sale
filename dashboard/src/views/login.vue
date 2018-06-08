@@ -62,7 +62,7 @@ export default class Login extends AbpBase {
     (this.$refs.loginform as any).validate(async (valid:boolean)=>{
        if(valid){
           this.$Message.loading({
-            content:"登陆中",
+            content:"登录中...",
             duration:0
           })
           await this.$store.dispatch({

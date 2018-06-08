@@ -4,7 +4,8 @@
 <template>
   <div class="main" :class="{'main-hide-text': shrink}">
     <div class="sidebar-menu-con" :style="{width: shrink?'80px':'256px', overflow: shrink ? 'visible' : 'auto'}">
-      <shrinkable-menu :shrink="shrink" @on-change="handleSubmenuChange" :theme="menuTheme" :before-push="beforePush" :open-names="openedSubmenuArr"
+      <shrinkable-menu :shrink="shrink" @on-change="handleSubmenuChange"
+       :theme="menuTheme" :before-push="beforePush" :open-names="openedSubmenuArr"
         :menu-list="menuList">
         <div slot="top" class="logo-con">
           <a>
@@ -31,7 +32,6 @@
           <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
           <lock-screen></lock-screen>
           <notice></notice>
-          <language-list></language-list>
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
               <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
@@ -81,7 +81,6 @@
   import notice from '../components/notices/notice.vue';
   import util from '../lib/util';
   import copyfooter from '../components/Footer.vue'
-  import LanguageList from '../components/language-list.vue'
   import AbpBase from '../lib/abpbase'
   @Component({
     components: {
@@ -91,8 +90,7 @@
       fullScreen,
       lockScreen,
       notice,
-      copyfooter,
-      LanguageList
+      copyfooter
     }
   })
   export default class Main extends AbpBase {

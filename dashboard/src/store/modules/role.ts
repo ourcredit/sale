@@ -23,11 +23,11 @@ class RoleModule extends ListModule<RoleState,any,Role>{
     actions={
         async getAll(context:ActionContext<RoleState,any>,payload:any){
             context.state.loading=true;
-            let reponse=await Ajax.get('/api/services/app/Role/GetAll',{params:payload.data});
+            let reponse=await Ajax.post('/api/role',payload.data);
             context.state.loading=false;
-            let page=reponse.data.result as PageResult<Role>;
-            context.state.totalCount=page.totalCount;
-            context.state.list=page.items;
+            let page=reponse.data as PageResult<Role>;
+            context.state.totalCount=page.total;
+            context.state.list=page.records;
         },
         async create(context:ActionContext<RoleState,any>,payload:any){
             await Ajax.post('/api/services/app/Role/Create',payload.data);

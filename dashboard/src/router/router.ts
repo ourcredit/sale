@@ -4,9 +4,6 @@ declare global {
   }
   var System: System;
 }
-import login from "../views/login.vue";
-import home from "../views/home/home.vue";
-import main from "../views/main.vue";
 export const locking = {
   path: "/locking",
   name: "locking",
@@ -26,7 +23,7 @@ export const otherRouters = {
   name: "main",
   permission: "",
   meta: { title: "ManageMenu" },
-  component: main,
+  component:() => System.import("../views/main.vue") ,
   children: [
     {
       path: "home",
@@ -43,7 +40,7 @@ export const appRouters = [
     permission: "",
     meta: { title: "系统管理" },
     icon: "&#xe68a;",
-    component: main,
+    component: () => System.import("../views/main.vue") ,
     children: [
       {
         path: "user",
@@ -64,6 +61,14 @@ export const appRouters = [
        // permission: "Pages.Tenants",
         meta: { title: "菜单管理" },
         name: "menus",
+        component: () => System.import("../views/setting/tenant/tenant.vue")
+      }
+      ,
+      {
+        path: "logs",
+       // permission: "Pages.Tenants",
+        meta: { title: "日志管理" },
+        name: "logs",
         component: () => System.import("../views/setting/tenant/tenant.vue")
       }
     ]

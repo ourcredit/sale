@@ -98,8 +98,8 @@ class Util{
         }
     }
     title(title:string){
-        let appname=this.abp.localization.localize('AppName',appconst.localization.defaultLocalizationSourceName);
-        let page=this.abp.localization.localize(title,appconst.localization.defaultLocalizationSourceName);
+        let appname="monkey";
+        let page="page";
         window.document.title = appname+'--'+page;
     }
     inOf(arr:Array<any>, targetArr:any) {

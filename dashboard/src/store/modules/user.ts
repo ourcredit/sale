@@ -27,11 +27,11 @@ class UserModule extends ListModule<UserState,any,User>{
     actions={
         async getAll(context:ActionContext<UserState,any>,payload:any){
             context.state.loading=true;
-            let reponse=await Ajax.get('/api/services/app/User/GetAll',{params:payload.data});
+            let reponse=await Ajax.post('/api/user',payload.data);
             context.state.loading=false;
-            let page=reponse.data.result as PageResult<User>;
-            context.state.totalCount=page.totalCount;
-            context.state.list=page.items;
+            let page=reponse.data as PageResult<User>;
+            context.state.totalCount=page.total;
+            context.state.list=page.records;
         },
         async create(context:ActionContext<UserState,any>,payload:any){
             await Ajax.post('/api/services/app/User/Create',payload.data);

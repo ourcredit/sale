@@ -22,9 +22,9 @@ class TenantModule extends ListModule<TenantState,any,Tenant>{
             context.state.loading=true;
             let reponse=await Ajax.get('/api/services/app/Tenant/GetAll',{params:payload.data});
             context.state.loading=false;
-            let page=reponse.data.result as PageResult<Tenant>;
-            context.state.totalCount=page.totalCount;
-            context.state.list=page.items;
+            let page=reponse.data as PageResult<Tenant>;
+            context.state.totalCount=page.total;
+            context.state.list=page.records;
         },
         async create(context:ActionContext<TenantState,any>,payload:any){
             await Ajax.post('/api/services/app/Tenant/Create',payload.data);
