@@ -24,7 +24,7 @@ import java.util.List;
 public class RoleMenuServiceImpl extends ServiceImpl<RolemenuRepository, Rolemenu> implements IRoleMenuService {
 
     @Override
-    @Cacheable(value = "RoleToMenuServiceImpl:selectByRoleId", key = "'role_'.concat(#root.args[0])")
+  //  @Cacheable(value = "RoleToMenuServiceImpl:selectByRoleId", key = "'role_'.concat(#root.args[0])")
     public List<Rolemenu> selectByRoleId(Integer roleId) {
         EntityWrapper<Rolemenu> ew = new EntityWrapper<>();
         ew.where("role_id={0}", roleId);
