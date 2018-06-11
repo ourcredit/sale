@@ -5,25 +5,25 @@
                 <Form ref="queryForm" :label-width="90" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="8">
-                            <FormItem label="角色名" style="width:100%">
+                            <FormItem label="角色名:" style="width:100%">
                                 <Input v-model="filters[0].Value"></Input>
                             </FormItem>
                         </Col>
-                        <Col span="8">
-                            <FormItem label="显示名" style="width:100%">
+                        <Col span="6">
+                            <FormItem label="显示名:" style="width:100%">
                                 <Input v-model="filters[1].Value"></Input>
                             </FormItem>
                         </Col>
-                        <Col span="8">
-                            <FormItem label="描述" style="width:100%">
+                        <Col span="6">
+                            <FormItem label="描述:" style="width:100%">
                                 <Input v-model="filters[2].Value"></Input>
                             </FormItem>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Button @click="create" icon="android-add" type="primary" size="large">添加</Button>
+                          <Col span="4">
+                            <Button @click="create" icon="android-add" type="primary" size="large">添加</Button>
                         <Button icon="ios-search" type="primary" size="large" @click="getpage"
                          class="toolbar-btn">查找</Button>
+                        </Col>
                     </Row>
                 </Form>
                 <div class="margin-top-10">

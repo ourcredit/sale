@@ -4,17 +4,17 @@
             <div class="page-body">
                 <Form ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
-                        <Col span="6">
+                        <Col span="5">
                             <FormItem label="用户名:" style="width:100%">
                                 <Input v-model="filters[0].Value"></Input>
                             </FormItem>
                         </Col>
-                        <Col span="6">
+                        <Col span="5">
                             <FormItem label="姓名" style="width:100%">
                                 <Input v-model="filters[1].Value"></Input>
                             </FormItem>
                         </Col>
-                        <Col span="6">
+                        <Col span="5">
                             <FormItem label="状态" style="width:100%">
                                 <Select :value="'All'" placeholder="请选择" @on-change="isActiveChange">
                                     <Option value="All">全部</Option>
@@ -23,7 +23,7 @@
                                 </Select>
                             </FormItem>
                         </Col>
-                        <Col span="6">
+                        <Col span="5">
                             <FormItem label="创建时间" style="width:100%">
                                 <DatePicker  v-model="filters[2].Value"
                                  type="datetimerange" format="yyyy-MM-dd"
@@ -31,12 +31,13 @@
                                    placeholder="选择时间"></DatePicker>
                             </FormItem>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Button @click="create" icon="android-add" type="primary" size="large">新增</Button>
+                         <Col span="4">
+                           <Button @click="create" icon="android-add" type="primary" size="large">新增</Button>
                         <Button icon="ios-search" type="primary" size="large"
                          @click="getpage" class="toolbar-btn">查找</Button>
+                        </Col>
                     </Row>
+                
                 </Form>
                 <div class="margin-top-10">
                     <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">

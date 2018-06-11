@@ -40,7 +40,7 @@
                   <Icon type="arrow-down-b"></Icon>
                 </a>
                 <DropdownMenu slot="list">
-                  <DropdownItem name="ownSpace">头像</DropdownItem>
+                  <DropdownItem name="ownSpace">个人设置</DropdownItem>
                   <DropdownItem name="loginout" divided>登出</DropdownItem>
                 </DropdownMenu>
               </Dropdown>

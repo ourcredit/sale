@@ -53,7 +53,7 @@
                         <TabPane :label="taskLabel" name="task">
                             <div class="noFound" v-if="!taskCount">
                                 <i class="iconfont">&#xe6b2;</i>
-                                <div class="noTitle">{{L('NoTask')}}</div>
+                                <div class="noTitle">无</div>
                             </div>
                             <div  v-if="taskCount">
                                 <Spin size="large" fix v-if="noticeSpinShow"></Spin>
