@@ -7,12 +7,12 @@
         <div class="close-all-tag-con">
             <Dropdown transfer @on-click="handleTagsOption">
                 <Button size="small" type="primary">
-                    {{L('LabelOptions')}}
+                    点击展开
                     <Icon type="arrow-down-b"></Icon>
                 </Button>
                 <DropdownMenu slot="list">
-                    <DropdownItem name="clearAll">{{L('ClearAll')}}</DropdownItem>
-                    <DropdownItem name="clearOthers">{{L('ClearOthers')}}</DropdownItem>
+                    <DropdownItem name="clearAll">关闭所有</DropdownItem>
+                    <DropdownItem name="clearOthers">关闭其他</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
@@ -61,7 +61,7 @@ export default class TagsPageOpened extends AbpBase {
         return this.$store.state.app.pageOpenedList;
     }
     itemTitle (item:any) {
-        return this.L(item.meta.title);
+        return item.meta.title;
     }
     closePage (event:any, name:string) {
         this.$store.commit('app/removeTag', name);

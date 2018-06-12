@@ -9,7 +9,7 @@
                         <TabPane :label="noticeLabel" name="notice">
                             <div class="noFound" v-if="!noticeCount">
                                 <i class="iconfont">&#xe70a;</i>
-                                <div class="noTitle">{{L('NoNotice')}}</div>
+                                <div class="noTitle">无提醒</div>
                             </div>
                             <div v-if="noticeCount">
                                 <div class="list">
@@ -32,7 +32,7 @@
                         <TabPane :label="messageLabel" name="message">
                             <div class="noFound" v-if="!messageCount">
                                 <i class="iconfont">&#xe66b;</i>
-                                <div class="noTitle">{{L('NoMessage')}}</div>
+                                <div class="noTitle">无消息</div>
                             </div>
                             <div  v-if="messageCount">
                                 <Spin size="large" fix v-if="noticeSpinShow"></Spin>
