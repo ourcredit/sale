@@ -46,9 +46,10 @@ class UserModule extends ListModule<UserState,any,User>{
             let reponse=await Ajax.get('/api/services/app/User/Get?Id='+payload.id);
             return reponse.data.result as User;
         },
-        async getRoles(context:ActionContext<UserState,any>){
-            let reponse=await Ajax.get('/api/services/app/User/GetRoles');
-            context.state.roles=reponse.data.result.items as Role[];
+        async getRoles(context: ActionContext<UserState, any>) {
+            let reponse = await Ajax.post('/api/role', { index: 1, size: 99 });
+            console.log(reponse);
+            context.state.roles=reponse.data.records ;
         }
     };
     mutations={

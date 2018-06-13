@@ -2,21 +2,16 @@
     <div>
         <Card dis-hover>
             <div class="page-body">
-                <Form ref="queryForm" :label-width="90" label-position="left" inline>
-                    <Row :gutter="16">
-                        <Col span="8">
-                            <FormItem label="角色名:" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
+                <Form ref="queryForm" :label-width="60" label-position="left" inline>
+                    <Row :gutter="4">
+                        <Col span="4">
+                            <FormItem label="角色名:" >
+                                <Input v-model="filters.roleName"></Input>
                             </FormItem>
                         </Col>
-                        <Col span="6">
-                            <FormItem label="显示名:" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
-                            </FormItem>
-                        </Col>
-                        <Col span="6">
-                            <FormItem label="描述:" style="width:100%">
-                                <Input v-model="filters[2].Value"></Input>
+                        <Col span="4">
+                            <FormItem label="显示名:" >
+                                <Input v-model="filters.displayName"></Input>
                             </FormItem>
                         </Col>
                           <Col span="4">
@@ -57,26 +52,10 @@ export default class Roles extends AbpBase {
   edit() {
     this.editModalShow = true;
   }
-  filters: Filter[] = [
-    {
-      Type: FieldType.String,
-      Value: "",
-      FieldName: "Name",
-      CompareType: CompareType.Contains
-    },
-    {
-      Type: FieldType.String,
-      Value: "",
-      FieldName: "DisplayName",
-      CompareType: CompareType.Contains
-    },
-    {
-      Type: FieldType.DataRange,
-      Value: "",
-      FieldName: "Description",
-      CompareType: CompareType.Contains
-    }
-  ];
+  filters: Object = {
+    roleName: "",
+    displayName: ""
+  };
   createModalShow: boolean = false;
   editModalShow: boolean = false;
   get list() {
@@ -97,11 +76,10 @@ export default class Roles extends AbpBase {
     this.getpage();
   }
   async getpage() {
-    let where = Util.buildFilters(this.filters);
     let pagerequest = new PageRequest();
     pagerequest.size = this.pageSize;
     pagerequest.index = this.currentPage;
-    pagerequest.where = where;
+    pagerequest.where = this.filters;
     await this.$store.dispatch({
       type: "role/getAll",
       data: pagerequest
@@ -132,7 +110,7 @@ export default class Roles extends AbpBase {
     {
       title: "创建时间",
       render: (h: any, params: any) => {
-          return h(
+        return h(
           "span",
           new Date(params.row.creationTime).toLocaleDateString()
         );
@@ -161,7 +139,7 @@ export default class Roles extends AbpBase {
                 }
               }
             },
-           "编辑"
+            "编辑"
           ),
           h(
             "Button",

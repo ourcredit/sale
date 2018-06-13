@@ -6,26 +6,27 @@
                     <Row :gutter="16">
                         <Col span="5">
                             <FormItem label="用户名:" style="width:100%">
-                                <Input v-model="filters[0].Value"></Input>
+                                <Input v-model="filters.account"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
                             <FormItem label="姓名" style="width:100%">
-                                <Input v-model="filters[1].Value"></Input>
+                                <Input v-model="filters.userName"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
                             <FormItem label="状态" style="width:100%">
-                                <Select :value="'All'" placeholder="请选择" @on-change="isActiveChange">
-                                    <Option value="All">全部</Option>
-                                    <Option value="Actived">激活</Option>
-                                    <Option value="NoActive">禁用</Option>
+                                <Select v-model="filters.isActive"
+                                 :value="'null'" placeholder="请选择" >
+                                    <Option value="null">全部</Option>
+                                    <Option value="true">激活</Option>
+                                    <Option value="false">禁用</Option>
                                 </Select>
                             </FormItem>
                         </Col>
                         <Col span="5">
                             <FormItem label="创建时间" style="width:100%">
-                                <DatePicker  v-model="filters[2].Value"
+                                <DatePicker  v-model="filters.creationTime"
                                  type="datetimerange" format="yyyy-MM-dd"
                                   style="width:100%" placement="bottom-end"
                                    placeholder="选择时间"></DatePicker>
@@ -70,32 +71,12 @@ export default class Users extends AbpBase {
   edit() {
     this.editModalShow = true;
   }
-  filters: Filter[] = [
-    {
-      Type: FieldType.String,
-      Value: "",
-      FieldName: "UserName",
-      CompareType: CompareType.Contains
-    },
-    {
-      Type: FieldType.String,
-      Value: "",
-      FieldName: "Name",
-      CompareType: CompareType.Contains
-    },
-    {
-      Type: FieldType.DataRange,
-      Value: "",
-      FieldName: "CreationTime",
-      CompareType: CompareType.Contains
-    },
-    {
-      Type: FieldType.Boolean,
-      Value: null,
-      FieldName: "IsActive",
-      CompareType: CompareType.Equal
-    }
-  ];
+  filters: Object = {
+    account:'',
+    userName:'',
+    creationTime:null,
+    isActive:null
+  };
   createModalShow: boolean = false;
   editModalShow: boolean = false;
   get list() {
@@ -107,15 +88,6 @@ export default class Users extends AbpBase {
   create() {
     this.createModalShow = true;
   }
-  isActiveChange(val: string) {
-    if (val === "Actived") {
-      this.filters[3].Value = true;
-    } else if (val === "NoActive") {
-      this.filters[3].Value = false;
-    } else {
-      this.filters[3].Value = null;
-    }
-  }
   pageChange(page: number) {
     this.$store.commit("user/setCurrentPage", page);
     this.getpage();
@@ -125,11 +97,10 @@ export default class Users extends AbpBase {
     this.getpage();
   }
   async getpage() {
-    let where = Util.buildFilters(this.filters);
     let pagerequest = new PageRequest();
     pagerequest.size = this.pageSize;
     pagerequest.index = this.currentPage;
-    pagerequest.where = where;
+    pagerequest.where = this.filters;
     await this.$store.dispatch({
       type: "user/getAll",
       data: pagerequest

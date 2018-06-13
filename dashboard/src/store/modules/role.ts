@@ -43,8 +43,8 @@ class RoleModule extends ListModule<RoleState,any,Role>{
             return reponse.data.result as Role;
         },
         async getAllPermissions(context:ActionContext<RoleState,any>){
-            let reponse=await Ajax.get('/api/services/app/Role/getAllPermissions');
-            context.state.permissions=reponse.data.result.items;
+            let reponse=await Ajax.post('/api/menu',{index:1,size:999});
+            context.state.permissions=reponse.data.records;
         }
     };
     mutations={

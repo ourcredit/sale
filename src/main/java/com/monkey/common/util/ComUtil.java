@@ -138,7 +138,7 @@ public class ComUtil {
         return str1 != null ? str1.equalsIgnoreCase(str2) : str2 == null;
     }
     public static EntityWrapper genderFilter(EntityWrapper e, Map<String,Object> m){
-        if (!m.isEmpty()) {
+        if (m!=null&& !m.isEmpty()) {
             Set<String> r=   m.keySet();
             for (String key :r){
                 Object v=m.get(key);
@@ -149,14 +149,28 @@ public class ComUtil {
                     if(!s.isEmpty()){
                         e.like(key,s);
                     }
-                } else if (v instanceof Date) {
+                }else if(v instanceof  Boolean){
+                    Boolean b=((Boolean)v).booleanValue();
+                    if(b!=null){
+                        e.eq(key,b);
+                    }
+                }
+                else if (v instanceof Date) {
                     Date d = (Date) v;
                     e.eq(key,d);
                 }else if(v instanceof List){
                     List a=(List)v;
                     if(!a.isEmpty()&&a.size()==2){
-                        e.ge(key, a.get(0));
-                        e.le(key,a.get(1));
+                        String l=a.get(0).toString();
+                        if(!l.isEmpty()){
+                            e.ge(key, l);
+
+                        }
+                        String rr=a.get(1).toString();
+                        if(!rr.isEmpty()){
+                            e.le(key,rr);
+
+                        }
                     }
 
                 }
