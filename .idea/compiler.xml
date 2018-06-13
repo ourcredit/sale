@@ -9,11 +9,5 @@
         <module name="sale" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="application" target="1.8" />
-      <module name="common" target="1.8" />
-      <module name="core" target="1.8" />
-      <module name="web" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

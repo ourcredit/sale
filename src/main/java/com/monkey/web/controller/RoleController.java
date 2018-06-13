@@ -10,6 +10,7 @@ import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.application.dtos.RoleMenuInput;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
+import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Role;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -41,10 +43,8 @@ public class RoleController {
     @RequiresPermissions(value = {"role:list"})
     public PublicResult<Page<Role>> roles(@RequestBody PagedAndFilterInputDto page) throws Exception {
         EntityWrapper<Role> filter = new EntityWrapper<>();
-        if (!page.filter.isEmpty()) {
-            filter.eq("roleName", page.filter);
-        }
-        Page<Role> res = _roleService.selectPage(page.get_page(), filter);
+        filter=  ComUtil.genderFilter(filter,page.where);
+        Page<Role> res = _roleService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
 

@@ -9,6 +9,7 @@ import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
+import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Menu;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -41,10 +43,8 @@ public class MenuController {
     @RequiresPermissions(value = {PermissionConst._menu.list})
     public PublicResult<Page<Menu>> menus(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Menu> filter = new EntityWrapper<>();
-        if (!page.filter.isEmpty()) {
-            filter.eq("roleName", page.filter);
-        }
-        Page<Menu> res= _menuService.selectPage(page.get_page(), filter);
+         filter=  ComUtil.genderFilter(filter,page.where);
+        Page<Menu> res= _menuService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取菜单详情",notes = "菜单列表")

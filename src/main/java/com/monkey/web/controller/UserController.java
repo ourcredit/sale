@@ -11,6 +11,7 @@ import com.monkey.application.dtos.UserRoleInput;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
+import com.monkey.common.util.ComUtil;
 import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -43,10 +45,8 @@ public class UserController {
     @RequiresPermissions(value = {PermissionConst._user.list})
     public PublicResult<Page<User>> users(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<User> filter = new EntityWrapper<User>();
-        if (!page.filter.isEmpty()) {
-            filter.eq("username", page.filter);
-        }
-        Page<User> res= _userService.selectPage(page.get_page(),filter);
+        filter=  ComUtil.genderFilter(filter,page.where);
+        Page<User> res= _userService.selectPage(new Page<>(page.index,page.size),filter);
 
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }

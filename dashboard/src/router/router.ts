@@ -69,7 +69,7 @@ export const appRouters = [
        // permission: "Pages.Tenants",
         meta: { title: "日志管理" },
         name: "logs",
-        component: () => System.import("../views/setting/tenant/tenant.vue")
+        component: () => System.import("../views/setting/operatelog/index.vue")
       }
     ]
   }

@@ -1,8 +1,10 @@
 package com.monkey.common.util;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.google.gson.JsonArray;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * @author liugh
@@ -135,5 +137,32 @@ public class ComUtil {
     public static boolean equalsIgnoreCase(String str1, String str2) {
         return str1 != null ? str1.equalsIgnoreCase(str2) : str2 == null;
     }
+    public static EntityWrapper genderFilter(EntityWrapper e, Map<String,Object> m){
+        if (!m.isEmpty()) {
+            Set<String> r=   m.keySet();
+            for (String key :r){
+                Object v=m.get(key);
+                if (v instanceof Number) {
+                    e.eq(key,v);
+                } else if (v instanceof String) {
+                    String s = (String) v;
+                    if(!s.isEmpty()){
+                        e.like(key,s);
+                    }
+                } else if (v instanceof Date) {
+                    Date d = (Date) v;
+                    e.eq(key,d);
+                }else if(v instanceof List){
+                    List a=(List)v;
+                    if(!a.isEmpty()&&a.size()==2){
+                        e.ge(key, a.get(0));
+                        e.le(key,a.get(1));
+                    }
 
+                }
+
+            }
+        }
+        return  e;
+    }
 }

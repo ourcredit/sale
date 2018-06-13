@@ -8,13 +8,16 @@ import com.monkey.application.OperationLogs.IOperationLogService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
+import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -36,10 +39,8 @@ public class LogController {
     @RequiresPermissions(value = {"log:list"})
     public PublicResult<Page<Log>> logs(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Log> filter = new EntityWrapper<>();
-        if (!page.filter.isEmpty()) {
-            filter.eq("roleName", page.filter);
-        }
-        Page<Log> res= _logService.selectPage(page.get_page(), filter);
+      filter=  ComUtil.genderFilter(filter,page.where);
+        Page<Log> res= _logService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取日志详情",notes = "日志列表")
@@ -59,7 +60,7 @@ public class LogController {
     @ApiOperation(value = "删除日志",notes = "日志列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {"log:delete"})
-    public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
+    public PublicResult<Object> delete(@PathVariable String id) throws Exception{
         Boolean r=_logService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
