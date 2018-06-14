@@ -49,6 +49,24 @@ public class Role extends Model<Role> {
      */
     private Integer creatorUserId;
 
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
+
+    public Integer getIsStatic() {
+        return isStatic;
+    }
+
+    public void setIsStatic(Integer isStatic) {
+        this.isStatic = isStatic;
+    }
+
+    private Integer isActive;
+    private  Integer isStatic;
 
     public Integer getId() {
         return id;

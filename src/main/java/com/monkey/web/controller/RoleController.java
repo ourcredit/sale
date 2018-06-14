@@ -11,14 +11,13 @@ import com.monkey.application.dtos.RoleMenuInput;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
+import com.monkey.core.dtos.RoleDto;
 import com.monkey.core.entity.Role;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Set;
 
 /**
  * <p>
@@ -60,7 +59,7 @@ public class RoleController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {"role:list"})
     public PublicResult<Object> role(@PathVariable Integer id) throws Exception {
-        Role r = _roleService.selectById(id);
+        RoleDto r = _roleService.selectRoleAndPermissionsById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
 

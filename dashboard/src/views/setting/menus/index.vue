@@ -5,24 +5,25 @@
                 <Form ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="5">
-                            <FormItem label="方法:" style="width:100%">
-                                <Input v-model="filters.method"></Input>
+                            <FormItem label="菜单名:" style="width:100%">
+                                <Input v-model="filters.name"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
-                            <FormItem label="描述" style="width:100%">
-                                <Input v-model="filters.log_description"></Input>
+                            <FormItem label="权限名:" style="width:100%">
+                                <Input v-model="filters.code"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
-                            <FormItem label="时间范围" style="width:100%">
-                                <DatePicker  v-model="filters.create_time"
+                            <FormItem label="创建时间:" style="width:100%">
+                                <DatePicker  v-model="filters.creationTime"
                                  type="datetimerange" format="yyyy-MM-dd"
                                   style="width:100%" placement="bottom-end"
                                    placeholder="选择时间"></DatePicker>
                             </FormItem>
                         </Col>
                          <Col span="4">
+                           <Button @click="create" icon="android-add" type="primary" size="large">新增</Button>
                         <Button icon="ios-search" type="primary" size="large"
                          @click="getpage" class="toolbar-btn">查找</Button>
                         </Col>
@@ -48,25 +49,34 @@ import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import PageRequest from "../../../store/entities/page-request";
-@Component({})
+@Component({
+})
 export default class Users extends AbpBase {
+  edit() {
+    this.editModalShow = true;
+  }
   filters: Object = {
-      method:'',
-      log_description:'',
-      create_time:'',
-  } ;
+    name:'',
+    code:'',
+    creationTime:null
+  };
+  createModalShow: boolean = false;
+  editModalShow: boolean = false;
   get list() {
-    return this.$store.state.log.list;
+    return this.$store.state.menu.list;
   }
   get loading() {
-    return this.$store.state.log.loading;
+    return this.$store.state.menu.loading;
+  }
+  create() {
+    this.createModalShow = true;
   }
   pageChange(page: number) {
-    this.$store.commit("log/setCurrentPage", page);
+    this.$store.commit("menu/setCurrentPage", page);
     this.getpage();
   }
   pagesizeChange(pagesize: number) {
-    this.$store.commit("log/setPageSize", pagesize);
+    this.$store.commit("menu/setPageSize", pagesize);
     this.getpage();
   }
   async getpage() {
@@ -75,48 +85,46 @@ export default class Users extends AbpBase {
     pagerequest.index = this.currentPage;
     pagerequest.where = this.filters;
     await this.$store.dispatch({
-      type: "log/getAll",
+      type: "menu/getAll",
       data: pagerequest
     });
   }
   get pageSize() {
-    return this.$store.state.log.pageSize;
+    return this.$store.state.menu.pageSize;
   }
   get totalCount() {
-    return this.$store.state.log.totalCount;
+    return this.$store.state.menu.totalCount;
   }
   get currentPage() {
-    return this.$store.state.log.currentPage;
+    return this.$store.state.menu.currentPage;
   }
   columns = [
     {
-      title: "类名",
-      key: "className"
+      title: "菜单名",
+      key: "name"
     },
     {
-      title: "方法",
-      key: "method"
+      title: "权限码",
+      key: "code"
     },
-
-    {
-      title: "请求地址",
-      key: "ip"
-    },
-    {
-      title: "接口描述",
-      key: "logDescription"
+     {
+      title: "路径",
+      key: "url"
     },
     {
-      title: "状态",
+      title: "类型",
       render: (h: any, params: any) => {
-        return h("span", params.row.succeed ? "成功" : "失败");
+        return h("span", params.row.type==1 ? "菜单" : "按钮");
       }
     },
     {
-      title: "请求时间",
-      key: "createTime",
+      title: "创建时间",
+      key: "creationTime",
       render: (h: any, params: any) => {
-        return h("span", new Date(params.row.createTime).toLocaleDateString());
+        return h(
+          "span",
+          new Date(params.row.creationTime).toLocaleDateString()
+        );
       }
     },
     {
@@ -137,11 +145,12 @@ export default class Users extends AbpBase {
               },
               on: {
                 click: () => {
-                  this.$store.commit("user/edit", params.row);
+                  this.$store.commit("menu/edit", params.row);
+                  this.edit();
                 }
               }
             },
-            "详情"
+            "编辑"
           ),
           h(
             "Button",
@@ -153,13 +162,13 @@ export default class Users extends AbpBase {
               on: {
                 click: async () => {
                   this.$Modal.confirm({
-                    title: "提示",
-                    content: "确认要删除该条信息么",
-                    okText:"是",
+                    title:"删除提示",
+                    content: "确认要删除么",
+                    okText: "是",
                     cancelText: "否",
                     onOk: async () => {
                       await this.$store.dispatch({
-                        type: "log/delete",
+                        type: "menu/delete",
                         data: params.row
                       });
                       await this.getpage();
@@ -168,7 +177,7 @@ export default class Users extends AbpBase {
                 }
               }
             },
-            "删除"
+           "删除"
           )
         ]);
       }

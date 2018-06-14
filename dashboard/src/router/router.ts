@@ -61,7 +61,7 @@ export const appRouters = [
        // permission: "Pages.Tenants",
         meta: { title: "菜单管理" },
         name: "menus",
-        component: () => System.import("../views/setting/tenant/tenant.vue")
+        component: () => System.import("../views/setting/menus/index.vue")
       }
       ,
       {

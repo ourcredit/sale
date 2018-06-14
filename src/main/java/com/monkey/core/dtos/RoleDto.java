@@ -1,5 +1,8 @@
 package com.monkey.core.dtos;
 
+import java.util.Date;
+import java.util.List;
+
 public class RoleDto {
     public Integer getId() {
         return id;
@@ -25,7 +28,46 @@ public class RoleDto {
         this.displayName = displayName;
     }
 
-    public  Integer id;
-    public String roleName;
-    public String displayName;
+    private   Integer id;
+    private String roleName;
+    private String displayName;
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    /**
+     * 创建时间
+     */
+    private Date creationTime;
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
+    }
+
+    private List<String> permissions;
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
+    }
+    public Integer getIsStatic() {
+        return isStatic;
+    }
+
+    public void setIsStatic(Integer isStatic) {
+        this.isStatic = isStatic;
+    }
+
+    private Integer isActive;
+    private  Integer isStatic;
 }

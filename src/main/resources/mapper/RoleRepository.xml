@@ -10,10 +10,37 @@
         <result column="creationTime" property="creationTime" />
         <result column="creatorUserId" property="creatorUserId" />
     </resultMap>
-
+    <resultMap id="RoleDtoMap" type="com.monkey.core.dtos.RoleDto">
+        <id column="id"  property="id" />
+        <result column="roleName" property="roleName" />
+        <result column="displayName" property="displayName" />
+        <result column="isActive" property="isActive" />
+        <result column="isStatic" property="isStatic" />
+        <result column="creationTime" property="creationTime" />
+        <collection  property="permissions" ofType="java.lang.String" >
+            <id  column="code"/>
+        </collection >
+    </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, roleName, displayName, creationTime, creatorUserId
     </sql>
+    <select id="selectRoleAndPermissionsById" parameterType="int" resultMap="RoleDtoMap">
+      SELECT
+	a.id,
+	a.roleName,
+	a.displayName,
+	a.isActive,
+	a.isStatic,
+	a.creationTime,
+	a.creatorUserId,
+	c.`code`
+FROM
+	sale_role a
+	JOIN sale_rolemenu b ON a.id = b.roleId
+	JOIN sale_menu c ON b.menuId = c.id
+WHERE
+	a.id =${id}
+    </select>
 
 </mapper>

@@ -10,115 +10,7 @@ class Util {
     script.src = url;
     document.body.appendChild(script);
   }
-  buildFilters(filters: Filter[]) {
-    let fileswhere: string[] = [];
-    filters.forEach(f => {
-      let where = "";
-      if (f.Type === FieldType.Number) {
-        where = this.buildNumber(f);
-      } else if (f.Type === FieldType.String) {
-        where = this.buildString(f);
-      } else if (f.Type === FieldType.Boolean) {
-        where = this.buildBoolean(f);
-      } else if (f.Type === FieldType.DataRange || f.Type === FieldType.Date) {
-        where = this.buildDate(f);
-      } else if (f.Type === FieldType.Enum) {
-        where = this.buildEnum(f);
-      }
-      if (where) {
-        fileswhere.push(where);
-      }
-    });
-    return fileswhere.join(" AND ");
-  }
-  private buildDate(filter: Filter) {
-    if (filter.Type === FieldType.Date) {
-      if (!!filter.Value) {
-        let compare = this.caseCompare(filter.CompareType);
-        let date = new Date(filter.Value);
-        return `${
-          filter.FieldName
-        }${compare} DateTime(${date.getFullYear()},${date.getMonth() +
-          1},${date.getDate()})`;
-      } else {
-        return "";
-      }
-    } else if (filter.Type === FieldType.DataRange) {
-      if (!!filter.Value) {
-        let dates = filter.Value as Array<Date>;
-        if (dates.length !== 2) {
-          throw "Dates format is error";
-        } else if (dates[0] && dates[1]) {
-          return `(${
-            filter.FieldName
-          }>= DateTime(${dates[0].getFullYear()},${dates[0].getMonth() +
-            1},${dates[0].getDate()}) AND ${
-            filter.FieldName
-          }<= DateTime(${dates[1].getFullYear()},${dates[1].getMonth() +
-            1},${dates[1].getDate()}))`;
-        } else {
-          return "";
-        }
-      } else {
-        return "";
-      }
-    } else {
-      return "";
-    }
-  }
-  private buildEnum(filter: Filter) {
-    let compare = this.caseCompare(filter.CompareType);
-    return `${filter.FieldName}${compare}"${filter.Value}"`;
-  }
-  private buildBoolean(filter: Filter) {
-    if (filter.Value == null) {
-      return "";
-    } else if (filter.Value) {
-      return `${filter.FieldName}=true`;
-    } else if (!filter.Value) {
-      return `${filter.FieldName}=false`;
-    } else {
-      return "";
-    }
-  }
-  private buildString(filter: Filter) {
-    if (!filter.Value) {
-      return "";
-    }
-    let compare = this.caseCompare(filter.CompareType);
-    return `${filter.FieldName} ${compare} "${filter.Value}" ${
-        filter.CompareType == CompareType.Contains ||
-        filter.CompareType == CompareType.EndWith
-          ? "%"
-          : ""
-      } `;
-  }
-  private buildNumber(filter: Filter) {
-    let compare = this.caseCompare(filter.CompareType);
-    return ` ${filter.FieldName} ${compare} '${filter.Value}'   `;
-  }
-  private caseCompare(compareType: CompareType) {
-    switch (compareType) {
-      case CompareType.Greater:
-        return "> ";
-      case CompareType.Less:
-        return "< ";
-      case CompareType.Equal:
-        return "= ";
-      case CompareType.GreaterOrEqual:
-        return ">= ";
-      case CompareType.LessOrEqual:
-        return "<= ";
-      case CompareType.Contains:
-        return "like % ";
-      case CompareType.StartWith:
-        return "like %";
-      case CompareType.EndWith:
-        return "like ";
-      case CompareType.NotEqual:
-        return "!= ";
-    }
-  }
+
   title(title: string) {
     let appname = "monkey";
     let page = "page";
@@ -429,6 +321,45 @@ class Util {
     }
     return target;
   }
+  genderTree(list: Array<any>, key: string,range?:Array<any>,  parentId?: number | null) {
+    var result = new Array<any>();
+    list.forEach((item: any) => {
+      let t: any = {};
+      t.id = item.id;
+      t.title = item.name;
+      t.code = item.code;
+      t.parentId = item.parentId;
+      if (range) {
+        const temp = range.findIndex(key => key === item.code);
+        if (temp > 0) {
+            if (!item.children || item.children.length <= 0) {
+                t.checked = true;
+                t.expand = true;
+            } else {
+                t.checked = false;
+                t.expand = false;
+            }
+        } else {
+            t.checked = false;
+            t.expand = false;
+        }
+    }
+      if (item[key] == parentId) {
+        t.children = this.genderTree(list, key,range, item.id);
+        result.push(t);
+      }
+    });
+    return result;
+  }
+  deptNode = (list: Array<any>, node: any, result: Array<any> = new Array<any>()) => {
+    debugger;
+    result.push(node.code);
+    let parent = list.find(c => c.id == node.parentId);
+    if (parent) {
+      result.push(parent.code);
+      this.deptNode(list, parent,result);
+    }
+  };
 }
 const util = new Util();
 export default util;

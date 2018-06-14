@@ -1,6 +1,7 @@
 package com.monkey.application.Roles;
 
 import com.baomidou.mybatisplus.service.IService;
+import com.monkey.core.dtos.RoleDto;
 import com.monkey.core.entity.Role;
 
 /**
@@ -12,5 +13,5 @@ import com.monkey.core.entity.Role;
  * @since 2018-05-03
  */
 public interface IRoleService extends IService<Role> {
-
+    RoleDto selectRoleAndPermissionsById(Integer id);
 }

@@ -4,7 +4,6 @@
             awdadawdawdawd
             awd
             dwadwadw
-            <datagrid></datagrid>
         </Card>
     </div>
 </template>

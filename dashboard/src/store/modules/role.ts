@@ -30,17 +30,18 @@ class RoleModule extends ListModule<RoleState,any,Role>{
             context.state.list=page.records;
         },
         async create(context:ActionContext<RoleState,any>,payload:any){
-            await Ajax.post('/api/services/app/Role/Create',payload.data);
+            await Ajax.post('/api/role/modify',payload.data);
         },
         async update(context:ActionContext<RoleState,any>,payload:any){
-            await Ajax.put('/api/services/app/Role/Update',payload.data);
+            await Ajax.put('/api/role/modify',payload.data);
         },
         async delete(context:ActionContext<RoleState,any>,payload:any){
-            await Ajax.delete('/api/services/app/Role/Delete?Id='+payload.data.id);
+            await Ajax.delete('/api/role'+payload.data.id);
         },
-        async get(context:ActionContext<RoleState,any>,payload:any){
-            let reponse=await Ajax.get('/api/services/app/Role/Get?Id='+payload.id);
-            return reponse.data.result as Role;
+        async get(context: ActionContext<RoleState, any>, payload: any) {
+            let reponse=await Ajax.get('/api/role/'+payload.data);
+           // return reponse.data.result as Role;
+            context.state.editRole = reponse.data as Role;
         },
         async getAllPermissions(context:ActionContext<RoleState,any>){
             let reponse=await Ajax.post('/api/menu',{index:1,size:999});
