@@ -60,13 +60,9 @@ import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import PageRequest from "../../../store/entities/page-request";
-import CreateUser from "./create-user.vue";
-import EditUser from "./edit-user.vue";
 import Modify from "./modify.vue";
 @Component({
   components: { 
-    CreateUser,
-     EditUser,
      Modify
       }
 })
