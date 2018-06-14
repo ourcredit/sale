@@ -33,7 +33,7 @@
                             </FormItem>
                         </Col>
                          <Col span="4">
-                           <Button @click="create" icon="android-add" type="primary" size="large">新增</Button>
+                           <Button @click="ModalStateChange" icon="android-add" type="primary" size="large">新增</Button>
                         <Button icon="ios-search" type="primary" size="large"
                          @click="getpage" class="toolbar-btn">查找</Button>
                         </Col>
@@ -52,8 +52,7 @@
                 </div>
             </div>
         </Card>
-        <create-user v-model="createModalShow" @save-success="getpage"></create-user>
-        <edit-user v-model="editModalShow" @save-success="getpage"></edit-user>
+        <Modify v-model="ModalShow" @save-success="getpage"></Modify>
     </div>
 </template>
 <script lang="ts">
@@ -63,29 +62,31 @@ import AbpBase from "../../../lib/abpbase";
 import PageRequest from "../../../store/entities/page-request";
 import CreateUser from "./create-user.vue";
 import EditUser from "./edit-user.vue";
+import Modify from "./modify.vue";
 @Component({
-  components: { CreateUser, EditUser }
+  components: { 
+    CreateUser,
+     EditUser,
+     Modify
+      }
 })
 export default class Users extends AbpBase {
-  edit() {
-    this.editModalShow = true;
-  }
+
   filters: Object = {
     account:'',
     userName:'',
     creationTime:null,
     isActive:null
   };
-  createModalShow: boolean = false;
-  editModalShow: boolean = false;
+  ModalShow: boolean = false;
   get list() {
     return this.$store.state.user.list;
   }
   get loading() {
     return this.$store.state.user.loading;
   }
-  create() {
-    this.createModalShow = true;
+  ModalStateChange() {
+    this.ModalShow = true;
   }
   pageChange(page: number) {
     this.$store.commit("user/setCurrentPage", page);
@@ -163,8 +164,11 @@ export default class Users extends AbpBase {
               },
               on: {
                 click: () => {
-                  this.$store.commit("user/edit", params.row);
-                  this.edit();
+                    this.$store.dispatch({
+                        type: "user/get",
+                        data: params.row
+                      });
+                  this.ModalStateChange();
                 }
               }
             },
@@ -180,10 +184,10 @@ export default class Users extends AbpBase {
               on: {
                 click: async () => {
                   this.$Modal.confirm({
-                    title: this.L("Tips"),
-                    content: this.L("DeleteUserConfirm"),
-                    okText: this.L("Yes"),
-                    cancelText: this.L("No"),
+                       title:"删除提示",
+                    content: "确认要删除么",
+                    okText: "是",
+                    cancelText: "否",
                     onOk: async () => {
                       await this.$store.dispatch({
                         type: "user/delete",

@@ -11,6 +11,7 @@ import com.monkey.core.mapper.MenuRepository;
 import com.monkey.core.mapper.RoleRepository;
 import com.monkey.core.mapper.RolemenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,17 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
         return _roleRepository.selectRoleAndPermissionsById(id);
     }
 
+    @Override
+    @CachePut(value = "allPermissions")
+    public List<String> getAllPermissions(){
+        List result=new ArrayList<String>();
+        EntityWrapper e=new EntityWrapper();
+       List<Menu> l= _menuRepository.selectList(e);
+       for(Menu m :l){
+           result.add(m.getCode());
+       }
+       return  result;
+    }
     @Override
     public Boolean insertRoleAndPermissions(RoleDto model) {
         Role role = new Role(model.getId(), model.getRoleName(), model.getDisplayName(),model.getIsActive(),model.getIsStatic());

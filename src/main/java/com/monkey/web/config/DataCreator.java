@@ -109,7 +109,6 @@ public class DataCreator implements CommandLineRunner {
                 }
             }
             if (!item.Children.isEmpty()) {
-
                 List<InitConst._menu.MenuInfo> a = new ArrayList<>();
                 List<Menu> b = new ArrayList<>();
                 for (InitConst._menu.MenuInfo t : item.Children) {
@@ -121,7 +120,6 @@ public class DataCreator implements CommandLineRunner {
                 }
                 if(!b.isEmpty()){
                     _menuService.insertBatch(b);
-
                 }
                 if (!a.isEmpty()) {
                     insertMenu(item.Children, m.getId());

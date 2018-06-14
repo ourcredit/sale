@@ -27,7 +27,7 @@ export const otherRouters = {
   children: [
     {
       path: "home",
-      meta: { title: "HomePage" },
+      meta: { title: "主页" },
       name: "home",
       component: () => System.import("../views/home/home.vue")
     }
@@ -37,28 +37,28 @@ export const appRouters = [
   {
     path: "/setting",
     name: "setting",
-    permission: "",
+    permission: "system:list",
     meta: { title: "系统管理" },
     icon: "&#xe68a;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {
         path: "user",
-        //permission: "Pages.Users",
+        permission: "user:list",
         meta: { title: "用户管理" },
         name: "user",
         component: () => System.import("../views/setting/user/user.vue")
       },
       {
         path: "role",
-       // permission: "Pages.Roles",
+        permission: "role:list",
         meta: { title: "角色管理" },
         name: "role",
         component: () => System.import("../views/setting/role/role.vue")
       },
       {
         path: "menus",
-       // permission: "Pages.Tenants",
+        permission: "menu:list",
         meta: { title: "菜单管理" },
         name: "menus",
         component: () => System.import("../views/setting/menus/index.vue")
@@ -66,7 +66,7 @@ export const appRouters = [
       ,
       {
         path: "logs",
-       // permission: "Pages.Tenants",
+        permission: "log:list",
         meta: { title: "日志管理" },
         name: "logs",
         component: () => System.import("../views/setting/operatelog/index.vue")

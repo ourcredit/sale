@@ -104,6 +104,26 @@
         key: "description"
       },
       {
+        title: "状态",
+        key: "isActive",
+         render: (h: any, params: any) => {
+          return h(
+            "span",
+           params.row.isActive==1?"启用":'禁用'
+          );
+        }
+      },
+      {
+        title: "是否静态",
+        key: "isStatic",
+         render: (h: any, params: any) => {
+          return h(
+            "span",
+            params.row.isStatic==1?"静态":'非静态'
+          );
+        }
+      },
+      {
         title: "创建时间",
         render: (h: any, params: any) => {
           return h(

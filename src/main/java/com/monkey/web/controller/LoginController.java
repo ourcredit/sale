@@ -11,6 +11,7 @@ import com.monkey.common.util.ComUtil;
 import com.monkey.common.util.JWTUtil;
 import com.monkey.common.util.StringUtil;
 import com.monkey.core.dtos.NgUserModel;
+import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 import com.monkey.core.entity.Userrole;
 import com.monkey.web.annotation.Log;
@@ -41,10 +42,6 @@ public class LoginController {
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private IUserService _userService;
-    @Autowired
-    private IUserRoleService _userToRoleService;
-    @Autowired
-    private IMenuService _menuService;
 
     @Log(description="登录接口:/login")
     @Pass
@@ -60,11 +57,7 @@ public class LoginController {
         if (ComUtil.isEmpty(user) || !BCrypt.checkpw(input.passWord, user.getPassword())) {
             return new PublicResult<>(PublicResultConstant.INVALID_USERNAME_PASSWORD, null);
         }
-        Map<String, Object> result = new HashMap<>();
-        List<Userrole> userToRole = _userToRoleService.selectByUserId(user.getId());
-        NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(), user.getPassword()),
-                user.getUserName(), user.getId(), System.currentTimeMillis(),
-                ComUtil.isEmpty(userToRole)? null: userToRole, user.getAccount(), user.getMobile() );
+        NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(), user.getPassword()),null );
         return new PublicResult<>(PublicResultConstant.SUCCESS, u);
     }
     @Log(description="注册接口:/register")

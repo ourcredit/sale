@@ -4,10 +4,8 @@ package com.monkey.web.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.monkey.application.Menus.IRoleMenuService;
 import com.monkey.application.Roles.IRoleService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
-import com.monkey.application.dtos.RoleMenuInput;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
@@ -34,8 +32,7 @@ public class RoleController {
 
     @Autowired
     IRoleService _roleService;
-    @Autowired
-    IRoleMenuService _roleMenuService;
+
 
     // @Log(description="获取用户列表:/list")
     @ApiOperation(value = "获取角色列表", notes = "角色列表")
@@ -47,15 +44,6 @@ public class RoleController {
         Page<Role> res = _roleService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
-
-    @ApiOperation(value = "角色分配菜单", notes = "角色列表")
-    @RequestMapping(value = "/rolemenu", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._role.rolemenu})
-    public PublicResult<Object> allowroles(@RequestBody RoleMenuInput model) throws Exception {
-        Boolean res = _roleMenuService.insertRoleMenu(model);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, res);
-    }
-
     @ApiOperation(value = "获取角色详情", notes = "角色列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._role.first})

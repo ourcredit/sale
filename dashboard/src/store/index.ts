@@ -6,7 +6,6 @@ import session from './modules/session'
 import account from './modules/account'
 import user from './modules/user'
 import role from './modules/role'
-import tenant from './modules/tenant'
 import log from './modules/log'
 import menu from './modules/menus'
 const store = new Vuex.Store({
@@ -25,7 +24,6 @@ const store = new Vuex.Store({
         account,
         user,
         role,
-        tenant,
         log,
         menu
     }

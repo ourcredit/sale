@@ -3,6 +3,7 @@ package com.monkey.web.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.monkey.application.Roles.IRoleService;
 import com.monkey.application.Roles.IUserRoleService;
 import com.monkey.application.Users.IUserService;
 import com.monkey.application.Users.dtos.CreateUserInput;
@@ -15,6 +16,7 @@ import com.monkey.common.util.ComUtil;
 import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
+import com.monkey.web.controller.dtos.UserOutPut;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class UserController {
 
     @Autowired
     IUserService _userService;
+
     @Autowired
-    IUserRoleService _userRoleService;
+    IRoleService _roleService;
    // @Log(description="获取用户列表:/list")
     @ApiOperation(value = "获取用户列表",notes = "用户列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
@@ -60,9 +63,18 @@ public class UserController {
     @ApiOperation(value = "获取当前登陆用户",notes = "用户列表")
     @RequestMapping(value = "/current",method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._user.first})
-    public PublicResult<UserDto>  user(@CurrentUser User current) throws Exception{
+    public PublicResult<UserOutPut>  user(@CurrentUser User current) throws Exception{
         UserDto u=_userService.selectUserRole(current.getId());
-        PublicResult r= new PublicResult<>(PublicResultConstant.SUCCESS, u);
+        if(u==null)   return new PublicResult<>(PublicResultConstant.UNAUTHORIZED, null);
+        User c=new User();
+        c.setIsActive(u.getIsActive());
+        c.setMobile(u.getMobile());
+        c.setUserName(u.getUserName());
+        c.setAccount(u.getAccount());
+        c.setCreationTime(u.getCreationTime());
+        List all=_roleService.getAllPermissions();
+        UserOutPut op=new UserOutPut(c,u.getRoles(),all, u.getPermissions());
+        PublicResult r= new PublicResult<>(PublicResultConstant.SUCCESS, op);
         return  r;
     }
 
@@ -73,13 +85,7 @@ public class UserController {
         _userService.ModifyUserAndRoles(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, true);
     }
-    @ApiOperation(value = "用户分配角色",notes = "用户列表")
-    @RequestMapping(value = "/userrole",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._user.userrole})
-    public PublicResult<Object> allowroles(@RequestBody UserRoleInput model) throws Exception{
-      Boolean res=  _userRoleService.insertUserRoles(model);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, res);
-    }
+
     @ApiOperation(value = "删除用户",notes = "用户列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._user.delete})

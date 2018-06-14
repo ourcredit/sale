@@ -1,6 +1,5 @@
 import axios from "axios";
 import Vue from "vue";
-import { FieldType, CompareType, Filter } from "../store/entities/filter";
 import appconst from "./appconst";
 class Util {
   abp: any = window.abp;
@@ -222,14 +221,15 @@ class Util {
     return currentPathArr;
   }
   openNewPage(vm: Vue, name: string | undefined, argu?: any, query?: any) {
-    let pageOpenedList = vm.$store.state.app.pageOpenedList;
+    var store = vm.$store||vm.$options.store;
+    let pageOpenedList = store.state.app.pageOpenedList;
     let openedPageLen = pageOpenedList.length;
     let i = 0;
     let tagHasOpened = false;
     while (i < openedPageLen) {
       if (name === pageOpenedList[i].name) {
         // 页面已经打开
-        vm.$store.commit("app/pageOpenedList", {
+        store.commit("app/pageOpenedList", {
           index: i,
           argu: argu,
           query: query
@@ -240,7 +240,7 @@ class Util {
       i++;
     }
     if (!tagHasOpened) {
-      let tag = vm.$store.state.app.tagsList.filter((item: any) => {
+      let tag = store.state.app.tagsList.filter((item: any) => {
         if (item.children) {
           return name === item.children[0].name;
         } else {
@@ -256,10 +256,10 @@ class Util {
         if (query) {
           tag.query = query;
         }
-        vm.$store.commit("app/increateTag", tag);
+        store.commit("app/increateTag", tag);
       }
     }
-    vm.$store.commit("app/setCurrentPageName", name);
+    store.commit("app/setCurrentPageName", name);
   }
   fullscreenEvent(vm: Vue) {
     vm.$store.commit("app/initCachepage");

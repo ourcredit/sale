@@ -9,7 +9,6 @@ public interface PermissionConst {
         public static  final  String modify="user:modify";
         public static  final  String delete="user:delete";
         public static  final  String batch="user:batch";
-        public static  final  String userrole="user:userrole";
         public static  final  String first="user:first";
     }
     public  static class  _role{
@@ -17,15 +16,14 @@ public interface PermissionConst {
         public static  final  String modify="role:modify";
         public static  final  String delete="role:delete";
         public static  final  String batch="role:batch";
-        public static  final  String rolemenu="role:rolemenu";
         public static  final  String first="role:first";
     }
     public  static class  _menu{
-        public static  final  String list="role:list";
-        public static  final  String modify="role:modify";
-        public static  final  String delete="role:delete";
-        public static  final  String batch="role:batch";
-        public static  final  String first="role:first";
+        public static  final  String list="menu:list";
+        public static  final  String modify="menu:modify";
+        public static  final  String delete="menu:delete";
+        public static  final  String batch="menu:batch";
+        public static  final  String first="menu:first";
     }
     public  static class  _log{
         public static  final  String list="log:list";
