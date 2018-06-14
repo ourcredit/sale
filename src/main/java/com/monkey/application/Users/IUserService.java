@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author liugh123
@@ -20,19 +20,24 @@ public interface IUserService extends IService<User> {
 
     /**
      * 根据用户名查询用户
+     *
      * @param username 用户名
      * @return 用户
      */
     User getUserByUserName(String username);
+
     /**
      * <p>
-     *  注册
+     * 注册
      * </p>
-     * @param user 用户
+     *
+     * @param user  用户
      * @param roles 角色ids
      * @since 2018-05-03
      */
-     boolean register(User user, List<Integer> roles);
-        void ModifyUserAndRoles(CreateUserInput input);
+    boolean register(User user, List<Integer> roles);
+
+    void ModifyUserAndRoles(CreateUserInput input);
+
     UserDto selectUserRole(Integer id);
 }

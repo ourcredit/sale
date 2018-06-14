@@ -47,10 +47,11 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         EntityWrapper<User> ew = new EntityWrapper<>();
         ew.where("username={0}", username);
         return this.selectOne(ew);
-
     }
+    @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")
     public UserDto selectUserRole(Integer id){
-      return   _userRepository.selectUserRole(id);
+      UserDto r=   _userRepository.selectUserRole(id);
+      return  r;
 }
 
     /**
@@ -67,10 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         ew.eq("account",input.account);
         if(input.id==null){
             u=new User(input.account,input.password,input.userName,input.mobile,input.isActive);
-           Boolean r= this.insert(u);
-           if(r){
-                u=this.selectOne(ew);
-           }
+          this.insert(u);
         }else {
             u=this.selectOne(ew);
             if(u!=null){

@@ -14,4 +14,5 @@ import com.monkey.core.entity.Role;
  */
 public interface IRoleService extends IService<Role> {
     RoleDto selectRoleAndPermissionsById(Integer id);
+    Boolean insertRoleAndPermissions(RoleDto model);
 }

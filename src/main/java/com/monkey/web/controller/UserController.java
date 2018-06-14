@@ -47,7 +47,6 @@ public class UserController {
         EntityWrapper<User> filter = new EntityWrapper<User>();
         filter=  ComUtil.genderFilter(filter,page.where);
         Page<User> res= _userService.selectPage(new Page<>(page.index,page.size),filter);
-
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取用户详情",notes = "用户列表")

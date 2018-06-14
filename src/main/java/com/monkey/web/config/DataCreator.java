@@ -59,7 +59,7 @@ public class DataCreator implements CommandLineRunner {
         rw.eq("roleName", InitConst._defaultRole.admin);
         Role r = _roleService.selectOne(rw);
         if (r == null) {
-            Boolean b = _roleService.insert(new Role(InitConst._defaultRole.admin, InitConst._defaultRole.admin));
+            Boolean b = _roleService.insert(new Role(null, InitConst._defaultRole.admin, InitConst._defaultRole.admin,1,0));
             if (b) {
                 r = _roleService.selectOne(rw);
             }
@@ -68,7 +68,7 @@ public class DataCreator implements CommandLineRunner {
         rw.eq("roleName", InitConst._defaultRole.def);
         Role de = _roleService.selectOne(rw);
         if (de == null) {
-            Boolean b = _roleService.insert(new Role(InitConst._defaultRole.def, InitConst._defaultRole.def));
+            Boolean b = _roleService.insert(new Role(null,InitConst._defaultRole.def, InitConst._defaultRole.def,1,1));
             if (b) {
                 de = _roleService.selectOne(rw);
             }

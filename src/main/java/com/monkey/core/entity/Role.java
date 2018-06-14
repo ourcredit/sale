@@ -21,9 +21,12 @@ public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
     public Role(){}
-    public Role(String roleName,String displayName){
+    public Role(Integer id, String roleName,String displayName,Integer isactive,Integer isStatic){
+        this.id=id;
         this.roleName=roleName;
         this.displayName=displayName;
+        this.isActive=isactive;
+        this.isStatic=isStatic;
         this.creationTime=new Date();
     }
 
