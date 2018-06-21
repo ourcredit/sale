@@ -14,14 +14,15 @@
               <Input v-model="filters.displayName"></Input>
             </FormItem>
             </Col>
-            <Col span="4">
+            <Col span="7">
             <Button v-if="p.modify" @click="create" icon="android-add" type="primary" size="large">添加</Button>
+            <Button v-if="p.batch" @click="batchDelete"  type="primary" class="toolbar-btn" size="large">批量删除</Button>
             <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">查找</Button>
             </Col>
           </Row>
         </Form>
         <div class="margin-top-10">
-          <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
+          <Table @on-selection-change="selectionChange" :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
           </Table>
           <Page show-sizer class-name="fengpage" :total="totalCount" class="margin-top-10" @on-change="pageChange" @on-page-size-change="pagesizeChange"
             :page-size="pageSize" :current="currentPage"></Page>
@@ -48,18 +49,19 @@ export default class Roles extends AbpBase {
     roleName: "",
     displayName: ""
   };
+  selectList: Array<any> = [];
   modalShow: boolean = false;
   get list() {
     return this.$store.state.role.list;
   }
   get p() {
-    console.log(util.abp.auth);
     var t = {
       modify: util.abp.auth.hasPermission("role:modify"),
       delete: util.abp.auth.hasPermission("role:delete"),
+      list: util.abp.auth.hasPermission("role:list"),
+      first: util.abp.auth.hasPermission("role:first"),
       batch: util.abp.auth.hasPermission("role:batch")
     };
-    console.log(t);
     return t;
   }
   get loading() {
@@ -76,6 +78,9 @@ export default class Roles extends AbpBase {
     this.$store.commit("role/setCurrentPage", page);
     this.getpage();
   }
+  selectionChange(e: any) {
+    this.selectList = e.map((c: any) => c.id);
+  }
   pagesizeChange(pagesize: number) {
     this.$store.commit("role/setPageSize", pagesize);
     this.getpage();
@@ -90,6 +95,23 @@ export default class Roles extends AbpBase {
       data: pagerequest
     });
   }
+  async batchDelete() {
+    if (this.selectList) {
+      this.$Modal.confirm({
+        title: "删除提示",
+        content: `确认要删除${this.selectList.length}条数据么`,
+        okText: "是",
+        cancelText: "否",
+        onOk: async () => {
+          await this.$store.dispatch({
+            type: "role/batch",
+            data: this.selectList
+          });
+          await this.getpage();
+        }
+      });
+    }
+  }
   get pageSize() {
     return this.$store.state.role.pageSize;
   }
@@ -100,6 +122,11 @@ export default class Roles extends AbpBase {
     return this.$store.state.role.currentPage;
   }
   columns = [
+    {
+      type: "selection",
+      width: 60,
+      align: "center"
+    },
     {
       title: "角色名",
       key: "roleName"
@@ -140,57 +167,60 @@ export default class Roles extends AbpBase {
       key: "Actions",
       width: 150,
       render: (h: any, params: any) => {
-        return h("div", [
-          h(
-            "Button",
-            {
-              props: {
-                type: "primary",
-                size: "small"
-              },
-              style: {
-                marginRight: "5px"
-              },
-              on: {
-                click: () => {
-                  this.$store.dispatch({
-                    type: "role/get",
-                    data: params.row.id
-                  });
-                  this.modify();
-                }
-              }
+        var ed = h(
+          "Button",
+          {
+            props: {
+              type: "primary",
+              size: "small",
+              disabled: !this.p.modify
             },
-            "编辑"
-          ),
-          h(
-            "Button",
-            {
-              props: {
-                type: "error",
-                size: "small"
-              },
-              on: {
-                click: async () => {
-                  this.$Modal.confirm({
-                    title: "删除提示",
-                    content: "确认要删除么",
-                    okText: "是",
-                    cancelText: "否",
-                    onOk: async () => {
-                      await this.$store.dispatch({
-                        type: "role/delete",
-                        data: params.row
-                      });
-                      await this.getpage();
-                    }
-                  });
-                }
-              }
+            style: {
+              marginRight: "5px"
             },
-            "删除"
-          )
-        ]);
+            on: {
+              click: () => {
+                this.$store.dispatch({
+                  type: "role/get",
+                  data: params.row.id
+                });
+                this.modify();
+              }
+            }
+          },
+          "编辑"
+        );
+
+        var de = h(
+          "Button",
+          {
+            props: {
+              type: "error",
+              size: "small",
+              disabled: !this.p.delete
+            },
+            on: {
+              click: async () => {
+                this.$Modal.confirm({
+                  title: "删除提示",
+                  content: "确认要删除么",
+                  okText: "是",
+                  cancelText: "否",
+                  onOk: async () => {
+                    await this.$store.dispatch({
+                      type: "role/delete",
+                      data: params.row
+                    });
+                    await this.getpage();
+                  }
+                });
+              }
+            }
+          },
+          "删除"
+        );
+        var t = [ed, de];
+        return h("div", t);
       }
     }
   ];
