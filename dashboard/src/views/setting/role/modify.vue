@@ -37,9 +37,9 @@ export default class CreateRole extends AbpBase {
   })
   value: boolean;
   get tree() {
-      debugger;
     let tree = this.$store.state.role.permissions;
     let res = Util.genderTree(tree, "parentId", this.role.permissions, null);
+    console.log(res);
     return res;
   }
   get role() {

@@ -221,7 +221,7 @@ class Util {
     return currentPathArr;
   }
   openNewPage(vm: Vue, name: string | undefined, argu?: any, query?: any) {
-    var store = vm.$store||vm.$options.store;
+    var store = vm.$store || vm.$options.store;
     let pageOpenedList = store.state.app.pageOpenedList;
     let openedPageLen = pageOpenedList.length;
     let i = 0;
@@ -321,8 +321,12 @@ class Util {
     }
     return target;
   }
-  genderTree(list: Array<any>, key: string,range?:Array<any>,  parentId?: number | null) {
-    debugger;
+  genderTree(
+    list: Array<any>,
+    key: string,
+    range?: Array<any>,
+    parentId?: number | null
+  ) {
     var result = new Array<any>();
     list.forEach((item: any) => {
       let t: any = {};
@@ -330,34 +334,46 @@ class Util {
       t.title = item.name;
       t.code = item.code;
       t.parentId = item.parentId;
+      t.checked = false;
       if (range) {
-        const temp = range.findIndex(key => key === item.code);
+        const temp = range.findIndex(w => w === item.code);
         if (temp > 0) {
-            if (!item.children || item.children.length <= 0) {
-                t.checked = true;
-                t.expand = true;
-            } else {
-                t.checked = false;
-                t.expand = false;
-            }
-        } else {
+          if (!item.children || item.children.length <= 0) {
+            t.checked = true;
+            t.expand = true;
+          } else {
             t.checked = false;
             t.expand = false;
+          }
+        } else {
+          t.checked = false;
+          t.expand = false;
         }
-    }
+      }
       if (item[key] == parentId) {
-        t.children = this.genderTree(list, key,range, item.id);
+        t.children = this.genderTree(list, key, range, item.id);
+        if (t.children && t.children.length > 0) {
+          var tem = t.children.filter((c: any) => c.checked);
+          t.checked =
+          tem.length ==
+            t.children.length;
+        }
+
         result.push(t);
       }
     });
     return result;
   }
-  deptNode = (list: Array<any>, node: any, result: Array<any> = new Array<any>()) => {
+  deptNode = (
+    list: Array<any>,
+    node: any,
+    result: Array<any> = new Array<any>()
+  ) => {
     result.push(node.code);
     let parent = list.find(c => c.id == node.parentId);
     if (parent) {
       result.push(parent.code);
-      this.deptNode(list, parent,result);
+      this.deptNode(list, parent, result);
     }
   };
 }
