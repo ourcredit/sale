@@ -33,7 +33,7 @@
                             </FormItem>
                         </Col>
                          <Col span="4">
-                           <Button @click="ModalStateChange" icon="android-add" type="primary" size="large">新增</Button>
+                           <Button  @click="Create" icon="android-add" type="primary" size="large">新增</Button>
                         <Button icon="ios-search" type="primary" size="large"
                          @click="getpage" class="toolbar-btn">查找</Button>
                         </Col>
@@ -57,31 +57,37 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
-import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import PageRequest from "../../../store/entities/page-request";
 import Modify from "./modify.vue";
+import User from "@/store/entities/user";
+import util from "../../../lib/util";
 @Component({
-  components: { 
-     Modify
-      }
+  components: {
+    Modify
+  }
 })
 export default class Users extends AbpBase {
-
   filters: Object = {
-    account:'',
-    userName:'',
-    creationTime:null,
-    isActive:null
+    account: "",
+    userName: "",
+    creationTime: null,
+    isActive: null
   };
   ModalShow: boolean = false;
   get list() {
     return this.$store.state.user.list;
   }
+
   get loading() {
     return this.$store.state.user.loading;
   }
-  ModalStateChange() {
+  Create() {
+    var u = new User();
+    this.$store.commit("user/edit", u);
+    this.ModalShow = true;
+  }
+  Modify() {
     this.ModalShow = true;
   }
   pageChange(page: number) {
@@ -137,7 +143,7 @@ export default class Users extends AbpBase {
       }
     },
     {
-      title:"最近登陆时间",
+      title: "最近登陆时间",
       render: (h: any, params: any) => {
         return h("span", new Date(params.row.lastLoginTime).toLocaleString());
       }
@@ -160,11 +166,11 @@ export default class Users extends AbpBase {
               },
               on: {
                 click: () => {
-                    this.$store.dispatch({
-                        type: "user/get",
-                        data: params.row
-                      });
-                  this.ModalStateChange();
+                  this.$store.dispatch({
+                    type: "user/get",
+                    data: params.row
+                  });
+                  this.Modify();
                 }
               }
             },
@@ -180,7 +186,7 @@ export default class Users extends AbpBase {
               on: {
                 click: async () => {
                   this.$Modal.confirm({
-                       title:"删除提示",
+                    title: "删除提示",
                     content: "确认要删除么",
                     okText: "是",
                     cancelText: "否",
@@ -195,7 +201,7 @@ export default class Users extends AbpBase {
                 }
               }
             },
-           "删除"
+            "删除"
           )
         ]);
       }

@@ -37,8 +37,8 @@
 	c.`code`
 FROM
 	sale_role a
-	JOIN sale_rolemenu b ON a.id = b.roleId
-	JOIN sale_menu c ON b.menuId = c.id
+  left	JOIN sale_rolemenu b ON a.id = b.roleId
+left	JOIN sale_menu c ON b.menuId = c.id
 WHERE
 	a.id =${id}
     </select>

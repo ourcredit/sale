@@ -62,7 +62,7 @@ public class UserController {
     }
     @ApiOperation(value = "获取当前登陆用户",notes = "用户列表")
     @RequestMapping(value = "/current",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._user.first})
+   // @RequiresPermissions(value = {PermissionConst._user.first})
     public PublicResult<UserOutPut>  user(@CurrentUser User current) throws Exception{
         UserDto u=_userService.selectUserRole(current.getId());
         if(u==null)   return new PublicResult<>(PublicResultConstant.UNAUTHORIZED, null);

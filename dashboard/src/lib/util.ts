@@ -322,6 +322,7 @@ class Util {
     return target;
   }
   genderTree(list: Array<any>, key: string,range?:Array<any>,  parentId?: number | null) {
+    debugger;
     var result = new Array<any>();
     list.forEach((item: any) => {
       let t: any = {};
@@ -352,7 +353,6 @@ class Util {
     return result;
   }
   deptNode = (list: Array<any>, node: any, result: Array<any> = new Array<any>()) => {
-    debugger;
     result.push(node.code);
     let parent = list.find(c => c.id == node.parentId);
     if (parent) {
