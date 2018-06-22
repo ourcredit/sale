@@ -35,7 +35,7 @@
                 </div>
             </div>
         </Card>
-        <Modify v-model="ModelShow" @save-success="getpage"></Modify>
+        <Modify :parent="parent" v-model="ModelShow" @save-success="getpage"></Modify>
     </div>
 </template>
 <script lang="ts">
@@ -58,6 +58,7 @@ export default class Menus extends AbpBase {
     code: "",
     creationTime: null
   };
+  parent:any=null;
   ModelShow: boolean = false;
   get tree() {
     let tree = this.$store.state.menu.list;
@@ -106,10 +107,10 @@ export default class Menus extends AbpBase {
         ),
         h("Icon", {
           props: {
-            type: data.type == 1 ? "android-share-list" : "android-list"
+            type: data.type == 1 ? "android-share-alt" : "android-list"
           },
           style: {
-            marginRight: "10px"
+            marginLeft: "10px"
           }
         }),
         h(
@@ -126,7 +127,7 @@ export default class Menus extends AbpBase {
               props: Object.assign(
                 {},
                 {
-                  type: "primary",
+                  type: "info",
                   size: "small"
                 },
                 {
@@ -138,7 +139,10 @@ export default class Menus extends AbpBase {
               },
               on: {
                 click: () => {
-                  this.ModelShow = true;
+                  if (data.type == 1) {
+                    this.parent=data;
+                    this.ModelShow = true;
+                  }
                 }
               }
             }),
@@ -146,7 +150,7 @@ export default class Menus extends AbpBase {
               props: Object.assign(
                 {},
                 {
-                  type: "primary",
+                  type: "warning",
                   size: "small"
                 },
                 {
@@ -166,7 +170,7 @@ export default class Menus extends AbpBase {
               props: Object.assign(
                 {},
                 {
-                  type: "primary",
+                  type: "error",
                   size: "small"
                 },
                 {

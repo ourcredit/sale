@@ -61,7 +61,7 @@ export default class CreateRole extends AbpBase {
           this.role.permissions = [...new Set(result)];
         }
         await this.$store.dispatch({
-          type: "role/create",
+          type: "role/modify",
           data: this.role
         });
         (this.$refs.roleForm as any).resetFields();

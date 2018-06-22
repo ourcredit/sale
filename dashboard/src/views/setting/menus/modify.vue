@@ -1,21 +1,25 @@
 <template>
     <div>
-        <Modal title="编辑角色" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-            <Form ref="roleForm" label-position="top" :rules="roleRule" :model="role">
-                <Tabs value="detail">
-                    <TabPane label="角色详情" name="detail">
-                        <FormItem label="角色名" prop="roleName">
-                            <Input v-model="role.roleName" :maxlength="32" :minlength="2" />
-                        </FormItem>
-                        <FormItem label="显示名" prop="displayName">
-                            <Input v-model="role.displayName" :maxlength="32" :minlength="2" />
-                        </FormItem>
-                    </TabPane>
-                    <TabPane label="角色权限" name="permission">
-                        <Tree ref="tree" multiple :data="tree" show-checkbox>
-                        </Tree>
-                    </TabPane>
-                </Tabs>
+        <Modal title="编辑菜单" :value="value" @on-ok="save" @on-visible-change="visibleChange">
+            <Form ref="roleForm" label-position="top" :rules="menuRule" :model="menu">
+                  <FormItem label="上级菜单" >
+                    <Input v-model="menu.parentName" disabled :maxlength="32" :minlength="2" />
+                </FormItem>
+                <FormItem label="菜单名" prop="name">
+                    <Input v-model="menu.name" :maxlength="32" :minlength="2" />
+                </FormItem>
+                <FormItem label="路径" prop="url">
+                    <Input v-model="menu.url" :maxlength="32" :minlength="2" />
+                </FormItem>
+                <FormItem label="权限" prop="code">
+                    <Input v-model="menu.code" :maxlength="32" :minlength="2" />
+                </FormItem>
+                <FormItem label="类型" prop="type">
+                    <RadioGroup v-model="menu.type">
+                        <Radio :label="1">菜单</Radio>
+                        <Radio :label="2">按钮</Radio>
+                    </RadioGroup>
+                </FormItem>
             </Form>
             <div slot="footer">
                 <Button @click="cancel">关闭</Button>
@@ -26,7 +30,6 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
-import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import Role from "@/store/entities/role";
 @Component
@@ -36,33 +39,27 @@ export default class CreateRole extends AbpBase {
     default: false
   })
   value: boolean;
-  get tree() {
-    let tree = this.$store.state.role.permissions;
-    let res = Util.genderTree(tree, "parentId", this.role.permissions, null);
-    return res;
-  }
-  get role() {
-    return this.$store.state.role.editRole;
-  }
-  get permissions() {
-    return this.$store.state.role.permissions;
+  @Prop({
+    type: Object,
+    default: null
+  })
+  parent: any;
+  get menu() {
+    var menu = this.$store.state.menu.editMenu;
+    menu.type = menu.type ? 1 : 2;
+    if (this.parent) {
+      menu.parentId = this.parent.id;
+      menu.parentName = this.parent.title;
+    }
+    console.log(menu);
+    return menu;
   }
   save() {
     (this.$refs.roleForm as any).validate(async (valid: boolean) => {
       if (valid) {
-        let nodes = (this.$refs.tree as any).getCheckedNodes();
-        let result: Array<any> = new Array<any>();
-        nodes.forEach((c: any) => {
-          Util.deptNode(this.permissions, c, result);
-        });
-        if (!result) {
-          this.role.permissions = [];
-        } else {
-          this.role.permissions = [...new Set(result)];
-        }
         await this.$store.dispatch({
-          type: "role/create",
-          data: this.role
+          type: "menu/modify",
+          data: this.menu
         });
         (this.$refs.roleForm as any).resetFields();
         this.$emit("save-success");
@@ -79,18 +76,11 @@ export default class CreateRole extends AbpBase {
       this.$emit("input", value);
     }
   }
-  roleRule = {
-    roleName: [
+  menuRule = {
+    name: [
       {
         required: true,
-        message: "角色名必填",
-        trigger: "blur"
-      }
-    ],
-    displayName: [
-      {
-        required: true,
-        message: "显示名必填",
+        message: "菜单名必填",
         trigger: "blur"
       }
     ]
