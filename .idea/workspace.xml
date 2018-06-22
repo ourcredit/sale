@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="22bcc1bb-1d77-4406-aa21-e395f73c69ad" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/role.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/role.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/setting/role/modify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/role/modify.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/setting/role/role.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/role/role.vue" afterDir="false" />
-    </list>
+    <list default="true" id="22bcc1bb-1d77-4406-aa21-e395f73c69ad" name="默认的" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,7 +76,7 @@
       <file leaf-file-name="RoleServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/RoleServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
+            <state relative-caret-position="226">
               <caret line="62" column="16" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
               <folding>
                 <element signature="e#1287#1288#0" expanded="true" />
@@ -450,10 +446,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="22" width="1616" height="886" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="调试" order="7" visible="true" weight="0.4831169" />
+      <window_info anchor="bottom" id="调试" order="7" weight="0.4831169" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.28875" />
@@ -962,7 +957,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/RoleServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
+        <state relative-caret-position="226">
           <caret line="62" column="16" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
           <folding>
             <element signature="e#1287#1288#0" expanded="true" />

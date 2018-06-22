@@ -56,11 +56,11 @@ export default class Roles extends AbpBase {
   }
   get p() {
     var t = {
-      modify: util.abp.auth.hasPermission("role:modify"),
-      delete: util.abp.auth.hasPermission("role:delete"),
-      list: util.abp.auth.hasPermission("role:list"),
-      first: util.abp.auth.hasPermission("role:first"),
-      batch: util.abp.auth.hasPermission("role:batch")
+      modify: this.hasPermission("role:modify"),
+      delete: this.hasPermission("role:delete"),
+      list: this.hasPermission("role:list"),
+      first: this.hasPermission("role:first"),
+      batch: this.hasPermission("role:batch")
     };
     return t;
   }

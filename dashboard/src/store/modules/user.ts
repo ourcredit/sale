@@ -16,7 +16,7 @@ class UserModule extends ListModule<UserState, any, User> {
   state = {
     totalCount: 0,
     currentPage: 1,
-    pageSize: 10,
+    pageSize: 1,
     list: new Array<User>(),
     loading: false,
     editUser: new User(),
