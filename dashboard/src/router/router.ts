@@ -22,7 +22,7 @@ export const otherRouters = {
   path: "/main",
   name: "main",
   permission: "",
-  meta: { title: "ManageMenu" },
+  meta: { title: "管理页" },
   component:() => System.import("../views/main.vue") ,
   children: [
     {
