@@ -2,7 +2,7 @@
     <div>
         <Card dis-hover>
             <div class="page-body">
-                <Form ref="queryForm" :label-width="80" label-position="left" inline>
+                <Form slot="filter" ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="5">
                             <FormItem label="方法:" style="width:100%">
@@ -23,72 +23,67 @@
                             </FormItem>
                         </Col>
                          <Col span="4">
+                         
                         <Button icon="ios-search" type="primary" size="large"
-                         @click="getpage" class="toolbar-btn">查找</Button>
+                         @click="init" class="toolbar-btn">查找</Button>
+                           <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
                         </Col>
                     </Row>
                 
                 </Form>
-                <div class="margin-top-10">
-                    <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
-                    </Table>
-                    <Page  show-sizer class-name="fengpage" :total="totalCount"
-                     class="margin-top-10"
-                      @on-change="pageChange"
-                       @on-page-size-change="pagesizeChange"
-                        :page-size="pageSize"
-                         :current="currentPage"></Page>
-                </div>
+                <SaleTable ref="table" :filters="filters" type="log" :columns="columns"></SaleTable>
             </div>
         </Card>
     </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
-import Util from "../../../lib/util";
+import SaleTable from "@/components/saletable.vue";
 import AbpBase from "../../../lib/abpbase";
-import PageRequest from "../../../store/entities/page-request";
-@Component({})
-export default class Users extends AbpBase {
+@Component({
+  components: {
+    SaleTable
+  }
+})
+export default class OperateLog extends AbpBase {
   filters: Object = {
-      method:'',
-      log_description:'',
-      create_time:'',
-  } ;
-  get list() {
-    return this.$store.state.log.list;
+    method: "",
+    log_description: "",
+    create_time: ""
+  };
+  p: any = {
+    delete: this.hasPermission("log:delete"),
+    list: this.hasPermission("log:list"),
+    batch: this.hasPermission("log:batch")
+  };
+  init() {
+    var t: any = this.$refs.table;
+    t.getpage();
   }
-  get loading() {
-    return this.$store.state.log.loading;
-  }
-  pageChange(page: number) {
-    this.$store.commit("log/setCurrentPage", page);
-    this.getpage();
-  }
-  pagesizeChange(pagesize: number) {
-    this.$store.commit("log/setPageSize", pagesize);
-    this.getpage();
-  }
-  async getpage() {
-    let pagerequest = new PageRequest();
-    pagerequest.size = this.pageSize;
-    pagerequest.index = this.currentPage;
-    pagerequest.where = this.filters;
-    await this.$store.dispatch({
-      type: "log/getAll",
-      data: pagerequest
-    });
-  }
-  get pageSize() {
-    return this.$store.state.log.pageSize;
-  }
-  get totalCount() {
-    return this.$store.state.log.totalCount;
-  }
-  get currentPage() {
-    return this.$store.state.log.currentPage;
+  async batchDelete() {
+    var t: any = this.$refs.table;
+    if (t.selections) {
+      this.$Modal.confirm({
+        title: "删除提示",
+        content: `确认要删除${t.selections.length}条数据么`,
+        okText: "是",
+        cancelText: "否",
+        onOk: async () => {
+          await this.$store.dispatch({
+            type: "log/batch",
+            data: t.selections
+          });
+          await this.init();
+        }
+      });
+    }
   }
   columns = [
+    {
+      type: "selection",
+      width: 60,
+      align: "center"
+    },
     {
       title: "类名",
       key: "className"
@@ -155,14 +150,14 @@ export default class Users extends AbpBase {
                   this.$Modal.confirm({
                     title: "提示",
                     content: "确认要删除该条信息么",
-                    okText:"是",
+                    okText: "是",
                     cancelText: "否",
                     onOk: async () => {
                       await this.$store.dispatch({
                         type: "log/delete",
                         data: params.row
                       });
-                      await this.getpage();
+                      await this.init();
                     }
                   });
                 }
@@ -174,8 +169,6 @@ export default class Users extends AbpBase {
       }
     }
   ];
-  async created() {
-    this.getpage();
-  }
+  async created() {}
 }
 </script>

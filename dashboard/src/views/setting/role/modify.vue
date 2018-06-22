@@ -50,7 +50,6 @@ export default class CreateRole extends AbpBase {
   save() {
     (this.$refs.roleForm as any).validate(async (valid: boolean) => {
       if (valid) {
-          debugger;
         let nodes = (this.$refs.tree as any).getCheckedNodes();
         let result: Array<any> = new Array<any>();
         nodes.forEach((c: any) => {

@@ -31,6 +31,9 @@ class LogModule extends ListModule<LogState,any,any>{
         async delete(context:ActionContext<LogState,any>,payload:any){
             await Ajax.delete('/api/log/'+payload.data.id);
         },
+        async batch(context:ActionContext<LogState,any>,payload:any){
+            await Ajax.post('/api/log/batch',payload.data);
+        },
         async get(context:ActionContext<LogState,any>,payload:any){
             let reponse=await Ajax.get('/api/log/'+payload.id);
             return reponse.data.result ;

@@ -354,11 +354,28 @@ class Util {
         t.children = this.genderTree(list, key, range, item.id);
         if (t.children && t.children.length > 0) {
           var tem = t.children.filter((c: any) => c.checked);
-          t.checked =
-          tem.length ==
-            t.children.length;
+          t.checked = tem.length == t.children.length;
         }
 
+        result.push(t);
+      }
+    });
+    return result;
+  }
+
+  genderMenu(list: Array<any>, key: string, parentId?: number | null) {
+    var result = new Array<any>();
+    list.forEach((item: any) => {
+      let t: any = {};
+      t.id = item.id;
+      t.title = item.name;
+      t.code = item.code;
+      t.parentId = item.parentId;
+      t.url = item.url;
+      t.type = item.type;
+      t.expand = true;
+      if (item[key] == parentId) {
+        t.children = this.genderMenu(list, key, item.id);
         result.push(t);
       }
     });

@@ -31,17 +31,11 @@
                 
                 </Form>
                 <div class="margin-top-10">
-                    <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
-                    </Table>
-                    <Page  show-sizer class-name="fengpage" :total="totalCount"
-                     class="margin-top-10"
-                      @on-change="pageChange"
-                       @on-page-size-change="pagesizeChange"
-                        :page-size="pageSize"
-                         :current="currentPage"></Page>
+                   <Tree :data="tree" :render="renderContent"></Tree>
                 </div>
             </div>
         </Card>
+        <Modify v-model="ModelShow" @save-success="getpage"></Modify>
     </div>
 </template>
 <script lang="ts">
@@ -49,55 +43,157 @@ import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import PageRequest from "../../../store/entities/page-request";
+import Modify from "./modify.vue";
 @Component({
+  components: {
+    Modify
+  }
 })
-export default class Users extends AbpBase {
+export default class Menus extends AbpBase {
   edit() {
-    this.editModalShow = true;
+    this.ModelShow = true;
   }
   filters: Object = {
-    name:'',
-    code:'',
-    creationTime:null
+    name: "",
+    code: "",
+    creationTime: null
   };
-  createModalShow: boolean = false;
-  editModalShow: boolean = false;
-  get list() {
-    return this.$store.state.menu.list;
+  ModelShow: boolean = false;
+  get tree() {
+    let tree = this.$store.state.menu.list;
+    let res = Util.genderMenu(tree, "parentId", null);
+    return res;
   }
-  get loading() {
-    return this.$store.state.menu.loading;
-  }
+
   create() {
-    this.createModalShow = true;
+    this.ModelShow = true;
   }
-  pageChange(page: number) {
-    this.$store.commit("menu/setCurrentPage", page);
-    this.getpage();
+
+  renderContent(h: any, { root, node, data }: any) {
+    return h(
+      "span",
+      {
+        style: {
+          display: "inline-block",
+          width: "40%"
+        }
+      },
+      [
+        h("span", [
+          h("Icon", {
+            props: {
+              type: "ios-paper-outline"
+            },
+            style: {
+              marginRight: "10px"
+            }
+          }),
+          h("span", data.title)
+        ]),
+        h(
+          "span",
+          {
+            style: { marginLeft: "30px" }
+          },
+          data.url
+        ),
+        h(
+          "span",
+          {
+            style: { marginLeft: "30px" }
+          },
+          data.code
+        ),
+        h("Icon", {
+          props: {
+            type: data.type == 1 ? "android-share-list" : "android-list"
+          },
+          style: {
+            marginRight: "10px"
+          }
+        }),
+        h(
+          "span",
+          {
+            style: {
+              display: "inline-block",
+              float: "right",
+              marginRight: "32px"
+            }
+          },
+          [
+            h("Button", {
+              props: Object.assign(
+                {},
+                {
+                  type: "primary",
+                  size: "small"
+                },
+                {
+                  icon: "plus"
+                }
+              ),
+              style: {
+                marginRight: "8px"
+              },
+              on: {
+                click: () => {
+                  this.ModelShow = true;
+                }
+              }
+            }),
+            h("Button", {
+              props: Object.assign(
+                {},
+                {
+                  type: "primary",
+                  size: "small"
+                },
+                {
+                  icon: "scissors"
+                }
+              ),
+              style: {
+                marginRight: "8px"
+              },
+              on: {
+                click: () => {
+                  this.ModelShow = true;
+                }
+              }
+            }),
+            h("Button", {
+              props: Object.assign(
+                {},
+                {
+                  type: "primary",
+                  size: "small"
+                },
+                {
+                  icon: "close"
+                }
+              ),
+              on: {
+                click: () => {}
+              }
+            })
+          ]
+        )
+      ]
+    );
   }
-  pagesizeChange(pagesize: number) {
-    this.$store.commit("menu/setPageSize", pagesize);
-    this.getpage();
-  }
+
   async getpage() {
     let pagerequest = new PageRequest();
-    pagerequest.size = this.pageSize;
-    pagerequest.index = this.currentPage;
+    pagerequest.size = 999;
+    pagerequest.index = 1;
     pagerequest.where = this.filters;
     await this.$store.dispatch({
       type: "menu/getAll",
       data: pagerequest
     });
   }
-  get pageSize() {
-    return this.$store.state.menu.pageSize;
-  }
-  get totalCount() {
-    return this.$store.state.menu.totalCount;
-  }
-  get currentPage() {
-    return this.$store.state.menu.currentPage;
-  }
+
   columns = [
     {
       title: "菜单名",
@@ -107,14 +203,14 @@ export default class Users extends AbpBase {
       title: "权限码",
       key: "code"
     },
-     {
+    {
       title: "路径",
       key: "url"
     },
     {
       title: "类型",
       render: (h: any, params: any) => {
-        return h("span", params.row.type==1 ? "菜单" : "按钮");
+        return h("span", params.row.type == 1 ? "菜单" : "按钮");
       }
     },
     {
@@ -162,7 +258,7 @@ export default class Users extends AbpBase {
               on: {
                 click: async () => {
                   this.$Modal.confirm({
-                    title:"删除提示",
+                    title: "删除提示",
                     content: "确认要删除么",
                     okText: "是",
                     cancelText: "否",
@@ -177,7 +273,7 @@ export default class Users extends AbpBase {
                 }
               }
             },
-           "删除"
+            "删除"
           )
         ]);
       }

@@ -50,13 +50,6 @@ export const appRouters = [
         component: () => System.import("../views/setting/user/user.vue")
       },
       {
-        path: "test",
-        permission: "user:list",
-        meta: { title: "table组件测试" },
-        name: "test",
-        component: () => System.import("../views/setting/test/test.vue")
-      },
-      {
         path: "role",
         permission: "role:list",
         meta: { title: "角色管理" },
