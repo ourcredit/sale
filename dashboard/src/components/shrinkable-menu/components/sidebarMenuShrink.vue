@@ -38,7 +38,7 @@ export default class extends AbpBase {
 
     }
     itemTitle(item:any){
-        return this.L(item.meta.title);
+        return item.meta.title;
     }
 }
 </script>

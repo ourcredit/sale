@@ -41,7 +41,7 @@ export default class SidebarMenu extends AbpBase {
   @Prop({ type: Array })
   openNames: Array<string>;
   itemTitle(item: any): string {
-    return this.L(item.meta.title);
+    return item.meta.title;
   }
   @Emit("on-change")
   changeMenu(active: string) {}

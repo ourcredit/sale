@@ -2,7 +2,7 @@
     <div class="page-body">
         <slot name="filter"></slot>
         <div class="margin-top-10">
-            <Table stripe border show-header :loading="loading" :columns="columns" :no-data-text="nodatatext" border :data="list">
+            <Table @on-selection-change="selectionChange" stripe border show-header :loading="loading" :columns="columns" :no-data-text="nodatatext" border :data="list">
             </Table>
             <Page show-sizer class-name="fengpage" :total="totalCount" class="margin-top-10" @on-change="pageChange" @on-page-size-change="pagesizeChange"
                 :page-size="pageSize" :current="currentPage"></Page>
@@ -44,17 +44,22 @@ export default class SaleTable extends AbpBase {
   @Prop({
     default: false
   })
-  'show-header': Boolean;
+  "show-header": Boolean;
   @Prop({
     default: "暂无数据"
   })
   nodatatext: String = "暂无数据";
+  selections: Array<any> = new Array<any>();
+  
   get list() {
     return this.$store.state[`${this.type}`].list;
   }
 
   get loading() {
     return this.$store.state[`${this.type}`].loading;
+  }
+  selectionChange(e: any) {
+    this.selections = e.map((c: any) => c.id);
   }
   pageChange(page: number) {
     this.$store.commit(`${this.type}/setCurrentPage`, page);

@@ -16,7 +16,7 @@ export default class extends AbpBase {
     name:string= 'breadcrumbNav';
     @Prop({type:Array}) currentPath:Array<any>;
     itemTitle (item:any) {
-        return this.L(item.meta.title);
+        return item.meta.title;
     }
 }
 </script>

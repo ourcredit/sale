@@ -107,7 +107,7 @@ export default class Notice extends AbpBase{
         return this.noticeList.filter(n=>n.read==false&&n.type===2).length
     }
     get noticeLabel(){
-        let name=this.L('Notice');
+        let name='通知';
         if(this.noticeCount>0){
             return `${name}(${this.noticeCount})`
         }else{
@@ -115,7 +115,7 @@ export default class Notice extends AbpBase{
         }
     }
     get messageLabel(){
-        let name=this.L('Message');
+        let name='信息';
         if(this.messageCount>0){
             return `${name}(${this.messageCount})`
         }else{
@@ -123,7 +123,7 @@ export default class Notice extends AbpBase{
         }
     }
     get taskLabel(){
-        let name=this.L('Task')
+        let name='任务'
         if(this.taskCount>0){
             return `${name}(${this.taskCount})`
         }else{

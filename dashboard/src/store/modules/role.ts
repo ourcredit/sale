@@ -36,7 +36,7 @@ class RoleModule extends ListModule<RoleState,any,Role>{
             await Ajax.put('/api/role/modify',payload.data);
         },
         async delete(context:ActionContext<RoleState,any>,payload:any){
-            await Ajax.delete('/api/role'+payload.data.id);
+            await Ajax.delete('/api/role/'+payload.data.id);
         },
         async batch(context:ActionContext<RoleState,any>,payload:any){
             await Ajax.post('/api/role/batch',payload.data);

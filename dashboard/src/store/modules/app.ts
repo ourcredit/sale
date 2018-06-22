@@ -44,7 +44,7 @@ class AppModule implements Module < AppState, any > {
     themeColor: "",
     pageOpenedList: [{
       meta: {
-        title: "HomePage"
+        title: "首页"
       },
       path: "",
       name: "home"
@@ -52,7 +52,7 @@ class AppModule implements Module < AppState, any > {
     currentPageName: "",
     currentPath: [{
       meta: {
-        title: "HomePage"
+        title: "首页"
       },
       path: "",
       name: "home"
@@ -65,18 +65,20 @@ class AppModule implements Module < AppState, any > {
     noticeList: [{
         read: false,
         type: 0,
-        title: "First notice",
-        description: "One day ago"
+        title: "一个提示",
+        description: "一天前"
       },
       {
         read: false,
-        type: 1
+        type: 1,
+        title: "一个提示",
+        description: "一天前"
       },
       {
         read: false,
         type: 0,
-        title: "Second notice",
-        description: "One month ago"
+        title: "第二个提示",
+        description: "一个月前"
       }
     ]
   };

@@ -11,7 +11,7 @@ class Util {
   }
 
   title(title: string) {
-    let appname = "monkey";
+    let appname = "sale";
     let page = "page";
     window.document.title = appname + "--" + page;
   }
@@ -171,7 +171,7 @@ class Util {
       ) {
         currentPathArr = [
           {
-            meta: { title: "HomePage" },
+            meta: { title: "首页" },
             path: "main/home",
             name: "home"
           }
@@ -183,7 +183,7 @@ class Util {
       ) {
         currentPathArr = [
           {
-            meta: { title: "HomePage" },
+            meta: { title: "首页" },
             path: "main/home",
             name: "home"
           },
@@ -199,7 +199,7 @@ class Util {
         })[0];
         currentPathArr = [
           {
-            meta: { title: "HomePage" },
+            meta: { title: "首页" },
             path: "main/home",
             name: "home"
           },
