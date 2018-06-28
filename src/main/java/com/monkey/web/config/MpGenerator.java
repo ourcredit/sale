@@ -55,10 +55,10 @@ public class MpGenerator {
                 return super.processTypeConvert(fieldType);
             }
         });
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("Dizhu2017");
-        dsc.setUrl("jdbc:mysql://103.45.102.47:3306/sale?characterEncoding=utf8&useSSL=false");
+        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setUsername("sale");
+        dsc.setPassword("zwy0410");
+        dsc.setUrl("jdbc:mysql://localhost:3306/sale?characterEncoding=utf8&useSSL=false");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -67,13 +67,7 @@ public class MpGenerator {
         strategy.setTablePrefix(new String[]{"sale_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setInclude(new String[]{
-                "sale_log",
-                "sale_role",
-                "sale_user",
-                "sale_userrole",
-                "sale_menu",
-                "sale_rolemenu",
-                "sale_file"
+                "sale_user"
         }); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
@@ -98,7 +92,7 @@ public class MpGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.liugh");
+        pc.setParent("com.monkey");
 //        pc.setModuleName("entity");
         mpg.setPackageInfo(pc);
 

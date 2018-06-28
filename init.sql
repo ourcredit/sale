@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : sale
+ Source Server         : myself
  Source Server Type    : MySQL
- Source Server Version : 50636
- Source Host           : 103.45.102.47:3306
+ Source Server Version : 80011
+ Source Host           : localhost:3306
  Source Schema         : sale
 
  Target Server Type    : MySQL
- Target Server Version : 50636
+ Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 14/06/2018 15:14:22
+ Date: 28/06/2018 17:00:28
 */
 
 SET NAMES utf8mb4;
@@ -61,6 +61,7 @@ CREATE TABLE `sale_menu`  (
   `parentId` int(11) NULL DEFAULT NULL COMMENT '父级id',
   `creationTime` datetime(0) NULL DEFAULT NULL,
   `creatorUserId` int(11) NULL DEFAULT NULL,
+  `isDeleted` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -76,6 +77,8 @@ CREATE TABLE `sale_role`  (
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '启用状态',
   `isStatic` tinyint(4) NULL DEFAULT NULL COMMENT '是否静态',
+  `desCrition` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `isDeleted` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`, `roleName`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -105,6 +108,7 @@ CREATE TABLE `sale_user`  (
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机',
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '1启用  0禁用',
   `isDeleted` tinyint(2) NULL DEFAULT NULL COMMENT '软删除  ',
+  `lastLoginTime` datetime(0) NULL DEFAULT NULL COMMENT '最后登陆时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ix_account`(`account`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
@@ -119,8 +123,8 @@ CREATE TABLE `sale_userrole`  (
   `roleId` int(11) NOT NULL,
   INDEX `ix_userId`(`userId`) USING BTREE,
   INDEX `ix_roleId`(`roleId`) USING BTREE,
-  CONSTRAINT `fk_roleId` FOREIGN KEY (`roleId`) REFERENCES `sale_role` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `sale_user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT `fk_roleId` FOREIGN KEY (`roleId`) REFERENCES `sale_role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `sale_user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
