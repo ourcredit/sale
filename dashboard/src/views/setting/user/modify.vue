@@ -5,13 +5,13 @@
                 <Tabs value="detail">
                     <TabPane label="用户详情" name="detail">
                         <FormItem label="账户" prop="account">
-                            <Input v-model="user.account" :maxlength="32" :minlength="2"></Input>
+                            <Input v-model="user.account" :maxlength="32" :minlength="2"/>
                         </FormItem>
                         <FormItem label="用户名" prop="userName">
-                            <Input v-model="user.userName" :maxlength="32"></Input>
+                            <Input v-model="user.userName" :maxlength="32"/>
                         </FormItem>
                         <FormItem label="手机" prop="mobile">
-                            <Input v-model="user.mobile" type="text" :maxlength="32"></Input>
+                            <Input v-model="user.mobile" type="text" :maxlength="32"/>
                         </FormItem>
                         <FormItem label="密码" prop="password">
                             <Input v-model="user.password" type="password" :maxlength="32"></Input>
