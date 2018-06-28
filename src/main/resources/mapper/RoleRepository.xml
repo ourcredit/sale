@@ -14,6 +14,7 @@
         <id column="id"  property="id" />
         <result column="roleName" property="roleName" />
         <result column="displayName" property="displayName" />
+        <result column="discription" property="discription" />
         <result column="isActive" property="isActive" />
         <result column="isStatic" property="isStatic" />
         <result column="creationTime" property="creationTime" />
@@ -30,6 +31,7 @@
 	a.id,
 	a.roleName,
 	a.displayName,
+	a.discription,
 	a.isActive,
 	a.isStatic,
 	a.creationTime,

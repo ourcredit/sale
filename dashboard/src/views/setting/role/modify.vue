@@ -10,6 +10,15 @@
                         <FormItem label="显示名" prop="displayName">
                             <Input v-model="role.displayName" :maxlength="32" :minlength="2" />
                         </FormItem>
+                          <FormItem label="描述" prop="discription">
+                            <Input v-model="role.discription" :maxlength="255" :minlength="2" />
+                        </FormItem>
+                         <FormItem>
+                            <Checkbox @on-change="activeChange" :value="role.isActive==1">启用</Checkbox>
+                        </FormItem>
+                         <FormItem>
+                            <Checkbox @on-change="staticChange" :value="role.isStatic==1">静态</Checkbox>
+                        </FormItem>
                     </TabPane>
                     <TabPane label="角色权限" name="permission">
                         <Tree ref="tree" multiple :data="tree" show-checkbox>
@@ -78,6 +87,12 @@ export default class CreateRole extends AbpBase {
     if (!value) {
       this.$emit("input", value);
     }
+  }
+  activeChange() {
+    this.role.isActive = !!!this.role.isActive;
+  }
+  staticChange() {
+    this.role.isStatic = !!!this.role.isStatic;
   }
   roleRule = {
     roleName: [

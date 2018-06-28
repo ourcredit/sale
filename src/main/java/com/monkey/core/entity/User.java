@@ -47,6 +47,7 @@ public class User extends Model<User> {
      * 密码
      */
     private String password;
+    private Date lastLoginTime;
     /**
      * 创建时间
      */
@@ -174,5 +175,13 @@ public class User extends Model<User> {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

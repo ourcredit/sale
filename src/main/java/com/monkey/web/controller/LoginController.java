@@ -26,10 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *  登录接口
@@ -54,9 +51,11 @@ public class LoginController {
         EntityWrapper<User> ew = new EntityWrapper<>();
         ew.where("account={0}", input.userName);
         User user = _userService.selectOne(ew);
+        user.setLastLoginTime(new Date());
         if (ComUtil.isEmpty(user) || !BCrypt.checkpw(input.passWord, user.getPassword())) {
             return new PublicResult<>(PublicResultConstant.INVALID_USERNAME_PASSWORD, null);
         }
+        _userService.updateById(user);
         NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(), user.getPassword()),null );
         return new PublicResult<>(PublicResultConstant.SUCCESS, u);
     }

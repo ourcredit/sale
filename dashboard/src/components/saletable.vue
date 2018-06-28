@@ -2,7 +2,7 @@
     <div class="page-body">
         <slot name="filter"></slot>
         <div class="margin-top-10">
-            <Table @on-selection-change="selectionChange" stripe border show-header :loading="loading" :columns="columns" :no-data-text="nodatatext" border :data="list">
+            <Table @on-selection-change="selectionChange" stripe border show-header :loading="loading" :columns="columns" :no-data-text="nodatatext" :data="list">
             </Table>
             <Page show-sizer class-name="fengpage" :total="totalCount" class="margin-top-10" @on-change="pageChange" @on-page-size-change="pagesizeChange"
                 :page-size="pageSize" :current="currentPage"></Page>
@@ -22,35 +22,42 @@ export default class SaleTable extends AbpBase {
     await this.getpage();
   }
   @Prop({
+    type: String,
     required: true
   })
   type: String;
   @Prop({
+    type: Object,
     required: true
   })
   filters: Object;
   @Prop({
+    type: Array,
     required: true
   })
   columns: Array<any>;
   @Prop({
+    type: Boolean,
     default: false
   })
   stripe: Boolean;
   @Prop({
+    type: Boolean,
     default: false
   })
   border: Boolean;
   @Prop({
+    type: Boolean,
     default: false
   })
   "show-header": Boolean;
   @Prop({
+    type: String,
     default: "暂无数据"
   })
   nodatatext: String = "暂无数据";
   selections: Array<any> = new Array<any>();
-  
+
   get list() {
     return this.$store.state[`${this.type}`].list;
   }

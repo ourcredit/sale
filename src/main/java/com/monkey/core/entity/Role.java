@@ -39,6 +39,7 @@ public class Role extends Model<Role> {
      * name
      */
     private String roleName;
+    private String discription;
     /**
      * 显示名
      */
@@ -125,5 +126,13 @@ public class Role extends Model<Role> {
         ", creationTime=" + creationTime +
         ", creatorUserId=" + creatorUserId +
         "}";
+    }
+
+    public String getDiscription() {
+        return discription;
+    }
+
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 }
