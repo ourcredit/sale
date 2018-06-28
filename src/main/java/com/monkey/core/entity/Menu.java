@@ -2,6 +2,7 @@ package com.monkey.core.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -28,7 +29,13 @@ public class Menu extends Model<Menu> {
         this.url=url;
         this.type=type;
         this.parentId=parentId;
+        this.isDeleted=0;
     }
+    /**
+     * 软删除
+     */
+    @TableLogic
+    private Integer isDeleted;
     /**
      * key
      */

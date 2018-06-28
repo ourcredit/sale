@@ -41,7 +41,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     public RoleDto selectRoleAndPermissionsById(Integer id) {
         return _roleRepository.selectRoleAndPermissionsById(id);
     }
-
     @Override
     @CachePut(value = "allPermissions")
     public List<String> getAllPermissions(){
@@ -56,6 +55,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     @Override
     public Boolean insertRoleAndPermissions(RoleDto model) {
         Role role = new Role(model.getId(), model.getRoleName(), model.getDisplayName(),model.getIsActive(),model.getIsStatic());
+        role.setDiscription(model.getDiscription());
         EntityWrapper ew = new EntityWrapper();
 
         if (model.getId() == null || model.getId() == 0) {

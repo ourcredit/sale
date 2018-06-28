@@ -6,13 +6,16 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.application.Roles.IUserRoleService;
 import com.monkey.application.Users.dtos.CreateUserInput;
 import com.monkey.core.dtos.UserDto;
+import com.monkey.core.entity.Role;
 import com.monkey.core.entity.User;
 import com.monkey.core.entity.Userrole;
+import com.monkey.core.mapper.RoleRepository;
 import com.monkey.core.mapper.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import scala.Int;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     private IUserRoleService _userRoleRepository;
     @Autowired
     private UserRepository _userRepository;
+    @Autowired
+    private RoleRepository _roleRepository;
 
     /**
      * <p>
@@ -42,17 +47,18 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
      * @since 2018-05-03
      */
     @Override
-  //  @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0])")
+    //  @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0])")
     public User getUserByUserName(String username) {
         EntityWrapper<User> ew = new EntityWrapper<>();
         ew.where("username={0}", username);
         return this.selectOne(ew);
     }
+
     @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")
-    public UserDto selectUserRole(Integer id){
-      UserDto r=   _userRepository.selectUserRole(id);
-      return  r;
-}
+    public UserDto selectUserRole(Integer id) {
+        UserDto r = _userRepository.selectUserRole(id);
+        return r;
+    }
 
     /**
      * <p>
@@ -62,32 +68,45 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
      * @param input dto
      * @since 2018-05-03
      */
-    public void ModifyUserAndRoles(CreateUserInput input){
+    public void ModifyUserAndRoles(CreateUserInput input) {
         User u;
-        EntityWrapper ew=  new EntityWrapper<>();
-        ew.eq("account",input.account);
-        if(input.id==null){
-            u=new User(input.account,input.password,input.userName,input.mobile,input.isActive);
-          this.insert(u);
-        }else {
-            u=this.selectOne(ew);
-            if(u!=null){
+        EntityWrapper ew = new EntityWrapper<>();
+        ew.eq("account", input.account);
+        if (input.id == null) {
+            u = new User(input.account, input.password, input.userName, input.mobile, input.isActive);
+            this.insert(u);
+        } else {
+            u = this.selectOne(ew);
+            if (u != null) {
                 u.setMobile(input.mobile);
                 u.setIsActive(input.isActive);
                 u.setUserName(input.userName);
-                u.setPassword( BCrypt.hashpw(input.password,BCrypt.gensalt()) );
+                u.setPassword(BCrypt.hashpw(input.password, BCrypt.gensalt()));
                 this.updateById(u);
             }
         }
-        if(!input.roles.isEmpty()){
-            ew=  new EntityWrapper<>();
-            ew.eq("userId",u.getId());
+        if (!input.roles.isEmpty()) {
+            ew = new EntityWrapper<>();
+            ew.eq("userId", u.getId());
             _userRoleRepository.delete(ew);
-            List<Userrole> urs=new ArrayList<>();
-           for (Integer r :input.roles){
-               urs.add(new Userrole(u.getId(),r));
-           }
-           _userRoleRepository.insertBatch(urs);
+            List<Userrole> urs = new ArrayList<>();
+            ew = new EntityWrapper();
+            ew.eq("isStatic", 1);
+            List<Role> rs = _roleRepository.selectList(ew);
+            List<Integer> temp = new ArrayList<>();
+
+            for (Role r : rs) {
+                temp.add(r.getId());
+            }
+            for (Integer r : input.roles) {
+                if (!temp.contains(r)) {
+                    urs.add(new Userrole(u.getId(), r));
+                }
+            }
+            for(Integer r : temp){
+                urs.add(new Userrole(u.getId(),r));
+            }
+            _userRoleRepository.insertBatch(urs);
         }
     }
 

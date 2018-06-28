@@ -60,8 +60,16 @@ export default class CreateUser extends AbpBase {
     if (u.id) {
       if (u.roles && u.roles.length > 0) {
         u.roles = u.roles.map((c: any) => {
-            if(c instanceof Object)return c.id;
-            return c;
+          if (c instanceof Object) return c.id;
+          return c;
+        });
+      }
+    } else {
+      var t = this.roles.filter((c: any) => c.isStatic == 1);
+      if (t && t.length) {
+        u.roles = t.map((c: any) => {
+          if (c instanceof Object) return c.id;
+          return c;
         });
       }
     }

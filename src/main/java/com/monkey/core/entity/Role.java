@@ -2,6 +2,7 @@ package com.monkey.core.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -21,15 +22,20 @@ public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
     public Role(){}
-    public Role(Integer id, String roleName,String displayName,Integer isactive,Integer isStatic){
+    public Role(Integer id, String roleName,String displayName,Integer isActive,Integer isStatic){
         this.id=id;
         this.roleName=roleName;
         this.displayName=displayName;
-        this.isActive=isactive;
+        this.isActive=isActive;
         this.isStatic=isStatic;
         this.creationTime=new Date();
+        this.isDeleted=0;
     }
-
+    /**
+     * 软删除
+     */
+    @TableLogic
+    private Integer isDeleted;
     /**
      * key
      */
@@ -39,7 +45,7 @@ public class Role extends Model<Role> {
      * name
      */
     private String roleName;
-    private String discription;
+    private String desCrition;
     /**
      * 显示名
      */
@@ -129,10 +135,18 @@ public class Role extends Model<Role> {
     }
 
     public String getDiscription() {
-        return discription;
+        return desCrition;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDiscription(String desCrition) {
+        this.desCrition = desCrition;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

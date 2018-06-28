@@ -3,6 +3,7 @@ package com.monkey.core.entity;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 import org.mindrot.jbcrypt.BCrypt;
@@ -31,7 +32,6 @@ public class User extends Model<User> {
             this.mobile=mobile;
             this.isActive=isActive;
             this.creationTime=new Date();
-            this.creatorUserId=1;
             this.isDeleted=0;
     }
     /**
@@ -43,6 +43,8 @@ public class User extends Model<User> {
      * 账户
      */
     private String account;
+
+
     /**
      * 密码
      */
@@ -71,11 +73,10 @@ public class User extends Model<User> {
     /**
      * 软删除  
      */
+    @TableLogic
     private Integer isDeleted;
     @TableField(el = "false",exist =false)
     private List<Role> roles;
-
-
 
     public Integer getId() {
         return id;
