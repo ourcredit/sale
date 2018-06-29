@@ -58,7 +58,7 @@ export default class Menus extends AbpBase {
     code: "",
     creationTime: null
   };
-  parent:any=null;
+  parent: any = null;
   ModelShow: boolean = false;
   get tree() {
     let tree = this.$store.state.menu.list;
@@ -140,7 +140,7 @@ export default class Menus extends AbpBase {
               on: {
                 click: () => {
                   if (data.type == 1) {
-                    this.parent=data;
+                    this.parent = data;
                     this.ModelShow = true;
                   }
                 }
@@ -197,92 +197,6 @@ export default class Menus extends AbpBase {
       data: pagerequest
     });
   }
-
-  columns = [
-    {
-      title: "菜单名",
-      key: "name"
-    },
-    {
-      title: "权限码",
-      key: "code"
-    },
-    {
-      title: "路径",
-      key: "url"
-    },
-    {
-      title: "类型",
-      render: (h: any, params: any) => {
-        return h("span", params.row.type == 1 ? "菜单" : "按钮");
-      }
-    },
-    {
-      title: "创建时间",
-      key: "creationTime",
-      render: (h: any, params: any) => {
-        return h(
-          "span",
-          new Date(params.row.creationTime).toLocaleDateString()
-        );
-      }
-    },
-    {
-      title: "操作",
-      key: "Actions",
-      width: 150,
-      render: (h: any, params: any) => {
-        return h("div", [
-          h(
-            "Button",
-            {
-              props: {
-                type: "primary",
-                size: "small"
-              },
-              style: {
-                marginRight: "5px"
-              },
-              on: {
-                click: () => {
-                  this.$store.commit("menu/edit", params.row);
-                  this.edit();
-                }
-              }
-            },
-            "编辑"
-          ),
-          h(
-            "Button",
-            {
-              props: {
-                type: "error",
-                size: "small"
-              },
-              on: {
-                click: async () => {
-                  this.$Modal.confirm({
-                    title: "删除提示",
-                    content: "确认要删除么",
-                    okText: "是",
-                    cancelText: "否",
-                    onOk: async () => {
-                      await this.$store.dispatch({
-                        type: "menu/delete",
-                        data: params.row
-                      });
-                      await this.getpage();
-                    }
-                  });
-                }
-              }
-            },
-            "删除"
-          )
-        ]);
-      }
-    }
-  ];
   async created() {
     this.getpage();
   }

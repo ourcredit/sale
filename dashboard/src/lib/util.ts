@@ -1,6 +1,4 @@
-import axios from "axios";
 import Vue from "vue";
-import appconst from "./appconst";
 class Util {
   abp: any = window.abp;
   loadScript(url: string) {
