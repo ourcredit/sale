@@ -45,7 +45,7 @@ public class Role extends Model<Role> {
      * name
      */
     private String roleName;
-    private String desCrition;
+    private String description;
     /**
      * 显示名
      */
@@ -134,13 +134,7 @@ public class Role extends Model<Role> {
         "}";
     }
 
-    public String getDiscription() {
-        return desCrition;
-    }
 
-    public void setDiscription(String desCrition) {
-        this.desCrition = desCrition;
-    }
 
     public Integer getIsDeleted() {
         return isDeleted;
@@ -148,5 +142,13 @@ public class Role extends Model<Role> {
 
     public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

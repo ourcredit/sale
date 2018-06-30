@@ -31,7 +31,7 @@ class MenuModule extends ListModule<MenuState,any,Menu>{
             context.state.list=page.records;
         },
         async create(context:ActionContext<MenuState,any>,payload:any){
-            await Ajax.post('/api/menu/modify',payload.data);
+            await Ajax.put('/api/menu',payload.data);
         },
         async update(context:ActionContext<MenuState,any>,payload:any){
             await Ajax.put('/api/menu/modify',payload.data);

@@ -11,7 +11,7 @@ interface UserState extends ListState<User> {
   editUser: User;
   roles: Role[];
 }
-class UserMutations extends ListMutations<User> {}
+class UserMutations extends ListMutations<User> { }
 class UserModule extends ListModule<UserState, any, User> {
   state = {
     totalCount: 0,
@@ -32,13 +32,13 @@ class UserModule extends ListModule<UserState, any, User> {
       context.state.list = page.records;
     },
     async modify(context: ActionContext<UserState, any>, payload: any) {
-      await Ajax.post("/api/user/modify", payload.data);
+      await Ajax.put("/api/user", payload.data);
     },
 
     async delete(context: ActionContext<UserState, any>, payload: any) {
       await Ajax.delete("/api/user/" + payload.data.id);
     },
-      async get(context: ActionContext<UserState, any>, payload: any) {
+    async get(context: ActionContext<UserState, any>, payload: any) {
       let reponse = await Ajax.get("/api/user/" + payload.data.id);
       context.state.editUser = reponse.data as User;
     },

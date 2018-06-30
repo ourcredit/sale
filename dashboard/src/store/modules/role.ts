@@ -30,7 +30,7 @@ class RoleModule extends ListModule<RoleState, any, Role>{
             context.state.list = page.records;
         },
         async modify(context: ActionContext<RoleState, any>, payload: any) {
-            await Ajax.post('/api/role/modify', payload.data);
+            await Ajax.put('/api/role', payload.data);
         },
         async delete(context: ActionContext<RoleState, any>, payload: any) {
             await Ajax.delete('/api/role/' + payload.data.id);

@@ -53,7 +53,7 @@ public class RoleController {
     }
 
     @ApiOperation(value = "添加或编辑角色", notes = "角色列表")
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    @RequestMapping( method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._role.modify})
     public PublicResult<Object> insert(@RequestBody RoleDto model) throws Exception {
         Boolean r = _roleService.insertRoleAndPermissions(model);

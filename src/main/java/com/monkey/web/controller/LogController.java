@@ -52,7 +52,7 @@ public class LogController {
         return new PublicResult<>(PublicResultConstant.SUCCESS, l);
     }
     @ApiOperation(value = "添加或编辑日志",notes = "日志列表")
-    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._log.modify})
     public PublicResult<Object> insert(@RequestBody Log model) throws Exception{
         Boolean r=_logService.insertOrUpdate(model);

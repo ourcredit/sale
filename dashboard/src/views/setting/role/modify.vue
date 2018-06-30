@@ -10,8 +10,8 @@
                         <FormItem label="显示名" prop="displayName">
                             <Input v-model="role.displayName" :maxlength="32" :minlength="2" />
                         </FormItem>
-                          <FormItem label="描述" prop="discription">
-                            <Input v-model="role.discription" :maxlength="255" :minlength="2" />
+                          <FormItem label="描述" prop="description">
+                            <Input v-model="role.description" :maxlength="255" :minlength="2" />
                         </FormItem>
                          <FormItem>
                             <Checkbox @on-change="activeChange" :value="role.isActive==1">启用</Checkbox>

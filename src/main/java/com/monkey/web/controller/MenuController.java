@@ -37,7 +37,7 @@ public class MenuController {
     @Autowired
     IMenuService _menuService;
 
-     @Log(description="获取菜单列表:/list")
+
     @ApiOperation(value = "获取菜单列表",notes = "菜单列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._menu.list})
@@ -63,7 +63,7 @@ public class MenuController {
     }
 
     @ApiOperation(value = "添加或编辑菜单",notes = "菜单列表")
-    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._menu.modify})
     public PublicResult<Object> insert(@RequestBody Menu model) throws Exception{
         Boolean r=_menuService.insertOrUpdate(model);

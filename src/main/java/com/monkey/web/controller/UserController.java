@@ -16,6 +16,7 @@ import com.monkey.common.util.ComUtil;
 import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
+import com.monkey.web.annotation.Log;
 import com.monkey.web.controller.dtos.UserOutPut;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,7 +43,6 @@ public class UserController {
 
     @Autowired
     IRoleService _roleService;
-   // @Log(description="获取用户列表:/list")
     @ApiOperation(value = "获取用户列表",notes = "用户列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._user.list})
@@ -79,13 +79,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "添加或编辑用户",notes = "用户列表")
-    @RequestMapping(value = "/modify",method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._user.modify})
     public PublicResult<Object> modify(@RequestBody CreateUserInput model) throws Exception{
         _userService.ModifyUserAndRoles(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, true);
     }
-
+    @Log(description="删除用户信息:/delete")
     @ApiOperation(value = "删除用户",notes = "用户列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._user.delete})
@@ -93,6 +93,7 @@ public class UserController {
         Boolean res=  _userService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
+    @Log(description="批量删除用户:/batch")
     @ApiOperation(value = "批量删除用户",notes = "用户列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._user.batch})

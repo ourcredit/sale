@@ -31,7 +31,7 @@ public class RoleDto {
     private   Integer id;
     private String roleName;
     private String displayName;
-    private String desCrition;
+    private String description;
     public Date getCreationTime() {
         return creationTime;
     }
@@ -71,11 +71,12 @@ public class RoleDto {
     private Integer isActive;
     private  Integer isStatic;
 
-    public String getDiscription() {
-        return desCrition;
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String desCrition) {
-        this.desCrition = desCrition;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
