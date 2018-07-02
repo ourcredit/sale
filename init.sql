@@ -77,7 +77,7 @@ CREATE TABLE `sale_role`  (
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '启用状态',
   `isStatic` tinyint(4) NULL DEFAULT NULL COMMENT '是否静态',
-  `desCrition` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `isDeleted` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`, `roleName`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;

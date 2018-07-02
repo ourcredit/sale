@@ -30,6 +30,7 @@ public class Role extends Model<Role> {
         this.isStatic=isStatic;
         this.creationTime=new Date();
         this.isDeleted=0;
+        this.description="";
     }
     /**
      * 软删除
