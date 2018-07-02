@@ -1,34 +1,34 @@
 import ajax from '../../lib/ajax';
 import util from '../../lib/util'
-import {Store,Module,ActionContext} from 'vuex' 
-interface SessionState{
-    application:any,
-    user:any,
+import { Store, Module, ActionContext } from 'vuex'
+interface SessionState {
+    application: any,
+    user: any,
     tenant: any,
-    roles:any
+    roles: any
 }
-class SessionStore implements Module<SessionState,any>{
-    namespaced=true;
-    state={
-        application:null,
-        user:null,
+class SessionStore implements Module<SessionState, any>{
+    namespaced = true;
+    state = {
+        application: null,
+        user: null,
         tenant: null,
-        roles:null
+        roles: null
     }
-    actions={
-        async init(content:ActionContext<SessionState,any>){
-            var token = util.abp.auth.getToken();
+    actions = {
+        async init(content: ActionContext<SessionState, any>) {
+            var token = util.getCookieValue();
             if (!token) {
                 util.abp.auth.clearToken();
                 return;
             }
-            let rep=await ajax.get('/api/user/current');
-            content.state.user=rep.data.user;
+            let rep = await ajax.get('/api/user/current');
+            content.state.user = rep.data.user;
             content.state.roles = rep.data.role;
-            util.abp.auth.init(rep.data.allPermissions,rep.data.permissions)
-       
+            util.abp.auth.init(rep.data.allPermissions, rep.data.permissions)
+
         }
     }
 }
-const session=new SessionStore();
+const session = new SessionStore();
 export default session;

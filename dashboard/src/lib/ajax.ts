@@ -1,5 +1,5 @@
 import axios from "axios";
-import Util from "./util";
+import util from "./util";
 import appconst from "./appconst";
 import Vue from "vue";
 const ajax = axios.create({
@@ -7,16 +7,16 @@ const ajax = axios.create({
   timeout: 30000
 });
 ajax.interceptors.request.use(
-  function(config) {
+  function (config) {
     if (!!window.abp.auth.getToken()) {
-      config.headers.common["Authorization"] = window.abp.auth.getToken();
-    //  config.headers.common["Authorization"] = "awdawdawd";
+      config.headers.common["Authorization"] = util.getCookieValue();;
+      //  config.headers.common["Authorization"] = "awdawdawd";
     }
     //  config.headers.common[".AspNetCore.Culture"]=window.abp.utils.getCookieValue("Abp.Localization.CultureName");
     //  config.headers.common["Abp.TenantId"]=window.abp.multiTenancy.getTenantIdCookie();
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
@@ -25,7 +25,7 @@ ajax.interceptors.response.use(
   respon => {
     return respon.data;
   },
-    error => {
+  error => {
     if (
       !!error.response &&
       !!error.response.data.error &&

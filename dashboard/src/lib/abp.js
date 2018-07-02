@@ -26,15 +26,15 @@
     abp.auth.grantedPermissions = abp.auth.grantedPermissions || {};
 
     abp.auth.init = function (a, b) {
-        abp.auth.allPermissions =  {};
-        abp.auth.grantedPermissions =  {};
+        abp.auth.allPermissions = {};
+        abp.auth.grantedPermissions = {};
         a.forEach(e => {
             abp.auth.allPermissions[e] = true;
         });
         b.forEach(e => {
             abp.auth.grantedPermissions[e] = true;
         });
-     
+
     }
     //Deprecated. Use abp.auth.isGranted instead.
     abp.auth.hasPermission = function (permissionName) {
@@ -50,8 +50,8 @@
         return abp.auth.areAllGranted.apply(this, arguments);
     };
     abp.auth.isGranted = function (permissionName) {
-        return abp.auth.allPermissions[permissionName] != undefined
-            && abp.auth.grantedPermissions[permissionName] != undefined;
+        return abp.auth.allPermissions[permissionName] != undefined &&
+            abp.auth.grantedPermissions[permissionName] != undefined;
     };
     abp.auth.isAnyGranted = function () {
         if (!arguments || arguments.length <= 0) {
@@ -117,10 +117,10 @@
     abp.utils = abp.utils || {};
 
     /* Find and replaces a string (search) to another string (replacement) in
-    *  given string (str).
-    *  Example:
-    *  abp.utils.replaceAll('This is a test string', 'is', 'X') = 'ThX X a test string'
-    ************************************************************/
+     *  given string (str).
+     *  Example:
+     *  abp.utils.replaceAll('This is a test string', 'is', 'X') = 'ThX X a test string'
+     ************************************************************/
     abp.utils.replaceAll = function (str, search, replacement) {
         var fix = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         return str.replace(new RegExp(fix, 'g'), replacement);
@@ -216,12 +216,10 @@
             if (!equalities[i]) {
                 continue;
             }
-
             var splitted = equalities[i].split('=');
             if (splitted.length != 2) {
                 continue;
             }
-
             if (decodeURIComponent(splitted[0]) === key) {
                 return decodeURIComponent(splitted[1] || '');
             }
@@ -266,13 +264,7 @@
     abp.timing.utcClockProvider = (function () {
         var toUtc = function (date) {
             return Date.UTC(
-                date.getUTCFullYear()
-                , date.getUTCMonth()
-                , date.getUTCDate()
-                , date.getUTCHours()
-                , date.getUTCMinutes()
-                , date.getUTCSeconds()
-                , date.getUTCMilliseconds()
+                date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds()
             );
         }
 
@@ -301,13 +293,7 @@
 
         var toLocal = function (date) {
             return new Date(
-                date.getFullYear()
-                , date.getMonth()
-                , date.getDate()
-                , date.getHours()
-                , date.getMinutes()
-                , date.getSeconds()
-                , date.getMilliseconds()
+                date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds()
             );
         }
 
