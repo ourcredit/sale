@@ -1,13 +1,14 @@
 import { Component, Vue, Inject } from "vue-property-decorator";
+import auth from "../lib/auth";
 import appconst from "./appconst";
 export default class AbpBase extends Vue {
   hasPermission(permissionName: string) {
-    return window.abp.auth.hasPermission(permissionName);
+    return auth.hasPermission(permissionName);
   }
   hasAnyOfPermissions(...argus: string[]) {
-    return window.abp.auth.hasAnyOfPermissions(...argus);
+    return auth.hasAnyOfPermissions(...argus);
   }
   hasAllOfPermissions(...argus: string[]) {
-    return window.abp.auth.hasAllOfPermissions(...argus);
+    return auth.hasAllOfPermissions(...argus);
   }
 }

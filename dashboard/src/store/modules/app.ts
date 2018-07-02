@@ -3,6 +3,7 @@ import {
   otherRouters
 } from "../../router/router";
 import Util from "../../lib/util";
+import auth from "../../lib/auth";
 import Vue from "vue";
 import {
   Store,
@@ -17,23 +18,23 @@ import {
 } from "util";
 Vue.use(Vuex);
 interface AppState {
-  cachePage: Array < any > ;
+  cachePage: Array<any>;
   lang: string;
   isFullScreen: boolean;
-  openedSubmenuArr: Array < any > ;
+  openedSubmenuArr: Array<any>;
   menuTheme: string;
   themeColor: string;
-  pageOpenedList: Array < any > ;
+  pageOpenedList: Array<any>;
   currentPageName: string;
-  currentPath: Array < any > ;
-  menuList: Array < any > ;
-  routers: Array < any > ;
-  tagsList: Array < any > ;
+  currentPath: Array<any>;
+  menuList: Array<any>;
+  routers: Array<any>;
+  tagsList: Array<any>;
   messageCount: number;
-  dontCache: Array < any > ;
-  noticeList: Array < any > ;
+  dontCache: Array<any>;
+  noticeList: Array<any>;
 }
-class AppModule implements Module < AppState, any > {
+class AppModule implements Module<AppState, any> {
   namespaced = true;
   state = {
     cachePage: [],
@@ -63,23 +64,23 @@ class AppModule implements Module < AppState, any > {
     messageCount: 0,
     dontCache: [],
     noticeList: [{
-        read: false,
-        type: 0,
-        title: "一个提示",
-        description: "一天前"
-      },
-      {
-        read: false,
-        type: 1,
-        title: "一个提示",
-        description: "一天前"
-      },
-      {
-        read: false,
-        type: 0,
-        title: "第二个提示",
-        description: "一个月前"
-      }
+      read: false,
+      type: 0,
+      title: "一个提示",
+      description: "一天前"
+    },
+    {
+      read: false,
+      type: 1,
+      title: "一个提示",
+      description: "一天前"
+    },
+    {
+      read: false,
+      type: 0,
+      title: "第二个提示",
+      description: "一个月前"
+    }
     ]
   };
   mutations = {
@@ -87,18 +88,18 @@ class AppModule implements Module < AppState, any > {
       localStorage.clear();
       sessionStorage.clear();
     },
-    setTagsList(state: AppState, list: Array < any > ) {
+    setTagsList(state: AppState, list: Array<any>) {
       state.tagsList.push(...list);
     },
     updateMenulist(state: AppState) {
-      let menuList: Array < any > = [];
+      let menuList: Array<any> = [];
       appRouters.forEach((item, index) => {
         if (item.permission !== undefined) {
           let childrenArr = [];
           childrenArr = item.children.filter(child => {
             let childany = child as any;
             if (childany.permission !== undefined) {
-              if (Util.abp.auth.hasPermission(childany.permission)) {
+              if (auth.hasPermission(childany.permission)) {
                 return child;
               }
             } else {
@@ -205,7 +206,7 @@ class AppModule implements Module < AppState, any > {
         JSON.parse(localStorage.pageOpenedList) :
         [otherRouters.children[0]];
     },
-    setCurrentPath(state: AppState, pathArr: Array < any > ) {
+    setCurrentPath(state: AppState, pathArr: Array<any>) {
       state.currentPath = pathArr;
     },
     setCurrentPageName(state: AppState, name: string) {
@@ -223,12 +224,12 @@ class AppModule implements Module < AppState, any > {
     }
   };
   actions = {
-    async login(content: ActionContext < AppState, any > , payload: any) {
+    async login(content: ActionContext<AppState, any>, payload: any) {
       let rep = await ajax.post("/api/auth/login", payload.data);
       var tokenExpireDate = payload.data.rememberMe ?
-        new Date(new Date().getTime() + 1000 * 24*60*60) :
+        new Date(new Date().getTime() + 1000 * 24 * 60 * 60) :
         undefined;
-      Util.abp.auth.setToken(rep.data.token, tokenExpireDate);
+      auth.setToken(rep.data.token, tokenExpireDate);
     }
   };
 }

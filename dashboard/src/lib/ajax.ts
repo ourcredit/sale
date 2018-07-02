@@ -1,5 +1,5 @@
 import axios from "axios";
-import util from "./util";
+import auth from "./auth";
 import appconst from "./appconst";
 import Vue from "vue";
 const ajax = axios.create({
@@ -8,8 +8,8 @@ const ajax = axios.create({
 });
 ajax.interceptors.request.use(
   function (config) {
-    if (!!window.abp.auth.getToken()) {
-      config.headers.common["Authorization"] = util.getCookieValue();;
+    if (!!auth.getToken()) {
+      config.headers.common["Authorization"] = auth.getToken();
       //  config.headers.common["Authorization"] = "awdawdawd";
     }
     //  config.headers.common[".AspNetCore.Culture"]=window.abp.utils.getCookieValue("Abp.Localization.CultureName");
@@ -26,6 +26,7 @@ ajax.interceptors.response.use(
     return respon.data;
   },
   error => {
+    debugger;
     if (
       !!error.response &&
       !!error.response.data.error &&
@@ -45,7 +46,7 @@ ajax.interceptors.response.use(
         content: error.response.data.message
       });
     } else if (!error.response) {
-      vm.$Modal.error("位置错误");
+      vm.$Modal.error(error.message);
     }
     setTimeout(() => {
       vm.$Message.destroy();

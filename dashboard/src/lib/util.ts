@@ -53,31 +53,6 @@ class Util {
     }
     return null;
   }
-  /**
-     * Gets a cookie with given key.
-     * This is a simple implementation created to be used by ABP.
-     * Please use a complete cookie library if you need.
-     * @param {string} key
-     * @returns {string} Cookie value or null
-     */
-  getCookieValue(key: String = 'Abp.AuthToken') {
-
-    var equalities = document.cookie.split('; ');
-    for (var i = 0; i < equalities.length; i++) {
-      if (!equalities[i]) {
-        continue;
-      }
-      var splitted = equalities[i].split('=');
-      if (splitted.length != 2) {
-        continue;
-      }
-      if (decodeURIComponent(splitted[0]) === key) {
-        return decodeURIComponent(splitted[1] || '');
-      }
-    }
-    return null;
-  };
-
   toDefaultPage(
     routers: Array<any>,
     name: string | undefined,

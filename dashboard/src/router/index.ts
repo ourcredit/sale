@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import { routers } from "./router";
 import iView from "iview";
 import Util from "../lib/util";
+import auth from "../lib/auth";
 import Cookies from "js-cookie";
 import { appRouters, otherRouters } from "./router";
 Vue.use(VueRouter);
@@ -42,10 +43,10 @@ router.beforeEach((to, from, next) => {
       );
       if (curRouterObj && curRouterObj.permission) {
         if (
-          window.abp.auth.allPermissions[curRouterObj.permission] &&
-          window.abp.auth.grantedPermissions[curRouterObj.permission]
+          auth.allPermissions[curRouterObj.permission] &&
+          auth.grantedPermissions[curRouterObj.permission]
         ) {
-          if (window.abp.auth.hasPermission(curRouterObj.permission)) {
+          if (auth.hasPermission(curRouterObj.permission)) {
             Util.toDefaultPage(
               [otherRouters, ...appRouters],
               to.name,

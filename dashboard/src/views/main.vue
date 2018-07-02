@@ -80,6 +80,7 @@
   import lockScreen from '../components/lockscreen/lockscreen.vue';
   import notice from '../components/notices/notice.vue';
   import util from '../lib/util';
+  import auth from '../lib/auth';
   import copyfooter from '../components/Footer.vue'
   import AbpBase from '../lib/abpbase'
   @Component({
@@ -148,7 +149,7 @@
         });
       } else if (name === 'loginout') {
         this.$store.commit('app/logout', this);
-        util.abp.auth.clearToken();
+        auth.clearToken();
         location.reload();
       }
     }
