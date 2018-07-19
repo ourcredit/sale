@@ -11,6 +11,7 @@ import com.monkey.core.entity.File;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.BasicErrorController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +30,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/file")
 @Api("文件上传接口")
-public class FileController {
+public class FileController  {
     @Autowired
     IFileService _fileService;
 
