@@ -4,6 +4,10 @@
 
 <template>
     <Menu ref="sideMenu" :active-name="$route.name" :open-names="openNames" :theme="menuTheme" width="auto" @on-select="changeMenu">
+            <MenuItem name="dashboard">
+             <span class="iconfont">&#xe68a;</span>
+               <span> 控制台</span>
+            </MenuItem>
         <template v-for="item in menuList">
             <MenuItem v-if="item.children.length<=0" :name="item.children[0].name" :key="item.name">
                 <!-- <Icon :type="item.icon" :size="iconSize"></Icon> -->

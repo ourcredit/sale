@@ -49,7 +49,30 @@ public class JWTUtil {
             return null;
         }
     }
-
+    /**
+     * 获得token中的信息无需secret解密也能获得
+     * @return token中包含的用户名
+     */
+    public static String getTenantId(String token) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("userId").asString();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
+    /**
+     * 获得token中的信息无需secret解密也能获得
+     * @return token中包含的用户名
+     */
+    public static String getUserId(String token) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("tenantId").asString();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
     /**
      * 生成签名,5min后过期
      * @param username 用户名
@@ -63,6 +86,8 @@ public class JWTUtil {
             // 附带username信息
             return JWT.create()
                     .withClaim("username", username)
+                    .withClaim("userId", 1)
+                    .withClaim("tenantId", 1)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {

@@ -108,7 +108,7 @@ public class DataCreator implements CommandLineRunner {
                     m = _menuService.selectOne(e);
                 }
             }
-            if (!item.Children.isEmpty()) {
+            if (item.Children!=null&& !item.Children.isEmpty()) {
                 List<InitConst._menu.MenuInfo> a = new ArrayList<>();
                 List<Menu> b = new ArrayList<>();
                 for (InitConst._menu.MenuInfo t : item.Children) {

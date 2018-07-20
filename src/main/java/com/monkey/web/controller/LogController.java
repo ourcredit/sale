@@ -37,7 +37,7 @@ public class LogController {
     // @Log(description="获取用户列表:/list")
     @ApiOperation(value = "获取日志列表",notes = "日志列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._log.list})
+    @RequiresPermissions(value = {PermissionConst._watch._actionlog.list})
     public PublicResult<Page<Log>> logs(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Log> filter = new EntityWrapper<>();
       filter=  ComUtil.genderFilter(filter,page.where);
@@ -46,28 +46,21 @@ public class LogController {
     }
     @ApiOperation(value = "获取日志详情",notes = "日志列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._log.first})
+    @RequiresPermissions(value = {PermissionConst._watch._actionlog.first})
     public PublicResult<Object> log(@PathVariable Integer id) throws Exception{
         Log l=_logService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, l);
     }
-    @ApiOperation(value = "添加或编辑日志",notes = "日志列表")
-    @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._log.modify})
-    public PublicResult<Object> insert(@RequestBody Log model) throws Exception{
-        Boolean r=_logService.insertOrUpdate(model);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
-    }
     @ApiOperation(value = "删除日志",notes = "日志列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {PermissionConst._log.delete})
+    @RequiresPermissions(value = {PermissionConst._watch._actionlog.delete})
     public PublicResult<Object> delete(@PathVariable String id) throws Exception{
         Boolean r=_logService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "批量删除日志",notes = "日志列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._log.batch})
+    @RequiresPermissions(value = {PermissionConst._watch._actionlog.batch})
     public PublicResult<Object> batchdelete(@RequestBody List<String> ids) throws Exception{
         Boolean r=_logService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

@@ -40,7 +40,7 @@ public class MenuController {
 
     @ApiOperation(value = "获取菜单列表",notes = "菜单列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._menu.list})
+    @RequiresPermissions(value = {PermissionConst._system._menu.list})
     public PublicResult<Page<Menu>> menus(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Menu> filter = new EntityWrapper<>();
          filter=  ComUtil.genderFilter(filter,page.where);
@@ -49,14 +49,14 @@ public class MenuController {
     }
     @ApiOperation(value = "获取菜单详情",notes = "菜单列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._menu.first})
+    @RequiresPermissions(value = {PermissionConst._system._menu.first})
     public PublicResult<Menu> menu(@PathVariable Integer id) throws Exception{
         Menu m=_menuService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
     @ApiOperation(value = "获取当前用户有权限访问的菜单",notes = "菜单列表")
     @RequestMapping(value = "/allowmenus",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._menu.list})
+    @RequiresPermissions(value = {PermissionConst._system._menu.list})
     public PublicResult<List<Menu>> menu(@CurrentUser User current) throws Exception{
         List<Menu> m=_menuService.findMenuByUserId(current.getId());
         return new PublicResult<List<Menu>>(PublicResultConstant.SUCCESS, m);
@@ -64,21 +64,21 @@ public class MenuController {
 
     @ApiOperation(value = "添加或编辑菜单",notes = "菜单列表")
     @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._menu.modify})
+    @RequiresPermissions(value = {PermissionConst._system._menu.modify})
     public PublicResult<Object> insert(@RequestBody Menu model) throws Exception{
         Boolean r=_menuService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "删除菜单",notes = "菜单列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {"menu:delete"})
+    @RequiresPermissions(value = {PermissionConst._system._menu.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
         Boolean r=_menuService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "批量删除菜单",notes = "菜单列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
-    @RequiresPermissions(value = {"user:delette"})
+    @RequiresPermissions(value = {PermissionConst._system._menu.batch})
     public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
         Boolean r=_menuService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

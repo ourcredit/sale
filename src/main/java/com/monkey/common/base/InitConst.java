@@ -19,33 +19,91 @@ public interface InitConst {
 
     public static class _menu {
         public static List<MenuInfo> menuList = new ArrayList<MenuInfo>() {{
-            add(new MenuInfo("系统管理", PermissionConst._system.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("用户管理", PermissionConst._user.list, "/system/user", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑用户", PermissionConst._user.modify, "", 2, null));
-                    add(new MenuInfo("删除用户", PermissionConst._user.delete, "", 2, null));
-                    add(new MenuInfo("批量删除用户", PermissionConst._user.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._user.first, "", 2, null));
+            add(new MenuInfo("控制台", PermissionConst._dashboard.list, "/dashboard", 1, null));
 
-                }}));
-                add(new MenuInfo("角色管理", PermissionConst._role.list, "/system/role", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑角色", PermissionConst._role.modify, "", 2, null));
-                    add(new MenuInfo("删除角色", PermissionConst._role.delete, "", 2, null));
-                    add(new MenuInfo("批量删除角色", PermissionConst._role.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._role.first, "", 2, null));
-                }}));
-                add(new MenuInfo("菜单管理", PermissionConst._menu.list, "/system/menu", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑菜单", PermissionConst._menu.modify, "", 2, null));
-                    add(new MenuInfo("删除菜单", PermissionConst._menu.delete, "", 2, null));
-                    add(new MenuInfo("批量删除菜单", PermissionConst._menu.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._menu.first, "", 2, null));
-                }}));
-                add(new MenuInfo("日志管理", PermissionConst._log.list, "/system/log", 1,  new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("添加日志", PermissionConst._log.modify, "", 2, null));
-                    add(new MenuInfo("编辑日志", PermissionConst._log.modify, "", 2, null));
-                    add(new MenuInfo("删除日志", PermissionConst._log.delete, "", 2, null));
-                    add(new MenuInfo("批量删除日志", PermissionConst._log.batch, "", 2, null));
+            add(new MenuInfo("订单系统", PermissionConst._order.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("订单列表", PermissionConst._order.list, "/order/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("查看订单", PermissionConst._order.show, "", 2, null));
+                    add(new MenuInfo("退款", PermissionConst._order.back, "", 2, null));
                 }}));
             }}));
+
+            add(new MenuInfo("点位管理", PermissionConst._pointer.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("机构树管理", PermissionConst._pointer._org.list, "/pointer/org", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑机构树", PermissionConst._pointer._org.modify, "", 2, null));
+                    add(new MenuInfo("删除机构树", PermissionConst._pointer._org.delete, "", 2, null));
+                    add(new MenuInfo("批量删除机构树", PermissionConst._pointer._org.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._pointer._org.first, "", 2, null));
+                }}));
+                add(new MenuInfo("点位管理", PermissionConst._pointer._point.list, "/pointer/point", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑点位", PermissionConst._pointer._point.modify, "", 2, null));
+                    add(new MenuInfo("删除点位", PermissionConst._pointer._point.delete, "", 2, null));
+                    add(new MenuInfo("批量删除点位", PermissionConst._pointer._point.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._pointer._point.first, "", 2, null));
+                }}));
+            }}));
+
+            add(new MenuInfo("货物管理", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("商品管理", PermissionConst._pm._product.list, "/product/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑商品", PermissionConst._pm._product.modify, "", 2, null));
+                    add(new MenuInfo("删除商品", PermissionConst._pm._product.delete, "", 2, null));
+                    add(new MenuInfo("批量删除商品", PermissionConst._pm._product.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._pm._product.first, "", 2, null));
+                }}));
+                add(new MenuInfo("售货机管理", PermissionConst._pm._box.list, "/product/box", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑点位", PermissionConst._pm._box.modify, "", 2, null));
+                    add(new MenuInfo("删除点位", PermissionConst._pm._box.delete, "", 2, null));
+                    add(new MenuInfo("批量删除点位", PermissionConst._pm._box.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._pm._box.first, "", 2, null));
+                }}));
+            }}));
+
+            add(new MenuInfo("监控系统", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("后台操作日志", PermissionConst._watch._actionlog.list, "/watch/action", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("删除日志", PermissionConst._watch._actionlog.delete, "", 2, null));
+                    add(new MenuInfo("批量删除日志", PermissionConst._watch._actionlog.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._watch._actionlog.first, "", 2, null));
+                }}));
+                add(new MenuInfo("监控运行日志", PermissionConst._watch._runlog.list, "/watch/run", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("删除日志", PermissionConst._watch._runlog.delete, "", 2, null));
+                    add(new MenuInfo("批量删除日志", PermissionConst._watch._runlog.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._watch._runlog.first, "", 2, null));
+                }}));
+                add(new MenuInfo("售货机故障日志", PermissionConst._watch._errorlog.list, "/watch/error", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("删除日志", PermissionConst._watch._errorlog.delete, "", 2, null));
+                    add(new MenuInfo("批量删除日志", PermissionConst._watch._errorlog.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._watch._errorlog.first, "", 2, null));
+                }}));
+            }}));
+
+            add(new MenuInfo("报表系统", PermissionConst._report.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("a报表", PermissionConst._report._a.list, "/watch/action", 1, null));
+                add(new MenuInfo("b报表", PermissionConst._report._b.list, "/watch/run", 1, null));
+            }}));
+
+            add(new MenuInfo("系统管理", PermissionConst._system.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("用户管理", PermissionConst._system._user.list, "/system/user", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑用户", PermissionConst._system._user.modify, "", 2, null));
+                    add(new MenuInfo("删除用户", PermissionConst._system._user.delete, "", 2, null));
+                    add(new MenuInfo("批量删除用户", PermissionConst._system._user.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._system._user.first, "", 2, null));
+                }}));
+                add(new MenuInfo("角色管理", PermissionConst._system._role.list, "/system/role", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑角色", PermissionConst._system._role.modify, "", 2, null));
+                    add(new MenuInfo("删除角色", PermissionConst._system._role.delete, "", 2, null));
+                    add(new MenuInfo("批量删除角色", PermissionConst._system._role.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._system._role.first, "", 2, null));
+                }}));
+                add(new MenuInfo("菜单管理", PermissionConst._system._menu.list, "/system/menu", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑菜单", PermissionConst._system._menu.modify, "", 2, null));
+                    add(new MenuInfo("删除菜单", PermissionConst._system._menu.delete, "", 2, null));
+                    add(new MenuInfo("批量删除菜单", PermissionConst._system._menu.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._system._menu.first, "", 2, null));
+                }}));
+
+            }}));
+
+
         }};
 
         public static class MenuInfo {

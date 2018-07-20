@@ -36,9 +36,9 @@ public class SwaggerConfigration {
 
     private ApiInfo buildApiInf(){
         return new ApiInfoBuilder()
-                .title("monkey")
-                .description("test")
-                .termsOfServiceUrl("http://blog.csdn.net/u014231523网址链接")
+                .title("猿人接口")
+                .description("v0.0.1")
+                .termsOfServiceUrl("https://github.com/zhaohejing")
                 .build();
 
     }
