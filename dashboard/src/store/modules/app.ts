@@ -45,18 +45,18 @@ class AppModule implements Module<AppState, any> {
     themeColor: "",
     pageOpenedList: [{
       meta: {
-        title: "首页"
+        title: "控制台"
       },
       path: "",
-      name: "home"
+      name: "dashboard"
     }],
     currentPageName: "",
     currentPath: [{
       meta: {
-        title: "首页"
+        title: "控制台"
       },
       path: "",
-      name: "home"
+      name: "dashboard"
     }],
     menuList: [],
     routers: [otherRouters, ...appRouters],
