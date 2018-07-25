@@ -45,7 +45,7 @@ export const appRouters = [
     path: "/order",
     name: "order",
     meta: { title: "订单系统" },
-    icon: "&#xe68a;",
+    icon: "&#xe6b8;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {
@@ -66,7 +66,7 @@ export const appRouters = [
     path: "/pointer",
     name: "pointer",
     meta: { title: "点位管理" },
-    icon: "&#xe68a;",
+    icon: "&#xe725;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {
@@ -87,7 +87,7 @@ export const appRouters = [
     path: "/product",
     name: "product",
     meta: { title: "货物管理" },
-    icon: "&#xe68a;",
+    icon: "&#xe717;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {
@@ -108,7 +108,7 @@ export const appRouters = [
     path: "/watch",
     name: "watch",
     meta: { title: "监控系统" },
-    icon: "&#xe68a;",
+    icon: "&#xe73d;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {
@@ -135,7 +135,7 @@ export const appRouters = [
     path: "/report",
     name: "report",
     meta: { title: "报表系统" },
-    icon: "&#xe68a;",
+    icon: "&#xe742;",
     component: () => System.import("../views/main.vue") ,
     children: [
       {

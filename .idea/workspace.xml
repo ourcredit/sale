@@ -3,20 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e81270bf-93e3-4977-ba8c-a4eae7191e0a" name="默认的" comment="prod=&gt;dev">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/util/JWTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/util/JWTUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/SwaggerConfigration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/SwaggerConfigration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/application-dev.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
-              <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="54" />
+              <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="54" />
               <folding>
                 <element signature="class#_pm#0;class#PermissionConst#0" />
               </folding>
@@ -43,7 +29,7 @@
       <file leaf-file-name="DataCreator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="1824">
               <caret line="110" selection-start-line="110" selection-end-line="110" />
             </state>
           </provider>
@@ -61,7 +47,7 @@
       <file leaf-file-name="application-dev.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
+            <state relative-caret-position="285">
               <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
             </state>
           </provider>
@@ -70,14 +56,13 @@
       <file leaf-file-name="InitConst.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="30" column="102" selection-start-line="30" selection-start-column="102" selection-end-line="30" selection-end-column="102" />
+            <state relative-caret-position="241">
+              <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
               <folding>
                 <element signature="initializer##0;class#758:1112" />
                 <element signature="initializer##0;class#1196:2329" />
                 <element signature="initializer##0;class#2408:3497" />
                 <element signature="initializer##0;class#3576:4976" />
-                <element signature="initializer##0;class#5059:5297" />
                 <element signature="initializer##0;class#5380:7037" />
               </folding>
             </state>
@@ -87,7 +72,7 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-312">
+            <state relative-caret-position="399">
               <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
             </state>
           </provider>
@@ -114,7 +99,7 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
+            <state relative-caret-position="4294">
               <caret line="244" column="10" selection-start-line="244" selection-start-column="10" selection-end-line="244" selection-end-column="10" />
               <folding>
                 <element signature="n#build#0;n#project#0;n#!!top" />
@@ -184,8 +169,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="205" />
-    <option name="y" value="179" />
+    <option name="x" value="1899" />
+    <option name="y" value="92" />
     <option name="width" value="1616" />
     <option name="height" value="886" />
   </component>
@@ -195,6 +180,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,8 +253,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -328,7 +313,7 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="23" width="1936" height="1065" extended-state="6" />
+    <frame x="1912" y="22" width="1616" height="886" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -338,10 +323,9 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="消息" order="7" weight="0.32987013" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="运行" order="7" visible="true" weight="0.36880928" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20833333" />
+      <window_info anchor="bottom" id="运行" order="7" weight="0.36880928" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="设计师" order="2" />
       <window_info anchor="right" id="Database" order="3" />
@@ -352,6 +336,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="消息" order="7" weight="0.32987013" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -441,9 +426,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
           <caret line="60" column="24" lean-forward="true" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -493,10 +475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="e#188#189#0" expanded="true" />
-            <element signature="e#226#227#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -553,9 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="15" column="29" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -709,7 +684,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-312">
+        <state relative-caret-position="399">
           <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
         </state>
       </provider>
@@ -723,7 +698,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
+        <state relative-caret-position="4294">
           <caret line="244" column="10" selection-start-line="244" selection-start-column="10" selection-end-line="244" selection-end-column="10" />
           <folding>
             <element signature="n#build#0;n#project#0;n#!!top" />
@@ -733,7 +708,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="1824">
           <caret line="110" selection-start-line="110" selection-end-line="110" />
         </state>
       </provider>
@@ -747,7 +722,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
+        <state relative-caret-position="285">
           <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
         </state>
       </provider>
@@ -755,7 +730,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="54" />
+          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="54" />
           <folding>
             <element signature="class#_pm#0;class#PermissionConst#0" />
           </folding>
@@ -764,14 +739,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="30" column="102" selection-start-line="30" selection-start-column="102" selection-end-line="30" selection-end-column="102" />
+        <state relative-caret-position="241">
+          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
           <folding>
             <element signature="initializer##0;class#758:1112" />
             <element signature="initializer##0;class#1196:2329" />
             <element signature="initializer##0;class#2408:3497" />
             <element signature="initializer##0;class#3576:4976" />
-            <element signature="initializer##0;class#5059:5297" />
             <element signature="initializer##0;class#5380:7037" />
           </folding>
         </state>

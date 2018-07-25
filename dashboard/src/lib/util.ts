@@ -7,7 +7,6 @@ class Util {
     script.src = url;
     document.body.appendChild(script);
   }
-
   title(title: string) {
     let appname = "sale";
     let page = "page";

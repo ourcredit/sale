@@ -26,7 +26,7 @@
                     :name="item.name" 
                     @on-close="closePage"
                     @click.native="linkTo(item)"
-                    :closable="item.name==='home'?false:true"
+                    :closable="item.name==='dashboard'?false:true"
                     :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
                 >{{ itemTitle(item) }}</Tag>
             </transition-group>
@@ -121,7 +121,7 @@ export default class TagsPageOpened extends AbpBase {
         if (type === 'clearAll') {
             this.$store.commit('app/clearAllTags');
             this.$router.push({
-                name: 'home'
+                name: 'dashboard'
             });
         } else {
             this.$store.commit('app/clearOtherTags', this);
