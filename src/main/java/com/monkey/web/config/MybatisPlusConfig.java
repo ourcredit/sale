@@ -1,10 +1,12 @@
 package com.monkey.web.config;
 
+import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.mapper.ISqlInjector;
 import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
 import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
+import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,10 +44,7 @@ public class MybatisPlusConfig {
         performanceInterceptor.setFormat(true);
         return performanceInterceptor;
     }
-    @Bean
-    public MetaObjectHandler metaObjectHandler(){
-        return new MyMetaObjectHandler();
-    }
+
     /**
      * 注入sql注入器
      */
@@ -53,5 +52,8 @@ public class MybatisPlusConfig {
     public ISqlInjector sqlInjector(){
         return new LogicSqlInjector();
     }
-
+    @Bean
+    public  MyMetaObjectHandler  metaObjectHandler(){
+        return  new MyMetaObjectHandler();
+    }
 }
