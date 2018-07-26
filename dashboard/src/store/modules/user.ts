@@ -1,11 +1,11 @@
 import { Store, Module, ActionContext } from "vuex";
-import ListModule from "./list-module";
-import IListState from "./list-state";
+import ListModule from "@/store/modules/base/list-module";
+import IListState from "@/store/modules/base/list-state";
 import User from "../entities/user";
 import Role from "../entities/role";
-import Ajax from "../../lib/ajax";
+import Ajax from "@/lib/ajax";
 import PageResult from "@/store/entities/page-result";
-import ListMutations from "./list-mutations";
+import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";
 interface IUserState extends IListState<User> {
   editUser: User;
@@ -16,7 +16,7 @@ class UserModule extends ListModule<IUserState, any, User> {
   state = {
     totalCount: 0,
     currentPage: 1,
-    pageSize: 1,
+    pageSize: 10,
     list: new Array<User>(),
     loading: false,
     editUser: new User(),

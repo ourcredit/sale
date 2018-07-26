@@ -1,6 +1,7 @@
 package com.monkey.application.Menus;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.entity.Menu;
 import com.monkey.core.mapper.MenuRepository;
@@ -32,12 +33,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
         return this.selectList(ew);
     }
 
+
+
     @Override
+    @Cacheable(value = "MenuServiceImpl:findMenuByRoleId",key="'allmenus'")
     public List<Menu> findMenuByRoleId(List<Integer> roles) {
         return _menuRepository.selectList(null);
     }
 
     @Override
+    @Cacheable(value = "MenuServiceImpl:findMenuByUserId", key = "'user_menu_'.concat(#root.args[0])")
     public List<Menu> findMenuByUserId(Integer userId) {
         return _menuRepository.selectCurrentMenus(userId);
     }

@@ -1,19 +1,18 @@
 import Vue from "vue";
 class Util {
-  abp: any = window.abp;
-  loadScript(url: string) {
-    var script = document.createElement("script");
+  loadScript(url: string): void {
+    var script: any = document.createElement("script");
     script.type = "text/javascript";
     script.src = url;
     document.body.appendChild(script);
   }
-  title(title: string) {
-    let appname = "猿人";
-    let page = "烘干机";
+  title(title: string): void {
+    let appname: string = "猿人";
+    let page: string = "烘干机";
     window.document.title = appname + "⭐" + page;
   }
-  inOf(arr: Array<any>, targetArr: any) {
-    let res = true;
+  inOf(arr: Array<any>, targetArr: any): boolean {
+    let res: boolean = true;
     arr.forEach(item => {
       if (targetArr.indexOf(item) < 0) {
         res = false;
@@ -21,14 +20,14 @@ class Util {
     });
     return res;
   }
-  oneOf(ele: any, targetArr: Array<any>) {
+  oneOf(ele: any, targetArr: Array<any>): boolean {
     if (targetArr.indexOf(ele) >= 0) {
       return true;
     } else {
       return false;
     }
   }
-  showThisRoute(itAccess: any, currentAccess: any) {
+  showThisRoute(itAccess: any, currentAccess: any): boolean {
     if (typeof itAccess === "object" && Array.isArray(itAccess)) {
       return this.oneOf(currentAccess, itAccess);
     } else {
@@ -40,7 +39,7 @@ class Util {
       return null;
     }
     // debugger;
-    let routerObj = null;
+    let routerObj: any = null;
     for (let item of routers) {
       if (item.name === name) {
         return item;
@@ -57,10 +56,10 @@ class Util {
     name: string | undefined,
     route: any,
     next: any
-  ) {
-    let len = routers.length;
-    let i = 0;
-    let notHandle = true;
+  ): void {
+    let len: number = routers.length;
+    let i: number = 0;
+    let notHandle: boolean = true;
     while (i < len) {
       if (
         routers[i].name === name &&
@@ -80,16 +79,16 @@ class Util {
       next();
     }
   }
-  handleTitle(vm: any, item: any) {
+  handleTitle(vm: any, item: any): string {
     if (typeof item.meta.title === "object") {
       return vm.$t(item.title.i18n);
     } else {
       return item.meta.title;
     }
   }
-  setCurrentPath(vm: Vue, name?: string) {
-    let title = "";
-    let isOtherRouter = false;
+  setCurrentPath(vm: Vue, name?: string): Array<any> {
+    let title: string = "";
+    let isOtherRouter: boolean = false;
     vm.$store.state.app.routers.forEach((item: any) => {
       if (item.children.length === 1) {
         if (item.children[0].name === name) {
@@ -109,7 +108,7 @@ class Util {
         });
       }
     });
-    let currentPathArr = [];
+    let currentPathArr: Array<any> = [];
     if (name === "home") {
       currentPathArr = [
         {
@@ -145,22 +144,24 @@ class Util {
         }
       ];
     } else {
-      let currentPathObj = vm.$store.state.app.routers.filter((item: any) => {
-        if (item.children.length <= 1) {
-          return item.children[0].name === name || item.name === name;
-        } else {
-          let i = 0;
-          let childArr = item.children;
-          let len = childArr.length;
-          while (i < len) {
-            if (childArr[i].name === name) {
-              return true;
+      let currentPathObj: any = vm.$store.state.app.routers.filter(
+        (item: any) => {
+          if (item.children.length <= 1) {
+            return item.children[0].name === name || item.name === name;
+          } else {
+            let i: number = 0;
+            let childArr: any = item.children;
+            let len: number = childArr.length;
+            while (i < len) {
+              if (childArr[i].name === name) {
+                return true;
+              }
+              i++;
             }
-            i++;
+            return false;
           }
-          return false;
         }
-      })[0];
+      )[0];
       if (
         currentPathObj.children &&
         currentPathObj.children.length <= 1 &&
@@ -191,7 +192,7 @@ class Util {
           }
         ];
       } else {
-        let childObj = currentPathObj.children.filter((child: any) => {
+        let childObj: any = currentPathObj.children.filter((child: any) => {
           return child.name === name;
         })[0];
         currentPathArr = [
@@ -217,12 +218,17 @@ class Util {
 
     return currentPathArr;
   }
-  openNewPage(vm: Vue, name: string | undefined, argu?: any, query?: any) {
-    var store = vm.$store || vm.$options.store;
-    let pageOpenedList = store.state.app.pageOpenedList;
-    let openedPageLen = pageOpenedList.length;
-    let i = 0;
-    let tagHasOpened = false;
+  openNewPage(
+    vm: Vue,
+    name: string | undefined,
+    argu?: any,
+    query?: any
+  ): void {
+    var store: any = vm.$store || vm.$options.store;
+    let pageOpenedList: Array<any> = store.state.app.pageOpenedList;
+    let openedPageLen: number = pageOpenedList.length;
+    let i: number = 0;
+    let tagHasOpened: boolean = false;
     while (i < openedPageLen) {
       if (name === pageOpenedList[i].name) {
         // 页面已经打开
@@ -237,7 +243,7 @@ class Util {
       i++;
     }
     if (!tagHasOpened) {
-      let tag = store.state.app.tagsList.filter((item: any) => {
+      let tag: any = store.state.app.tagsList.filter((item: any) => {
         if (item.children) {
           return name === item.children[0].name;
         } else {
@@ -258,13 +264,13 @@ class Util {
     }
     store.commit("app/setCurrentPageName", name);
   }
-  fullscreenEvent(vm: Vue) {
+  fullscreenEvent(vm: Vue): void {
     vm.$store.commit("app/initCachepage");
     // 权限菜单过滤相关
     vm.$store.commit("app/updateMenulist");
     // 全屏相关
   }
-  extend(...args: any[]) {
+  extend(...args: any[]): any {
     let options,
       name,
       src,
@@ -323,8 +329,8 @@ class Util {
     key: string,
     range?: Array<any>,
     parentId?: number | null
-  ) {
-    var result = new Array<any>();
+  ):Array<any> {
+    var result:Array<any> = new Array<any>();
     list.forEach((item: any) => {
       let t: any = {};
       t.id = item.id;
@@ -333,7 +339,7 @@ class Util {
       t.parentId = item.parentId;
       t.checked = false;
       if (range) {
-        const temp = range.findIndex(w => w === item.code);
+        const temp:any = range.findIndex(w => w === item.code);
         if (temp > 0) {
           if (!item.children || item.children.length <= 0) {
             t.checked = true;
@@ -347,11 +353,11 @@ class Util {
           t.expand = false;
         }
       }
-      if (item[key] == parentId) {
+      if (item[key] === parentId) {
         t.children = this.genderTree(list, key, range, item.id);
         if (t.children && t.children.length > 0) {
-          var tem = t.children.filter((c: any) => c.checked);
-          t.checked = tem.length == t.children.length;
+          var tem: any = t.children.filter((c: any) => c.checked);
+          t.checked = tem.length === t.children.length;
         }
 
         result.push(t);
@@ -360,8 +366,12 @@ class Util {
     return result;
   }
 
-  genderMenu(list: Array<any>, key: string, parentId?: number | null) {
-    var result = new Array<any>();
+  genderMenu(
+    list: Array<any>,
+    key: string,
+    parentId?: number | null
+  ): Array<any> {
+    var result: Array<any> = new Array<any>();
     list.forEach((item: any) => {
       let t: any = {};
       t.id = item.id;
@@ -371,7 +381,7 @@ class Util {
       t.url = item.url;
       t.type = item.type;
       t.expand = true;
-      if (item[key] == parentId) {
+      if (item[key] === parentId) {
         t.children = this.genderMenu(list, key, item.id);
         result.push(t);
       }
@@ -384,12 +394,12 @@ class Util {
     result: Array<any> = new Array<any>()
   ) => {
     result.push(node.code);
-    let parent = list.find(c => c.id == node.parentId);
+    let parent: any = list.find(c => c.id === node.parentId);
     if (parent) {
       result.push(parent.code);
       this.deptNode(list, parent, result);
     }
-  };
+  }
 }
-const util = new Util();
+const util: Util = new Util();
 export default util;

@@ -8,17 +8,17 @@ import Cookies from "js-cookie";
 import { appRouters, otherRouters } from "./router";
 Vue.use(VueRouter);
 
-const RouterConfig = {
+const RouterConfig: any = {
   // mode: 'history',
   routes: routers
 };
 
-export const router = new VueRouter(RouterConfig);
+export const router: any = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
   Util.title(to.meta.title);
-  var token = Cookies.get("Abp.AuthToken");
+  var token: string = Cookies.get("Abp.AuthToken");
   if (Cookies.get("locking") === "1" && to.name !== "locking") {
     next({
       replace: true,
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
         name: "home"
       });
     } else {
-      const curRouterObj = Util.getRouterObjByName(
+      const curRouterObj: any = Util.getRouterObjByName(
         [otherRouters, ...appRouters],
         to.name
       );

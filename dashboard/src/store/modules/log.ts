@@ -1,9 +1,9 @@
 import { Store, Module, ActionContext } from "vuex";
-import ListModule from "./list-module";
-import IListState from "./list-state";
-import Ajax from "../../lib/ajax";
+import ListModule from "@/store/modules/base/list-module";
+import IListState from "@/store/modules/base/list-state";
+import Ajax from "@/lib/ajax";
 import PageResult from "@/store/entities/page-result";
-import ListMutations from "./list-mutations";
+import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";
 interface ILogState extends IListState<any> {}
 class UserMutations extends ListMutations<ILogState> {}

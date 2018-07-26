@@ -1,11 +1,11 @@
-import { appRouters, otherRouters } from "../../router/router";
-import Util from "../../lib/util";
-import auth from "../../lib/auth";
+import { appRouters, otherRouters } from "@/router/router";
+import Util from "@/lib/util";
+import auth from "@/lib/auth";
 import Vue from "vue";
 import { Store, Module, ActionContext } from "vuex";
 import Vuex from "vuex";
-import ajax from "../../lib/ajax";
-import appconst from "../../lib/appconst";
+import ajax from "@/lib/ajax";
+import appconst from "@/lib/appconst";
 import { debug } from "util";
 Vue.use(Vuex);
 interface IAppState {

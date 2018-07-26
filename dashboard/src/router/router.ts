@@ -73,7 +73,7 @@ export const appRouters: Array<any> = [
         path: "point",
         meta: { title: "点位管理" },
         name: "point",
-        component: () => System.import("../views/setting/role/role.vue")
+        component: () => System.import("../views/points/index.vue")
       }
     ]
   },

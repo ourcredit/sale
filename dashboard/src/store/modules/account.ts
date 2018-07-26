@@ -1,4 +1,4 @@
-import ajax from "../../lib/ajax";
+import ajax from "@/lib/ajax";
 const account: any = {
   namespaced: true,
   state: {},

@@ -27,7 +27,7 @@ public interface InitConst {
                 }}));
             }}));
             add(new MenuInfo("点位管理", PermissionConst._pointer.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("点位管理", PermissionConst._pointer._point.list, "/pointer/point", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("点位列表", PermissionConst._pointer._point.list, "/pointer/point", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("编辑点位", PermissionConst._pointer._point.modify, "", 2, null));
                     add(new MenuInfo("删除点位", PermissionConst._pointer._point.delete, "", 2, null));
                     add(new MenuInfo("批量删除点位", PermissionConst._pointer._point.batch, "", 2, null));
@@ -35,7 +35,7 @@ public interface InitConst {
                 }}));
             }}));
             add(new MenuInfo("设备管理", PermissionConst._device.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("设备管理", PermissionConst._device.list, "/device/list", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("设备列表", PermissionConst._device.list, "/device/list", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("编辑设备", PermissionConst._device.modify, "", 2, null));
                     add(new MenuInfo("删除设备", PermissionConst._device.delete, "", 2, null));
                     add(new MenuInfo("批量删除设备", PermissionConst._device.batch, "", 2, null));

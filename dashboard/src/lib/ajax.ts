@@ -7,7 +7,7 @@ const ajax: any = axios.create({
   timeout: 30000
 });
 ajax.interceptors.request.use(
-  function(config) {
+  (config: any) => {
     if (!!auth.getToken()) {
       config.headers.common.Authorization = auth.getToken();
       //  config.headers.common["Authorization"] = "awdawdawd";
@@ -16,7 +16,7 @@ ajax.interceptors.request.use(
     //  config.headers.common["Abp.TenantId"]=window.abp.multiTenancy.getTenantIdCookie();
     return config;
   },
-  function(error) {
+  (error: any) => {
     return Promise.reject(error);
   }
 );

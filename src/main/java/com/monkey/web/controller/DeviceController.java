@@ -15,12 +15,9 @@ import com.monkey.web.annotation.CurrentUser;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ import java.util.List;
  * @author zhaohejing
  * @since 2018-07-26
  */
-@Controller
+@RestController
 @RequestMapping("api/device")
 @RequiresPermissions(value = {})
 public class DeviceController {
