@@ -8,9 +8,9 @@ class Util {
     document.body.appendChild(script);
   }
   title(title: string) {
-    let appname = "sale";
-    let page = "page";
-    window.document.title = appname + "--" + page;
+    let appname = "猿人";
+    let page = "烘干机";
+    window.document.title = appname + "⭐" + page;
   }
   inOf(arr: Array<any>, targetArr: any) {
     let res = true;

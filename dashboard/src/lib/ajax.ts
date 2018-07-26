@@ -2,31 +2,30 @@ import axios from "axios";
 import auth from "./auth";
 import appconst from "./appconst";
 import Vue from "vue";
-const ajax = axios.create({
+const ajax: any = axios.create({
   baseURL: appconst.remoteServiceBaseUrl,
   timeout: 30000
 });
 ajax.interceptors.request.use(
-  function (config) {
+  function(config) {
     if (!!auth.getToken()) {
-      config.headers.common["Authorization"] = auth.getToken();
+      config.headers.common.Authorization = auth.getToken();
       //  config.headers.common["Authorization"] = "awdawdawd";
     }
     //  config.headers.common[".AspNetCore.Culture"]=window.abp.utils.getCookieValue("Abp.Localization.CultureName");
     //  config.headers.common["Abp.TenantId"]=window.abp.multiTenancy.getTenantIdCookie();
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );
-let vm = new Vue({});
+let vm: Vue = new Vue({});
 ajax.interceptors.response.use(
   respon => {
     return respon.data;
   },
   error => {
-    debugger;
     if (
       !!error.response &&
       !!error.response.data.error &&

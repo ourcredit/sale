@@ -1,23 +1,14 @@
-import {
-  appRouters,
-  otherRouters
-} from "../../router/router";
+import { appRouters, otherRouters } from "../../router/router";
 import Util from "../../lib/util";
 import auth from "../../lib/auth";
 import Vue from "vue";
-import {
-  Store,
-  Module,
-  ActionContext
-} from "vuex";
+import { Store, Module, ActionContext } from "vuex";
 import Vuex from "vuex";
 import ajax from "../../lib/ajax";
 import appconst from "../../lib/appconst";
-import {
-  debug
-} from "util";
+import { debug } from "util";
 Vue.use(Vuex);
-interface AppState {
+interface IAppState {
   cachePage: Array<any>;
   lang: string;
   isFullScreen: boolean;
@@ -34,7 +25,7 @@ interface AppState {
   dontCache: Array<any>;
   noticeList: Array<any>;
 }
-class AppModule implements Module<AppState, any> {
+class AppModule implements Module<IAppState, any> {
   namespaced = true;
   state = {
     cachePage: [],
@@ -43,61 +34,66 @@ class AppModule implements Module<AppState, any> {
     openedSubmenuArr: [],
     menuTheme: "dark",
     themeColor: "",
-    pageOpenedList: [{
-      meta: {
-        title: "控制台"
-      },
-      path: "",
-      name: "dashboard"
-    }],
+    pageOpenedList: [
+      {
+        meta: {
+          title: "控制台"
+        },
+        path: "",
+        name: "dashboard"
+      }
+    ],
     currentPageName: "",
-    currentPath: [{
-      meta: {
-        title: "控制台"
-      },
-      path: "",
-      name: "dashboard"
-    }],
+    currentPath: [
+      {
+        meta: {
+          title: "控制台"
+        },
+        path: "",
+        name: "dashboard"
+      }
+    ],
     menuList: [],
     routers: [otherRouters, ...appRouters],
     tagsList: [...otherRouters.children],
     messageCount: 0,
     dontCache: [],
-    noticeList: [{
-      read: false,
-      type: 0,
-      title: "一个提示",
-      description: "一天前"
-    },
-    {
-      read: false,
-      type: 1,
-      title: "一个提示",
-      description: "一天前"
-    },
-    {
-      read: false,
-      type: 0,
-      title: "第二个提示",
-      description: "一个月前"
-    }
+    noticeList: [
+      {
+        read: false,
+        type: 0,
+        title: "一个提示",
+        description: "一天前"
+      },
+      {
+        read: false,
+        type: 1,
+        title: "一个提示",
+        description: "一天前"
+      },
+      {
+        read: false,
+        type: 0,
+        title: "第二个提示",
+        description: "一个月前"
+      }
     ]
   };
   mutations = {
-    logout(state: AppState) {
+    logout(state: IAppState): void {
       localStorage.clear();
       sessionStorage.clear();
     },
-    setTagsList(state: AppState, list: Array<any>) {
+    setTagsList(state: IAppState, list: Array<any>): void {
       state.tagsList.push(...list);
     },
-    updateMenulist(state: AppState) {
+    updateMenulist(state: IAppState): void {
       let menuList: Array<any> = [];
-      appRouters.forEach((item:any, index) => {
+      appRouters.forEach((item: any, index) => {
         if (item.permission !== undefined) {
-          let childrenArr = [];
-          childrenArr = item.children.filter((child:any) => {
-            let childany = child as any;
+          let childrenArr: Array<any> = [];
+          childrenArr = item.children.filter((child: any) => {
+            let childany: any = child as any;
             if (childany.permission !== undefined) {
               if (auth.hasPermission(childany.permission)) {
                 return child;
@@ -114,12 +110,14 @@ class AppModule implements Module<AppState, any> {
           if (item.children.length === 1) {
             menuList.push(item);
           } else {
-            let len = menuList.push(item);
-            let childrenArr = [];
-            childrenArr = item.children.filter((child:any) => {
+            let len: number = menuList.push(item);
+            let childrenArr: Array<any> = [];
+            childrenArr = item.children.filter((child: any) => {
               return child;
             });
-            let handledItem = JSON.parse(JSON.stringify(menuList[len - 1]));
+            let handledItem: any = JSON.parse(
+              JSON.stringify(menuList[len - 1])
+            );
             handledItem.children = childrenArr;
             menuList.splice(len - 1, 1, handledItem);
           }
@@ -127,15 +125,15 @@ class AppModule implements Module<AppState, any> {
       });
       state.menuList = menuList;
     },
-    changeMenuTheme(state: AppState, theme: string) {
+    changeMenuTheme(state: IAppState, theme: string): void {
       state.menuTheme = theme;
     },
-    changeMainTheme(state: AppState, mainTheme: string) {
+    changeMainTheme(state: IAppState, mainTheme: string): void {
       state.themeColor = mainTheme;
     },
-    addOpenSubmenu(state: AppState, name: any) {
-      let hasThisName = false;
-      let isEmpty = false;
+    addOpenSubmenu(state: IAppState, name: any): void {
+      let hasThisName: boolean = false;
+      let isEmpty: boolean = false;
       if (name.length === 0) {
         isEmpty = true;
       }
@@ -146,27 +144,27 @@ class AppModule implements Module<AppState, any> {
         state.openedSubmenuArr.push(name);
       }
     },
-    closePage(state: AppState, name: any) {
+    closePage(state: IAppState, name: any): void {
       state.cachePage.forEach((item, index) => {
         if (item === name) {
           state.cachePage.splice(index, 1);
         }
       });
     },
-    initCachepage(state: AppState) {
+    initCachepage(state: IAppState): void {
       if (localStorage.cachePage) {
         state.cachePage = JSON.parse(localStorage.cachePage);
       }
     },
-    removeTag(state: AppState, name: string) {
+    removeTag(state: IAppState, name: string): void {
       state.pageOpenedList.map((item, index) => {
         if (item.name === name) {
           state.pageOpenedList.splice(index, 1);
         }
       });
     },
-    pageOpenedList(state: AppState, get: any) {
-      let openedPage = state.pageOpenedList[get.index];
+    pageOpenedList(state: IAppState, get: any): void {
+      let openedPage: any = state.pageOpenedList[get.index];
       if (get.argu) {
         openedPage.argu = get.argu;
       }
@@ -176,14 +174,14 @@ class AppModule implements Module<AppState, any> {
       state.pageOpenedList.splice(get.index, 1, openedPage);
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
     },
-    clearAllTags(state: AppState) {
+    clearAllTags(state: IAppState): void {
       state.pageOpenedList.splice(1);
       state.cachePage.length = 0;
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
     },
-    clearOtherTags(state: AppState, vm: Vue) {
-      let currentName = vm.$route.name;
-      let currentIndex = 0;
+    clearOtherTags(state: IAppState, vm: Vue): void {
+      let currentName: any = vm.$route.name;
+      let currentIndex: number = 0;
       state.pageOpenedList.forEach((item, index) => {
         if (item.name === currentName) {
           currentIndex = index;
@@ -195,27 +193,27 @@ class AppModule implements Module<AppState, any> {
         state.pageOpenedList.splice(currentIndex + 1);
         state.pageOpenedList.splice(1, currentIndex - 1);
       }
-      let newCachepage = state.cachePage.filter(item => {
+      let newCachepage: any[] = state.cachePage.filter(item => {
         return item === currentName;
       });
       state.cachePage = newCachepage;
       localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
     },
-    setOpenedList(state: AppState) {
-      state.pageOpenedList = localStorage.pageOpenedList ?
-        JSON.parse(localStorage.pageOpenedList) :
-        [otherRouters.children[0]];
+    setOpenedList(state: IAppState): void {
+      state.pageOpenedList = localStorage.pageOpenedList
+        ? JSON.parse(localStorage.pageOpenedList)
+        : [otherRouters.children[0]];
     },
-    setCurrentPath(state: AppState, pathArr: Array<any>) {
+    setCurrentPath(state: IAppState, pathArr: Array<any>): void {
       state.currentPath = pathArr;
     },
-    setCurrentPageName(state: AppState, name: string) {
+    setCurrentPageName(state: IAppState, name: string): void {
       state.currentPageName = name;
     },
-    clearOpenedSubmenu(state: AppState) {
+    clearOpenedSubmenu(state: IAppState): void {
       state.openedSubmenuArr.length = 0;
     },
-    increateTag(state: AppState, tagObj: any) {
+    increateTag(state: IAppState, tagObj: any): void {
       if (!Util.oneOf(tagObj.name, state.dontCache)) {
         state.cachePage.push(tagObj.name);
         localStorage.cachePage = JSON.stringify(state.cachePage);
@@ -224,14 +222,17 @@ class AppModule implements Module<AppState, any> {
     }
   };
   actions = {
-    async login(content: ActionContext<AppState, any>, payload: any) {
-      let rep = await ajax.post("/api/auth/login", payload.data);
-      var tokenExpireDate = payload.data.rememberMe ?
-        new Date(new Date().getTime() + 1000 * 24 * 60 * 60) :
-        undefined;
+    async login(
+      content: ActionContext<IAppState, any>,
+      payload: any
+    ): Promise<any> {
+      let rep: any = await ajax.post("/api/auth/login", payload.data);
+      var tokenExpireDate: any = payload.data.rememberMe
+        ? new Date(new Date().getTime() + 1000 * 24 * 60 * 60)
+        : undefined;
       auth.setToken(rep.data.token, tokenExpireDate);
     }
   };
 }
-const appModule = new AppModule();
+const appModule: AppModule = new AppModule();
 export default appModule;

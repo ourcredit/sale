@@ -200,7 +200,7 @@
             READ
         }
 
-        //TODO: We can extend this interface to define built-in notification types, like ILocalizableMessageNotificationData 
+        // TODO: We can extend this interface to define built-in notification types, like ILocalizableMessageNotificationData 
         interface INotificationData {
 
             type: string;
@@ -291,7 +291,7 @@
 
     namespace message {
 
-        //TODO: these methods return jQuery.Promise instead of any. fix it.
+        // TODO: these methods return jQuery.Promise instead of any. fix it.
 
         function info(message: string, title?: string): any;
 
