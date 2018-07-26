@@ -1,9 +1,12 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -22,6 +25,7 @@ public class Product extends Model<Product> {
     /**
      * key
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
      * 商品名

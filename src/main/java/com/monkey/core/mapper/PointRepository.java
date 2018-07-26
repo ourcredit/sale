@@ -1,6 +1,6 @@
-package com.monkey.mapper;
+package com.monkey.core.mapper;
 
-import com.monkey.entity.Point;
+import com.monkey.core.entity.Point;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**

@@ -3,7 +3,7 @@
 <mapper namespace="com.monkey.mapper.DeviceRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.entity.Device">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Device">
         <id column="id" property="id" />
         <result column="deviceName" property="deviceName" />
         <result column="deviceNum" property="deviceNum" />

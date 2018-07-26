@@ -1,6 +1,6 @@
-package com.monkey.service;
+package com.monkey.application.Device;
 
-import com.monkey.entity.Point;
+import com.monkey.core.entity.Point;
 import com.baomidou.mybatisplus.service.IService;
 
 /**

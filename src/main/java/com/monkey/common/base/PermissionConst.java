@@ -31,16 +31,20 @@ public interface PermissionConst {
             public static  final  String batch="product:batch";
             public static  final  String first="org:first";
         }
-        public  static  class _box{
-            public static  final  String list="box:list";
-            public static  final  String modify="box:modify";
-            public static  final  String delete="box:delete";
-            public static  final  String batch="box:batch";
-            public static  final  String first="box:first";
-        }
-
     }
 
+    public  static  class  _pay{
+        public static  final  String list="pay:show";
+        public  static  class  _alipay{
+            public static  final  String list="ali:list";
+            public static  final  String modify="ali:modify";
+        }
+        public  static  class  _wechatpay{
+            public static  final  String list="wechat:list";
+            public static  final  String modify="wechat:modify";
+
+        }
+    }
     public  static  class  _watch{
         public static  final  String list="watch:show";
         public  static  class _actionlog{
@@ -67,16 +71,16 @@ public interface PermissionConst {
 
     }
 
-
+    public  static  class _device{
+        public static  final  String list="device:list";
+        public static  final  String modify="device:modify";
+        public static  final  String delete="device:delete";
+        public static  final  String batch="device:batch";
+        public static  final  String first="device:first";
+        public static  final  String allow="device:allow";
+    }
     public  static  class  _pointer{
         public static  final  String list="pointer:show";
-        public  static  class _org{
-            public static  final  String list="org:list";
-            public static  final  String modify="org:modify";
-            public static  final  String delete="org:delete";
-            public static  final  String batch="org:batch";
-            public static  final  String first="org:first";
-        }
         public  static  class _point{
             public static  final  String list="point:list";
             public static  final  String modify="point:modify";

@@ -1,8 +1,8 @@
-package com.monkey.service.impl;
+package com.monkey.application.Device;
 
-import com.monkey.entity.Point;
-import com.monkey.mapper.PointRepository;
-import com.monkey.service.IPointService;
+import com.monkey.core.entity.Point;
+import com.monkey.core.mapper.PointRepository;
+
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

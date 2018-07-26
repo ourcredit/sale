@@ -1,7 +1,7 @@
-import {Store,Module,ActionContext, MutationTree} from 'vuex'
-import ListState from './list-state'
+import { Store, Module, ActionContext, MutationTree } from "vuex";
+import IListState from "./list-state";
 
-export default class ListModule<T extends ListState<U>,R,U> implements Module<ListState<U>,R>{
+export default class ListModule<T extends IListState<U>,R,U> implements Module<IListState<U>,R> {
     namespaced=true;
     state={
         totalCount:0,
@@ -10,12 +10,12 @@ export default class ListModule<T extends ListState<U>,R,U> implements Module<Li
         list:new Array<U>(),
         loading:false
     };
-    mutations={
-        setCurrentPage(state:ListState<U>,page:number){
-            state.currentPage=page;
+    mutations = {
+        setCurrentPage(state: IListState<U>, page: number): void {
+            state.currentPage = page;
         },
-        setPageSize(state:ListState<U>,pagesize:number){
-            state.pageSize=pagesize;
+        setPageSize(state: IListState<U>, pagesize: number): void {
+            state.pageSize = pagesize;
         }
-    }
+    };
 }

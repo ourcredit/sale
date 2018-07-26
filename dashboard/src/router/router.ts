@@ -1,16 +1,16 @@
 declare global {
-  interface System {
+  interface ISystem {
     import(request: string): Promise<any>;
   }
-  var System: System;
+  var System: ISystem;
 }
-export const locking = {
+export const locking: any = {
   path: "/locking",
   name: "locking",
   component: () =>
     System.import("../components/lockscreen/components/locking-page.vue")
 };
-export const loginRouter = {
+export const loginRouter: any = {
   path: "/",
   name: "login",
   meta: {
@@ -18,12 +18,12 @@ export const loginRouter = {
   },
   component: () => System.import("../views/login.vue")
 };
-export const otherRouters = {
+export const otherRouters: any = {
   path: "/main",
   name: "main",
   permission: "",
   meta: { title: "管理页" },
-  component:() => System.import("../views/main.vue") ,
+  component: () => System.import("../views/main.vue"),
   children: [
     {
       path: "home",
@@ -40,13 +40,13 @@ export const otherRouters = {
     }
   ]
 };
-export const appRouters = [
+export const appRouters: Array<any> = [
   {
     path: "/order",
     name: "order",
     meta: { title: "订单系统" },
     icon: "&#xe6b8;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
       {
         path: "list",
@@ -67,14 +67,8 @@ export const appRouters = [
     name: "pointer",
     meta: { title: "点位管理" },
     icon: "&#xe725;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
-      {
-        path: "org",
-        meta: { title: "机构树管理" },
-        name: "org",
-        component: () => System.import("../views/setting/user/user.vue")
-      },
       {
         path: "point",
         meta: { title: "点位管理" },
@@ -84,23 +78,53 @@ export const appRouters = [
     ]
   },
   {
+    path: "/device",
+    name: "device",
+    meta: { title: "设备管理" },
+    icon: "&#xe717;",
+    component: () => System.import("../views/main.vue"),
+    children: [
+      {
+        path: "list",
+        meta: { title: "设备管理" },
+        name: "dl",
+        component: () => System.import("../views/setting/user/user.vue")
+      }
+    ]
+  },
+  {
     path: "/product",
     name: "product",
     meta: { title: "货物管理" },
     icon: "&#xe717;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
       {
         path: "list",
         meta: { title: "商品管理" },
-        name: "plist",
+        name: "pl",
+        component: () => System.import("../views/setting/user/user.vue")
+      }
+    ]
+  },
+  {
+    path: "/pay",
+    name: "pay",
+    meta: { title: "支付配置" },
+    icon: "&#xe717;",
+    component: () => System.import("../views/main.vue"),
+    children: [
+      {
+        path: "alipay",
+        meta: { title: "支付宝" },
+        name: "alipay",
         component: () => System.import("../views/setting/user/user.vue")
       },
       {
-        path: "box",
-        meta: { title: "售货机管理" },
-        name: "box",
-        component: () => System.import("../views/setting/role/role.vue")
+        path: "wechatpay",
+        meta: { title: "微信" },
+        name: "wechatpay",
+        component: () => System.import("../views/setting/user/user.vue")
       }
     ]
   },
@@ -109,7 +133,7 @@ export const appRouters = [
     name: "watch",
     meta: { title: "监控系统" },
     icon: "&#xe73d;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
       {
         path: "action",
@@ -136,7 +160,7 @@ export const appRouters = [
     name: "report",
     meta: { title: "报表系统" },
     icon: "&#xe742;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
       {
         path: "a",
@@ -150,7 +174,6 @@ export const appRouters = [
         name: "b",
         component: () => System.import("../views/setting/role/role.vue")
       }
-     
     ]
   },
   {
@@ -159,7 +182,7 @@ export const appRouters = [
     permission: "system:list",
     meta: { title: "系统管理" },
     icon: "&#xe68a;",
-    component: () => System.import("../views/main.vue") ,
+    component: () => System.import("../views/main.vue"),
     children: [
       {
         path: "user",
@@ -185,4 +208,9 @@ export const appRouters = [
     ]
   }
 ];
-export const routers = [loginRouter, locking, ...appRouters, otherRouters];
+export const routers: Array<any> = [
+  loginRouter,
+  locking,
+  ...appRouters,
+  otherRouters
+];

@@ -20,26 +20,27 @@ public interface InitConst {
     public static class _menu {
         public static List<MenuInfo> menuList = new ArrayList<MenuInfo>() {{
             add(new MenuInfo("控制台", PermissionConst._dashboard.list, "/dashboard", 1, null));
-
             add(new MenuInfo("订单系统", PermissionConst._order.list, "", 1, new ArrayList<MenuInfo>() {{
                 add(new MenuInfo("订单列表", PermissionConst._order.list, "/order/list", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("查看订单", PermissionConst._order.show, "", 2, null));
                     add(new MenuInfo("退款", PermissionConst._order.back, "", 2, null));
                 }}));
             }}));
-
             add(new MenuInfo("点位管理", PermissionConst._pointer.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("机构树管理", PermissionConst._pointer._org.list, "/pointer/org", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑机构树", PermissionConst._pointer._org.modify, "", 2, null));
-                    add(new MenuInfo("删除机构树", PermissionConst._pointer._org.delete, "", 2, null));
-                    add(new MenuInfo("批量删除机构树", PermissionConst._pointer._org.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._pointer._org.first, "", 2, null));
-                }}));
                 add(new MenuInfo("点位管理", PermissionConst._pointer._point.list, "/pointer/point", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("编辑点位", PermissionConst._pointer._point.modify, "", 2, null));
                     add(new MenuInfo("删除点位", PermissionConst._pointer._point.delete, "", 2, null));
                     add(new MenuInfo("批量删除点位", PermissionConst._pointer._point.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._pointer._point.first, "", 2, null));
+                }}));
+            }}));
+            add(new MenuInfo("设备管理", PermissionConst._device.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("设备管理", PermissionConst._device.list, "/device/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑设备", PermissionConst._device.modify, "", 2, null));
+                    add(new MenuInfo("删除设备", PermissionConst._device.delete, "", 2, null));
+                    add(new MenuInfo("批量删除设备", PermissionConst._device.batch, "", 2, null));
+                    add(new MenuInfo("获取设备详情", PermissionConst._device.first, "", 2, null));
+                    add(new MenuInfo("配置商品", PermissionConst._device.allow, "", 2, null));
                 }}));
             }}));
 
@@ -50,14 +51,15 @@ public interface InitConst {
                     add(new MenuInfo("批量删除商品", PermissionConst._pm._product.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._pm._product.first, "", 2, null));
                 }}));
-                add(new MenuInfo("售货机管理", PermissionConst._pm._box.list, "/product/box", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑点位", PermissionConst._pm._box.modify, "", 2, null));
-                    add(new MenuInfo("删除点位", PermissionConst._pm._box.delete, "", 2, null));
-                    add(new MenuInfo("批量删除点位", PermissionConst._pm._box.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._pm._box.first, "", 2, null));
+            }}));
+            add(new MenuInfo("支付配置", PermissionConst._pay.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("支付宝", PermissionConst._pay._alipay.list, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("修改配置", PermissionConst._pay._alipay.modify, "", 2, null));
+                }}));
+                add(new MenuInfo("微信", PermissionConst._pay._wechatpay.list, "/pay/wechatpay", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("修改配置", PermissionConst._pay._alipay.modify, "", 2, null));
                 }}));
             }}));
-
             add(new MenuInfo("监控系统", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
                 add(new MenuInfo("后台操作日志", PermissionConst._watch._actionlog.list, "/watch/action", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("删除日志", PermissionConst._watch._actionlog.delete, "", 2, null));
@@ -100,7 +102,6 @@ public interface InitConst {
                     add(new MenuInfo("批量删除菜单", PermissionConst._system._menu.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._system._menu.first, "", 2, null));
                 }}));
-
             }}));
 
 

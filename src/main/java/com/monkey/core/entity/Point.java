@@ -1,8 +1,11 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +24,7 @@ public class Point extends Model<Point> {
     /**
      * key
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
      * 点位名
@@ -46,6 +50,7 @@ public class Point extends Model<Point> {
      * 软删除  
      */
     private Integer isDeleted;
+    private  Integer areaId;
     /**
      * x坐标
      */
@@ -146,5 +151,13 @@ public class Point extends Model<Point> {
         ", x=" + x +
         ", y=" + y +
         "}";
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 }

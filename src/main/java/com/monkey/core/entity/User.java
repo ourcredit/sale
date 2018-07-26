@@ -1,24 +1,21 @@
 package com.monkey.core.entity;
 
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableLogic;
-import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author zhaohejing123
- * @since 2018-06-05
+ * @author zhaohejing
+ * @since 2018-07-26
  */
 @TableName("sale_user")
 public class User extends Model<User> {
@@ -26,13 +23,12 @@ public class User extends Model<User> {
     private static final long serialVersionUID = 1L;
     public  User(){}
     public  User(String account,String password,String userName,String mobile,Integer isActive){
-            this.account=account;
-            this.password=BCrypt.hashpw(password,BCrypt.gensalt());
-            this.userName=userName;
-            this.mobile=mobile;
-            this.isActive=isActive;
-            this.creationTime=new Date();
-            this.isDeleted=0;
+        this.account=account;
+        this.password=BCrypt.hashpw(password,BCrypt.gensalt());
+        this.userName=userName;
+        this.mobile=mobile;
+        this.isActive=isActive;
+        this.creationTime=new Date();
     }
     /**
      * 自增主键
@@ -43,13 +39,10 @@ public class User extends Model<User> {
      * 账户
      */
     private String account;
-
-
     /**
      * 密码
      */
     private String password;
-    private Date lastLoginTime;
     /**
      * 创建时间
      */
@@ -73,10 +66,16 @@ public class User extends Model<User> {
     /**
      * 软删除  
      */
-    @TableLogic
     private Integer isDeleted;
-    @TableField(el = "false",exist =false)
-    private List<Role> roles;
+    /**
+     * 最后登陆时间
+     */
+    private Date lastLoginTime;
+    /**
+     * 是否运营商
+     */
+    private Integer isOperator;
+
 
     public Integer getId() {
         return id;
@@ -150,6 +149,22 @@ public class User extends Model<User> {
         this.isDeleted = isDeleted;
     }
 
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getIsOperator() {
+        return isOperator;
+    }
+
+    public void setIsOperator(Integer isOperator) {
+        this.isOperator = isOperator;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -167,22 +182,8 @@ public class User extends Model<User> {
         ", mobile=" + mobile +
         ", isActive=" + isActive +
         ", isDeleted=" + isDeleted +
+        ", lastLoginTime=" + lastLoginTime +
+        ", isOperator=" + isOperator +
         "}";
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
     }
 }

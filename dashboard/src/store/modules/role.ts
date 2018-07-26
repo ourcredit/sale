@@ -1,64 +1,81 @@
-import { Store, Module, ActionContext } from 'vuex'
-import ListModule from './list-module'
-import ListState from './list-state'
-import Role from '../entities/role'
-import Ajax from '../../lib/ajax'
-import PageResult from '@/store/entities/page-result';
-import ListMutations from './list-mutations'
-import { stat } from 'fs';
-interface RoleState extends ListState<Role> {
-    editRole: Role;
-    permissions: Array<string>
+import { Store, Module, ActionContext } from "vuex";
+import ListModule from "./list-module";
+import IListState from "./list-state";
+import Role from "../entities/role";
+import Ajax from "../../lib/ajax";
+import PageResult from "@/store/entities/page-result";
+import ListMutations from "./list-mutations";
+import { stat } from "fs";
+interface IRoleState extends IListState<Role> {
+  editRole: Role;
+  permissions: Array<string>;
 }
-class RoleModule extends ListModule<RoleState, any, Role>{
-    state = {
-        totalCount: 0,
-        currentPage: 1,
-        pageSize: 10,
-        list: new Array<Role>(),
-        loading: false,
-        editRole: new Role(),
-        permissions: new Array<string>()
+class RoleModule extends ListModule<IRoleState, any, Role> {
+  state = {
+    totalCount: 0,
+    currentPage: 1,
+    pageSize: 10,
+    list: new Array<Role>(),
+    loading: false,
+    editRole: new Role(),
+    permissions: new Array<string>()
+  };
+  actions = {
+    async getAll(
+      context: ActionContext<IRoleState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      let reponse: any = await Ajax.post("/api/role", payload.data);
+      context.state.loading = false;
+      let page: PageResult<Role> = reponse.data as PageResult<Role>;
+      context.state.totalCount = page.total;
+      context.state.list = page.records;
+    },
+    async modify(
+      context: ActionContext<IRoleState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.put("/api/role", payload.data);
+    },
+    async delete(
+      context: ActionContext<IRoleState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.delete("/api/role/" + payload.data.id);
+    },
+    async batch(
+      context: ActionContext<IRoleState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.post("/api/role/batch", payload.data);
+    },
+    async get(
+      context: ActionContext<IRoleState, any>,
+      payload: any
+    ): Promise<any> {
+      let reponse: any = await Ajax.get("/api/role/" + payload.data);
+      // return reponse.data.result as Role;
+      context.state.editRole = reponse.data as Role;
+    },
+    async getAllPermissions(
+      context: ActionContext<IRoleState, any>
+    ): Promise<any> {
+      let reponse: any = await Ajax.post("/api/menu", { index: 1, size: 999 });
+      context.state.permissions = reponse.data.records;
     }
-    actions = {
-        async getAll(context: ActionContext<RoleState, any>, payload: any) {
-            context.state.loading = true;
-            let reponse = await Ajax.post('/api/role', payload.data);
-            context.state.loading = false;
-            let page = reponse.data as PageResult<Role>;
-            context.state.totalCount = page.total;
-            context.state.list = page.records;
-        },
-        async modify(context: ActionContext<RoleState, any>, payload: any) {
-            await Ajax.put('/api/role', payload.data);
-        },
-        async delete(context: ActionContext<RoleState, any>, payload: any) {
-            await Ajax.delete('/api/role/' + payload.data.id);
-        },
-        async batch(context: ActionContext<RoleState, any>, payload: any) {
-            await Ajax.post('/api/role/batch', payload.data);
-        },
-        async get(context: ActionContext<RoleState, any>, payload: any) {
-            let reponse = await Ajax.get('/api/role/' + payload.data);
-            // return reponse.data.result as Role;
-            context.state.editRole = reponse.data as Role;
-        },
-        async getAllPermissions(context: ActionContext<RoleState, any>) {
-            let reponse = await Ajax.post('/api/menu', { index: 1, size: 999 });
-            context.state.permissions = reponse.data.records;
-        }
-    };
-    mutations = {
-        setCurrentPage(state: RoleState, page: number) {
-            state.currentPage = page;
-        },
-        setPageSize(state: RoleState, pagesize: number) {
-            state.pageSize = pagesize;
-        },
-        edit(state: RoleState, role: Role) {
-            state.editRole = role;
-        }
+  };
+  mutations = {
+    setCurrentPage(state: IRoleState, page: number): void {
+      state.currentPage = page;
+    },
+    setPageSize(state: IRoleState, pagesize: number): void {
+      state.pageSize = pagesize;
+    },
+    edit(state: IRoleState, role: Role): void {
+      state.editRole = role;
     }
+  };
 }
-const roleModule = new RoleModule();
+const roleModule: RoleModule = new RoleModule();
 export default roleModule;

@@ -56,9 +56,9 @@ public class MpGenerator {
             }
         });
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("sale");
+        dsc.setUsername("root");
         dsc.setPassword("zwy0410");
-        dsc.setUrl("jdbc:mysql://localhost:3306/sale?characterEncoding=utf8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://localhost:3306/sale?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
         mpg.setDataSource(dsc);
 
         // 策略配置
@@ -66,9 +66,9 @@ public class MpGenerator {
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
         strategy.setTablePrefix(new String[]{"sale_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[]{
-                "sale_user"
-        }); // 需要生成的表
+//        strategy.setInclude(new String[]{
+//
+//        }); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
 //         strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");

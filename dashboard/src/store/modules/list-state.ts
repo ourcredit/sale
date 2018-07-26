@@ -1,4 +1,4 @@
-export default interface ListState<T>{
+export default interface IListState<T> {
     totalCount:number;
     currentPage:number;
     pageSize:number;

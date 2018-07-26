@@ -1,8 +1,8 @@
-package com.monkey.service.impl;
+package com.monkey.application.Device;
 
-import com.monkey.entity.Product;
-import com.monkey.mapper.ProductRepository;
-import com.monkey.service.IProductService;
+import com.monkey.core.entity.Product;
+import com.monkey.core.mapper.ProductRepository;
+
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

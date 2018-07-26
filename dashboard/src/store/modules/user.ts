@@ -1,18 +1,18 @@
 import { Store, Module, ActionContext } from "vuex";
 import ListModule from "./list-module";
-import ListState from "./list-state";
+import IListState from "./list-state";
 import User from "../entities/user";
 import Role from "../entities/role";
 import Ajax from "../../lib/ajax";
 import PageResult from "@/store/entities/page-result";
 import ListMutations from "./list-mutations";
 import { stat } from "fs";
-interface UserState extends ListState<User> {
+interface IUserState extends IListState<User> {
   editUser: User;
   roles: Role[];
 }
-class UserMutations extends ListMutations<User> { }
-class UserModule extends ListModule<UserState, any, User> {
+class UserMutations extends ListMutations<User> {}
+class UserModule extends ListModule<IUserState, any, User> {
   state = {
     totalCount: 0,
     currentPage: 1,
@@ -23,41 +23,53 @@ class UserModule extends ListModule<UserState, any, User> {
     roles: new Array<Role>()
   };
   actions = {
-    async getAll(context: ActionContext<UserState, any>, payload: any) {
+    async getAll(
+      context: ActionContext<IUserState, any>,
+      payload: any
+    ): Promise<any> {
       context.state.loading = true;
-      let reponse = await Ajax.post("/api/user", payload.data);
+      let reponse: any = await Ajax.post("/api/user", payload.data);
       context.state.loading = false;
-      let page = reponse.data as PageResult<User>;
+      let page: PageResult<User> = reponse.data as PageResult<User>;
       context.state.totalCount = page.total;
       context.state.list = page.records;
     },
-    async modify(context: ActionContext<UserState, any>, payload: any) {
+    async modify(
+      context: ActionContext<IUserState, any>,
+      payload: any
+    ): Promise<any> {
       await Ajax.put("/api/user", payload.data);
     },
 
-    async delete(context: ActionContext<UserState, any>, payload: any) {
+    async delete(
+      context: ActionContext<IUserState, any>,
+      payload: any
+    ): Promise<any> {
       await Ajax.delete("/api/user/" + payload.data.id);
     },
-    async get(context: ActionContext<UserState, any>, payload: any) {
-      let reponse = await Ajax.get("/api/user/" + payload.data.id);
+    async get(
+      context: ActionContext<IUserState, any>,
+      payload: any
+    ): Promise<any> {
+      let reponse: any = await Ajax.get("/api/user/" + payload.data.id);
       context.state.editUser = reponse.data as User;
     },
-    async getRoles(context: ActionContext<UserState, any>) {
-      let reponse = await Ajax.post("/api/role", { index: 1, size: 99 });
+    async getRoles(context: ActionContext<IUserState, any>): Promise<any> {
+      let reponse: any = await Ajax.post("/api/role", { index: 1, size: 99 });
       context.state.roles = reponse.data.records;
     }
   };
   mutations = {
-    setCurrentPage(state: UserState, page: number) {
+    setCurrentPage(state: IUserState, page: number): void {
       state.currentPage = page;
     },
-    setPageSize(state: UserState, pagesize: number) {
+    setPageSize(state: IUserState, pagesize: number): void {
       state.pageSize = pagesize;
     },
-    edit(state: UserState, user: User) {
+    edit(state: IUserState, user: User): void {
       state.editUser = user;
     }
   };
 }
-const userModule = new UserModule();
+const userModule: UserModule = new UserModule();
 export default userModule;

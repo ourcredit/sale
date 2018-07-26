@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : myself
+ Source Server         : my
  Source Server Type    : MySQL
  Source Server Version : 80011
  Source Host           : localhost:3306
@@ -11,11 +11,42 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 28/06/2018 17:00:28
+ Date: 26/07/2018 10:02:25
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sale_device
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_device`;
+CREATE TABLE `sale_device`  (
+  `id` int(11) NOT NULL COMMENT 'key',
+  `deviceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点位名称',
+  `deviceNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备编码',
+  `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
+  `pointId` int(11) NOT NULL COMMENT '从属点位',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sale_device_product
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_device_product`;
+CREATE TABLE `sale_device_product`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'guid',
+  `productId` int(11) NOT NULL COMMENT '产品id',
+  `deviceId` int(11) NOT NULL COMMENT '设备id',
+  `isSale` tinyint(2) NOT NULL DEFAULT 0 COMMENT '是否售卖',
+  `price` decimal(10, 2) NOT NULL COMMENT '价格',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_file
@@ -66,6 +97,39 @@ CREATE TABLE `sale_menu`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
+-- Table structure for sale_point
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_point`;
+CREATE TABLE `sale_point`  (
+  `id` int(11) NOT NULL COMMENT 'key',
+  `pointName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点位名',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'i奥数',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
+  `x` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'x坐标',
+  `y` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'y坐标',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sale_product
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_product`;
+CREATE TABLE `sale_product`  (
+  `id` int(11) NOT NULL COMMENT 'key',
+  `productName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名',
+  `productNum` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品编号',
+  `productType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品类型',
+  `price` decimal(10, 2) NOT NULL COMMENT '默认价格',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for sale_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_role`;
@@ -107,8 +171,9 @@ CREATE TABLE `sale_user`  (
   `userName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '姓名',
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机',
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '1启用  0禁用',
-  `isDeleted` tinyint(2) NULL DEFAULT NULL COMMENT '软删除  ',
+  `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
   `lastLoginTime` datetime(0) NULL DEFAULT NULL COMMENT '最后登陆时间',
+  `isOperator` tinyint(2) NULL DEFAULT 0 COMMENT '是否运营商',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ix_account`(`account`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;

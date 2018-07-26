@@ -3,7 +3,7 @@
 <mapper namespace="com.monkey.mapper.ProductRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.entity.Product">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Product">
         <id column="id" property="id" />
         <result column="productName" property="productName" />
         <result column="productNum" property="productNum" />

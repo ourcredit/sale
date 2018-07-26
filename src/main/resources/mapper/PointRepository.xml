@@ -3,7 +3,7 @@
 <mapper namespace="com.monkey.mapper.PointRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.entity.Point">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Point">
         <id column="id" property="id" />
         <result column="pointName" property="pointName" />
         <result column="address" property="address" />
@@ -13,11 +13,12 @@
         <result column="isDeleted" property="isDeleted" />
         <result column="x" property="x" />
         <result column="y" property="y" />
+        <result column="areaId" property="areaId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, pointName, address, description, creationTime, creatorUserId, isDeleted, x, y
+        id, pointName, address, description, creationTime, creatorUserId, isDeleted, x, y,areaId
     </sql>
 
 </mapper>
