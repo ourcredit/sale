@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.mapper.DeviceRepository">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.monkey.entity.Device">
+        <id column="id" property="id" />
+        <result column="deviceName" property="deviceName" />
+        <result column="deviceNum" property="deviceNum" />
+        <result column="deviceType" property="deviceType" />
+        <result column="pointId" property="pointId" />
+        <result column="creationTime" property="creationTime" />
+        <result column="creatorUserId" property="creatorUserId" />
+        <result column="isDeleted" property="isDeleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, deviceName, deviceNum, deviceType, pointId, creationTime, creatorUserId, isDeleted
+    </sql>
+
+</mapper>
