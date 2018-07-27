@@ -1,38 +1,49 @@
 <template>
-    <div>
-      <Row>
-        <Col span="5">
-         <Card dis-hover>
-            <div class="page-body">
-             <Tree :data="tree"></Tree>
-            </div>
-        </Card></Col>
-        <Col span="19">
-         <Card dis-hover>
-            <div class="page-body">
-                <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
-                    <Row :gutter="4">
-                        <Col span="4">
-                        <FormItem label="点位名:">
-                            <Input v-model="filters.pointName"/>
-                        </FormItem>
-                        </Col>
-                        <Col span="7">
-                        <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
-                        
-                        <Button class="toolbar-btn" v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+  <div>
+    <Row>
+      <Col span="4">
+      <Card dis-hover>
+        <div class="page-body">
+          <Tree :data="tree"></Tree>
+        </div>
+      </Card>
+      </Col>
+      <Col span="20">
+      <Card dis-hover>
+        <div class="page-body">
+          <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
+            <Row :gutter="4">
+              <Col span="18">
+              <FormItem label="设备名:">
+                <Input v-model="filters.deviceName" />
+              </FormItem>
+              <FormItem label="设备编号:">
+                <Input v-model="filters.deviceName" />
+              </FormItem>
+              <FormItem label="设备类型:">
+                <Select clearable v-model="filters.deviceType" style="width:160px">
+                  <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
+                </Select>
+              </FormItem>
+              <FormItem label="所属点位:">
+                <Input v-model="filters.deviceName" />
+              </FormItem>
+              </Col>
+              <Col span="6">
+              <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
+              <Button class="toolbar-btn" v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+              <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
+              </Col>
+            </Row>
+          </Form>
+          <SaleTable ref="table" :filters="filters" :type="'device'" :columns="columns"></SaleTable>
+        </div>
+      </Card>
+      </Col>
+    </Row>
 
-                        <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
-                        </Col>
-                    </Row>
-                </Form>
-                <SaleTable ref="table" :filters="filters" :type="'point'" :columns="columns"></SaleTable>
-            </div>
-        </Card></Col>
-      </Row>
-       
-        <modify v-model="ModalShow" @save-success="init"></modify>
-    </div>
+    <modify v-model="ModalShow" @save-success="init"></modify>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
@@ -40,7 +51,7 @@ import SaleTable from "@/components/saletable.vue";
 import AbpBase from "@/lib/abpbase";
 import PageRequest from "../../store/entities/page-request";
 import Util from "../../lib/util";
-import Point from "@/store/entities/point";
+import Device from "@/store/entities/device";
 import Modify from "./modify.vue";
 
 @Component({
@@ -49,18 +60,20 @@ import Modify from "./modify.vue";
     Modify
   }
 })
-export default class PointC extends AbpBase {
+export default class deviceC extends AbpBase {
   filters: Object = {
-    pointName: ""
+    deviceName: ""
   };
   p: any = {
-    modify: this.hasPermission("point:modify"),
-    delete: this.hasPermission("point:delete"),
-    list: this.hasPermission("point:list"),
-    first: this.hasPermission("point:first"),
-    batch: this.hasPermission("point:batch")
+    modify: this.hasPermission("device:modify"),
+    delete: this.hasPermission("device:delete"),
+    list: this.hasPermission("device:list"),
+    first: this.hasPermission("device:first"),
+    batch: this.hasPermission("device:batch")
   };
-
+  get cates() {
+    return this.$store.state.device.deviceCate;
+  }
   ModalShow: boolean = false;
   tree: Array<any> = [
     {
@@ -101,15 +114,19 @@ export default class PointC extends AbpBase {
       align: "center"
     },
     {
-      title: "点位名称",
-      key: "pointName"
+      title: "设备名",
+      key: "deviceName"
     },
     {
-      title: "地址",
+      title: "设备编号",
+      key: "deviceName"
+    },
+    {
+      title: "设备类型",
       key: "address"
     },
     {
-      title: "描述",
+      title: "所属点位",
       key: "description"
     },
     {
@@ -144,7 +161,7 @@ export default class PointC extends AbpBase {
             on: {
               click: () => {
                 this.$store.dispatch({
-                  type: "point/get",
+                  type: "device/get",
                   data: params.row.id
                 });
                 this.Modify();
@@ -171,7 +188,7 @@ export default class PointC extends AbpBase {
                   cancelText: "否",
                   onOk: async () => {
                     await this.$store.dispatch({
-                      type: "point/delete",
+                      type: "device/delete",
                       data: params.row
                     });
                     await this.init();
@@ -188,8 +205,8 @@ export default class PointC extends AbpBase {
     }
   ];
   Create() {
-    var u = new Point();
-    this.$store.commit("point/edit", u);
+    var u = new Device();
+    this.$store.commit("device/edit", u);
     this.ModalShow = true;
   }
   init() {
@@ -206,7 +223,7 @@ export default class PointC extends AbpBase {
         cancelText: "否",
         onOk: async () => {
           await this.$store.dispatch({
-            type: "point/batch",
+            type: "device/batch",
             data: t.selections
           });
           await this.init();

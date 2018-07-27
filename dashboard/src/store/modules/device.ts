@@ -2,22 +2,23 @@ import { Store, Module, ActionContext } from "vuex";
 import ListModule from "@/store/modules/base/list-module";
 import IListState from "@/store/modules/base/list-state";
 import Ajax from "@/lib/ajax";
-import Point from "../entities/point";
+import Device from "../entities/device";
 import PageResult from "@/store/entities/page-result";
 import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";
-interface IPointState extends IListState<Point> {
-  editPoint: Point;
+interface IPointState extends IListState<Device> {
+  editDevice: Device;
 }
-class PointMutations extends ListMutations<Point> {}
-class PointModule extends ListModule<IPointState, any, Point> {
+class PointMutations extends ListMutations<Device> {}
+class PointModule extends ListModule<IPointState, any, Device> {
   state = {
     totalCount: 0,
     currentPage: 1,
     pageSize: 10,
-    list: new Array<Point>(),
+    list: new Array<Device>(),
     loading: false,
-    editPoint: new Point()
+    editDevice: new Device(),
+    deviceCate:["格子机","售货机","抓娃娃机","咖啡机"]
   };
   actions = {
     async getAll(
@@ -25,9 +26,9 @@ class PointModule extends ListModule<IPointState, any, Point> {
       payload: any
     ): Promise<any> {
       context.state.loading = true;
-      let reponse: any = await Ajax.post("/api/point", payload.data);
+      let reponse: any = await Ajax.post("/api/device", payload.data);
       context.state.loading = false;
-      let page: PageResult<Point> = reponse.data as PageResult<Point>;
+      let page: PageResult<Device> = reponse.data as PageResult<Device>;
       context.state.totalCount = page.total;
       context.state.list = page.records;
     },
@@ -35,21 +36,21 @@ class PointModule extends ListModule<IPointState, any, Point> {
       context: ActionContext<IPointState, any>,
       payload: any
     ): Promise<any> {
-      await Ajax.put("/api/point", payload.data);
+      await Ajax.put("/api/device", payload.data);
     },
 
     async delete(
       context: ActionContext<IPointState, any>,
       payload: any
     ): Promise<any> {
-      await Ajax.delete("/api/point/" + payload.data.id);
+      await Ajax.delete("/api/device/" + payload.data.id);
     },
     async get(
       context: ActionContext<IPointState, any>,
       payload: any
     ): Promise<any> {
-      let reponse: any = await Ajax.get("/api/point/" + payload.data);
-      context.state.editPoint = reponse.data as Point;
+      let reponse: any = await Ajax.get("/api/device/" + payload.data);
+      context.state.editDevice = reponse.data as Device;
     }
   };
   mutations = {
@@ -59,8 +60,8 @@ class PointModule extends ListModule<IPointState, any, Point> {
     setPageSize(state: IPointState, pagesize: number): void {
       state.pageSize = pagesize;
     },
-    edit(state: IPointState, user: Point): void {
-      state.editPoint = user;
+    edit(state: IPointState, de: Device): void {
+      state.editDevice = de;
     }
   };
 }

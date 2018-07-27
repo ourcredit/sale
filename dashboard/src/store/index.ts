@@ -9,6 +9,7 @@ import role from "./modules/role";
 import log from "./modules/log";
 import menu from "./modules/menus";
 import point from "./modules/point";
+import device from "./modules/device";
 const store: any = new Vuex.Store({
   state: {
     //
@@ -25,7 +26,8 @@ const store: any = new Vuex.Store({
     role,
     log,
     menu,
-    point
+    point,
+    device
   }
 });
 

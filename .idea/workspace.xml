@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e81270bf-93e3-4977-ba8c-a4eae7191e0a" name="默认的" comment="prod=&gt;dev">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DBConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/points/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/points/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/SaleRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/RecordLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/RecordLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MyMetaObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MyMetaObjectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/LogRepository.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/LogRepository.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoleRepository.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleRepository.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/point.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/point.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -109,8 +90,8 @@
       <file leaf-file-name="MybatisPlusConfig.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+            <state relative-caret-position="285">
+              <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3046#3047#0" expanded="true" />
@@ -901,8 +882,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+        <state relative-caret-position="285">
+          <caret line="21" column="32" lean-forward="true" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3046#3047#0" expanded="true" />

@@ -74,6 +74,12 @@ export const appRouters: Array<any> = [
         meta: { title: "点位管理" },
         name: "point",
         component: () => System.import("../views/points/index.vue")
+      },
+      {
+        path: "pointshow",
+        meta: { title: "点位展示" },
+        name: "pointshow",
+        component: () => System.import("../views/points/show.vue")
       }
     ]
   },
@@ -88,7 +94,7 @@ export const appRouters: Array<any> = [
         path: "list",
         meta: { title: "设备管理" },
         name: "dl",
-        component: () => System.import("../views/setting/user/user.vue")
+        component: () => System.import("../views/devices/index.vue")
       }
     ]
   },

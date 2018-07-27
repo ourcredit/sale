@@ -14,7 +14,8 @@
         <FormItem label="描述" prop="description">
           <Input v-model="point.description" :maxlength="255"  />
         </FormItem>
-        <baidu-map @ready="handler" @click="draw" :scroll-wheel-zoom="true" :center="{lng: 116.404, lat: 39.915}" :zoom="15"  class="map">
+        <baidu-map @ready="handler" @click="draw" :scroll-wheel-zoom="true"
+         :center="center" :zoom="15"  class="map">
           <bm-marker :position="tempPoint" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
                    </bm-marker>
         </baidu-map>
@@ -39,10 +40,11 @@ export default class CreatePoint extends AbpBase {
     default: false
   })
   value: boolean;
+  center:any={lng: 116.404, lat: 39.915};
   get point() {
     return this.$store.state.point.editPoint;
   }
-  tempPoint: any ={lng: 116.404, lat: 39.915};
+  tempPoint: any = { lng: 116.404, lat: 39.915 };
   save() {
     (this.$refs.pointForm as any).validate(async (valid: boolean) => {
       if (valid) {
@@ -56,7 +58,14 @@ export default class CreatePoint extends AbpBase {
       }
     });
   }
-  handler({ BMap, map }) {}
+  handler({ BMap, map }) {
+    if (this.point) {
+      this.tempPoint.lng = this.point.x;
+      this.tempPoint.lat = this.point.y;
+       this.center.lng = this.point.x;
+      this.center.lat = this.point.y;
+    }
+  }
   draw(e) {
     this.tempPoint.lng = e.point.lng;
     this.tempPoint.lat = e.point.lat;
