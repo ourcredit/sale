@@ -56,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
 
     @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")
     public UserDto selectUserRole(Integer id) {
-        UserDto r = _userRepository.selectUserRole(id);
+        UserDto r = _roleRepository.selectUserRole(id);
         return r;
     }
 

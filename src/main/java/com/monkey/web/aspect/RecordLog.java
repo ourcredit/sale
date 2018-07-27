@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -74,7 +75,7 @@ public class RecordLog implements AspectApi {
         }
         operationLog.setIp(getIpAddress(request));
         operationLog.setClassName(joinPoint.getTarget().getClass().getName() );
-        operationLog.setCreateTime(startTime);
+        operationLog.setCreationTime(new Date(startTime));
         operationLog.setLogDescription(log.description());
         if(isException){
             StringBuilder sb = new StringBuilder();

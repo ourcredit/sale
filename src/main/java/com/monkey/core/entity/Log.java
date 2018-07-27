@@ -4,17 +4,19 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
  * 操作日志
  * </p>
  *
- * @author zhaohejing123
- * @since 2018-06-05
+ * @author zhaohejing
+ * @since 2018-07-27
  */
 @TableName("sale_log")
 public class Log extends Model<Log> {
@@ -24,41 +26,42 @@ public class Log extends Model<Log> {
     /**
      * 主键
      */
-    /**
-     * 角色主键
-     */
     @TableId(value = "id", type = IdType.UUID)
     private String id;
     /**
      * 日志类型
      */
-    @TableField("log_description")
     private String logDescription;
     /**
      * 日志名称
      */
-    @TableField("action_args")
     private String actionArgs;
     /**
      * 用户id
      */
-    @TableField("user_name")
     private String userName;
     /**
      * 类名称
      */
-    @TableField("class_name")
     private String className;
     /**
      * 方法名称
      */
     private String method;
+    /**
+     * ip
+     */
     private String ip;
     /**
      * 创建时间
      */
-    @TableField("create_time")
-    private Long createTime;
+    @TableField(fill = FieldFill.INSERT)
+    private Date creationTime;
+    /**
+     * 创建人id
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Integer creatorUserId;
     /**
      * 是否成功
      */
@@ -125,12 +128,12 @@ public class Log extends Model<Log> {
         this.ip = ip;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Date getCreationTime() {
+        return creationTime;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
     }
 
     public String getSucceed() {
@@ -164,7 +167,7 @@ public class Log extends Model<Log> {
         ", className=" + className +
         ", method=" + method +
         ", ip=" + ip +
-        ", createTime=" + createTime +
+        ", creationTime=" + creationTime +
         ", succeed=" + succeed +
         ", message=" + message +
         "}";

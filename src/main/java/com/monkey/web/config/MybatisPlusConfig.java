@@ -1,34 +1,49 @@
-package com.monkey.web.config;
-
+import com.baomidou.mybatisplus.MybatisConfiguration;
 import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.mapper.ISqlInjector;
 import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
-import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
+import com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.plugins.PerformanceInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
+import com.monkey.web.config.MyMetaObjectHandler;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.JdbcType;
+import org.apache.velocity.runtime.resource.loader.ResourceLoader;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- *
- * @author liugh
- * @since 2018-03-21
- */
-@EnableTransactionManagement
+import javax.sql.DataSource;
+
 @Configuration
-@MapperScan("com.monkey.core.mapper.*")
+@MapperScan("com.monkey.core.mapper")
 public class MybatisPlusConfig {
-    /**
-     *   mybatis-plus分页插件
-     */
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        PaginationInterceptor page = new PaginationInterceptor();
-        page.setDialectType("mysql");
-        return page;
+
+    @Bean("mybatisSqlSession")
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, ResourceLoader resourceLoader, GlobalConfiguration globalConfiguration) throws Exception {
+        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+        sqlSessionFactory.setDataSource(dataSource);
+//        sqlSessionFactory.setConfigLocation(resourceLoader.getResource("classpath:mybatis-config.xml"));
+        sqlSessionFactory.setTypeAliasesPackage("com.monkey.core.entity");
+        MybatisConfiguration configuration = new MybatisConfiguration();
+//        configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
+//        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setJdbcTypeForNull(JdbcType.NULL);
+        configuration.setMapUnderscoreToCamelCase(true);
+        sqlSessionFactory.setConfiguration(configuration);
+        PaginationInterceptor pagination = new PaginationInterceptor();
+        pagination.setLocalPage(true);
+        OptimisticLockerInterceptor optLock = new OptimisticLockerInterceptor();
+        sqlSessionFactory.setPlugins(new Interceptor[]{
+                pagination,
+                optLock,
+                new PerformanceInterceptor()
+        });
+        globalConfiguration.setMetaObjectHandler(new MyMetaObjectHandler());
+        sqlSessionFactory.setGlobalConfig(globalConfiguration);
+        return sqlSessionFactory.getObject();
     }
     /***
      * SQL执行效率插件【生产环境可以关闭】
@@ -52,8 +67,13 @@ public class MybatisPlusConfig {
     public ISqlInjector sqlInjector(){
         return new LogicSqlInjector();
     }
+
     @Bean
-    public  MyMetaObjectHandler  metaObjectHandler(){
-        return  new MyMetaObjectHandler();
+    public GlobalConfiguration globalConfiguration() {
+        GlobalConfiguration conf = new GlobalConfiguration(new LogicSqlInjector());
+        conf.setLogicDeleteValue("-1");
+        conf.setLogicNotDeleteValue("0");
+        conf.setIdType(2);
+        return conf;
     }
 }

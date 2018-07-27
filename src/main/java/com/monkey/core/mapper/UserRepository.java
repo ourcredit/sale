@@ -15,5 +15,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserRepository extends BaseMapper<User> {
 
-      UserDto selectUserRole(@Param("id") Integer id) ;
+
 }

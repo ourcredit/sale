@@ -67,7 +67,7 @@ export default class PointC extends AbpBase {
     },
     {
       title: "创建人",
-      key: "creationUserId"
+      key: "creatorUserId"
     },
     {
       title: "创建时间",
