@@ -4,6 +4,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -53,6 +54,7 @@ public class Point extends Model<Point> {
     /**
      * 软删除  
      */
+    @TableLogic
     private Integer isDeleted;
     private  Integer areaId;
     /**

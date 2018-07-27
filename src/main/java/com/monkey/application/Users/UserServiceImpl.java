@@ -15,7 +15,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import scala.Int;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
 
     @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")
     public UserDto selectUserRole(Integer id) {
-        UserDto r = _roleRepository.selectUserRole(id);
+        UserDto r = _userRepository.selectUserRole(id);
         return r;
     }
 

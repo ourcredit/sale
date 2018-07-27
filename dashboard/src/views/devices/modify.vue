@@ -1,5 +1,5 @@
 <style lang="less">
-  @import "./device.less";
+@import "./device.less";
 </style>
 <template>
   <div>
@@ -17,8 +17,8 @@
           </Select>
         </FormItem>
         <FormItem label="所属点位" prop="pointId">
-          <Select v-model="device.deviceType" style="width:100%">
-            <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
+          <Select v-model="device.pointId" style="width:100%">
+            <Option v-for="item in points" :value="item.id" :key="item.id">{{ item.pointName }}</Option>
           </Select>
         </FormItem>
         </Tabs>
@@ -31,69 +31,86 @@
   </div>
 </template>
 <script lang="ts">
-  import {
-    Component,
-    Vue,
-    Inject,
-    Prop,
-    Watch
-  } from "vue-property-decorator";
-  import Util from "@/lib/util";
-  import AbpBase from "@/lib/abpbase";
-  import Point from "@/store/entities/device";
-  @Component
-  export default class CreateDevice extends AbpBase {
-    @Prop({
-      type: Boolean,
-      default: false
-    })
-    value: boolean;
-    get device() {
-      return this.$store.state.device.editDevice;
-    }
-    get cates() {
-      return this.$store.state.device.deviceCate;
-    }
-    save() {
-      (this.$refs.deviceForm as any).validate(async (valid: boolean) => {
-        if (valid) {
-          await this.$store.dispatch({
-            type: "device/modify",
-            data: this.device
-          });
-          (this.$refs.deviceForm as any).resetFields();
-          this.$emit("save-success");
-          this.$emit("input", false);
-        }
-      });
-    }
-
-    cancel() {
-      (this.$refs.deviceForm as any).resetFields();
-      this.$emit("input", false);
-    }
-    visibleChange(value: boolean) {
-      if (!value) {
-        this.$emit("input", value);
+import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
+import Util from "@/lib/util";
+import AbpBase from "@/lib/abpbase";
+import PageRequest from "../../store/entities/page-request";
+import Point from "@/store/entities/device";
+@Component
+export default class CreateDevice extends AbpBase {
+  @Prop({
+    type: Boolean,
+    default: false
+  })
+  value: boolean;
+  get device() {
+    return this.$store.state.device.editDevice;
+  }
+  get cates() {
+    return this.$store.state.device.deviceCate;
+  }
+  get points() {
+    return this.$store.state.point.list;
+  }
+  save() {
+    (this.$refs.deviceForm as any).validate(async (valid: boolean) => {
+      if (valid) {
+        await this.$store.dispatch({
+          type: "device/modify",
+          data: this.device
+        });
+        (this.$refs.deviceForm as any).resetFields();
+        this.$emit("save-success");
+        this.$emit("input", false);
       }
+    });
+  }
+  
+  async getpage() {
+    let pagerequest = new PageRequest();
+    pagerequest.size = 999;
+    pagerequest.index = 1;
+    pagerequest.where = {};
+    await this.$store.dispatch({
+      type: `point/getAll`,
+      data: pagerequest
+    });
+  }
+  created() {
+    this.getpage();
+  }
+  cancel() {
+    (this.$refs.deviceForm as any).resetFields();
+    this.$emit("input", false);
+  }
+  visibleChange(value: boolean) {
+    if (!value) {
+      this.$emit("input", value);
     }
+  }
 
-    deviceRule = {
-      deviceName: [{
+  deviceRule = {
+    deviceName: [
+      {
         required: true,
         message: "设备名必填",
         trigger: "blur"
-      }],
-      deviceNum: [{
+      }
+    ],
+    deviceNum: [
+      {
         required: true,
         message: "设备编号必填",
         trigger: "blur"
-      }],
-      deviceType: [{
+      }
+    ],
+    deviceType: [
+      {
         required: true,
         message: "设备类型必填",
         trigger: "blur"
-      }]
-    };
-  }
+      }
+    ]
+  };
+}
 </script>

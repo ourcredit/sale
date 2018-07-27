@@ -123,11 +123,11 @@ export default class deviceC extends AbpBase {
     },
     {
       title: "设备类型",
-      key: "address"
+      key: "deviceType"
     },
     {
       title: "所属点位",
-      key: "description"
+      key: "pointId"
     },
     {
       title: "创建人",

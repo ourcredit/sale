@@ -44,35 +44,5 @@ left	JOIN sale_menu c ON b.menuId = c.id
 WHERE
 	a.id =${id}
     </select>
-    <resultMap id="UserRoleMap" type="com.monkey.core.dtos.UserDto">
-        <id column="id"  property="id" />
-        <result column="account" property="account" />
-        <result column="creationTime" property="creationTime" />
-        <result column="creatorUserId" property="creatorUserId" />
-        <result column="userName" property="userName" />
-        <result column="mobile" property="mobile" />
-        <result column="isActive" property="isActive" />
-        <collection  property="roles" ofType="com.monkey.core.dtos.RoleDto">
-            <id property="id" column="roleId"/>
-            <result property="roleName" column="roleName"/>
-            <result property="displayName" column="displayName"/>
-        </collection >
-        <collection  property="permissions" ofType="java.lang.String" >
-            <id  column="code"/>
-        </collection >
-    </resultMap>
-    <select id="selectUserRole" parameterType="int" resultMap="UserRoleMap">
-        SELECT
-	a.*,
-	c.id as roleId,
-	c.roleName,
-	c.displayName,e.`code`
-FROM
-	sale_user a
-	LEFT JOIN sale_userrole b ON a.id = b.userId
-	LEFT JOIN sale_role c ON b.roleId = c.id
-	left join sale_rolemenu d on c.id=d.roleId
-	left join sale_menu e on d.menuId=e.id
-	where a.id=${id}
-     </select>
+
 </mapper>

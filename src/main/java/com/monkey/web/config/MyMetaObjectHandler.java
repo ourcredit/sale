@@ -3,7 +3,6 @@ package com.monkey.web.config;
 import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
 import com.monkey.core.entity.User;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
