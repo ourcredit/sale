@@ -1,5 +1,6 @@
 package com.monkey.web.config;
 
+import com.baomidou.mybatisplus.entity.GlobalConfiguration;
 import com.baomidou.mybatisplus.mapper.ISqlInjector;
 import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
 import com.baomidou.mybatisplus.mapper.MetaObjectHandler;
@@ -20,6 +21,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.monkey.core.mapper.*")
 public class MybatisPlusConfig {
+    @Bean
+    public GlobalConfiguration globalConfiguration() {
+        GlobalConfiguration conf = new GlobalConfiguration(new LogicSqlInjector());
+        conf.setLogicDeleteValue("-1");
+        conf.setLogicNotDeleteValue("0");
+        conf.setIdType(2);
+        return conf;
+    }
     /**
      *   mybatis-plus分页插件
      */
