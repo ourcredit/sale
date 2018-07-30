@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : my
+ Source Server         : 103.45.8.198
  Source Server Type    : MySQL
  Source Server Version : 80011
- Source Host           : localhost:3306
+ Source Host           : 103.45.8.198:3306
  Source Schema         : sale
 
  Target Server Type    : MySQL
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 30/07/2018 16:09:30
+ Date: 30/07/2018 17:36:29
 */
 
 SET NAMES utf8mb4;
@@ -161,7 +161,8 @@ CREATE TABLE `sale_role`  (
   `isStatic` tinyint(4) NULL DEFAULT NULL COMMENT '是否静态',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `isDeleted` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `roleName`) USING BTREE
+  PRIMARY KEY (`id`, `roleName`) USING BTREE,
+  INDEX `id`(`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -172,6 +173,8 @@ CREATE TABLE `sale_rolemenu`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'guid',
   `roleId` int(11) NOT NULL,
   `menuId` int(11) NOT NULL,
+  `creationTime` datetime(0) NULL DEFAULT NULL,
+  `creatorUserId` int(11) NULL DEFAULT NULL,
   INDEX `ix_roleId`(`roleId`) USING BTREE,
   INDEX `ix_menuId`(`menuId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
@@ -204,6 +207,8 @@ CREATE TABLE `sale_userrole`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'key',
   `userId` int(11) NOT NULL,
   `roleId` int(11) NOT NULL,
+  `creationTime` datetime(0) NULL DEFAULT NULL,
+  `creatorUserId` int(11) NULL DEFAULT NULL,
   INDEX `ix_userId`(`userId`) USING BTREE,
   INDEX `ix_roleId`(`roleId`) USING BTREE,
   CONSTRAINT `fk_roleId` FOREIGN KEY (`roleId`) REFERENCES `sale_role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,

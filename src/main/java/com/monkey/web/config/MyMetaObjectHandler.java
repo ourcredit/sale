@@ -22,12 +22,16 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
         }
         Object creatorUserId = metaObject.getValue("creatorUserId");
        //获取当前登录用户
-        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        User user = (User) req.getAttribute("currentUser");
-
-       if (null == creatorUserId&&user!=null) {
-            metaObject.setValue("creatorUserId", user.getId());
+        ServletRequestAttributes s=(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if(s!=null){
+            HttpServletRequest req = s.getRequest();
+            User user = (User) req.getAttribute("currentUser");
+            if (null == creatorUserId&&user!=null) {
+                metaObject.setValue("creatorUserId", user.getId());
+            }
         }
+
+
     }
     @Override
     public boolean openUpdateFill() {
