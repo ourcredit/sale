@@ -1,8 +1,8 @@
-package com.monkey.application.Device;
+package com.monkey.service.impl;
 
-import com.monkey.core.entity.DeviceProduct;
-import com.monkey.core.mapper.DeviceProductRepository;
-
+import com.monkey.entity.DeviceProduct;
+import com.monkey.mapper.DeviceProductRepository;
+import com.monkey.service.IDeviceProductService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author zhaohejing
- * @since 2018-07-26
+ * @since 2018-07-27
  */
 @Service
 public class DeviceProductServiceImpl extends ServiceImpl<DeviceProductRepository, DeviceProduct> implements IDeviceProductService {

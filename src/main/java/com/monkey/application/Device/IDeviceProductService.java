@@ -1,6 +1,6 @@
-package com.monkey.application.Device;
+package com.monkey.service;
 
-import com.monkey.core.entity.DeviceProduct;
+import com.monkey.entity.DeviceProduct;
 import com.baomidou.mybatisplus.service.IService;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.service.IService;
  * </p>
  *
  * @author zhaohejing
- * @since 2018-07-26
+ * @since 2018-07-27
  */
 public interface IDeviceProductService extends IService<DeviceProduct> {
 

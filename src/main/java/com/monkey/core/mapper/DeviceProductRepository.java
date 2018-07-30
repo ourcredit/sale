@@ -1,8 +1,7 @@
-package com.monkey.core.mapper;
+package com.monkey.mapper;
 
-
+import com.monkey.entity.DeviceProduct;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.monkey.core.entity.DeviceProduct;
 
 /**
  * <p>
@@ -10,7 +9,7 @@ import com.monkey.core.entity.DeviceProduct;
  * </p>
  *
  * @author zhaohejing
- * @since 2018-07-26
+ * @since 2018-07-27
  */
 public interface DeviceProductRepository extends BaseMapper<DeviceProduct> {
 
