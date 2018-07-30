@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.mapper.PayforRepository">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.monkey.entity.Payfor">
+        <id column="id" property="id" />
+        <result column="operatorId" property="operatorId" />
+        <result column="alipayId" property="alipayId" />
+        <result column="alipayKey" property="alipayKey" />
+        <result column="alipayAgent" property="alipayAgent" />
+        <result column="wechatpayId" property="wechatpayId" />
+        <result column="wechatpayKey" property="wechatpayKey" />
+        <result column="wechatpayAgent" property="wechatpayAgent" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, operatorId, alipayId, alipayKey, alipayAgent, wechatpayId, wechatpayKey, wechatpayAgent
+    </sql>
+
+</mapper>
