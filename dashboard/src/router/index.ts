@@ -1,11 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { routers } from "./router";
 import iView from "iview";
-import Util from "../lib/util";
-import auth from "../lib/auth";
+import Util from "@/lib/util";
+import auth from "@/lib/auth";
 import Cookies from "js-cookie";
-import { appRouters, otherRouters } from "./router";
+import { routers,appRouters, otherRouters } from "@/router/router";
 Vue.use(VueRouter);
 
 const RouterConfig: any = {

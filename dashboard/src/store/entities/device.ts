@@ -1,4 +1,4 @@
-import Entity from "./entity";
+import Entity from "@/store/entities/entity";
 
 export default class Device extends Entity<number> {
     deviceName: string;

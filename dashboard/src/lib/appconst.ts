@@ -1,4 +1,4 @@
-import url from "./url";
+import url from "@/lib/url";
 const AppConsts: any = {
   userManagement: {
     defaultAdminUserName: "admin"

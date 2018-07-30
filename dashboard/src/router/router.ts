@@ -26,17 +26,18 @@ export const otherRouters: any = {
   component: () => System.import("../views/main.vue"),
   children: [
     {
-      path: "home",
-      meta: { title: "主页" },
-      name: "home",
-      component: () => System.import("../views/home/home.vue")
-    },
-    {
       path: "/dashboard",
       meta: { title: "控制台" },
       name: "dashboard",
       permission: "dashboard:show",
       component: () => System.import("../views/home/home.vue")
+    },
+    {
+      path: "/allowproduct",
+      meta: { title: "分配商品" },
+      name: "allowproduct",
+      permission: "product:allow",
+      component: () => System.import("../views/devices/allow.vue")
     }
   ]
 };
@@ -109,7 +110,7 @@ export const appRouters: Array<any> = [
         path: "list",
         meta: { title: "商品管理" },
         name: "pl",
-        component: () => System.import("../views/setting/user/user.vue")
+        component: () => System.import("../views/products/index.vue")
       }
     ]
   },

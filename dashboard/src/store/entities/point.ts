@@ -1,4 +1,4 @@
-import Entity from "./entity";
+import Entity from "@/store/entities/entity";
 
 export default class Point extends Entity<number> {
   pointName: string;

@@ -1,5 +1,5 @@
 import { Store, Module, ActionContext, MutationTree } from "vuex";
-import IListState from "./list-state";
+import IListState from "@/store/modules/base/list-state";
 
 export default class ListModule<T extends IListState<U>, R, U>
   implements Module<IListState<U>, R> {

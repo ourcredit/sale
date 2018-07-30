@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./app.vue";
 import iView from "iview";
-import { router } from "./router/index";
+import { router } from "@/router";
 import BaiduMap from "vue-baidu-map";
 // import "iview/dist/styles/iview.css";
 import "famfamfam-flags/dist/sprite/famfamfam-flags.css";
@@ -12,9 +12,9 @@ Vue.use(BaiduMap, {
   ak: "pYjoSR2GThuatLt06MlaKzRgSWy4Zztq"
 });
 // vue.use(Vuex)
-import store from "./store/index";
+import store from "@/store";
 Vue.config.productionTip = false;
-import { appRouters, otherRouters } from "./router/router";
+import { appRouters, otherRouters } from "@/router/router";
 new Vue({
   render: h => h(App),
   router: router,

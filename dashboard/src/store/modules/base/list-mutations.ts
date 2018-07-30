@@ -1,4 +1,4 @@
-import IListState from "./list-state";
+import IListState from "@/store/modules/base/list-state";
 
 export default class ListMutations<U> {
   setCurrentPage(state: IListState<U>, page: number): void {

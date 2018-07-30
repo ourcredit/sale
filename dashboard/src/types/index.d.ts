@@ -3,43 +3,43 @@
 // definitions by: yangdan
 // definitions: https://github.com/yangdan8/iview.git
 import Vue from "vue";
-import { Affix } from "./affix";
-import { Alert } from "./alert";
-import { AutoComplete } from "./auto-complete";
-import { Avatar } from "./avatar";
-import { BackTop } from "./back-top";
-import { Badge } from "./badge";
-import { Breadcrumb, BreadcrumbItem } from "./breadcrumb";
-import { Button, ButtonGroup } from "./button";
-import { Card } from "./card";
-import { Carousel } from "./carousel";
-import { Cascader } from "./cascader";
-import { Checkbox, CheckboxGroup } from "./checkbox";
-import { Circle } from "./circle";
-import { Collapse, CollapsePanel } from "./collapse";
-import { ColorPicker } from "./color-picker";
-import { DatePicker, DatePickerOptions } from "./date-picker";
-import { Dropdown, DropdownItem } from "./dropdown";
-import { Form, FormItem } from "./form";
-import { GridRow, GridCol } from "./grid";
-import { Icon } from "./icon";
-import { Input } from "./input";
-import { InputNumber } from "./input-number";
-import { LoadingBarInstance, LoadingBarConfig } from "./loading-bar";
-import { Menu, MenuItem, Submenu, MenuGroup } from "./menu";
-import { MessageInstance, MessageConfig } from "./message";
-import { Modal, ModalInstance, ModalConfig } from "./modal";
-import { NoticeInstance, NoticeConfig, NoticeGlobalConfig } from "./notice";
-import { Page } from "./page";
-import { Poptip } from "./poptip";
-import { Progress } from "./progress";
-import { Radio, RadioGroup } from "./radio";
-import { Rate } from "./rate";
-import { Scroll } from "./scroll";
-import { Select, SelectOption, SelectOptionGroup } from "./select";
-import { Spin } from "./spin";
-import { Steps, Step } from "./steps";
-import { Switch } from "./switch";
+import { Affix } from "@/types/affix";
+import { Alert } from "@/types/alert";
+import { AutoComplete } from "@/types/auto-complete";
+import { Avatar } from "@/types/avatar";
+import { BackTop } from "@/types/back-top";
+import { Badge } from "@/types/badge";
+import { Breadcrumb, BreadcrumbItem } from "@/types/breadcrumb";
+import { Button, ButtonGroup } from "@/types/button";
+import { Card } from "@/types/card";
+import { Carousel } from "@/types/carousel";
+import { Cascader } from "@/types/cascader";
+import { Checkbox, CheckboxGroup } from "@/types/checkbox";
+import { Circle } from "@/types/circle";
+import { Collapse, CollapsePanel } from "@/types/collapse";
+import { ColorPicker } from "@/types/color-picker";
+import { DatePicker, DatePickerOptions } from "@/types/date-picker";
+import { Dropdown, DropdownItem } from "@/types/dropdown";
+import { Form, FormItem } from "@/types/form";
+import { GridRow, GridCol } from "@/types/grid";
+import { Icon } from "@/types/icon";
+import { Input } from "@/types/input";
+import { InputNumber } from "@/types/input-number";
+import { LoadingBarInstance, LoadingBarConfig } from "@/types/loading-bar";
+import { Menu, MenuItem, Submenu, MenuGroup } from "@/types/menu";
+import { MessageInstance, MessageConfig } from "@/types/message";
+import { Modal, ModalInstance, ModalConfig } from "@/types/modal";
+import { NoticeInstance, NoticeConfig, NoticeGlobalConfig } from "@/types/notice";
+import { Page } from "@/types/page";
+import { Poptip } from "@/types/poptip";
+import { Progress } from "@/types/progress";
+import { Radio, RadioGroup } from "@/types/radio";
+import { Rate } from "@/types/rate";
+import { Scroll } from "@/types/scroll";
+import { Select, SelectOption, SelectOptionGroup } from "@/types/select";
+import { Spin } from "@/types/spin";
+import { Steps, Step } from "@/types/steps";
+import { Switch } from "@/types/switch";
 import {
   Table,
   TableColumn,
@@ -47,15 +47,15 @@ import {
   TableRenderCreateElementResult,
   TableColumnRenderParams,
   TableExportCsvParams
-} from "./table";
-import { Tabs, TabPane } from "./tabs";
-import { Tag } from "./tag";
-import { Timeline, TimelineItem } from "./timeline";
-import { TimePicker } from "./time-picker";
-import { Tooltip } from "./tooltip";
-import { Transfer } from "./transfer";
-import { Tree, TreeChildren } from "./tree";
-import { Upload } from "./upload";
+} from "@/types/table";
+import { Tabs, TabPane } from "@/types/tabs";
+import { Tag } from "@/types/tag";
+import { Timeline, TimelineItem } from "@/types/timeline";
+import { TimePicker } from "@/types/time-picker";
+import { Tooltip } from "@/types/tooltip";
+import { Transfer } from "@/types/transfer";
+import { Tree, TreeChildren } from "@/types/tree";
+import { Upload } from "@/types/upload";
 
 export declare namespace IView {
   interface IAffix extends Affix {}

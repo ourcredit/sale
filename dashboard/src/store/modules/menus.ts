@@ -2,7 +2,7 @@ import { Store, Module, ActionContext } from "vuex";
 import ListModule from "@/store/modules/base/list-module";
 import IListState from "@/store/modules/base/list-state";
 import Ajax from "@/lib/ajax";
-import Menu from "../entities/menu";
+import Menu from "@/store/entities/menu";
 import PageResult from "@/store/entities/page-result";
 import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";

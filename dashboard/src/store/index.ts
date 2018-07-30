@@ -1,15 +1,16 @@
 import Vue from "vue";
 import Vuex from "vuex";
 Vue.use(Vuex);
-import app from "./modules/app";
-import session from "./modules/session";
-import account from "./modules/account";
-import user from "./modules/user";
-import role from "./modules/role";
-import log from "./modules/log";
-import menu from "./modules/menus";
-import point from "./modules/point";
-import device from "./modules/device";
+import app from "@/store/modules/app";
+import session from "@/store/modules/session";
+import account from "@/store/modules/account";
+import user from "@/store/modules/user";
+import role from "@/store/modules/role";
+import log from "@/store/modules/log";
+import menu from "@/store/modules/menus";
+import point from "@/store/modules/point";
+import device from "@/store/modules/device";
+import product from "@/store/modules/product";
 const store: any = new Vuex.Store({
   state: {
     //
@@ -27,7 +28,8 @@ const store: any = new Vuex.Store({
     log,
     menu,
     point,
-    device
+    device,
+    product
   }
 });
 

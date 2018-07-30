@@ -1,6 +1,6 @@
 import axios from "axios";
-import auth from "./auth";
-import appconst from "./appconst";
+import auth from "@/lib/auth";
+import appconst from "@/lib/appconst";
 import Vue from "vue";
 const ajax: any = axios.create({
   baseURL: appconst.remoteServiceBaseUrl,

@@ -1,32 +1,25 @@
 <template>
   <div>
     <Row>
-      <Col span="4">
-      <Card dis-hover>
-        <div class="page-body">
-          <Tree :data="tree"></Tree>
-        </div>
-      </Card>
-      </Col>
-      <Col span="20">
+     
       <Card dis-hover>
         <div class="page-body">
           <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
             <Row :gutter="4">
               <Col span="18">
-              <FormItem label="设备名:">
-                <Input v-model="filters.deviceName" />
+              <FormItem label="商品名:">
+                <Input v-model="filters.productName" />
               </FormItem>
-              <FormItem label="设备编号:">
-                <Input v-model="filters.deviceName" />
+              <FormItem label="商品编号:">
+                <Input v-model="filters.productName" />
               </FormItem>
-              <FormItem label="设备类型:">
-                <Select clearable v-model="filters.deviceType" style="width:160px">
+              <FormItem label="商品类型:">
+                <Select clearable v-model="filters.productType" style="width:160px">
                   <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
                 </Select>
               </FormItem>
-              <FormItem label="所属点位:">
-                <Input v-model="filters.deviceName" />
+              <FormItem label="是否售卖:">
+                <Input v-model="filters.productName" />
               </FormItem>
               </Col>
               <Col span="6">
@@ -36,10 +29,9 @@
               </Col>
             </Row>
           </Form>
-          <SaleTable ref="table" :filters="filters" :type="'device'" :columns="columns"></SaleTable>
+          <SaleTable ref="table" :filters="filters" :type="'product'" :columns="columns"></SaleTable>
         </div>
       </Card>
-      </Col>
     </Row>
 
     <modify v-model="ModalShow" @save-success="init"></modify>
@@ -51,9 +43,8 @@ import SaleTable from "@/components/saletable.vue";
 import AbpBase from "@/lib/abpbase";
 import PageRequest from "../../store/entities/page-request";
 import Util from "../../lib/util";
-import Device from "@/store/entities/device";
+import Product from "@/store/entities/product";
 import Modify from "./modify.vue";
-import { router } from "@/router";
 
 @Component({
   components: {
@@ -61,53 +52,21 @@ import { router } from "@/router";
     Modify
   }
 })
-export default class deviceC extends AbpBase {
+export default class ProductC extends AbpBase {
   filters: Object = {
-    deviceName: ""
+    productName: ""
   };
   p: any = {
-    modify: this.hasPermission("device:modify"),
-    delete: this.hasPermission("device:delete"),
-    list: this.hasPermission("device:list"),
-    first: this.hasPermission("device:first"),
-    batch: this.hasPermission("device:batch")
+    modify: this.hasPermission("product:modify"),
+    delete: this.hasPermission("product:delete"),
+    list: this.hasPermission("product:list"),
+    first: this.hasPermission("product:first"),
+    batch: this.hasPermission("product:batch")
   };
   get cates() {
-    return this.$store.state.device.deviceCate;
+    return this.$store.state.product.productCate;
   }
   ModalShow: boolean = false;
-  tree: Array<any> = [
-    {
-      title: "总部",
-      expand: true,
-      children: [
-        {
-          title: "分部1",
-          expand: true,
-          children: [
-            {
-              title: "分部2"
-            },
-            {
-              title: "分部3"
-            }
-          ]
-        },
-        {
-          title: "分部4",
-          expand: true,
-          children: [
-            {
-              title: "分部5"
-            },
-            {
-              title: "分部6"
-            }
-          ]
-        }
-      ]
-    }
-  ];
   columns: Array<any> = [
     {
       type: "selection",
@@ -115,24 +74,20 @@ export default class deviceC extends AbpBase {
       align: "center"
     },
     {
-      title: "设备名",
-      key: "deviceName"
+      title: "商品名",
+      key: "productName"
     },
     {
-      title: "设备编号",
-      key: "deviceName"
+      title: "商品编号",
+      key: "productName"
     },
     {
-      title: "设备类型",
-      key: "deviceType"
+      title: "商品类型",
+      key: "productType"
     },
     {
-      title: "所属点位",
-      key: "pointId"
-    },
-    {
-      title: "创建人",
-      key: "creatorUserId"
+      title: "价格",
+      key: "price"
     },
     {
       title: "创建时间",
@@ -146,7 +101,7 @@ export default class deviceC extends AbpBase {
     {
       title: "操作",
       key: "Actions",
-      width: 200,
+      width: 150,
       render: (h: any, params: any) => {
         var ed = h(
           "Button",
@@ -162,7 +117,7 @@ export default class deviceC extends AbpBase {
             on: {
               click: () => {
                 this.$store.dispatch({
-                  type: "device/get",
+                  type: "product/get",
                   data: params.row.id
                 });
                 this.Modify();
@@ -171,26 +126,7 @@ export default class deviceC extends AbpBase {
           },
           "编辑"
         );
-        var allow = h(
-          "Button",
-          {
-            props: {
-              type: "primary",
-              size: "small",
-              disabled: !this.p.modify
-            },
-            style: {
-              marginRight: "5px"
-            },
-            on: {
-              click: () => {
-                console.log(this);
-                router.push({ name: "allowproduct" });
-              }
-            }
-          },
-          "分配商品"
-        );
+
         var de = h(
           "Button",
           {
@@ -208,7 +144,7 @@ export default class deviceC extends AbpBase {
                   cancelText: "否",
                   onOk: async () => {
                     await this.$store.dispatch({
-                      type: "device/delete",
+                      type: "product/delete",
                       data: params.row
                     });
                     await this.init();
@@ -219,14 +155,14 @@ export default class deviceC extends AbpBase {
           },
           "删除"
         );
-        var t = [ed, allow, de];
+        var t = [ed, de];
         return h("div", t);
       }
     }
   ];
   Create() {
-    var u = new Device();
-    this.$store.commit("device/edit", u);
+    var u = new Product();
+    this.$store.commit("product/edit", u);
     this.ModalShow = true;
   }
   init() {
@@ -243,7 +179,7 @@ export default class deviceC extends AbpBase {
         cancelText: "否",
         onOk: async () => {
           await this.$store.dispatch({
-            type: "device/batch",
+            type: "product/batch",
             data: t.selections
           });
           await this.init();
