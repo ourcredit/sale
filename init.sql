@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 26/07/2018 10:02:25
+ Date: 30/07/2018 16:09:30
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_device`;
 CREATE TABLE `sale_device`  (
-  `id` int(11) NOT NULL COMMENT 'key',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'key',
   `deviceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点位名称',
   `deviceNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备编码',
   `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
@@ -31,7 +31,7 @@ CREATE TABLE `sale_device`  (
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_device_product
@@ -42,7 +42,7 @@ CREATE TABLE `sale_device_product`  (
   `productId` int(11) NOT NULL COMMENT '产品id',
   `deviceId` int(11) NOT NULL COMMENT '设备id',
   `isSale` tinyint(2) NOT NULL DEFAULT 0 COMMENT '是否售卖',
-  `price` decimal(10, 2) NOT NULL COMMENT '价格',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   PRIMARY KEY (`id`) USING BTREE
@@ -68,15 +68,16 @@ CREATE TABLE `sale_file`  (
 DROP TABLE IF EXISTS `sale_log`;
 CREATE TABLE `sale_log`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键',
-  `log_description` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '日志类型',
-  `action_args` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志名称',
-  `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
-  `class_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类名称',
+  `logDescription` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '日志类型',
+  `actionArgs` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志名称',
+  `userName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
+  `className` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类名称',
   `method` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '方法名称',
   `ip` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` bigint(20) NULL DEFAULT NULL COMMENT '创建时间',
   `succeed` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '是否成功',
-  `message` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注'
+  `message` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '备注',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
@@ -97,11 +98,27 @@ CREATE TABLE `sale_menu`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
+-- Table structure for sale_payfor
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_payfor`;
+CREATE TABLE `sale_payfor`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `operatorId` int(10) NOT NULL COMMENT '运营商key',
+  `alipayId` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里key',
+  `alipayKey` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里密钥',
+  `alipayAgent` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里保留',
+  `wechatpayId` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信id',
+  `wechatpayKey` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信key',
+  `wechatpayAgent` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信保留',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for sale_point
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_point`;
 CREATE TABLE `sale_point`  (
-  `id` int(11) NOT NULL COMMENT 'key',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'key',
   `pointName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点位名',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'i奥数',
@@ -110,19 +127,20 @@ CREATE TABLE `sale_point`  (
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
   `x` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'x坐标',
   `y` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'y坐标',
+  `areaId` int(11) NULL DEFAULT NULL COMMENT '区域id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_product
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_product`;
 CREATE TABLE `sale_product`  (
-  `id` int(11) NOT NULL COMMENT 'key',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'key',
   `productName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名',
   `productNum` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品编号',
   `productType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品类型',
-  `price` decimal(10, 2) NOT NULL COMMENT '默认价格',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '默认价格',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',

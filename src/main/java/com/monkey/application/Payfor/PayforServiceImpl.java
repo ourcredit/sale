@@ -1,8 +1,8 @@
-package com.monkey.service.impl;
+package com.monkey.application.Payfor;
 
-import com.monkey.entity.Payfor;
-import com.monkey.mapper.PayforRepository;
-import com.monkey.service.IPayforService;
+import com.monkey.core.entity.Payfor;
+import com.monkey.core.mapper.PayforRepository;
+
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

@@ -109,33 +109,33 @@ class Util {
       }
     });
     let currentPathArr: Array<any> = [];
-    if (name === "home") {
+    if (name === "dashboard") {
       currentPathArr = [
         {
           meta: {
             title: this.handleTitle(
               vm,
-              this.getRouterObjByName(vm.$store.state.app.routers, "home")
+              this.getRouterObjByName(vm.$store.state.app.routers, "dashboard")
             )
           },
-          path: "main/home",
-          name: "home"
+          path: "main/dashboard",
+          name: "dashboard"
         }
       ];
     } else if (
       ((name as string).indexOf("index") >= 0 || isOtherRouter) &&
-      name !== "home"
+      name !== "dashboard"
     ) {
       currentPathArr = [
         {
           meta: {
             title: this.handleTitle(
               vm,
-              this.getRouterObjByName(vm.$store.state.app.routers, "home")
+              this.getRouterObjByName(vm.$store.state.app.routers, "dashboard")
             )
           },
-          path: "main/home",
-          name: "home"
+          path: "main/dashboard",
+          name: "dashboard"
         },
         {
           meta: { title: title },
@@ -165,25 +165,25 @@ class Util {
       if (
         currentPathObj.children &&
         currentPathObj.children.length <= 1 &&
-        currentPathObj.name === "home"
+        currentPathObj.name === "dashboard"
       ) {
         currentPathArr = [
           {
             meta: { title: "首页" },
-            path: "main/home",
-            name: "home"
+            path: "main/dashboard",
+            name: "dashboard"
           }
         ];
       } else if (
         currentPathObj.children &&
         currentPathObj.children.length <= 1 &&
-        currentPathObj.name !== "home"
+        currentPathObj.name !== "dashboard"
       ) {
         currentPathArr = [
           {
             meta: { title: "首页" },
-            path: "main/home",
-            name: "home"
+            path: "main/dashboard",
+            name: "dashboard"
           },
           {
             meta: { title: currentPathObj.meta.title },
@@ -198,8 +198,8 @@ class Util {
         currentPathArr = [
           {
             meta: { title: "首页" },
-            path: "main/home",
-            name: "home"
+            path: "main/dashboard",
+            name: "dashboard"
           },
           {
             meta: { title: currentPathObj.meta.title },

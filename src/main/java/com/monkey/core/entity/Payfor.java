@@ -1,8 +1,14 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,6 +26,7 @@ public class Payfor extends Model<Payfor> {
     /**
      * key
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
      * 运营商key
@@ -33,6 +40,16 @@ public class Payfor extends Model<Payfor> {
      * 阿里密钥
      */
     private String alipayKey;
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Date creationTime;
+    /**
+     * 创建人id
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Integer creatorUserId;
     /**
      * 阿里保留
      */
@@ -132,5 +149,21 @@ public class Payfor extends Model<Payfor> {
         ", wechatpayKey=" + wechatpayKey +
         ", wechatpayAgent=" + wechatpayAgent +
         "}";
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Integer getCreatorUserId() {
+        return creatorUserId;
+    }
+
+    public void setCreatorUserId(Integer creatorUserId) {
+        this.creatorUserId = creatorUserId;
     }
 }

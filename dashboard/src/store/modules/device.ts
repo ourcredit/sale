@@ -6,9 +6,11 @@ import Device from "@/store/entities/device";
 import PageResult from "@/store/entities/page-result";
 import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";
+import { O_NONBLOCK } from "constants";
 interface IDeviceState extends IListState<Device> {
   editDevice: Device;
   products: Array<any>;
+  payfor: any;
 }
 class PointMutations extends ListMutations<Device> {}
 class PointModule extends ListModule<IDeviceState, any, Device> {
@@ -20,7 +22,8 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     loading: false,
     editDevice: new Device(),
     products: new Array<any>(),
-    deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"]
+    deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"],
+    payfor: new Object()
   };
   actions = {
     async getAll(
@@ -69,6 +72,19 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     ): Promise<any> {
       let reponse: any = await Ajax.get("/api/device/" + payload.data);
       context.state.editDevice = reponse.data as Device;
+    },
+    async getAccount(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      let reponse: any = await Ajax.get("/api/payfor/" + payload.data);
+      context.state.payfor = reponse.data as any;
+    },
+    async putAccount(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.put("/api/payfor", payload.data);
     }
   };
   mutations = {

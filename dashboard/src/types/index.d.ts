@@ -7,6 +7,7 @@ import { Affix } from "@/types/affix";
 import { Alert } from "@/types/alert";
 import { AutoComplete } from "@/types/auto-complete";
 import { Avatar } from "@/types/avatar";
+import { Divider } from "@/types/divider";
 import { BackTop } from "@/types/back-top";
 import { Badge } from "@/types/badge";
 import { Breadcrumb, BreadcrumbItem } from "@/types/breadcrumb";
@@ -134,6 +135,7 @@ export declare namespace IView {
   interface ITransfer extends Transfer {}
   interface ITree extends Tree {}
   interface ITreeChildren extends TreeChildren {}
-  interface IUpload extends Upload {}
+  interface IUpload extends Upload { }
+  interface IDivider extends Divider { }
 }
 export default IView;

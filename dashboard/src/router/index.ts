@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
     } else if (!!token && to.name === "login") {
       Util.title(to.meta.title);
       next({
-        name: "home"
+        name: "dashboard"
       });
     } else {
       const curRouterObj: any = Util.getRouterObjByName(

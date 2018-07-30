@@ -1,6 +1,6 @@
-package com.monkey.service;
+package com.monkey.application.Payfor;
 
-import com.monkey.entity.Payfor;
+import com.monkey.core.entity.Payfor;
 import com.baomidou.mybatisplus.service.IService;
 
 /**

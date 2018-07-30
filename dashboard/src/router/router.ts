@@ -30,7 +30,7 @@ export const otherRouters: any = {
       meta: { title: "控制台" },
       name: "dashboard",
       permission: "dashboard:show",
-      component: () => System.import("../views/home/home.vue")
+      component: () => System.import("../views/home/dashboard.vue")
     },
     {
       path: "/allowproduct",
@@ -124,14 +124,14 @@ export const appRouters: Array<any> = [
       {
         path: "alipay",
         meta: { title: "支付宝" },
-        name: "alipay",
-        component: () => System.import("../views/setting/user/user.vue")
+        name: "ap",
+        component: () => System.import("../views/payfor/alipay.vue")
       },
       {
         path: "wechatpay",
         meta: { title: "微信" },
-        name: "wechatpay",
-        component: () => System.import("../views/setting/user/user.vue")
+        name: "wp",
+        component: () => System.import("../views/payfor/wechatpay.vue")
       }
     ]
   },
@@ -146,19 +146,19 @@ export const appRouters: Array<any> = [
         path: "action",
         meta: { title: "后台操作日志" },
         name: "action",
-        component: () => System.import("../views/setting/user/user.vue")
+        component: () => System.import("../views/actions/action.vue")
       },
       {
         path: "run",
         meta: { title: "监控运行日志" },
         name: "run",
-        component: () => System.import("../views/setting/role/role.vue")
+        component: () => System.import("../views/actions/run.vue")
       },
       {
         path: "error",
         meta: { title: "故障日志" },
         name: "error",
-        component: () => System.import("../views/setting/role/role.vue")
+        component: () => System.import("../views/actions/error.vue")
       }
     ]
   },
@@ -206,11 +206,11 @@ export const appRouters: Array<any> = [
         component: () => System.import("../views/setting/role/role.vue")
       },
       {
-        path: "menus",
-        permission: "menu:list",
-        meta: { title: "菜单管理" },
-        name: "menus",
-        component: () => System.import("../views/setting/menus/index.vue")
+        path: "operator",
+       // permission: "operator:list",
+        meta: { title: "运营商管理" },
+        name: "operator",
+        component: () => System.import("../views/setting/role/role.vue")
       }
     ]
   }
