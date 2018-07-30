@@ -49,6 +49,6 @@ FROM
 	LEFT JOIN sale_role c ON b.roleId = c.id
 	left join sale_rolemenu d on c.id=d.roleId
 	left join sale_menu e on d.menuId=e.id
-	where a.id=${id}
+	where a.id=#{id}
      </select>
 </mapper>

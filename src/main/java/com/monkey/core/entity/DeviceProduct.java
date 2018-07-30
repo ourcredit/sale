@@ -22,6 +22,14 @@ import java.io.Serializable;
 @TableName("sale_device_product")
 public class DeviceProduct extends Model<DeviceProduct> {
 
+    public DeviceProduct(){}
+    public DeviceProduct(String id, Integer productId,Integer deviceId,Integer isSale,BigDecimal price){
+        this.id=id;
+        this.productId=productId;
+        this.deviceId=deviceId;
+        this.isSale=isSale;
+        this.price=price;
+    }
     private static final long serialVersionUID = 1L;
 
     /**

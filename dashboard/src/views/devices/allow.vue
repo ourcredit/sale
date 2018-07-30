@@ -26,13 +26,27 @@
               </FormItem>
               </Col>
               <Col span="6">
-              <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
+              <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">查找</Button>
 
-              <Button icon="add" type="primary" size="large" @click="init" class="toolbar-btn">保存</Button>
+              <Button icon="add" type="primary" size="large" @click="save" class="toolbar-btn">保存</Button>
               </Col>
             </Row>
           </Form>
-          <SaleTable ref="table" :filters="filters" :type="'product'" :columns="columns"></SaleTable>
+           <div class="margin-top-10">
+            <Table  ref="table"
+             stripe border show-header 
+              :columns="columns"
+               no-data-text="暂无数据"
+                :data="list">
+            </Table>
+            <Page show-sizer class-name="fengpage"
+             :total="totalCount"
+              class="margin-top-10"
+              @on-change="pageChange"
+               @on-page-size-change="pagesizeChange"
+                :page-size="pageSize" 
+                :current="currentPage"></Page>
+        </div>
         </div>
       </Card>
     </Row>
@@ -44,6 +58,7 @@ import SaleTable from "@/components/saletable.vue";
 import AbpBase from "@/lib/abpbase";
 import PageRequest from "../../store/entities/page-request";
 import Util from "../../lib/util";
+import { debug } from "util";
 @Component({
   components: {
     SaleTable
@@ -53,11 +68,16 @@ export default class deviceC extends AbpBase {
   filters: Object = {
     deviceName: ""
   };
+  finnalList: any = new Array<any>();
   get cates() {
     return this.$store.state.product.productCate;
   }
-  ModalShow: boolean = false;
-
+  get list() {
+    return this.$store.state.device.products;
+  }
+  get current() {
+    return this.$store.state.device.editDevice;
+  }
   columns: Array<any> = [
     {
       title: "商品名",
@@ -77,14 +97,26 @@ export default class deviceC extends AbpBase {
       render: (h: any, params: any) => {
         return h("Checkbox", {
           props: {
-            value: params.row.isSale
+            value: params.row.isSale > 0
           },
           style: {
             marginRight: "5px"
           },
           on: {
             "on-change": (e: any) => {
-              params.row.isSale = e;
+              console.log(this.finnalList);
+              var mo = this.finnalList[params.index];
+              if (mo) {
+                mo.isSale = e ? 1 : 0;
+              } else {
+                mo = {
+                  isSale: e ? 1 : 0,
+                  id: params.row.id,
+                  deviceId: this.current.id,
+                  productId: params.row.productId
+                };
+                this.finnalList[params.index] = mo;
+              }
             }
           }
         });
@@ -105,18 +137,81 @@ export default class deviceC extends AbpBase {
           },
           on: {
             "on-change": (e: any) => {
-              params.row.price = e;
+              var mo = this.finnalList[params.index];
+              if (mo) {
+                mo.price = e;
+              } else {
+                mo = {
+                  price: e,
+                  id: params.row.id,
+                  deviceId: this.current.id,
+                  productId: params.row.productId
+                };
+                this.finnalList[params.index] = mo;
+              }
             }
           }
         });
       }
     }
   ];
-
-  init() {
-    var t: any = this.$refs.table;
-    t.getpage();
+  async save() {
+    await this.$store.dispatch({
+      type: `device/allowProducts`,
+      data: this.finnalList
+    });
+    this.$router.push({ name: "dl" });
   }
-  async created() {}
+  pageChange(page: number) {
+    this.$store.commit(`device/setCurrentPage`, page);
+    this.getpage();
+  }
+  pagesizeChange(pagesize: number) {
+    this.$store.commit(`device/setPageSize`, pagesize);
+    this.getpage();
+  }
+  async getpage() {
+    let pagerequest: any = new PageRequest();
+    pagerequest.size = this.pageSize;
+    pagerequest.index = this.currentPage;
+    pagerequest.deviceId = this.current.id;
+    await this.$store.dispatch({
+      type: `device/getAllProducts`,
+      data: pagerequest
+    });
+    this.list.forEach(w => {
+      var t = {
+        id: w.id,
+        isSale: w.isSale,
+        price: w.price,
+        deviceId: w.deviceId,
+        productId: w.productId
+      };
+      if (this.current.id == t.deviceId) {
+        this.finnalList.push(t);
+      }
+    });
+  }
+  get pageSize() {
+    return this.$store.state[`device`].pageSize;
+  }
+  get totalCount() {
+    return this.$store.state[`device`].totalCount;
+  }
+  get currentPage() {
+    return this.$store.state[`device`].currentPage;
+  }
+  async created() {
+    if (!this.current || !this.current.id) {
+      this.$router.push({ name: "dl" });
+      return;
+    }
+    this.getpage();
+  }
+  async mounted() {
+    if (!this.current || !this.current.id) {
+      this.$router.push({ name: "dl" });
+    }
+  }
 }
 </script>

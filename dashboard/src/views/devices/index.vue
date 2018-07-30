@@ -184,7 +184,7 @@ export default class deviceC extends AbpBase {
             },
             on: {
               click: () => {
-                console.log(this);
+                this.$store.commit("device/edit", params.row);
                 router.push({ name: "allowproduct" });
               }
             }

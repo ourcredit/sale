@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.monkey.core.mapper.*")
+@MapperScan("com.monkey.core.mapper")
 public class MybatisPlusConfig {
     @Bean
     public GlobalConfiguration globalConfiguration() {

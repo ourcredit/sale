@@ -1,10 +1,12 @@
 package com.monkey.core.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.monkey.core.dtos.ProductDto;
 import com.monkey.core.dtos.RoleDto;
-import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.Role;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +18,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface RoleRepository extends BaseMapper<Role> {
     RoleDto selectRoleAndPermissionsById(@Param("id") Integer id);
-
+    /**
+     * @param deviceId
+     * @return 商品dto 类
+     */
+    List<ProductDto> selectProductsByDevice(@Param("deviceId") Integer deviceId) ;
 }

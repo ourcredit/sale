@@ -42,7 +42,7 @@ FROM
   left	JOIN sale_rolemenu b ON a.id = b.roleId
 left	JOIN sale_menu c ON b.menuId = c.id
 WHERE
-	a.id =${id}
+	a.id =#{id}
     </select>
 
 </mapper>
