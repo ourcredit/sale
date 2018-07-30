@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -23,17 +24,22 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableTransactionManagement
 public class DBConfig {
+    @Value("${spring.datasource.driver-class-name}")
+    private String type;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
+    @Value("${spring.datasource.url}")
+    private String url;
 
     @Bean
     public DataSource dataSource() throws SQLException {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        hikariConfig.setUsername("root");
-        hikariConfig.setPassword("zwy0410");
-        hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/sale?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC");
-//        dataSource.setJdbcUrl();
-//        dataSource.setUsername("sa");
-//        dataSource.setPassword("");
+        hikariConfig.setDriverClassName(type);
+        hikariConfig.setUsername(username);
+        hikariConfig.setPassword(password);
+        hikariConfig.setJdbcUrl(url);
         return new HikariDataSource(hikariConfig);
     }
 
