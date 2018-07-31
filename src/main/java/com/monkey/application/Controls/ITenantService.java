@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-07-31
  */
 public interface ITenantService extends IService<Tenant> {
-
+    // 创建租户下默认的管理员和角色以及菜单信息等
+    void createTenantAndUserRoles(Integer tenantId);
 }

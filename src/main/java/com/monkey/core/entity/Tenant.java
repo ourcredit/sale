@@ -49,7 +49,10 @@ public class Tenant extends Model<Tenant> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
-
+    /**
+     * 1启用  0禁用
+     */
+    private Integer isActive;
 
     public Integer getId() {
         return id;
@@ -105,5 +108,13 @@ public class Tenant extends Model<Tenant> {
         ", creationTime=" + creationTime +
         ", creatorUserId=" + creatorUserId +
         "}";
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 }

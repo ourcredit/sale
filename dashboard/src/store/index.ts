@@ -11,6 +11,7 @@ import menu from "@/store/modules/menus";
 import point from "@/store/modules/point";
 import device from "@/store/modules/device";
 import product from "@/store/modules/product";
+import tenant from "@/store/modules/tenant";
 const store: any = new Vuex.Store({
   state: {
     //
@@ -29,7 +30,8 @@ const store: any = new Vuex.Store({
     menu,
     point,
     device,
-    product
+    product,
+    tenant
   }
 });
 

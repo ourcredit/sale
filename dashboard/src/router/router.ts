@@ -206,11 +206,11 @@ export const appRouters: Array<any> = [
         component: () => System.import("../views/setting/role/role.vue")
       },
       {
-        path: "operator",
-       // permission: "operator:list",
+        path: "tenant",
+         permission: "tenant:list",
         meta: { title: "运营商管理" },
-        name: "operator",
-        component: () => System.import("../views/setting/role/role.vue")
+        name: "tenant",
+        component: () => System.import("../views/setting/tenants/index.vue")
       }
     ]
   }

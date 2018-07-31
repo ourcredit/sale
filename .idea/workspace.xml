@@ -2,58 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e81270bf-93e3-4977-ba8c-a4eae7191e0a" name="默认的" comment="prod=&gt;dev">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/TenantRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/lockscreen/lockscreen.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/components/lockscreen/lockscreen.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/notices/notice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/components/notices/notice.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/shrinkable-menu/components/sidebarMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/components/shrinkable-menu/components/sidebarMenu.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/device.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/device.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/devices/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/devices/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/main.less" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/main.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/payfor/alipay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/payfor/alipay.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/payfor/wechatpay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/payfor/wechatpay.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/points/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/points/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/setting/user/modify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/user/modify.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Menus/RoleMenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Menus/RoleMenuServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/IRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/IUserRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Roles/UserRoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserRoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/dtos/CreateUserInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/dtos/CreateUserInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/store/entities/tenant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/entities/tenant.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/views/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/util/JWTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/util/JWTUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Payfor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Payfor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Rolemenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Rolemenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Userrole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Userrole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MyMetaObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MyMetaObjectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserLoginInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserLoginInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserRegisterInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserRegisterInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/shiro/JWTFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/shiro/JWTFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/shiro/MyRealm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/shiro/MyRealm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -102,29 +64,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
+      <file leaf-file-name="TenantController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+            <state relative-caret-position="171">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IUserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserService.java">
+      <file leaf-file-name="Tenant.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+            <state relative-caret-position="152">
+              <caret line="54" column="29" lean-forward="true" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+              <folding>
+                <element signature="e#2379#2380#0" expanded="true" />
+                <element signature="e#2410#2411#0" expanded="true" />
+                <element signature="e#2459#2460#0" expanded="true" />
+                <element signature="e#2499#2500#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" column="48" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="48" />
+            <state relative-caret-position="143">
+              <caret line="63" column="2" selection-start-line="63" selection-start-column="2" selection-end-line="66" selection-end-column="29" />
+              <folding>
+                <element signature="method#toString#0;class#User#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TenantRepository.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -132,67 +115,63 @@
       <file leaf-file-name="UserRepository.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="53" column="40" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="40" />
+            <state relative-caret-position="399">
+              <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserRoleServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserRoleServiceImpl.java">
+      <file leaf-file-name="DataCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="70" column="42" lean-forward="true" selection-start-line="70" selection-start-column="42" selection-end-line="70" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MybatisPlusConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="323">
+              <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="141" selection-end-column="5" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#globalConfiguration#0;class#MybatisPlusConfig#0" />
-                <element signature="method#performanceInterceptor#0;class#MybatisPlusConfig#0" />
+                <element signature="method#createDefaultTenant#0;class#DataCreator#0" />
+                <element signature="method#createUserRoles#0;class#DataCreator#0" />
+                <element signature="method#createRoleMenus#0;class#DataCreator#0" />
+                <element signature="method#insertMenu#0;class#DataCreator#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application-dev.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ITenantService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TenantServiceImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+              <folding>
+                <element signature="method#createUserRoles#0;class#TenantServiceImpl#0" />
+                <element signature="method#insertMenu#0;class#TenantServiceImpl#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sale.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/sale.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="229" column="36" lean-forward="true" selection-end-line="246" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-dev.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserRegisterInput.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserRegisterInput.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserLoginInput.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserLoginInput.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="28" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="28" />
+            <state relative-caret-position="133">
+              <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -220,12 +199,17 @@
       <find>OptimisticLockerInterceptor</find>
       <find>PaginationInterceptor</find>
       <find>tenantId</find>
+      <find>Point</find>
+      <find>_Tenanter</find>
+      <find>tenant</find>
     </findStrings>
     <replaceStrings>
       <replace>_deviceService</replace>
       <replace>点位</replace>
       <replace>设备</replace>
       <replace>._pointer._point</replace>
+      <replace>Tenant</replace>
+      <replace>_tenant</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -234,26 +218,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/PayforRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/PayforRepository.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/PayforServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IPayforService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DruidConfig.java" />
-        <option value="$PROJECT_DIR$/init.sql" />
         <option value="$PROJECT_DIR$/src/main/resources/config/application-prod.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DBConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/BaseEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/IMustHaveTenant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/IMusthaveTenant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/TenantRepository.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/ITenantService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Users/TenantServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/annotation/CurrentUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/IBaseService.java" />
@@ -272,7 +248,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Menu.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/File.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/BaseServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/RoleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Menus/RoleMenuServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserRoleServiceImpl.java" />
@@ -284,7 +259,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserRegisterInput.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
+        <option value="$PROJECT_DIR$/init.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config/application-dev.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -410,6 +394,25 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="monkey" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sale" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="monkey" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sale" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="monkey" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -437,26 +440,6 @@
               <item name="sale" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="exception" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="shiro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -474,11 +457,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -569,6 +547,7 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="层次结构" order="3" />
       <window_info anchor="bottom" id="调试" order="7" weight="0.45194805" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.500625" side_tool="true" weight="0.36753246" />
@@ -590,7 +569,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="right" id="层次结构" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -612,13 +590,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
-          <line>114</line>
+          <line>110</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
-          <line>99</line>
+          <line>95</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -630,7 +608,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
-          <line>62</line>
+          <line>58</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
@@ -642,7 +620,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
-          <line>91</line>
+          <line>87</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -651,71 +629,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../test/com/monkey/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="63" column="1" lean-forward="true" selection-start-line="63" selection-start-column="1" selection-end-line="66" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
-          <folding>
-            <element signature="e#1588#1589#0" expanded="true" />
-            <element signature="e#1619#1620#0" expanded="true" />
-            <element signature="e#1668#1669#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/RoleDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/AllControllerAdvice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-521">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/shiro/CurrentUserMethodArgumentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/annotation/CurrentUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Menus/IRoleMenuService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Menus/MenuServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -748,13 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/sale.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="229" column="31" lean-forward="true" selection-start-line="229" selection-start-column="31" selection-end-line="229" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -827,25 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
-          <folding>
-            <element signature="e#3528#3529#0" expanded="true" />
-            <element signature="e#3558#3559#0" expanded="true" />
-            <element signature="method#toString#0;class#User#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -878,13 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="83" column="5" selection-start-line="83" selection-start-column="5" selection-end-line="83" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -923,13 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="172" selection-start-line="172" selection-end-line="172" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="33" column="10" lean-forward="true" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -1009,35 +882,28 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
-          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserRegisterInput.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
-          <caret line="6" column="29" lean-forward="true" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Log.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="70" column="42" lean-forward="true" selection-start-line="70" selection-start-column="42" selection-end-line="70" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="53" column="40" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="40" />
+        <state relative-caret-position="266">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="271">
+          <caret line="85" column="30" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#globalConfiguration#0;class#MybatisPlusConfig#0" />
@@ -1046,10 +912,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PointController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="33" column="32" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="70" column="42" selection-start-line="70" selection-start-column="42" selection-end-line="70" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/sale.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="229" column="36" lean-forward="true" selection-end-line="246" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="54" column="29" lean-forward="true" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+          <folding>
+            <element signature="e#2379#2380#0" expanded="true" />
+            <element signature="e#2410#2411#0" expanded="true" />
+            <element signature="e#2459#2460#0" expanded="true" />
+            <element signature="e#2499#2500#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="63" column="2" selection-start-line="63" selection-start-column="2" selection-end-line="66" selection-end-column="29" />
+          <folding>
+            <element signature="method#toString#0;class#User#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        <state relative-caret-position="133">
+          <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="57" column="3" selection-start-line="57" selection-start-column="3" selection-end-line="141" selection-end-column="5" />
+          <folding>
+            <element signature="method#createDefaultTenant#0;class#DataCreator#0" />
+            <element signature="method#createUserRoles#0;class#DataCreator#0" />
+            <element signature="method#createRoleMenus#0;class#DataCreator#0" />
+            <element signature="method#insertMenu#0;class#DataCreator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+          <folding>
+            <element signature="method#createUserRoles#0;class#TenantServiceImpl#0" />
+            <element signature="method#insertMenu#0;class#TenantServiceImpl#0" />
+          </folding>
         </state>
       </provider>
     </entry>

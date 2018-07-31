@@ -35,7 +35,6 @@ public class DataCreator implements CommandLineRunner {
     @Autowired
     IRoleMenuService _roleMenuService;
 
-    private Tenant t;
     /**
      * 初始化数据结构
      */
@@ -51,12 +50,9 @@ public class DataCreator implements CommandLineRunner {
     public void  createDefaultTenant(){
         EntityWrapper<Tenant> ew = new EntityWrapper<>();
         ew.eq("name",InitConst._defaultTenant.admin);
-         t = _tenantService.selectOne(ew);
+        Tenant  t = _tenantService.selectOne(ew);
         if(t==null){
-          Boolean b=  _tenantService.insert(new Tenant(InitConst._defaultTenant.admin,InitConst._defaultTenant.admin));
-          if(b){
-              t=_tenantService.selectOne(ew);
-          }
+         _tenantService.insert(new Tenant(InitConst._defaultTenant.admin,InitConst._defaultTenant.admin));
         }
     }
     public void createUserRoles() {
@@ -112,7 +108,7 @@ public class DataCreator implements CommandLineRunner {
     }
 
     public void insertMenu(List<InitConst._menu.MenuInfo> list, Integer parentId) {
-        EntityWrapper e;
+        EntityWrapper  e ;
         for (InitConst._menu.MenuInfo item : list) {
             e = new EntityWrapper<>();
             e.eq("name", item.Name);

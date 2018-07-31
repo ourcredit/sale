@@ -1,6 +1,13 @@
 package com.monkey.common.base;
 
 public interface PermissionConst {
+    public  static class  _tenant{
+        public static  final  String list="tenant:list";
+        public static  final  String modify="tenant:modify";
+        public static  final  String delete="tenant:delete";
+        public static  final  String batch="tenant:batch";
+        public static  final  String first="tenant:first";
+    }
     public  static class  _dashboard{
         public static  final  String list="dashboard:show";
     }
@@ -29,7 +36,7 @@ public interface PermissionConst {
             public static  final  String modify="product:modify";
             public static  final  String delete="product:delete";
             public static  final  String batch="product:batch";
-            public static  final  String first="org:first";
+            public static  final  String first="product:first";
         }
     }
 

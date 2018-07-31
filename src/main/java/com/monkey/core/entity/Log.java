@@ -70,18 +70,6 @@ public class Log extends Model<Log> {
      * 备注
      */
     private String message;
-    /**
-     * 租户id
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Integer tenantId;
-    public Integer getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(Integer tenantId) {
-        this.tenantId = tenantId;
-    }
 
     public String getId() {
         return id;

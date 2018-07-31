@@ -8,6 +8,7 @@ public interface InitConst {
     public static class _defaultTenant {
         public static final String admin = "default";
     }
+
     public static class _defaultUser {
         public static final String admin = "admin";
         public static final String def = "user";
@@ -98,11 +99,11 @@ public interface InitConst {
                     add(new MenuInfo("批量删除角色", PermissionConst._system._role.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._system._role.first, "", 2, null));
                 }}));
-                add(new MenuInfo("菜单管理", PermissionConst._system._menu.list, "/system/menu", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑菜单", PermissionConst._system._menu.modify, "", 2, null));
-                    add(new MenuInfo("删除菜单", PermissionConst._system._menu.delete, "", 2, null));
-                    add(new MenuInfo("批量删除菜单", PermissionConst._system._menu.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._system._menu.first, "", 2, null));
+                add(new MenuInfo("租户管理", PermissionConst._tenant.list, "/tenant/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑租户", PermissionConst._tenant.modify, "", 2, null));
+                    add(new MenuInfo("删除租户", PermissionConst._tenant.delete, "", 2, null));
+                    add(new MenuInfo("批量删除租户", PermissionConst._tenant.batch, "", 2, null));
+                    add(new MenuInfo("获取租户详情", PermissionConst._tenant.first, "", 2, null));
                 }}));
             }}));
 
@@ -112,6 +113,7 @@ public interface InitConst {
         public static class MenuInfo {
             public MenuInfo() {
             }
+
             public MenuInfo(String name, String code, String url, Integer type, List<MenuInfo> childs) {
                 Name = name;
                 Type = type;

@@ -1,9 +1,9 @@
 import Entity from "@/store/entities/entity";
 
 export default class Tenant extends Entity<number> {
-  tenancyName: string;
+  displayName: string;
   name: string;
   isActive: boolean;
-  adminEmailAddress: string;
-  connectionString: string;
+  creationTime: string;
+  creatorUserId: string;
 }
