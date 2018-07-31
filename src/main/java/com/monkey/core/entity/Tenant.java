@@ -1,0 +1,95 @@
+package com.monkey.entity;
+
+import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
+import java.io.Serializable;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author zhaohejing
+ * @since 2018-07-31
+ */
+@TableName("sale_tenant")
+public class Tenant extends Model<Tenant> {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * key
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+    /**
+     * 显示名
+     */
+    private String displayName;
+    /**
+     * 名称
+     */
+    private String name;
+    private Date creationTime;
+    private Integer creatorUserId;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Integer getCreatorUserId() {
+        return creatorUserId;
+    }
+
+    public void setCreatorUserId(Integer creatorUserId) {
+        this.creatorUserId = creatorUserId;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tenant{" +
+        "id=" + id +
+        ", displayName=" + displayName +
+        ", name=" + name +
+        ", creationTime=" + creationTime +
+        ", creatorUserId=" + creatorUserId +
+        "}";
+    }
+}
