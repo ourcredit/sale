@@ -1,6 +1,6 @@
 package com.monkey.web.shiro;
 
-import com.monkey.application.Users.IUserService;
+import com.monkey.application.Controls.IUserService;
 
 import com.monkey.common.util.JWTUtil;
 import com.monkey.core.entity.User;

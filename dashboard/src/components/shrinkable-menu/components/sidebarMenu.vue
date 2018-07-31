@@ -5,7 +5,7 @@
 <template>
     <Menu ref="sideMenu" :active-name="$route.name" :open-names="openNames" :theme="menuTheme" width="auto" @on-select="changeMenu">
             <MenuItem name="dashboard">
-             <span class="iconfont">&#xe7d8;</span>
+             <span class="iconfont">&#xeafc;</span>
                <span> 控制台</span>
             </MenuItem>
         <template v-for="item in menuList">

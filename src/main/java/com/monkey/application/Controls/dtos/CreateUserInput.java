@@ -1,4 +1,4 @@
-package com.monkey.application.Users.dtos;
+package com.monkey.application.Controls.dtos;
 
 
 import java.util.List;

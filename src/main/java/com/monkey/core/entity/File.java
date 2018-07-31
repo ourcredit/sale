@@ -87,7 +87,17 @@ public class File extends Model<File> {
     protected Serializable pkVal() {
         return this.id;
     }
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     @Override
     public String toString() {
         return "File{" +

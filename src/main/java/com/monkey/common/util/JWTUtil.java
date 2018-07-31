@@ -79,15 +79,15 @@ public class JWTUtil {
      * @param secret 用户的密码
      * @return 加密的token
      */
-    public static String sign(String username, String secret) {
+    public static String sign(String username,Integer userId,Integer tenantId, String secret) {
         try {
             Date date = new Date(System.currentTimeMillis()+EXPIRE_TIME);
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // 附带username信息
             return JWT.create()
                     .withClaim("username", username)
-                    .withClaim("userId", 1)
-                    .withClaim("tenantId", 1)
+                    .withClaim("userId", userId)
+                    .withClaim("tenantId", tenantId)
                     .withExpiresAt(date)
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {

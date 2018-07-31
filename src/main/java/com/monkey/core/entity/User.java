@@ -24,13 +24,11 @@ public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
     public  User(){}
-    public  User(String account,String password,String userName,String mobile,Integer isActive){
+    public  User(String account,String password,String userName,Integer isActive){
         this.account=account;
         this.password=BCrypt.hashpw(password,BCrypt.gensalt());
         this.userName=userName;
-        this.mobile=mobile;
         this.isActive=isActive;
-        this.creationTime=new Date();
     }
     /**
      * 自增主键
@@ -75,12 +73,18 @@ public class User extends Model<User> {
      * 最后登陆时间
      */
     private Date lastLoginTime;
+
     /**
-     * 是否运营商
+     * 租户id
      */
-    private Integer isOperator;
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
-
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     public Integer getId() {
         return id;
     }
@@ -161,13 +165,7 @@ public class User extends Model<User> {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public Integer getIsOperator() {
-        return isOperator;
-    }
 
-    public void setIsOperator(Integer isOperator) {
-        this.isOperator = isOperator;
-    }
 
     @Override
     protected Serializable pkVal() {
@@ -187,7 +185,9 @@ public class User extends Model<User> {
         ", isActive=" + isActive +
         ", isDeleted=" + isDeleted +
         ", lastLoginTime=" + lastLoginTime +
-        ", isOperator=" + isOperator +
         "}";
     }
+
+
+
 }

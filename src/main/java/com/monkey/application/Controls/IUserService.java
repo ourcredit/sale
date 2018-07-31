@@ -1,7 +1,7 @@
-package com.monkey.application.Users;
+package com.monkey.application.Controls;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.monkey.application.Users.dtos.CreateUserInput;
+import com.monkey.application.Controls.dtos.CreateUserInput;
 import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 
@@ -25,7 +25,7 @@ public interface IUserService extends IService<User> {
      * @return 用户
      */
     User getUserByUserName(String username);
-
+    User login(String tenantName,String account);
     /**
      * <p>
      * 注册

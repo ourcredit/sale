@@ -1,4 +1,4 @@
-package com.monkey.application.Users;
+package com.monkey.application.Controls;
 
 import com.monkey.core.entity.Tenant;
 import com.monkey.core.mapper.TenantRepository;

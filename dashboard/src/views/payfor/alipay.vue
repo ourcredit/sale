@@ -61,45 +61,9 @@ export default class Payfor extends AbpBase {
   get current() {
     return this.$store.state.device.payfor;
   }
-  tree: Array<any> = [
-    {
-      title: "总部",
-      id: 1,
-      expand: true,
-      children: [
-        {
-          id: 2,
-          title: "分部1",
-          expand: true,
-          children: [
-            {
-              id: 3,
-              title: "分部2"
-            },
-            {
-              id: 4,
-              title: "分部3"
-            }
-          ]
-        },
-        {
-          title: "分部4",
-          id: 5,
-          expand: true,
-          children: [
-            {
-              id: 6,
-              title: "分部5"
-            },
-            {
-              id: 7,
-              title: "分部6"
-            }
-          ]
-        }
-      ]
-    }
-  ];
+  get tree(){
+    return this.$store.state.device.tree;
+  }
   async change(e) {
     if (e[0] && e[0].id) {
       var node = e[0].id;

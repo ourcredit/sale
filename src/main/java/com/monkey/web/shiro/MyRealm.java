@@ -1,7 +1,7 @@
 package com.monkey.web.shiro;
 import com.monkey.application.Menus.IMenuService;
-import com.monkey.application.Roles.IUserRoleService;
-import com.monkey.application.Users.IUserService;
+import com.monkey.application.Controls.IUserRoleService;
+import com.monkey.application.Controls.IUserService;
 import com.monkey.common.util.ComUtil;
 import com.monkey.common.util.JWTUtil;
 import com.monkey.core.entity.Menu;

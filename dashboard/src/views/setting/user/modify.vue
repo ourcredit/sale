@@ -10,9 +10,6 @@
                         <FormItem label="用户名" prop="userName">
                             <Input v-model="user.userName" :maxlength="32"/>
                         </FormItem>
-                        <FormItem label="手机" prop="mobile">
-                            <Input v-model="user.mobile" type="text" :maxlength="32"/>
-                        </FormItem>
                         <FormItem label="密码" prop="password">
                             <Input v-model="user.password" type="password" :maxlength="32"></Input>
                         </FormItem>
@@ -29,6 +26,9 @@
                                 <span>{{role.displayName}}</span>
                             </Checkbox>
                         </CheckboxGroup>
+                    </TabPane>
+                     <TabPane label="机构信息" name="trees">
+                       <Tree :data="tree"></Tree>
                     </TabPane>
                 </Tabs>
             </Form>
@@ -54,6 +54,9 @@ export default class CreateUser extends AbpBase {
   value: boolean;
   get roles() {
     return this.$store.state.user.roles;
+  }
+  get tree() {
+    return this.$store.state.device.tree;
   }
   get user() {
     var u = this.$store.state.user.editUser;

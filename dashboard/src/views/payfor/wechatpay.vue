@@ -35,53 +35,23 @@
     </div>
 </template>
 <script lang="ts">
-    import {
-        Component,
-        Vue,
-        Inject,
-        Prop,
-        Watch
-    } from "vue-property-decorator";
-    import AbpBase from "@/lib/abpbase";
-    import PageRequest from "../../store/entities/page-request";
-    import Util from "../../lib/util";
+import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
+import AbpBase from "@/lib/abpbase";
+import PageRequest from "../../store/entities/page-request";
+import Util from "../../lib/util";
 
-    @Component
-    export default class deviceC extends AbpBase {
-        filters: Object = {
-            deviceName: ""
-        };
-        get cates() {
-            return this.$store.state.device.deviceCate;
-        }
-        tree: Array < any > = [{
-            title: "总部",
-            expand: true,
-            children: [{
-                    title: "分部1",
-                    expand: true,
-                    children: [{
-                            title: "分部2"
-                        },
-                        {
-                            title: "分部3"
-                        }
-                    ]
-                },
-                {
-                    title: "分部4",
-                    expand: true,
-                    children: [{
-                            title: "分部5"
-                        },
-                        {
-                            title: "分部6"
-                        }
-                    ]
-                }
-            ]
-        }];
-        async save() {}
-        async created() {}
-    }
+@Component
+export default class deviceC extends AbpBase {
+  filters: Object = {
+    deviceName: ""
+  };
+  get cates() {
+    return this.$store.state.device.deviceCate;
+  }
+  get tree() {
+    return this.$store.state.device.tree;
+  }
+  async save() {}
+  async created() {}
+}
 </script>

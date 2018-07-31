@@ -2,7 +2,7 @@
     <div @click="lock" class="lock-screen-btn-con">
         <Tooltip content="锁屏" placement="bottom">
             <!-- <Icon type="locked" :size="20"></Icon> -->
-            <i class="iconfont" style="font-size:20px">&#xe6c0;</i>
+            <i class="iconfont" style="font-size:20px">&#xeac4;</i>
         </Tooltip>
     </div>
 </template>

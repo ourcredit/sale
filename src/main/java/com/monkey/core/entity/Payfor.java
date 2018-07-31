@@ -150,7 +150,17 @@ public class Payfor extends Model<Payfor> {
         ", wechatpayAgent=" + wechatpayAgent +
         "}";
     }
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     public Date getCreationTime() {
         return creationTime;
     }

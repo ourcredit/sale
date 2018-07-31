@@ -1,4 +1,4 @@
-package com.monkey.application.Roles;
+package com.monkey.application.Controls;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -26,7 +26,7 @@ import java.util.List;
 public class UserRoleServiceImpl extends ServiceImpl<UserroleRepository, Userrole> implements IUserRoleService {
 
     @Override
-    @Cacheable(value = "UserToRoleServiceImpl:selectByUserId", key = "'user_'.concat(#root.args[0])")
+    @Cacheable(value = "UserToRoleServiceImpl:selectByUserId", key = "'user_role_'.concat(#root.args[0])")
     public List<Userrole> selectByUserId(Integer userId) {
         EntityWrapper<Userrole> ew = new EntityWrapper<>();
         ew.where("userId={0}", userId);

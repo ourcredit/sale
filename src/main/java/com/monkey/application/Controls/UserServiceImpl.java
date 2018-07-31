@@ -1,10 +1,9 @@
-package com.monkey.application.Users;
+package com.monkey.application.Controls;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
-import com.monkey.application.Roles.IUserRoleService;
-import com.monkey.application.Users.dtos.CreateUserInput;
+import com.monkey.application.Controls.dtos.CreateUserInput;
 import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.Role;
 import com.monkey.core.entity.User;
@@ -58,6 +57,10 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         UserDto r = _userRepository.selectUserRole(id);
         return r;
     }
+    @Override
+    public User login(String tenantName,String account){
+        return _userRepository.selectByTenantAndAccount(tenantName,account);
+    }
 
     /**
      * <p>
@@ -72,7 +75,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         EntityWrapper ew = new EntityWrapper<>();
         ew.eq("account", input.account);
         if (input.id == null) {
-            u = new User(input.account, input.password, input.userName, input.mobile, input.isActive);
+            u = new User(input.account, input.password, input.userName,  input.isActive);
             this.insert(u);
         } else {
             u = this.selectOne(ew);

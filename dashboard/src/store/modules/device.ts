@@ -11,6 +11,7 @@ interface IDeviceState extends IListState<Device> {
   editDevice: Device;
   products: Array<any>;
   payfor: any;
+  tree: Array<any>;
 }
 class PointMutations extends ListMutations<Device> {}
 class PointModule extends ListModule<IDeviceState, any, Device> {
@@ -23,7 +24,46 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     editDevice: new Device(),
     products: new Array<any>(),
     deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"],
-    payfor: new Object()
+    payfor: new Object(),
+    tree: [
+      {
+        id: 1,
+        title: "总部",
+        expand: true,
+        children: [
+          {
+            id: 2,
+            title: "分部1",
+            expand: true,
+            children: [
+              {
+                id: 3,
+                title: "分部2"
+              },
+              {
+                id: 4,
+                title: "分部3"
+              }
+            ]
+          },
+          {
+            id: 5,
+            title: "分部4",
+            expand: true,
+            children: [
+              {
+                id: 6,
+                title: "分部5"
+              },
+              {
+                id: 7,
+                title: "分部6"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   };
   actions = {
     async getAll(

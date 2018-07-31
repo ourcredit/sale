@@ -65,7 +65,17 @@ public class Point extends Model<Point> {
      * y坐标
      */
     private String y;
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public Integer getId() {
         return id;

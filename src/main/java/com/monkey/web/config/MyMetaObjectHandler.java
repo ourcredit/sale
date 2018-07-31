@@ -17,6 +17,7 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         Object creationTime = getFieldValByName("creationTime",metaObject);
+      //  Object tenantId = getFieldValByName("tenantId",metaObject);
         if (null == creationTime) {
             metaObject.setValue("creationTime", new Date());
         }
@@ -29,6 +30,7 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
             if (null == creatorUserId&&user!=null) {
                 metaObject.setValue("creatorUserId", user.getId());
             }
+
         }
 
 

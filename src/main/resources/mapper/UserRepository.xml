@@ -51,4 +51,14 @@ FROM
 	left join sale_menu e on d.menuId=e.id
 	where a.id=#{id}
      </select>
+    <select id="selectByTenantAndAccount" resultType="com.monkey.core.entity.User">
+        SELECT
+	b.*
+FROM
+	sale_tenant a
+	INNER JOIN sale_user b ON a.id = b.tenantId
+WHERE
+	a.`name` = #{tenant}
+	AND b.account =#{account}
+    </select>
 </mapper>

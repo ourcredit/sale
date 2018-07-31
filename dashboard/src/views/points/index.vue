@@ -62,38 +62,9 @@ export default class PointC extends AbpBase {
   };
 
   ModalShow: boolean = false;
-  tree: Array<any> = [
-    {
-      title: "总部",
-      expand: true,
-      children: [
-        {
-          title: "分部1",
-          expand: true,
-          children: [
-            {
-              title: "分部2"
-            },
-            {
-              title: "分部3"
-            }
-          ]
-        },
-        {
-          title: "分部4",
-          expand: true,
-          children: [
-            {
-              title: "分部5"
-            },
-            {
-              title: "分部6"
-            }
-          ]
-        }
-      ]
-    }
-  ];
+  get tree() {
+    return this.$store.state.device.tree;
+  }
   columns: Array<any> = [
     {
       type: "selection",

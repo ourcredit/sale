@@ -1,4 +1,4 @@
-package com.monkey.application.Roles;
+package com.monkey.application.Controls;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -9,13 +9,11 @@ import com.monkey.core.entity.Role;
 import com.monkey.core.entity.Rolemenu;
 import com.monkey.core.mapper.MenuRepository;
 import com.monkey.core.mapper.RoleRepository;
-import com.monkey.core.mapper.RolemenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ import java.util.List;
  * @since 2018-05-03
  */
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implements IRoleService {
+public class RoleServiceImpl extends  ServiceImpl<RoleRepository, Role> implements IRoleService {
     @Autowired
     RoleRepository _roleRepository;
     @Autowired
@@ -54,6 +52,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     }
     @Override
     public Boolean insertRoleAndPermissions(RoleDto model) {
+
         Role role = new Role(model.getId(), model.getRoleName(), model.getDisplayName(),model.getIsActive(),model.getIsStatic());
         role.setDescription(model.getDescription());
         EntityWrapper ew = new EntityWrapper();

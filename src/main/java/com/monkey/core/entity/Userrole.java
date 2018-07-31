@@ -45,7 +45,17 @@ public class Userrole extends Model<Userrole> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     public String getId() {
         return id;
     }

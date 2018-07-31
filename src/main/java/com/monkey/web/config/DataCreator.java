@@ -1,11 +1,12 @@
 package com.monkey.web.config;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.monkey.application.Controls.ITenantService;
 import com.monkey.application.Menus.IMenuService;
 import com.monkey.application.Menus.IRoleMenuService;
-import com.monkey.application.Roles.IRoleService;
-import com.monkey.application.Roles.IUserRoleService;
-import com.monkey.application.Users.IUserService;
+import com.monkey.application.Controls.IRoleService;
+import com.monkey.application.Controls.IUserRoleService;
+import com.monkey.application.Controls.IUserService;
 import com.monkey.common.base.InitConst;
 import com.monkey.core.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,13 @@ public class DataCreator implements CommandLineRunner {
     @Autowired
     IMenuService _menuService;
     @Autowired
+    ITenantService _tenantService;
+    @Autowired
     IUserRoleService _userRoleService;
     @Autowired
     IRoleMenuService _roleMenuService;
 
+    private Tenant t;
     /**
      * 初始化数据结构
      */
@@ -39,8 +43,20 @@ public class DataCreator implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         String r = env.getProperty("isInitData");
         if (r.equals("true")) {
+            createDefaultTenant();
             createUserRoles();
             createRoleMenus();
+        }
+    }
+    public void  createDefaultTenant(){
+        EntityWrapper<Tenant> ew = new EntityWrapper<>();
+        ew.eq("name",InitConst._defaultTenant.admin);
+         t = _tenantService.selectOne(ew);
+        if(t==null){
+          Boolean b=  _tenantService.insert(new Tenant(InitConst._defaultTenant.admin,InitConst._defaultTenant.admin));
+          if(b){
+              t=_tenantService.selectOne(ew);
+          }
         }
     }
     public void createUserRoles() {
@@ -50,7 +66,7 @@ public class DataCreator implements CommandLineRunner {
         if (u == null) {
             Boolean b = _userService.insert(new User(InitConst._defaultUser.admin,
                     InitConst._defaultUser.defaultPassword,
-                    InitConst._defaultUser.admin, "", 1));
+                    InitConst._defaultUser.admin, 1));
             if (b) {
                 u = _userService.selectOne(ew);
             }

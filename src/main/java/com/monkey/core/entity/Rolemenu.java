@@ -27,7 +27,6 @@ public class Rolemenu extends Model<Rolemenu> {
     public Rolemenu(Integer roleId,Integer menuId){
         this.roleId=roleId;
         this.menuId=menuId;
-
     }
     /**
      * guid
@@ -36,7 +35,17 @@ public class Rolemenu extends Model<Rolemenu> {
     private String id;
     private Integer roleId;
     private Integer menuId;
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public String getId() {
         return id;

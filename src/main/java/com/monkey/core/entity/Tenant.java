@@ -1,5 +1,7 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -19,7 +21,11 @@ import java.io.Serializable;
 public class Tenant extends Model<Tenant> {
 
     private static final long serialVersionUID = 1L;
-
+    public  Tenant(){}
+    public  Tenant(String name,String displayName){
+        this.name=name;
+        this.displayName=displayName;
+    }
     /**
      * key
      */
@@ -33,7 +39,15 @@ public class Tenant extends Model<Tenant> {
      * 名称
      */
     private String name;
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
     private Date creationTime;
+    /**
+     * 创建人id
+     */
+    @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
 
 

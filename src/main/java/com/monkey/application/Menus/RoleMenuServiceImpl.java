@@ -1,8 +1,8 @@
 package com.monkey.application.Menus;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.application.dtos.RoleMenuInput;
 import com.monkey.core.entity.Rolemenu;
 import com.monkey.core.mapper.RolemenuRepository;
@@ -21,10 +21,10 @@ import java.util.List;
  * @since 2018-05-03
  */
 @Service
-public class RoleMenuServiceImpl extends ServiceImpl<RolemenuRepository, Rolemenu> implements IRoleMenuService {
+public class RoleMenuServiceImpl extends ServiceImpl<RolemenuRepository,Rolemenu> implements IRoleMenuService {
 
     @Override
-  //  @Cacheable(value = "RoleToMenuServiceImpl:selectByRoleId", key = "'role_'.concat(#root.args[0])")
+    @Cacheable(value = "RoleToMenuServiceImpl:selectByRoleId", key = "'role_'.concat(#root.args[0])")
     public List<Rolemenu> selectByRoleId(Integer roleId) {
         EntityWrapper<Rolemenu> ew = new EntityWrapper<>();
         ew.where("role_id={0}", roleId);

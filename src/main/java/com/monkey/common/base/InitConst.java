@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface InitConst {
-
+    public static class _defaultTenant {
+        public static final String admin = "default";
+    }
     public static class _defaultUser {
         public static final String admin = "admin";
         public static final String def = "user";

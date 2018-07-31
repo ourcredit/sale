@@ -30,9 +30,6 @@ public class Role extends Model<Role> {
         this.displayName=displayName;
         this.isActive=isActive;
         this.isStatic=isStatic;
-        this.creationTime=new Date();
-        this.isDeleted=0;
-        this.description="";
     }
     /**
      * 软删除
@@ -63,7 +60,17 @@ public class Role extends Model<Role> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
     public Integer getIsActive() {
         return isActive;
     }

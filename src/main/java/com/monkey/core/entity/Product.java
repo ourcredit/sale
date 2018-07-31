@@ -61,7 +61,17 @@ public class Product extends Model<Product> {
      */
     @TableLogic
     private Integer isDeleted;
+    /**
+     * 租户id
+     */
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public Integer getId() {
         return id;

@@ -63,7 +63,18 @@ public class DeviceProduct extends Model<DeviceProduct> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
+    /**
+     * 租户id
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Integer tenantId;
+    public Integer getTenantId() {
+        return tenantId;
+    }
 
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 
     public String getId() {
         return id;

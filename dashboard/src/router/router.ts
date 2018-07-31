@@ -46,7 +46,7 @@ export const appRouters: Array<any> = [
     path: "/order",
     name: "order",
     meta: { title: "订单系统" },
-    icon: "&#xe6b8;",
+    icon: "&#xeb1c;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -67,7 +67,7 @@ export const appRouters: Array<any> = [
     path: "/pointer",
     name: "pointer",
     meta: { title: "点位管理" },
-    icon: "&#xe725;",
+    icon: "&#xeb33;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -88,7 +88,7 @@ export const appRouters: Array<any> = [
     path: "/device",
     name: "device",
     meta: { title: "设备管理" },
-    icon: "&#xe717;",
+    icon: "&#xeac8;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -103,7 +103,7 @@ export const appRouters: Array<any> = [
     path: "/product",
     name: "product",
     meta: { title: "货物管理" },
-    icon: "&#xe717;",
+    icon: "&#xeafc;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -118,7 +118,7 @@ export const appRouters: Array<any> = [
     path: "/pay",
     name: "pay",
     meta: { title: "支付配置" },
-    icon: "&#xe717;",
+    icon: "&#xeb18;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -139,7 +139,7 @@ export const appRouters: Array<any> = [
     path: "/watch",
     name: "watch",
     meta: { title: "监控系统" },
-    icon: "&#xe73d;",
+    icon: "&#xeafa;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -166,7 +166,7 @@ export const appRouters: Array<any> = [
     path: "/report",
     name: "report",
     meta: { title: "报表系统" },
-    icon: "&#xe742;",
+    icon: "&#xeaf5;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
@@ -188,7 +188,7 @@ export const appRouters: Array<any> = [
     name: "setting",
     permission: "system:list",
     meta: { title: "系统管理" },
-    icon: "&#xe68a;",
+    icon: "&#xeacc;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
