@@ -73,7 +73,6 @@ public class MybatisPlusConfig {
                         tenantId = u.getTenantId();
                     }
                 }
-                System.out.print("当前登陆sessiont"+ tenantId);
                 return new LongValue(tenantId);
             }
 
