@@ -56,7 +56,7 @@ public interface InitConst {
                 }}));
             }}));
             add(new MenuInfo("支付配置", PermissionConst._pay.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("支付设置", PermissionConst._pay.list, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("支付设置", PermissionConst._pay.first, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("修改配置", PermissionConst._pay.modify, "", 2, null));
                 }}));
             }}));

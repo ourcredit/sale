@@ -46,7 +46,6 @@ public class PayforController {
     @RequiresPermissions(value = {PermissionConst._pay.first})
     public PublicResult<Payfor> Device(@PathVariable Integer id) throws Exception{
         EntityWrapper ew=new EntityWrapper();
-        ew.eq("operatorId",id);
         Payfor m=_payforService.selectOne(ew);
         if(m==null){
             m=new Payfor();

@@ -3,5 +3,4 @@ declare module "iview" {
   export default iView;
 }
 
-
-declare module 'vue-baidu-map'
+declare module "vue-baidu-map";
