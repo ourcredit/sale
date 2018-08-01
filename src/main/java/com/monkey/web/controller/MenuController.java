@@ -14,6 +14,7 @@ import com.monkey.core.entity.Menu;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
 import com.monkey.web.annotation.Log;
+import com.monkey.web.annotation.Pass;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class MenuController {
 
     @ApiOperation(value = "获取菜单列表",notes = "菜单列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.list})
+    @Pass
     public PublicResult<Page<Menu>> menus(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Menu> filter = new EntityWrapper<>();
          filter=  ComUtil.genderFilter(filter,page.where);

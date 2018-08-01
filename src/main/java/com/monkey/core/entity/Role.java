@@ -24,12 +24,18 @@ public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
     public Role(){}
-    public Role(Integer id, String roleName,String displayName,Integer isActive,Integer isStatic){
-        this.id=id;
+    public Role( String roleName,String displayName,Integer isActive,Integer isStatic){
         this.roleName=roleName;
         this.displayName=displayName;
         this.isActive=isActive;
         this.isStatic=isStatic;
+    }
+    public Role( String roleName,String displayName,Integer isActive,Integer isStatic,Integer tenantId){
+        this.roleName=roleName;
+        this.displayName=displayName;
+        this.isActive=isActive;
+        this.isStatic=isStatic;
+        this.tenantId=tenantId;
     }
     /**
      * 软删除

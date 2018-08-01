@@ -61,4 +61,7 @@ WHERE
 	a.`name` = #{tenant}
 	AND b.account =#{account}
     </select>
+    <select id="selectByTenantAndName" resultType="com.monkey.core.entity.User">
+        select * from sale_user where account=#{account} and tenantId=#{tenantId}
+    </select>
 </mapper>

@@ -53,10 +53,10 @@ public class JWTUtil {
      * 获得token中的信息无需secret解密也能获得
      * @return token中包含的用户名
      */
-    public static String getTenantId(String token) {
+    public static Integer getTenantId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("userId").asString();
+            return jwt.getClaim("tenantId").asInt();
         } catch (JWTDecodeException e) {
             return null;
         }
@@ -65,10 +65,10 @@ public class JWTUtil {
      * 获得token中的信息无需secret解密也能获得
      * @return token中包含的用户名
      */
-    public static String getUserId(String token) {
+    public static Integer getUserId(String token) {
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("tenantId").asString();
+            return jwt.getClaim("userId").asInt();
         } catch (JWTDecodeException e) {
             return null;
         }

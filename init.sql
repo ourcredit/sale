@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 31/07/2018 17:37:27
+ Date: 01/08/2018 10:31:41
 */
 
 SET NAMES utf8mb4;
@@ -99,7 +99,6 @@ CREATE TABLE `sale_menu`  (
   `creationTime` datetime(0) NULL DEFAULT NULL,
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `isDeleted` int(11) NULL DEFAULT NULL,
-  `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -204,7 +203,7 @@ CREATE TABLE `sale_tenant`  (
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '1启用  0禁用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_user

@@ -9,11 +9,16 @@ import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
+import com.monkey.common.util.JWTUtil;
+import com.monkey.core.dtos.NgUserModel;
 import com.monkey.core.entity.Tenant;
+import com.monkey.core.entity.User;
+import com.monkey.web.annotation.Pass;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -53,7 +58,10 @@ public class TenantController {
     @RequiresPermissions(value = {PermissionConst._tenant.modify})
     public PublicResult<Object> insert(@RequestBody Tenant model) throws Exception {
         Boolean r = _tenantService.insertOrUpdate(model);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+        if (model.getId() != null) {
+            _tenantService.insertTenantAdmin(model.getId());
+        }
+        return new PublicResult<>(PublicResultConstant.FAILED, r);
     }
 
     @ApiOperation(value = "删除租户", notes = "租户列表")

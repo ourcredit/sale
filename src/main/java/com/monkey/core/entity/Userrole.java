@@ -28,6 +28,11 @@ public class Userrole extends Model<Userrole> {
     this.userId=userId;
     this.roleId=roleId;
     }
+    public  Userrole(Integer userId,Integer roleId,Integer tenantId){
+        this.tenantId=tenantId;
+        this.userId=userId;
+        this.roleId=roleId;
+    }
     /**
      * key
      */

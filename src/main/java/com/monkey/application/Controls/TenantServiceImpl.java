@@ -7,6 +7,7 @@ import com.monkey.common.base.InitConst;
 import com.monkey.core.entity.*;
 import com.monkey.core.mapper.TenantRepository;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,8 @@ public class TenantServiceImpl extends ServiceImpl<TenantRepository, Tenant> imp
     @Autowired
     IUserService _userService;
     @Autowired
+    TenantRepository _tenantRepository;
+    @Autowired
     IRoleService _roleService;
     @Autowired
     IUserRoleService _userRoleService;
@@ -34,87 +37,28 @@ public class TenantServiceImpl extends ServiceImpl<TenantRepository, Tenant> imp
     IMenuService _menuService;
     @Autowired
     IRoleMenuService _roleMenuService;
+
+
     @Override
-    public void createTenantAndUserRoles(Integer tenantId) {
-        createUserRoles(tenantId);
-        createRoleMenus(tenantId);
-    }
-    public void createUserRoles(Integer tenantId) {
-        User u=new User(InitConst._defaultUser.admin,
-                InitConst._defaultUser.defaultPassword,
-                InitConst._defaultUser.admin, 1) ;
-           _userService.insert(u);
-        EntityWrapper<Role> rw = new EntityWrapper<>();
-        rw.eq("roleName", InitConst._defaultRole.admin);
-        Role r = _roleService.selectOne(rw);
-        if (r == null) {
-            Boolean b = _roleService.insert(new Role(null, InitConst._defaultRole.admin, InitConst._defaultRole.admin,1,0));
-            if (b) {
-                r = _roleService.selectOne(rw);
-            }
-        }
-        rw = new EntityWrapper<>();
-        rw.eq("roleName", InitConst._defaultRole.def);
-        Role de = _roleService.selectOne(rw);
-        if (de == null) {
-            Boolean b = _roleService.insert(new Role(null,InitConst._defaultRole.def, InitConst._defaultRole.def,1,1));
-            if (b) {
-                de = _roleService.selectOne(rw);
-            }
-        }
-        List<Userrole> rels = new ArrayList<>();
-        rels.add(new Userrole(u.getId(), r.getId()));
-        rels.add(new Userrole(u.getId(), de.getId()));
-        _userRoleService.delete(new EntityWrapper<>());
-        _userRoleService.insertBatch(rels);
-    }
+    public void insertTenantAdmin(Integer tenantId) {
+        User t=new User("admin","1234567","admin",1);
+        t.setTenantId(tenantId);
+         _tenantRepository.insertTenantAdmin(t);
+         List<Role> roles=new ArrayList<Role>(){{
+             add(new Role( InitConst._defaultRole.admin, InitConst._defaultRole.admin,1,0,tenantId));
+             add(new Role(InitConst._defaultRole.def, InitConst._defaultRole.def,1,1,tenantId));
+         }};
+         _tenantRepository.insertTenantRole(roles);
+        _tenantRepository.insertTenantAdminRoles(t.getTenantId(),t.getId());
+        List<Role> rls=_tenantRepository.selectTenantRoles(t.getTenantId());
+        if(rls.size()>0){
+            for (int i = 0; i <rls.size() ; i++) {
+                _tenantRepository.insertTenantMenus(t.getTenantId(),rls.get(i).getId());
 
-    public void createRoleMenus(Integer tenantId) {
-        List<InitConst._menu.MenuInfo> list = InitConst._menu.menuList;
-        insertMenu(list, null);
-        EntityWrapper e = new EntityWrapper<>();
-        Role r = _roleService.selectOne(e.eq("roleName", InitConst._defaultRole.admin));
-        if (r != null) {
-            List<Menu> lists = _menuService.selectList(new EntityWrapper<>());
-            List<Rolemenu> rms = new ArrayList<>();
-            for (Menu m : lists) {
-                rms.add(new Rolemenu(r.getId(), m.getId()));
-            }
-            _roleMenuService.insertBatch(rms);
-        }
-    }
-
-    public void insertMenu(List<InitConst._menu.MenuInfo> list, Integer parentId) {
-        EntityWrapper  e ;
-        for (InitConst._menu.MenuInfo item : list) {
-            e = new EntityWrapper<>();
-            e.eq("name", item.Name);
-            Menu m = _menuService.selectOne(e);
-            if (m == null) {
-                m = new Menu(item.Name, item.Code, item.Url, item.Type, parentId);
-                Boolean r = _menuService.insert(m);
-                if (r) {
-                    m = _menuService.selectOne(e);
-                }
-            }
-            if (item.Children!=null&& !item.Children.isEmpty()) {
-                List<InitConst._menu.MenuInfo> a = new ArrayList<>();
-                List<Menu> b = new ArrayList<>();
-                for (InitConst._menu.MenuInfo t : item.Children) {
-                    if (t.Type == 1) {
-                        a.add(t);
-                    } else {
-                        b.add(new Menu(t.Name, t.Code, t.Url, t.Type, m.getId()));
-                    }
-                }
-                if(!b.isEmpty()){
-                    _menuService.insertBatch(b);
-                }
-                if (!a.isEmpty()) {
-                    insertMenu(item.Children, m.getId());
-                }
             }
         }
 
     }
+
+
 }

@@ -28,6 +28,11 @@ public class Rolemenu extends Model<Rolemenu> {
         this.roleId=roleId;
         this.menuId=menuId;
     }
+    public Rolemenu(Integer roleId,Integer menuId,Integer tenantId){
+        this.roleId=roleId;
+        this.menuId=menuId;
+        this.tenantId=tenantId;
+    }
     /**
      * guid
      */

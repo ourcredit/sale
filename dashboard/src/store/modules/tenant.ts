@@ -4,6 +4,7 @@ import ListState from "./base/list-state";
 import Tenant from "../entities/tenant";
 import Ajax from "../../lib/ajax";
 import PageResult from "@/store/entities/page-result";
+import auth from "@/lib/auth";
 import ListMutations from "./base/list-mutations";
 interface ITenantState extends ListState<Tenant> {
   editTenant: Tenant;
@@ -35,7 +36,7 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
       context: ActionContext<ITenantState, any>,
       payload: any
     ): Promise<void> {
-      await Ajax.put("/api/tenant", payload.data);
+       Ajax.put("/api/tenant", payload.data);
     },
     async delete(
       context: ActionContext<ITenantState, any>,

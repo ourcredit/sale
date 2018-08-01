@@ -55,6 +55,9 @@ public class LoginController {
         NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(),user.getId(),user.getTenantId(), user.getPassword()),null );
         return new PublicResult<>(PublicResultConstant.SUCCESS, u);
     }
+
+
+
     @Log(description="注册接口:/register")
     @Pass
     @ApiOperation(value = "注册接口",notes = "注册新用户")

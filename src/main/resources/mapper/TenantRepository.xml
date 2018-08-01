@@ -4,16 +4,65 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.monkey.core.entity.Tenant">
-        <id column="id" property="id" />
-        <result column="displayName" property="displayName" />
-        <result column="name" property="name" />
-        <result column="creationTime" property="creationTime" />
-        <result column="creatorUserId" property="creatorUserId" />
+        <id column="id" property="id"/>
+        <result column="displayName" property="displayName"/>
+        <result column="name" property="name"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creatorUserId" property="creatorUserId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, displayName, name, creationTime, creatorUserId
     </sql>
+
+    <insert id="insertTenantAdmin" useGeneratedKeys="true" keyProperty="id" parameterType="com.monkey.core.entity.User">
+  INSERT INTO `sale_user` ( account, userName, `password`, creationTime, creatorUserId, isActive, isDeleted, tenantId )
+VALUES
+	( #{account},#{account},#{password}, '2018-07-31 09:50:23', NULL, 1, 0, #{tenantId} );
+</insert>
+    <insert id="insertTenantRole" parameterType="java.util.List">
+        INSERT INTO sale_role ( roleName, displayName, isActive, isStatic, description, isDeleted, tenantId )
+        VALUES
+        <foreach collection="list" item="itm" index="index" separator=",">
+            (
+            #{itm.roleName},
+            #{itm.displayName},
+            #{itm.isActive},
+            #{itm.isStatic},
+            #{itm.description},
+            #{itm.isDeleted},
+            #{itm.tenantId}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertTenantMenus">
+INSERT INTO sale_rolemenu (id, roleId, menuId, tenantId ) SELECT
+REPLACE(UUID(),'-',''),
+#{roleId},
+id,
+#{tenantId}
+FROM
+	sale_menu
+    </insert>
+    <insert id="insertTenantAdminRoles">
+        INSERT INTO sale_userrole (id, userId, roleId, tenantId ) SELECT
+        REPLACE(UUID(),'-',''),
+#{userId},
+Id,
+#{tenantId}
+FROM
+	sale_role
+WHERE
+	tenantId =#{tenantId}
+    </insert>
+    <select id="selectTenantRoles" resultMap="com.monkey.core.mapper.RoleRepository.BaseResultMap">
+      SELECT
+	*
+FROM
+	sale_role
+WHERE
+	tenantId =#{tenantId}
+    </select>
 
 </mapper>

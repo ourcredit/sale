@@ -32,6 +32,7 @@ public class Menu extends Model<Menu> {
         this.type=type;
         this.parentId=parentId;
     }
+
     /**
      * 软删除
      */
@@ -72,17 +73,6 @@ public class Menu extends Model<Menu> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
-    /**
-     * 租户id
-     */
-    private Integer tenantId;
-    public Integer getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(Integer tenantId) {
-        this.tenantId = tenantId;
-    }
 
     public Integer getId() {
         return id;

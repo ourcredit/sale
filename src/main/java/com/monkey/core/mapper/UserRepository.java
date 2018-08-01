@@ -5,7 +5,6 @@ import com.monkey.core.dtos.UserDto;
 import com.monkey.core.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import scala.util.parsing.combinator.testing.Str;
 
 /**
  * <p>
@@ -19,5 +18,6 @@ import scala.util.parsing.combinator.testing.Str;
 public interface UserRepository extends BaseMapper<User> {
 
     UserDto selectUserRole(@Param("id") Integer id) ;
+    User selectByTenantAndName(@Param("tenantId")Integer tenantId,@Param("account")String account);
     User selectByTenantAndAccount(@Param("tenant") String tenantId, @Param("account")String account);
 }

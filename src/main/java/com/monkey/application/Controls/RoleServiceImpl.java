@@ -53,7 +53,8 @@ public class RoleServiceImpl extends  ServiceImpl<RoleRepository, Role> implemen
     @Override
     public Boolean insertRoleAndPermissions(RoleDto model) {
 
-        Role role = new Role(model.getId(), model.getRoleName(), model.getDisplayName(),model.getIsActive(),model.getIsStatic());
+        Role role = new Role(model.getRoleName(), model.getDisplayName(),model.getIsActive(),model.getIsStatic());
+        role.setId(model.getId());
         role.setDescription(model.getDescription());
         EntityWrapper ew = new EntityWrapper();
 
