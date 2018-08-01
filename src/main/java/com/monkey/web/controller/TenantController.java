@@ -37,7 +37,7 @@ public class TenantController {
 
     @ApiOperation(value = "获取租户列表", notes = "租户列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._tenant.list})
+    @RequiresPermissions(value = {PermissionConst._system._tenant.list})
     public PublicResult<Page<Tenant>> tenants(@RequestBody PagedAndFilterInputDto page) throws Exception {
         EntityWrapper<Tenant> filter = new EntityWrapper<>();
         filter = ComUtil.genderFilter(filter, page.where);
@@ -47,7 +47,7 @@ public class TenantController {
 
     @ApiOperation(value = "获取租户详情", notes = "租户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._tenant.first})
+    @RequiresPermissions(value = {PermissionConst._system._tenant.first})
     public PublicResult<Tenant> Tenant(@PathVariable Integer id) throws Exception {
         Tenant m = _tenantService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
@@ -55,7 +55,7 @@ public class TenantController {
 
     @ApiOperation(value = "添加或编辑租户", notes = "租户列表")
     @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._tenant.modify})
+    @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
     public PublicResult<Object> insert(@RequestBody Tenant model) throws Exception {
         Boolean r = _tenantService.insertOrUpdate(model);
         if (model.getId() != null) {
@@ -66,7 +66,7 @@ public class TenantController {
 
     @ApiOperation(value = "删除租户", notes = "租户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {PermissionConst._tenant.delete})
+    @RequiresPermissions(value = {PermissionConst._system._tenant.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception {
         Boolean r = _tenantService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
@@ -74,7 +74,7 @@ public class TenantController {
 
     @ApiOperation(value = "批量删除租户", notes = "租户列表")
     @RequestMapping(value = "/batch", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._tenant.batch})
+    @RequiresPermissions(value = {PermissionConst._system._tenant.batch})
     public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception {
         Boolean r = _tenantService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

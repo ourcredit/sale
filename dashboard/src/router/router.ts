@@ -53,7 +53,7 @@ export const appRouters: Array<any> = [
         path: "list",
         meta: { title: "订单列表" },
         name: "ol",
-        component: () => System.import("../views/setting/user/user.vue")
+        component: () => System.import("../views/orders/index.vue")
       },
       {
         path: "back",

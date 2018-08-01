@@ -34,7 +34,7 @@ public class ProductController {
     IProductService _productService;
     @ApiOperation(value = "获取设备列表",notes = "设备列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.list})
+    @RequiresPermissions(value = {PermissionConst._pm._product.list})
     public PublicResult<Page<Product>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Product> filter = new EntityWrapper<>();
         filter=  ComUtil.genderFilter(filter,page.where);
@@ -43,7 +43,7 @@ public class ProductController {
     }
     @ApiOperation(value = "获取设备详情",notes = "设备列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._system._menu.first})
+    @RequiresPermissions(value = {PermissionConst._pm._product.first})
     public PublicResult<Product> Product(@PathVariable Integer id) throws Exception{
         Product m=_productService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
@@ -51,21 +51,21 @@ public class ProductController {
 
     @ApiOperation(value = "添加或编辑设备",notes = "设备列表")
     @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._system._menu.modify})
+    @RequiresPermissions(value = {PermissionConst._pm._product.modify})
     public PublicResult<Object> insert(@RequestBody Product model) throws Exception{
         Boolean r=_productService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "删除设备",notes = "设备列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {PermissionConst._system._menu.delete})
+    @RequiresPermissions(value = {PermissionConst._pm._product.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
         Boolean r=_productService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "批量删除设备",notes = "设备列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.batch})
+    @RequiresPermissions(value = {PermissionConst._pm._product.batch})
     public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
         Boolean r=_productService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

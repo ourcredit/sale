@@ -45,7 +45,7 @@ public class DeviceController {
 
     @ApiOperation(value = "获取设备列表",notes = "设备列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.list})
+    @RequiresPermissions(value = {PermissionConst._device.list})
     public PublicResult<Page<Device>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Device> filter = new EntityWrapper<>();
         filter=  ComUtil.genderFilter(filter,page.where);
@@ -54,7 +54,7 @@ public class DeviceController {
     }
     @ApiOperation(value = "获取设备详情",notes = "设备列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._system._menu.first})
+    @RequiresPermissions(value = {PermissionConst._device.first})
     public PublicResult<Device> Device(@PathVariable Integer id) throws Exception{
         Device m=_deviceService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
@@ -62,21 +62,21 @@ public class DeviceController {
 
     @ApiOperation(value = "添加或编辑设备",notes = "设备列表")
     @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._system._menu.modify})
+    @RequiresPermissions(value = {PermissionConst._device.modify})
     public PublicResult<Object> insert(@RequestBody Device model) throws Exception{
         Boolean r=_deviceService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "删除设备",notes = "设备列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {PermissionConst._system._menu.delete})
+    @RequiresPermissions(value = {PermissionConst._device.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
         Boolean r=_deviceService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "批量删除设备",notes = "设备列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.batch})
+    @RequiresPermissions(value = {PermissionConst._device.batch})
     public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
         Boolean r=_deviceService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
@@ -85,14 +85,14 @@ public class DeviceController {
 
     @ApiOperation(value = "获取设备下商品配置列",notes = "设备列表")
     @RequestMapping(value = "/products",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._system._menu.list})
+    @RequiresPermissions(value = {PermissionConst._device.list})
     public PublicResult<Page<ProductDto>> get_products_by_device(@RequestBody ProductInput page) throws Exception{
         Page<ProductDto> res= _deviceService.selectProductsByDevice(new Page<>(page.index,page.size),page.deviceId, page.productName,page.productNum,page.productType,page.isSale);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "批量更新商品",notes = "设备列表")
     @RequestMapping(value = "/products",method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._system._menu.list})
+    @RequiresPermissions(value = {PermissionConst._device.allow})
     public PublicResult<Boolean> put_products_by_device(@RequestBody List<DeviceProductInput> page) throws Exception{
      Boolean r=   _deviceProductService.updateProducts(page);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

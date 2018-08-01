@@ -56,11 +56,8 @@ public interface InitConst {
                 }}));
             }}));
             add(new MenuInfo("支付配置", PermissionConst._pay.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("支付宝", PermissionConst._pay._alipay.list, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("修改配置", PermissionConst._pay._alipay.modify, "", 2, null));
-                }}));
-                add(new MenuInfo("微信", PermissionConst._pay._wechatpay.list, "/pay/wechatpay", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("修改配置", PermissionConst._pay._alipay.modify, "", 2, null));
+                add(new MenuInfo("支付设置", PermissionConst._pay.list, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("修改配置", PermissionConst._pay.modify, "", 2, null));
                 }}));
             }}));
             add(new MenuInfo("监控系统", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
@@ -99,11 +96,11 @@ public interface InitConst {
                     add(new MenuInfo("批量删除角色", PermissionConst._system._role.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._system._role.first, "", 2, null));
                 }}));
-                add(new MenuInfo("租户管理", PermissionConst._tenant.list, "/tenant/list", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑租户", PermissionConst._tenant.modify, "", 2, null));
-                    add(new MenuInfo("删除租户", PermissionConst._tenant.delete, "", 2, null));
-                    add(new MenuInfo("批量删除租户", PermissionConst._tenant.batch, "", 2, null));
-                    add(new MenuInfo("获取租户详情", PermissionConst._tenant.first, "", 2, null));
+                add(new MenuInfo("租户管理", PermissionConst._system._tenant.list, "/system/tenant", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑租户", PermissionConst._system._tenant.modify, "", 2, null));
+                    add(new MenuInfo("删除租户", PermissionConst._system._tenant.delete, "", 2, null));
+                    add(new MenuInfo("批量删除租户", PermissionConst._system._tenant.batch, "", 2, null));
+                    add(new MenuInfo("获取租户详情", PermissionConst._system._tenant.first, "", 2, null));
                 }}));
             }}));
 

@@ -12,8 +12,7 @@
                         <FormItem>
                             <Checkbox @on-change="activeChange" :value="tenant.isActive==1">启用</Checkbox>
                         </FormItem>
-              
-            </Form>
+                          </Form>
             <div slot="footer">
                 <Button @click="cancel">关闭</Button>
                 <Button @click="save" type="primary">保存</Button>

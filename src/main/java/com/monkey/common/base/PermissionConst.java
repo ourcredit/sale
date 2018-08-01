@@ -1,13 +1,7 @@
 package com.monkey.common.base;
 
 public interface PermissionConst {
-    public  static class  _tenant{
-        public static  final  String list="tenant:list";
-        public static  final  String modify="tenant:modify";
-        public static  final  String delete="tenant:delete";
-        public static  final  String batch="tenant:batch";
-        public static  final  String first="tenant:first";
-    }
+
     public  static class  _dashboard{
         public static  final  String list="dashboard:show";
     }
@@ -41,16 +35,9 @@ public interface PermissionConst {
     }
 
     public  static  class  _pay{
-        public static  final  String list="pay:show";
-        public  static  class  _alipay{
-            public static  final  String list="ali:list";
-            public static  final  String modify="ali:modify";
-        }
-        public  static  class  _wechatpay{
-            public static  final  String list="wechat:list";
-            public static  final  String modify="wechat:modify";
-
-        }
+        public static  final  String list="pay:list";
+        public static  final  String first="pay:first";
+        public static  final  String modify="pay:modify";
     }
     public  static  class  _watch{
         public static  final  String list="watch:show";
@@ -114,19 +101,13 @@ public interface PermissionConst {
             public static  final  String batch="role:batch";
             public static  final  String first="role:first";
         }
-        public  static class  _menu{
-            public static  final  String list="menu:list";
-            public static  final  String modify="menu:modify";
-            public static  final  String delete="menu:delete";
-            public static  final  String batch="menu:batch";
-            public static  final  String first="menu:first";
-        }
-        public  static class  _allowmanager{
-            public static  final  String list="allow:list";
-            public static  final  String modify="allow:modify";
-            public static  final  String delete="allow:delete";
-            public static  final  String batch="allow:batch";
-            public static  final  String first="allow:first";
+
+        public  static class  _tenant{
+            public static  final  String list="tenant:list";
+            public static  final  String modify="tenant:modify";
+            public static  final  String delete="tenant:delete";
+            public static  final  String batch="tenant:batch";
+            public static  final  String first="tenant:first";
         }
     }
 
