@@ -94,6 +94,7 @@ export const appRouters: Array<any> = [
       {
         path: "list",
         meta: { title: "设备管理" },
+        permission: "device:list",
         name: "dl",
         component: () => System.import("../views/devices/index.vue")
       }
@@ -109,6 +110,7 @@ export const appRouters: Array<any> = [
       {
         path: "list",
         meta: { title: "商品管理" },
+        permission: "product:list",
         name: "pl",
         component: () => System.import("../views/products/index.vue")
       }
@@ -122,16 +124,11 @@ export const appRouters: Array<any> = [
     component: () => System.import("../views/main.vue"),
     children: [
       {
-        path: "alipay",
-        meta: { title: "支付宝" },
+        path: "settings",
+        meta: { title: "支付设置" },
+        permission: "pay:list",
         name: "ap",
-        component: () => System.import("../views/payfor/alipay.vue")
-      },
-      {
-        path: "wechatpay",
-        meta: { title: "微信" },
-        name: "wp",
-        component: () => System.import("../views/payfor/wechatpay.vue")
+        component: () => System.import("../views/payfor/index.vue")
       }
     ]
   },

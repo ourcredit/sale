@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e81270bf-93e3-4977-ba8c-a4eae7191e0a" name="默认的" comment="prod=&gt;dev">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/home/dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/home/dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/views/setting/tenants/modify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/tenants/modify.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/views/payfor/alipay.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/src/views/payfor/wechatpay.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -63,11 +59,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TenantController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TenantController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="76" column="57" selection-start-line="76" selection-start-column="57" selection-end-line="76" selection-end-column="57" />
+            <state relative-caret-position="193">
+              <caret line="59" column="57" lean-forward="true" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,15 +76,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="257">
               <caret line="90" column="53" selection-start-line="90" selection-start-column="53" selection-end-line="90" selection-end-column="53" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="50" column="5" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -123,8 +110,8 @@
       <file leaf-file-name="PermissionConst.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-627">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="247">
+              <caret line="110" column="38" lean-forward="true" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -147,11 +134,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1083">
-              <caret line="57" column="60" lean-forward="true" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
+            <state relative-caret-position="114">
+              <caret line="67" column="49" lean-forward="true" selection-start-line="67" selection-start-column="49" selection-end-line="67" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application-dev.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -230,7 +229,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" />
         <option value="$USER_HOME$/Desktop/sale.sql" />
         <option value="$PROJECT_DIR$/init.sql" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/application-dev.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" />
@@ -247,10 +245,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/ProductController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config/application-dev.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java" />
       </list>
     </option>
   </component>
@@ -490,9 +489,9 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" sideWeight="0.496875" weight="0.32987013" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="消息" order="7" sideWeight="0.499375" visible="true" weight="0.32987013" />
+      <window_info anchor="bottom" id="消息" order="7" sideWeight="0.499375" weight="0.32987013" />
       <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="运行" order="7" sideWeight="0.499375" weight="0.36753246" />
+      <window_info active="true" anchor="bottom" id="运行" order="7" sideWeight="0.499375" visible="true" weight="0.36753246" />
       <window_info anchor="bottom" id="TypeScript" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="right" id="Bean Validation" order="3" />
@@ -761,20 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="237" column="54" lean-forward="true" selection-start-line="237" selection-start-column="54" selection-end-line="237" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-prod.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -945,24 +930,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1083">
-          <caret line="57" column="60" lean-forward="true" selection-start-line="57" selection-start-column="60" selection-end-line="57" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="48" column="31" lean-forward="true" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-627">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -973,10 +944,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/init.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="231" column="31" lean-forward="true" selection-start-line="231" selection-start-column="31" selection-end-line="231" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="76" column="57" selection-start-line="76" selection-start-column="57" selection-end-line="76" selection-end-column="57" />
+        <state relative-caret-position="193">
+          <caret line="59" column="57" lean-forward="true" selection-start-line="59" selection-start-column="57" selection-end-line="59" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="110" column="38" lean-forward="true" selection-start-line="110" selection-start-column="38" selection-end-line="110" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="67" column="49" lean-forward="true" selection-start-line="67" selection-start-column="49" selection-end-line="67" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

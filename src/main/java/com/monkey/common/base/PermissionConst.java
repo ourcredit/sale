@@ -101,7 +101,13 @@ public interface PermissionConst {
             public static  final  String batch="role:batch";
             public static  final  String first="role:first";
         }
-
+        public  static class  _menu{
+            public static  final  String list="menu:list";
+            public static  final  String modify="menu:modify";
+            public static  final  String delete="menu:delete";
+            public static  final  String batch="menu:batch";
+            public static  final  String first="menu:first";
+        }
         public  static class  _tenant{
             public static  final  String list="tenant:list";
             public static  final  String modify="tenant:modify";
