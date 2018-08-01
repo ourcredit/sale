@@ -45,11 +45,9 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
      * @since 2018-05-03
      */
     @Override
-      @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0])")
-    public User getUserByUserName(String username) {
-        EntityWrapper<User> ew = new EntityWrapper<>();
-        ew.where("username={0}", username);
-        return this.selectOne(ew);
+      @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0]).concat(#root.args[1])")
+    public User getUserByUserName(String username,Integer tenantId) {
+    return  _userRepository.selectByTenantAndName(tenantId,username);
     }
 
     @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")

@@ -80,7 +80,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             this.userService = SpringContextBean.getBean(IUserService.class);
         }
         String username =  JWTUtil.getUsername(token.getPrincipal().toString());
-        User userBean= userService.getUserByUserName(username);
+        User userBean= userService.getUserByUserName(username, JWTUtil.getTenantId(token.getPrincipal().toString()));
         request.setAttribute("currentUser", userBean);
     }
 

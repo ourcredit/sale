@@ -61,7 +61,7 @@ public class TenantController {
         if (model.getId() != null) {
             _tenantService.insertTenantAdmin(model.getId());
         }
-        return new PublicResult<>(PublicResultConstant.FAILED, r);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
 
     @ApiOperation(value = "删除租户", notes = "租户列表")

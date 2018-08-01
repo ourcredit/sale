@@ -24,7 +24,7 @@ public interface IUserService extends IService<User> {
      * @param username 用户名
      * @return 用户
      */
-    User getUserByUserName(String username);
+    User getUserByUserName(String username,Integer tenantId);
     User login(String tenantName,String account);
     /**
      * <p>

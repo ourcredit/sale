@@ -54,7 +54,7 @@ public class MyRealm extends AuthorizingRealm {
         }
 
         String username = JWTUtil.getUsername(principals.toString());
-        User user = userService.getUserByUserName(username);
+        User user = userService.getUserByUserName(username,JWTUtil.getTenantId(principals.toString()));
         List<Userrole> userToRole = userRoleService.selectByUserId(user.getId());
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
@@ -88,15 +88,17 @@ public class MyRealm extends AuthorizingRealm {
 
         // 解密获得username，用于和数据库进行对比
         String username = JWTUtil.getUsername(token);
+        Integer tenantId = JWTUtil.getTenantId(token);
+        Integer userId = JWTUtil.getUserId(token);
         if (username == null) {
             throw new UnauthorizedException("token invalid");
         }
 
-        User userBean = userService.getUserByUserName(username);
+        User userBean = userService.getUserByUserName(username,tenantId);
         if (userBean == null) {
             throw new UnauthorizedException("User didn't existed!");
         }
-        if (! JWTUtil.verify(token, username, userBean.getPassword())) {
+        if (! JWTUtil.verify(token, username,userId,tenantId, userBean.getPassword())) {
             throw new UnauthorizedException("Username or password error");
         }
         return new SimpleAuthenticationInfo(token, token, this.getName());

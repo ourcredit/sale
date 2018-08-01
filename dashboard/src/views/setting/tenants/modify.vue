@@ -28,7 +28,7 @@ import AbpBase from "../../../lib/abpbase";
 import Tenant from "../../../store/entities/tenant";
 import { debug } from "util";
 @Component
-export default class CreateUser extends AbpBase {
+export default class CreateTenant extends AbpBase {
   @Prop({
     type: Boolean,
     default: false
@@ -51,6 +51,18 @@ export default class CreateUser extends AbpBase {
       }
     });
   }
+   //参数n为休眠时间，单位为毫秒:
+     sleep(n) {
+        var start = new Date().getTime();
+        //  console.log('休眠前：' + start);
+        while (true) {
+            if (new Date().getTime() - start > n) {
+                break;
+            }
+        }
+        // console.log('休眠后：' + new Date().getTime());
+    }
+
   activeChange() {
     this.tenant.isActive = !!!this.tenant.isActive;
   }
