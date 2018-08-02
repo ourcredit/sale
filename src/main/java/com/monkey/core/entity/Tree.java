@@ -1,5 +1,7 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -19,7 +21,11 @@ import java.io.Serializable;
 public class Tree extends Model<Tree> {
 
     private static final long serialVersionUID = 1L;
-
+    public Tree(){}
+    public Tree(String name,Integer parentId){
+        this.name=name;
+        this.parentId=parentId;
+    }
     /**
      * key
      */
@@ -36,10 +42,12 @@ public class Tree extends Model<Tree> {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date creationTime;
     /**
      * 创建人id
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
     /**
      * 租户id

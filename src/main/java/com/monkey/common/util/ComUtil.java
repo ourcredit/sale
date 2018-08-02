@@ -1,10 +1,12 @@
 package com.monkey.common.util;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.google.gson.JsonArray;
+import com.monkey.core.entity.Tree;
+import com.monkey.web.controller.dtos.TreeDtoInput;
 
-import java.lang.reflect.Array;
+import javax.swing.event.TreeWillExpandListener;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author liugh
@@ -98,7 +100,6 @@ public class ComUtil {
     }
 
 
-
     public static String trim(String aStr) {
         if (aStr == null) {
             return "";
@@ -137,38 +138,38 @@ public class ComUtil {
     public static boolean equalsIgnoreCase(String str1, String str2) {
         return str1 != null ? str1.equalsIgnoreCase(str2) : str2 == null;
     }
-    public static EntityWrapper genderFilter(EntityWrapper e, Map<String,Object> m){
-        if (m!=null&& !m.isEmpty()) {
-            Set<String> r=   m.keySet();
-            for (String key :r){
-                Object v=m.get(key);
+
+    public static EntityWrapper genderFilter(EntityWrapper e, Map<String, Object> m) {
+        if (m != null && !m.isEmpty()) {
+            Set<String> r = m.keySet();
+            for (String key : r) {
+                Object v = m.get(key);
                 if (v instanceof Number) {
-                    e.eq(key,v);
+                    e.eq(key, v);
                 } else if (v instanceof String) {
                     String s = (String) v;
-                    if(!s.isEmpty()){
-                        e.like(key,s);
+                    if (!s.isEmpty()) {
+                        e.like(key, s);
                     }
-                }else if(v instanceof  Boolean){
-                    Boolean b=((Boolean)v).booleanValue();
-                    if(b!=null){
-                        e.eq(key,b);
+                } else if (v instanceof Boolean) {
+                    Boolean b = ((Boolean) v).booleanValue();
+                    if (b != null) {
+                        e.eq(key, b);
                     }
-                }
-                else if (v instanceof Date) {
+                } else if (v instanceof Date) {
                     Date d = (Date) v;
-                    e.eq(key,d);
-                }else if(v instanceof List){
-                    List a=(List)v;
-                    if(!a.isEmpty()&&a.size()==2){
-                        String l=a.get(0).toString();
-                        if(!l.isEmpty()){
+                    e.eq(key, d);
+                } else if (v instanceof List) {
+                    List a = (List) v;
+                    if (!a.isEmpty() && a.size() == 2) {
+                        String l = a.get(0).toString();
+                        if (!l.isEmpty()) {
                             e.ge(key, l);
 
                         }
-                        String rr=a.get(1).toString();
-                        if(!rr.isEmpty()){
-                            e.le(key,rr);
+                        String rr = a.get(1).toString();
+                        if (!rr.isEmpty()) {
+                            e.le(key, rr);
 
                         }
                     }
@@ -177,6 +178,8 @@ public class ComUtil {
 
             }
         }
-        return  e;
+        return e;
     }
+
+
 }

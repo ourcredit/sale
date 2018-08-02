@@ -7,6 +7,7 @@ import PageResult from "@/store/entities/page-result";
 import ListMutations from "@/store/modules/base/list-mutations";
 import { stat } from "fs";
 import { O_NONBLOCK } from "constants";
+import util from "@/lib/util";
 interface IDeviceState extends IListState<Device> {
   editDevice: Device;
   products: Array<any>;
@@ -25,45 +26,7 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     products: new Array<any>(),
     deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"],
     payfor: new Object(),
-    tree: [
-      {
-        id: 1,
-        title: "总部",
-        expand: true,
-        children: [
-          {
-            id: 2,
-            title: "分部1",
-            expand: true,
-            children: [
-              {
-                id: 3,
-                title: "分部2"
-              },
-              {
-                id: 4,
-                title: "分部3"
-              }
-            ]
-          },
-          {
-            id: 5,
-            title: "分部4",
-            expand: true,
-            children: [
-              {
-                id: 6,
-                title: "分部5"
-              },
-              {
-                id: 7,
-                title: "分部6"
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    tree: new Array<any>()
   };
   actions = {
     async getAll(
@@ -99,6 +62,16 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
       payload: any
     ): Promise<any> {
       await Ajax.put("/api/device/products", payload.data);
+    },
+    async initTree(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      let reponse: any = await Ajax.post("/api/tree", payload.data);
+      context.state.loading = false;
+      let list: Array<any> = reponse.data as Array<any>;
+      context.state.tree = util.genderMenu(list, "parentId", null);
     },
     async delete(
       context: ActionContext<IDeviceState, any>,

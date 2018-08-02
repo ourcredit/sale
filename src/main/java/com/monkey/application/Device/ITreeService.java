@@ -1,7 +1,10 @@
-package com.monkey.service;
+package com.monkey.application.Device;
 
-import com.monkey.entity.Tree;
+import com.monkey.core.entity.Tree;
 import com.baomidou.mybatisplus.service.IService;
+import com.monkey.web.controller.dtos.TreeDtoInput;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-08-02
  */
 public interface ITreeService extends IService<Tree> {
-
+            void mutiInsertOrgs(List<TreeDtoInput> input);
 }

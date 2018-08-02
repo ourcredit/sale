@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 01/08/2018 10:31:41
+ Date: 02/08/2018 15:22:33
 */
 
 SET NAMES utf8mb4;
@@ -119,7 +119,7 @@ CREATE TABLE `sale_payfor`  (
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_point
@@ -204,6 +204,20 @@ CREATE TABLE `sale_tenant`  (
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '1启用  0禁用',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for sale_tree
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_tree`;
+CREATE TABLE `sale_tree`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'key',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '节点名',
+  `parentId` int(11) NULL DEFAULT NULL COMMENT '父级id',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_user

@@ -225,6 +225,11 @@ export default class deviceC extends AbpBase {
   Modify() {
     this.ModalShow = true;
   }
-  async created() {}
+  async created() {
+      await this.$store.dispatch({
+            type: "device/initTree",
+            data: this.filters
+          });
+  }
 }
 </script>
