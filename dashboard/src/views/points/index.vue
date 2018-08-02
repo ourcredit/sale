@@ -1,38 +1,36 @@
 <template>
-    <div>
-      <Row>
-        <Col span="5">
-         <Card dis-hover>
-            <div class="page-body">
-             <Tree :data="tree"></Tree>
-            </div>
-        </Card></Col>
-        <Col span="19">
-         <Card dis-hover>
-            <div class="page-body">
-                <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
-                    <Row :gutter="4">
-                        <Col span="4">
-                        <FormItem label="点位名:">
-                            <Input v-model="filters.pointName"/>
-                        </FormItem>
-                        </Col>
-                        <Col span="7">
-                        <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
-                        
-                        <Button class="toolbar-btn" v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+  <div>
+    <Row>
+      <Col span="5">
+        <OrgTree @complete="init" ></OrgTree>
+      </Col>
+      <Col span="19">
+      <Card dis-hover>
+        <div class="page-body">
+          <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
+            <Row :gutter="4">
+              <Col span="4">
+              <FormItem label="点位名:">
+                <Input v-model="filters.pointName" />
+              </FormItem>
+              </Col>
+              <Col span="7">
+              <Button  icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
 
-                        <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
-                        </Col>
-                    </Row>
-                </Form>
-                <SaleTable ref="table" :filters="filters" :type="'point'" :columns="columns"></SaleTable>
-            </div>
-        </Card></Col>
-      </Row>
-       
-        <modify v-model="ModalShow" @save-success="init"></modify>
-    </div>
+              <Button  class="toolbar-btn" v-if="p.modify&&current" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+
+              <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
+              </Col>
+            </Row>
+          </Form>
+          <SaleTable ref="table" :filters="filters" :type="'point'" :columns="columns"></SaleTable>
+        </div>
+      </Card>
+      </Col>
+    </Row>
+
+    <modify v-model="ModalShow" @save-success="init"></modify>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
@@ -41,17 +39,20 @@ import AbpBase from "@/lib/abpbase";
 import PageRequest from "../../store/entities/page-request";
 import Util from "../../lib/util";
 import Point from "@/store/entities/point";
+import OrgTree from "@/components/orgtree.vue";
 import Modify from "./modify.vue";
 
 @Component({
   components: {
     SaleTable,
-    Modify
+    Modify,
+    OrgTree
   }
 })
 export default class PointC extends AbpBase {
-  filters: Object = {
-    pointName: ""
+  filters: any = {
+    pointName: "",
+    areaId: null
   };
   p: any = {
     modify: this.hasPermission("point:modify"),
@@ -60,10 +61,12 @@ export default class PointC extends AbpBase {
     first: this.hasPermission("point:first"),
     batch: this.hasPermission("point:batch")
   };
-
   ModalShow: boolean = false;
   get tree() {
     return this.$store.state.device.tree;
+  }
+  get current() {
+    return this.$store.state.device.currentOrg;
   }
   columns: Array<any> = [
     {
@@ -158,6 +161,7 @@ export default class PointC extends AbpBase {
       }
     }
   ];
+  
   Create() {
     var u = new Point();
     this.$store.commit("point/edit", u);
@@ -165,6 +169,7 @@ export default class PointC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
+    this.filters.areaId = this.current;
     t.getpage();
   }
   async batchDelete() {
@@ -188,11 +193,6 @@ export default class PointC extends AbpBase {
   Modify() {
     this.ModalShow = true;
   }
-  async created() {
-      await this.$store.dispatch({
-            type: "device/initTree",
-            data: this.filters
-          });
-  }
+  async created() {}
 }
 </script>

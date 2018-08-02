@@ -40,14 +40,18 @@ export default class CreatePoint extends AbpBase {
     default: false
   })
   value: boolean;
-  center:any={lng: 116.404, lat: 39.915};
+  center: any = { lng: 116.404, lat: 39.915 };
   get point() {
     return this.$store.state.point.editPoint;
+  }
+  get treeId() {
+    return this.$store.state.device.currentOrg;
   }
   tempPoint: any = { lng: 116.404, lat: 39.915 };
   save() {
     (this.$refs.pointForm as any).validate(async (valid: boolean) => {
-      if (valid) {
+      if (valid && this.treeId) {
+        this.point.areaId = this.treeId;
         await this.$store.dispatch({
           type: "point/modify",
           data: this.point
@@ -62,7 +66,7 @@ export default class CreatePoint extends AbpBase {
     if (this.point) {
       this.tempPoint.lng = this.point.x;
       this.tempPoint.lat = this.point.y;
-       this.center.lng = this.point.x;
+      this.center.lng = this.point.x;
       this.center.lat = this.point.y;
     }
   }

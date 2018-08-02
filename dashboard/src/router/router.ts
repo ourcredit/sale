@@ -59,7 +59,7 @@ export const appRouters: Array<any> = [
         path: "back",
         meta: { title: "退款单" },
         name: "back",
-        component: () => System.import("../views/setting/role/role.vue")
+        component: () => System.import("../views/orders/payback.vue")
       }
     ]
   },

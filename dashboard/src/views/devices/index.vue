@@ -2,11 +2,7 @@
   <div>
     <Row>
       <Col span="4">
-      <Card dis-hover>
-        <div class="page-body">
-          <Tree :data="tree"></Tree>
-        </div>
-      </Card>
+       <OrgTree @complete="init"></OrgTree>
       </Col>
       <Col span="20">
       <Card dis-hover>
@@ -18,7 +14,7 @@
                 <Input v-model="filters.deviceName" />
               </FormItem>
               <FormItem label="设备编号:">
-                <Input v-model="filters.deviceName" />
+                <Input v-model="filters.deviceNum" />
               </FormItem>
               <FormItem label="设备类型:">
                 <Select clearable v-model="filters.deviceType" style="width:160px">
@@ -26,12 +22,12 @@
                 </Select>
               </FormItem>
               <FormItem label="所属点位:">
-                <Input v-model="filters.deviceName" />
+                <Input v-model="filters.pointName" />
               </FormItem>
               </Col>
               <Col span="6">
               <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
-              <Button class="toolbar-btn" v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+              <Button class="toolbar-btn" v-if="p.modify&&current" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
               <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
               </Col>
             </Row>
@@ -54,16 +50,21 @@ import Util from "../../lib/util";
 import Device from "@/store/entities/device";
 import Modify from "./modify.vue";
 import { router } from "@/router";
-
+import OrgTree from "@/components/orgtree.vue";
 @Component({
   components: {
     SaleTable,
-    Modify
+    Modify,
+    OrgTree
   }
 })
 export default class deviceC extends AbpBase {
-  filters: Object = {
-    deviceName: ""
+  filters: any = {
+    deviceName: "",
+    deviceNum: "",
+    deviceType: "",
+    pointName: "",
+    areaId: null
   };
   p: any = {
     modify: this.hasPermission("device:modify"),
@@ -76,8 +77,11 @@ export default class deviceC extends AbpBase {
     return this.$store.state.device.deviceCate;
   }
   ModalShow: boolean = false;
-  get tree(){
+  get tree() {
     return this.$store.state.device.tree;
+  }
+  get current() {
+    return this.$store.state.device.currentOrg;
   }
   columns: Array<any> = [
     {
@@ -99,7 +103,7 @@ export default class deviceC extends AbpBase {
     },
     {
       title: "所属点位",
-      key: "pointId"
+      key: "pointName"
     },
     {
       title: "创建人",
@@ -202,6 +206,7 @@ export default class deviceC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
+    this.filters.areaId = this.current;
     t.getpage();
   }
   async batchDelete() {
@@ -225,11 +230,6 @@ export default class deviceC extends AbpBase {
   Modify() {
     this.ModalShow = true;
   }
-  async created() {
-      await this.$store.dispatch({
-            type: "device/initTree",
-            data: this.filters
-          });
-  }
+  async created() {}
 }
 </script>

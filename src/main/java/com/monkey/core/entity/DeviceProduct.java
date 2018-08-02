@@ -66,7 +66,6 @@ public class DeviceProduct extends Model<DeviceProduct> {
     /**
      * 租户id
      */
-    @TableField(fill = FieldFill.INSERT)
     private Integer tenantId;
     public Integer getTenantId() {
         return tenantId;

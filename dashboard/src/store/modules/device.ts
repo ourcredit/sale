@@ -13,6 +13,7 @@ interface IDeviceState extends IListState<Device> {
   products: Array<any>;
   payfor: any;
   tree: Array<any>;
+  currentOrg: Number;
 }
 class PointMutations extends ListMutations<Device> {}
 class PointModule extends ListModule<IDeviceState, any, Device> {
@@ -26,7 +27,8 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     products: new Array<any>(),
     deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"],
     payfor: new Object(),
-    tree: new Array<any>()
+    tree: new Array<any>(),
+    currentOrg: null
   };
   actions = {
     async getAll(
@@ -109,6 +111,9 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     },
     edit(state: IDeviceState, de: Device): void {
       state.editDevice = de;
+    },
+    setTree(state: IDeviceState, treeId: Number): void {
+      state.currentOrg = treeId;
     }
   };
 }

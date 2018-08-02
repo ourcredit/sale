@@ -1,7 +1,7 @@
-// Type definitions for iview 2.5.1
-// Project: https://github.com/iview/iview
-// Definitions by: yangdan
-// Definitions: https://github.com/yangdan8/iview.git
+// type definitions for iview 2.5.1
+// project: https://github.com/iview/iview
+// definitions by: yangdan
+// definitions: https://github.com/yangdan8/iview.git
 import Vue from "vue";
 
 export default Tree;
@@ -20,16 +20,16 @@ export interface Tree extends Vue {
    * 是否显示多选框
    * @default false
    */
-  'show-checkbox': boolean;
+  "show-checkbox": boolean;
   /**
    * 没有数据时的提示
    * @default 暂无数据
    */
-  'empty-text': string;
+  "empty-text": string;
   /**
    * 异步加载数据的方法，见示例
    */
-  'load-data': () => void;
+  "load-data": () => void;
   /**
    * 自定义渲染内容，见示例
    */
@@ -38,17 +38,17 @@ export interface Tree extends Vue {
    * 点击树节点时触发
    * @default 当前已选中的节点数组
    */
-  $emit(eventName: 'on-select-change', value: object[]): this;
+  $emit(eventName: "on-select-change", value: object[]): this;
   /**
    * 点击复选框时触发
    * @default  当前已勾选节点的数组
    */
-  $emit(eventName: 'on-check-change', value: object[]): this;
+  $emit(eventName: "on-check-change", value: object[]): this;
   /**
    * 展开和收起子列表时触发
    * @default  当前节点的数据
    */
-  $emit(eventName: 'on-toggle-expand', value: object): this;
+  $emit(eventName: "on-toggle-expand", value: object): this;
   /**
    * 获取被勾选的节点
    */

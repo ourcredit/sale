@@ -43,9 +43,8 @@ CASE
 	END AS price
 FROM
 	sale_product a
-	LEFT JOIN sale_device_product b ON a.id = b.productId
+	LEFT JOIN sale_device_product b ON a.id = b.productId and b.deviceId=#{deviceId}
 	<where>
-         1=1
         <if test="name!=null">  and a.productName LIKE '%' #{name} '%'  </if>
         <if test="type!=null">  and a.productType LIKE '%' #{type} '%'  </if>
         <if test="num!=null">  and a.productNum LIKE '%' #{num} '%'  </if>

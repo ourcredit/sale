@@ -45,6 +45,8 @@ public class Device extends Model<Device>  {
      * 从属点位
      */
     private Integer pointId;
+    private     String pointName;
+    private  Integer areaId;
     /**
      * 创建时间
      */
@@ -143,5 +145,21 @@ public class Device extends Model<Device>  {
         ", creatorUserId=" + creatorUserId +
         ", isDeleted=" + isDeleted +
         "}";
+    }
+
+    public String getPointName() {
+        return pointName;
+    }
+
+    public void setPointName(String pointName) {
+        this.pointName = pointName;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 }

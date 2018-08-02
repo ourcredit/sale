@@ -17,7 +17,7 @@
           </Select>
         </FormItem>
         <FormItem label="所属点位" prop="pointId">
-          <Select v-model="device.pointId" style="width:100%">
+          <Select :label-in-value="true" @on-change="change" v-model="device.pointId" style="width:100%">
             <Option v-for="item in points" :value="item.id" :key="item.id">{{ item.pointName }}</Option>
           </Select>
         </FormItem>
@@ -49,12 +49,22 @@ export default class CreateDevice extends AbpBase {
   get cates() {
     return this.$store.state.device.deviceCate;
   }
+  get current() {
+    return this.$store.state.device.currentOrg;
+  }
   get points() {
     return this.$store.state.point.list;
   }
+  change(e) {
+    if (e) {
+      this.device.pointName = e.label;
+      this.$store.commit("device/edit", this.device);
+    }
+  }
   save() {
     (this.$refs.deviceForm as any).validate(async (valid: boolean) => {
-      if (valid) {
+      if (valid && this.current) {
+        this.device.areaId = this.current;
         await this.$store.dispatch({
           type: "device/modify",
           data: this.device
@@ -65,7 +75,7 @@ export default class CreateDevice extends AbpBase {
       }
     });
   }
-  
+
   async getpage() {
     let pagerequest = new PageRequest();
     pagerequest.size = 999;
