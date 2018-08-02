@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 02/08/2018 15:22:33
+ Date: 02/08/2018 17:15:55
 */
 
 SET NAMES utf8mb4;
@@ -26,6 +26,8 @@ CREATE TABLE `sale_device`  (
   `deviceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '点位名称',
   `deviceNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '设备编码',
   `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
+  `areaId` int(11) NULL DEFAULT NULL COMMENT '区域id',
+  `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备名',
   `pointId` int(11) NOT NULL COMMENT '从属点位',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
@@ -47,7 +49,10 @@ CREATE TABLE `sale_device_product`  (
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `Ix_id`(`id`) USING BTREE,
+  INDEX `fk_device_id`(`deviceId`) USING BTREE,
+  CONSTRAINT `fk_device_id` FOREIGN KEY (`deviceId`) REFERENCES `sale_device` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -98,7 +103,7 @@ CREATE TABLE `sale_menu`  (
   `parentId` int(11) NULL DEFAULT NULL COMMENT '父级id',
   `creationTime` datetime(0) NULL DEFAULT NULL,
   `creatorUserId` int(11) NULL DEFAULT NULL,
-  `isDeleted` int(11) NULL DEFAULT NULL,
+  `isDeleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
@@ -170,7 +175,7 @@ CREATE TABLE `sale_role`  (
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '启用状态',
   `isStatic` tinyint(4) NULL DEFAULT NULL COMMENT '是否静态',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `isDeleted` int(11) NULL DEFAULT NULL,
+  `isDeleted` int(11) NULL DEFAULT 0,
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`, `roleName`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
@@ -188,7 +193,8 @@ CREATE TABLE `sale_rolemenu`  (
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   INDEX `ix_roleId`(`roleId`) USING BTREE,
-  INDEX `ix_menuId`(`menuId`) USING BTREE
+  INDEX `ix_menuId`(`menuId`) USING BTREE,
+  CONSTRAINT `fk_role_id` FOREIGN KEY (`roleId`) REFERENCES `sale_role` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
