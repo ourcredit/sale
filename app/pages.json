@@ -1,0 +1,29 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页,,
+		{
+			"path": "pages/dash/advence",
+			"style": {
+				"navigationBarTitleText": "广告页"
+			}
+		},
+		{
+			"path": "pages/dash/detail",
+			"style": {
+				"navigationBarTitleText": "广告详情"
+			}
+		},
+		{
+			"path": "pages/dash/products",
+			"style": {
+				"navigationBarTitleText": "商品列表"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle":"custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "演示",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
