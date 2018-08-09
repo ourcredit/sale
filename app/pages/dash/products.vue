@@ -1,5 +1,7 @@
 <template>
 	<view>
+		<page-head :title="title"></page-head>
+
 		<view class="page-body">
 			<view class="page-section">
 				<view class="uni-flex uni-row">
@@ -29,9 +31,11 @@
 	</view>
 </template>
 <script>
+	import pageHead from '../../components/page-head.vue';
 	export default {
 		data() {
 			return {
+				title:"商品清单",
 				list: [{
 					name:"商品A",
 					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
@@ -66,6 +70,30 @@
 				},
 				{
 					name:"商品E",
+					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+					image:"/static/c5.png",
+					price:2.3,
+				},
+				{
+					name:"商品F",
+					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+					image:"/static/c5.png",
+					price:2.3,
+				},
+				{
+					name:"商品G",
+					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+					image:"/static/c5.png",
+					price:2.3,
+				},
+				{
+					name:"商品H",
 					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
 					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
 					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
@@ -147,8 +175,7 @@
 	.scroll-view-item_H {
 		display: inline-block;
 		width: 20%;
-		height: 200px;
-		line-height: 200px;
+		height: 100px;
 		text-align: center;
 		font-size: 36px;
 	}

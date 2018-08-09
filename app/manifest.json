@@ -63,6 +63,9 @@
          "ios" : {}, /* ios打包配置 */
          "sdkConfigs" : {}, /* SDK配置 */
          "orientation" : [ "portrait-primary" ]
+      },
+      "splashscreen" : {
+         "autoclose" : true
       }
    },
    "quickapp" : {}, /* 快应用特有相关 */

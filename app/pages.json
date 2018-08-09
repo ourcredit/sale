@@ -22,7 +22,7 @@
 	"globalStyle": {
 		"navigationStyle":"custom",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "演示",
+		"navigationBarTitleText": "first",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}
