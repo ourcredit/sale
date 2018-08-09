@@ -1,121 +1,71 @@
 <template>
-	<view>
-		<page-head :title="title"></page-head>
-
-		<view class="page-body">
-			<view class="page-section">
-				<view class="uni-flex uni-row">
-					<view class="text" style="width: 300px;height: 320px;display: flex; justify-content: center;align-items: center;">
-						<image :src="current.image" style="width: 150px;height: 150px;"></image>
+	<view class="page">
+		<view class="page-section">
+			<view class="uni-flex uni-row">
+				<view class="text" style="width: 300px;height: 320px;display: flex; justify-content: center;align-items: center;">
+					<image :src="current.image" style="width: 150px;height: 150px;"></image>
+				</view>
+				<view class="uni-flex uni-column" style="flex: 1;justify-content: space-between;">
+					<view class="text" style="height: 220px;text-align: left;padding-left: 20px;padding-top: 10px;">
+						{{current.description}}
 					</view>
-					<view class="uni-flex uni-column" style="flex: 1;justify-content: space-between;">
-						<view class="text" style="height: 220px;text-align: left;padding-left: 20px;padding-top: 10px;">
-							{{current.description}}
-						</view>
-						<view class="uni-flex uni-row">
-							<view class="text" style="flex: 1;">{{current.price}}</view>
-							<view @tap="gobuy" class="text" style="flex: 1;">立即购买</view>
-						</view>
+					<view class="uni-flex uni-row">
+						<view class="text" style="flex: 1;">{{current.price}}</view>
+						<view @tap="gobuy" class="text" style="flex: 1;">立即购买</view>
 					</view>
 				</view>
 			</view>
+		</view>
 
-			<view class="page-section">
-				<view class="page-section-spacing">
-					<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll">
-						<view @tap="show(item)" :key="item.name" v-for="item in list" class="scroll-view-item_H color1">{{item.name}}</view>
-					</scroll-view>
-				</view>
+
+		<view class="page-section">
+			<view class="page-section-spacing">
+				<scroll-view @scrolltolower="loadMore" class="scroll-view_H" scroll-x="true" @scroll="scroll">
+					<view @tap="show(item)" :key="item.name" v-for="item in list" class="scroll-view-item_H color1">{{item.name}}</view>
+				</scroll-view>
 			</view>
 		</view>
 	</view>
 </template>
 <script>
-	import pageHead from '../../components/page-head.vue';
+	import {
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex'
 	export default {
 		data() {
 			return {
-				title:"商品清单",
-				list: [{
-					name:"商品A",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c1.png",
-					price:2.2,
-				},
-				{
-					name:"商品B",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c2.png",
-					price:2.3,
-				},
-				{
-					name:"商品C",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c3.png",
-					price:2.3,
-				},
-				{
-					name:"商品D",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c4.png",
-					price:2.3,
-				},
-				{
-					name:"商品E",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c5.png",
-					price:2.3,
-				},
-				{
-					name:"商品F",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c5.png",
-					price:2.3,
-				},
-				{
-					name:"商品G",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c5.png",
-					price:2.3,
-				},
-				{
-					name:"商品H",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c5.png",
-					price:2.3,
-				}],
-				title: 'scroll-view',
-				toView: 'green',
-				order: ['demo1', 'demo2', 'demo3'],
-				current:{}
+				title: "商品清单",
+				current: {}
 			}
 		},
+		computed: {
+			...mapState({
+				error: state => state.error,
+				token: state => state.token,
+				list: state => state.products
+			})
+		},
+		onShow() {
+			this.getAllProducts({
+				a: 1
+			});
+		},
 		methods: {
+			...mapActions(["getAllProducts"]),
+			
+			loadMore(){
+				console.log("loadMore")
+				//this.getAllProducts({});
+			},
 			show(item) {
-				this.current=item;
-				console.log(item);
+				this.current = item;
 			},
-			scroll() {
-			},
-			gobuy(){
+			scroll() {},
+			gobuy() {
 				uni.redirectTo({
-					url:"/pages/dash/product",
+					url: "/pages/dash/product",
 				})
 			}
 
@@ -156,10 +106,6 @@
 		font-size: 26px;
 	}
 
-	.scroll-Y {
-		height: 200px;
-	}
-
 	.scroll-view_H {
 		white-space: nowrap;
 		width: 100%;
@@ -173,9 +119,12 @@
 	}
 
 	.scroll-view-item_H {
+		border-radius: 50%;
+		margin-left: 10px;
 		display: inline-block;
 		width: 20%;
-		height: 100px;
+		height: 250px;
+		vertical-align: middle;
 		text-align: center;
 		font-size: 36px;
 	}

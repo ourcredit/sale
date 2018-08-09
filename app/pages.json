@@ -3,7 +3,7 @@
 		{
 			"path": "pages/dash/advence",
 			"style": {
-				"navigationBarTitleText": "广告页"
+				"navigationBarTitleText": ""
 			}
 		},
 		{
@@ -20,9 +20,8 @@
 		}
 	],
 	"globalStyle": {
-		"navigationStyle":"custom",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "first",
+		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

@@ -2,55 +2,103 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+import {
+	request
+} from "../common/ajax.js"
 const store = new Vuex.Store({
 	state: {
-		hasLogin: false,
-		loginProvider: "",
-		openid: null
+		error: null,
+		token: "",
+		tenantName: "default",
+		products: [{
+				name: "商品A",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.2,
+			},
+			{
+				name: "商品B",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品C",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品D",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品E",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品F",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品G",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			},
+			{
+				name: "商品H",
+				description: `描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
+					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
+					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+				image: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg",
+				price: 2.3,
+			}
+		]
 	},
 	mutations: {
-		login(state, provider) {
-			state.hasLogin = true;
-			state.loginProvider = provider;
-		},
-		logout(state) {
-			state.hasLogin = false
-			state.openid = null
-		},
-		setOpenid(state, openid) {
-			state.openid = openid
+		setPageSize(state, size) {
+			state.pageSize = size;
 		}
 	},
 	actions: {
-		// lazy loading openid
-		getUserOpenId: async function ({
-			commit,
+		//获取所有
+		async getAllProducts({
 			state
-		}) {
-			return await new Promise((resolve, reject) => {
-				if (state.openid) {
-					resolve(state.openid)
-				} else {
-					uni.login({
-						success: (data) => {
-							commit('login')
-							setTimeout(function () { //模拟异步请求服务器获取 openid
-								const openid = '123456789'
-								console.log('uni.request mock openid[' + openid + ']');
-								commit('setOpenid', openid)
-								resolve(openid)
-							}, 1000)
-						},
-						fail: (err) => {
-							console.log('uni.login 接口调用失败，将无法正常使用开放接口等服务', err)
-							reject(err)
-						}
-					})
-				}
-			})
+		}, payload) {
+			let params = {
+				"deviceId": 1,
+				"index": 1,
+				"size": 10
+			};
+			request('/api/device/products', "POST",params , function (r) {
+				state.products = [];
+				state.products.push(...r.data.data.records);
+				state.totalCount = r.data.data.total;
+			});
 		}
-	}
+	},
+	modules: {}
 })
 
 export default store

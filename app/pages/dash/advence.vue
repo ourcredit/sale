@@ -1,53 +1,71 @@
 <template>
-	<view>
-		<page-head :title="title"></page-head>
-		<swiper :indicator-dots="true" :autoplay="false" :interval="5000" :duration="1000">
-			<swiper-item v-for="item in itemList" :key="item">
-				<view>{{item.name}}</view>
-				<image :src="item.url" style="width: 150px;height: 150px;"></image>
+	<view class="page">
+		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:height }">
+			<swiper-item @tap="detail(img)" v-for="(img,key) in imgUrls" :key="key">
+				<image :src="img" v-bind:style="{height:height }" />
 			</swiper-item>
 		</swiper>
-		<button @click="goproducts" type="primary">开始购物</button>
+		<button @click="gobuy" class="clickbutton">立即购买</button>
 	</view>
 </template>
 <script>
-	import pageHead from '../../components/page-head.vue';
 	export default {
-		name: 'advence',
-		data() {
-			return {
-				title: "首页",
-				itemList: [{
-					name: "a",
-					url: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg"
-				}, {
-					name: "b",
-					url: "http://f.hiphotos.baidu.com/baike/s=220/sign=510d39928fb1cb133a693b11ed5556da/c2fdfc039245d688b19ae0d9a6c27d1ed21b2436.jpg"
-				}, {
-					name: "c",
-					url: "https://a.33iq.com/upload/quiz/images/14/06/20140612155130.jpg"
-				}]
-			}
-		},
-		components: {
-			pageHead
+		data: {
+			title: '广告位',
+			imgUrls: [
+				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/shuijiao.jpg',
+				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg',
+				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
+			]
 		},
 		computed: {
-			disableSubtract() {
-				return this.value <= this.min
-			},
-			disableAdd() {
-				return this.value >= this.max
+			height() {
+				return '320px';
 			}
 		},
-		onUnload() {},
 		methods: {
-			goproducts() {
-				console.log("aaa")
-				uni.redirectTo({
+			detail(img) {
+				console.log(img);
+				uni.navigateTo({
+					url: "/pages/dash/detail",
+				})
+			},
+			gobuy(e) {
+				uni.navigateTo({
 					url: "/pages/dash/products",
 				})
 			}
 		}
 	}
 </script>
+
+<style>
+	@import "../../common/uni.css";
+
+	page {
+		background: #efeff4;
+	}
+
+	.list-collapse {
+		padding-left: 36px;
+		box-sizing: border-box;
+	}
+
+	image {
+		width: 100%;
+	}
+
+	.page-pd {
+		padding: 36px;
+	}
+
+	.clickbutton {
+		background-color: #1AAD19;
+		border-radius: 50%;
+		margin-left: 80%;
+		width: 12%;
+		height: 140px;
+		vertical-align: middle;
+		text-align: center;
+	}
+</style>

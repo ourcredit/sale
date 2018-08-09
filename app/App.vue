@@ -6,6 +6,8 @@
 			/* 5+环境锁定屏幕方向 */
 			//plus.screen.lockOrientation('portrait-primary'); //锁定	竖屏正方向	
 			plus.screen.lockOrientation('landscape-primary'); //锁定  横屏正方向
+			plus.device.setWakelock( true );; //保持唤醒
+
 			/* 5+环境升级提示 */
 			var server = "https://uniapp.dcloud.io/update"; //检查更新地址
 			var req = { //升级检测数据
@@ -77,10 +79,9 @@
 	}
 
 	.page-head {
-		padding: 60px 50px 80px;
 		text-align: center;
 		line-height: initial;
-		height: 60px;
+		height: 40px;
 	}
 
 	.page-head-title {
