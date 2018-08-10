@@ -5,10 +5,9 @@
 			<view class="uni-flex uni-row">
 				<view style="width: 80%;height: 430px;" class="flex-item color1">
 					<view class="uni-flex  uni-row">
-						<view  class="text" style="flex: 1;">
-								<image 
-							 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg" >二维码</image>
-					
+						<view class="text" style="flex: 1;">
+							<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg">二维码</image>
+
 						</view>
 						<view class="text" style="flex: 1;">简介阿达伟大阿瓦达伟大阿瓦达阿瓦</view>
 					</view>
@@ -23,8 +22,8 @@
 					<view class="uni-flex uni-row">
 						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
 							<button v-if="!state" @click="gobuy">立即购买</button>
-							<image style="width:200px;height:200px;"
-							 src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg" v-if="state">二维码</image>
+							<image style="width:200px;height:200px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg"
+							    v-if="state">二维码</image>
 						</view>
 					</view>
 
@@ -80,6 +79,18 @@
 			this.params.index = 1;
 			this.params.init = true;
 			this.loadMore(this.params);
+
+			uni.connectSocket({
+				url: 'ws://localhost:8081/websocket',
+				data: {},
+				header: {
+					'content-type': 'application/json'
+				},
+				protocols: [],
+				method: "GET"
+			},function(r){
+				console.log(r);
+			});
 		},
 		components: {
 			pageHead
@@ -92,7 +103,7 @@
 					this.params.init = false;
 					if (this.total > (this.params.index - 1) * this.params.size) {
 						this.loadMore(this.params);
-					}else{
+					} else {
 						this.params.index--;
 					}
 				}
