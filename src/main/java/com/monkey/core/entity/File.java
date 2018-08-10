@@ -1,11 +1,14 @@
 package com.monkey.core.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -82,7 +85,16 @@ public class File extends Model<File> {
     public void setPath(String path) {
         this.path = path;
     }
-
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Date creationTime;
+    /**
+     * 创建人id
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Integer creatorUserId;
     @Override
     protected Serializable pkVal() {
         return this.id;
@@ -107,5 +119,21 @@ public class File extends Model<File> {
         ", ext=" + ext +
         ", path=" + path +
         "}";
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public Integer getCreatorUserId() {
+        return creatorUserId;
+    }
+
+    public void setCreatorUserId(Integer creatorUserId) {
+        this.creatorUserId = creatorUserId;
     }
 }
