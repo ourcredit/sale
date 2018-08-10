@@ -81,7 +81,7 @@
 	.page-head {
 		text-align: center;
 		line-height: initial;
-		height: 40px;
+		height: 50px;
 	}
 
 	.page-head-title {

@@ -30,3 +30,5 @@ dependency-reduced-pom.xml
 *.idea  
   
 README.html
+#app 打包文件
+app/unpackage

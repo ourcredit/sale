@@ -1,5 +1,6 @@
 <template>
 	<view class="page">
+		<page-head :title="ww"></page-head>
 		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:height }">
 			<swiper-item @tap="detail(img)" v-for="(img,key) in imgUrls" :key="key">
 				<image :src="img" v-bind:style="{height:height }" />
@@ -9,6 +10,7 @@
 	</view>
 </template>
 <script>
+	import pageHead from "../../components/page-head.vue"
 	export default {
 		data: {
 			title: '广告位',
@@ -18,9 +20,12 @@
 				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
 			]
 		},
+		components:{
+			pageHead
+		},
 		computed: {
 			height() {
-				return '320px';
+				return '335px';
 			}
 		},
 		methods: {
@@ -64,7 +69,7 @@
 		border-radius: 50%;
 		margin-left: 80%;
 		width: 12%;
-		height: 140px;
+		height: 135px;
 		vertical-align: middle;
 		text-align: center;
 	}

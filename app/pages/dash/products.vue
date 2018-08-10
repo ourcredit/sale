@@ -1,27 +1,44 @@
 <template>
 	<view class="page">
+		<page-head :title="ww"></page-head>
 		<view class="page-section">
 			<view class="uni-flex uni-row">
-				<view class="text" style="width: 300px;height: 320px;display: flex; justify-content: center;align-items: center;">
-					<image :src="current.image" style="width: 150px;height: 150px;"></image>
+				<view style="width: 80%;height: 430px;" class="flex-item color1">
+					<view class="uni-flex  uni-row">
+						<view class="text" style="flex: 1;">图片</view>
+						<view class="text" style="flex: 1;">{{current.productName}}</view>
+					</view>
+
 				</view>
-				<view class="uni-flex uni-column" style="flex: 1;justify-content: space-between;">
-					<view class="text" style="height: 220px;text-align: left;padding-left: 20px;padding-top: 10px;">
-						{{current.description}}
+				<view style="flex: 1;height: 430px;" class="flex-item color3">
+					<view class="uni-flex uni-row">
+						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-start;">
+							<text>{{current.productName}}</text>
+						</view>
 					</view>
 					<view class="uni-flex uni-row">
-						<view class="text" style="flex: 1;">{{current.price}}</view>
-						<view @tap="gobuy" class="text" style="flex: 1;">立即购买</view>
+						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
+							<button v-if="!state" @click="gobuy">立即购买</button>
+							<text v-if="state">二维码</text>
+						</view>
 					</view>
+
 				</view>
 			</view>
 		</view>
-
-
 		<view class="page-section">
 			<view class="page-section-spacing">
-				<scroll-view @scrolltolower="loadMore" class="scroll-view_H" scroll-x="true" @scroll="scroll">
-					<view @tap="show(item)" :key="item.name" v-for="item in list" class="scroll-view-item_H color1">{{item.name}}</view>
+				<scroll-view @scrolltoupper="init" @scrolltolower="more" class="scroll-view_H" scroll-x="true" @scroll="scroll">
+
+					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
+						<view class="textshow">{{item.productName}} </view>
+					</view>
+					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
+						<view class="textshow">{{item.productName}} </view>
+					</view>
+					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
+						<view class="textshow">{{item.productName}} </view>
+					</view>
 				</scroll-view>
 			</view>
 		</view>
@@ -33,40 +50,62 @@
 		mapMutations,
 		mapActions
 	} from 'vuex'
+	import pageHead from "../../components/page-head.vue"
 	export default {
 		data() {
 			return {
+				state: false,
+				params: {
+					"deviceId": 1,
+					"index": 1,
+					"size": 10,
+					"init": true
+				},
 				title: "商品清单",
 				current: {}
 			}
 		},
 		computed: {
 			...mapState({
-				error: state => state.error,
-				token: state => state.token,
-				list: state => state.products
+				list: state => state.products,
+				total: state => state.totalCount
 			})
 		},
 		onShow() {
-			this.getAllProducts({
-				a: 1
-			});
+			this.params.index = 1;
+			this.params.init = true;
+			this.loadMore(this.params);
+		},
+		components: {
+			pageHead
 		},
 		methods: {
-			...mapActions(["getAllProducts"]),
-			
-			loadMore(){
-				console.log("loadMore")
-				//this.getAllProducts({});
+			...mapActions(["loadMore"]),
+			more() {
+				if (this.total > 0) {
+					this.params.index++;
+					this.params.init = false;
+					if (this.total > (this.params.index - 1) * this.params.size) {
+						this.loadMore(this.params);
+					}else{
+						this.params.index--;
+					}
+				}
+			},
+			init() {
+				this.params.index = 1;
+				this.params.init = true;
+				this.loadMore(this.params);
 			},
 			show(item) {
 				this.current = item;
 			},
 			scroll() {},
 			gobuy() {
-				uni.redirectTo({
-					url: "/pages/dash/product",
-				})
+				this.state = !this.state;
+				setTimeout(() => {
+					this.state = !this.state;
+				}, 5000)
 			}
 
 		}
@@ -118,12 +157,24 @@
 		font-size: 36px;
 	}
 
+	.scroll-view-item_R {
+		border-radius: 50%;
+		margin-left: 30px;
+		margin-right: 30px;
+		display: inline-block;
+		height: 200px;
+	}
+
 	.scroll-view-item_H {
 		border-radius: 50%;
-		margin-left: 10px;
+		margin-left: 30px;
+		margin-right: 30px;
 		display: inline-block;
-		width: 20%;
-		height: 250px;
+		width: 15%;
+		height: 200px;
+	}
+
+	.textshow {
 		vertical-align: middle;
 		text-align: center;
 		font-size: 36px;

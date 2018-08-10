@@ -20,9 +20,10 @@
 		}
 	],
 	"globalStyle": {
+		"navigationStyle":"custom",
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#000000",
+		"backgroundColor": "darkgoldenrod"
 	}
 }

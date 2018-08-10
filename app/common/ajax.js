@@ -10,8 +10,6 @@ function request(url, type, data,call) {
 		login();
 	}
 	token = uni.getStorageSync("token");
-	console.log("token"+JSON.stringify(token));
-
 	header = Object.assign(header, {
 		'Authorization': token
 	})
