@@ -14,8 +14,6 @@ function request(url, type, data,call) {
 		'Authorization': token
 	})
 	let rurl=baseUrl + url;
-	console.log(rurl);
-	console.log(token);
 	uni.request({
 		url: rurl,
 		method: type,

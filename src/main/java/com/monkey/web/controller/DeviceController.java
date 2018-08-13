@@ -61,7 +61,7 @@ public class DeviceController {
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
     @ApiOperation(value = "设备自注册",notes = "设备列表")
-    @RequestMapping(value = "/register",method = RequestMethod.PUT)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     @Pass
     public PublicResult<Boolean> register(@RequestBody Device model){
         Boolean r=_deviceService.insertDeviceByApp(model);
