@@ -14,6 +14,7 @@ import com.monkey.core.dtos.ProductDto;
 import com.monkey.core.entity.Device;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
+import com.monkey.web.annotation.Pass;
 import com.monkey.web.controller.dtos.DeviceProductInput;
 import com.monkey.web.controller.dtos.ProductInput;
 import io.swagger.annotations.ApiOperation;
@@ -61,7 +62,7 @@ public class DeviceController {
     }
     @ApiOperation(value = "设备自注册",notes = "设备列表")
     @RequestMapping(value = "/register",method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._device.modify})
+    @Pass
     public PublicResult<Boolean> register(@RequestBody Device model){
         Boolean r=_deviceService.insertDeviceByApp(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

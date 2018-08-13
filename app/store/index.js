@@ -33,9 +33,9 @@ const store = new Vuex.Store({
 			});
 		},
 		async register({state},payload){
-			request('/api/device/register', "POST",payload , function (r) {
+			request('/api/device/register', "PUT",payload , function (r) {
 				console.log(JSON.stringify(r));
-				if(r.data.data.success){
+				if(r.data.statusCode){
 					state.isRegister=true;
 				}
 			});

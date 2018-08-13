@@ -13,8 +13,11 @@ function request(url, type, data,call) {
 	header = Object.assign(header, {
 		'Authorization': token
 	})
+	let rurl=baseUrl + url;
+	console.log(rurl);
+	console.log(token);
 	uni.request({
-		url: baseUrl + url,
+		url: rurl,
 		method: type,
 		data: data,
 		header: header,

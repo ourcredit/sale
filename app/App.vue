@@ -9,6 +9,7 @@
 			...mapActions(["register"])
 		},
 		onLaunch: function () {
+		
 			console.log('App Launch');
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
@@ -51,13 +52,13 @@
 			console.log("4." + plus.device.vendor);
 			console.log("5." + plus.device.uuid);
 			if (plus.device.imei) {
+				let num=plus.device.imei.split(',')[0];
 				this.register({
-					code: plus.device.imei,
-					model: plus.device.model
+					deviceNum: num,
+					deviceName: plus.device.model
 				});
 			}
 			//#endif
-
 		},
 		onShow: function () {
 			console.log('App Show')

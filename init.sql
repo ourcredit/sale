@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 02/08/2018 17:15:55
+ Date: 13/08/2018 13:27:01
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `sale_device`  (
   `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
   `areaId` int(11) NULL DEFAULT NULL COMMENT '区域id',
   `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备名',
-  `pointId` int(11) NOT NULL COMMENT '从属点位',
+  `pointId` int(11) NULL DEFAULT NULL COMMENT '从属点位',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
@@ -106,6 +106,28 @@ CREATE TABLE `sale_menu`  (
   `isDeleted` int(11) NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Table structure for sale_order
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_order`;
+CREATE TABLE `sale_order`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'key',
+  `productName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名',
+  `productId` int(11) NULL DEFAULT NULL COMMENT '商品id',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
+  `wechatOrder` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信订单',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `orderState` int(255) NULL DEFAULT NULL COMMENT '订单状态',
+  `payState` int(10) NULL DEFAULT NULL COMMENT '支付状态',
+  `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  `deviceId` int(10) NULL DEFAULT NULL COMMENT '设备id',
+  `deviceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备名',
+  `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
+  `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '点位名',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_payfor
@@ -223,7 +245,7 @@ CREATE TABLE `sale_tree`  (
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_user
