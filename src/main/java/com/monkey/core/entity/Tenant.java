@@ -25,6 +25,7 @@ public class Tenant extends Model<Tenant> {
     public  Tenant(String name,String displayName){
         this.name=name;
         this.displayName=displayName;
+        this.isActive=1;
     }
     /**
      * key

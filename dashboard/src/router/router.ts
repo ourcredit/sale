@@ -160,24 +160,42 @@ export const appRouters: Array<any> = [
     ]
   },
   {
-    path: "/report",
+    path: "",
     name: "report",
     meta: { title: "报表系统" },
     icon: "&#xeaf5;",
     component: () => System.import("../views/main.vue"),
     children: [
       {
-        path: "a",
-        meta: { title: "a报表" },
-        name: "a",
-        component: () => System.import("../views/setting/user/user.vue")
+        path: "/report/device",
+        meta: { title: "设备销量" },
+        name: "report.device",
+        component: () => System.import("../views/report/device.vue")
       },
       {
-        path: "b",
-        meta: { title: "b报表" },
-        name: "b",
-        component: () => System.import("../views/setting/role/role.vue")
-      }
+        path: "/report/product",
+        meta: { title: "产品销量" },
+        name: "report.product",
+        component: () => System.import("../views/report/product.vue")
+      },
+      {
+        path: "/report/dgp",
+        meta: { title: "设备备货" },
+        name: "report.dgp",
+        component: () => System.import("../views/report/dgp.vue")
+      },
+      {
+        path: "/report/de",
+        meta: { title: "设备故障记录" },
+        name: "report.de",
+        component: () => System.import("../views/report/de.vue")
+      },
+      {
+        path: "/report/dep",
+        meta: { title: "设备故障率" },
+        name: "report.dep",
+        component: () => System.import("../views/report/dep.vue")
+      },
     ]
   },
   {

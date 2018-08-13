@@ -53,7 +53,7 @@ public class LoginController {
       if(t==null){
           return new PublicResult<>(PublicResultConstant.INVALID_TENANT_NAME, null);
       }
-      if(t.getIsActive()!=1||t.getIsActive()==null){
+      if(t.getIsActive()==null||t.getIsActive()!=1){
           return new PublicResult<>(PublicResultConstant.INVALID_TENANT_STATE, null);
       }
         User user = _userService.login(input.tenantName,input.userName);

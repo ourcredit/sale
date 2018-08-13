@@ -64,23 +64,23 @@ public interface InitConst {
                 add(new MenuInfo("后台操作日志", PermissionConst._watch._actionlog.list, "/watch/action", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("删除日志", PermissionConst._watch._actionlog.delete, "", 2, null));
                     add(new MenuInfo("批量删除日志", PermissionConst._watch._actionlog.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._watch._actionlog.first, "", 2, null));
                 }}));
                 add(new MenuInfo("监控运行日志", PermissionConst._watch._runlog.list, "/watch/run", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("删除日志", PermissionConst._watch._runlog.delete, "", 2, null));
                     add(new MenuInfo("批量删除日志", PermissionConst._watch._runlog.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._watch._runlog.first, "", 2, null));
                 }}));
                 add(new MenuInfo("售货机故障日志", PermissionConst._watch._errorlog.list, "/watch/error", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("删除日志", PermissionConst._watch._errorlog.delete, "", 2, null));
                     add(new MenuInfo("批量删除日志", PermissionConst._watch._errorlog.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._watch._errorlog.first, "", 2, null));
                 }}));
             }}));
 
             add(new MenuInfo("报表系统", PermissionConst._report.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("a报表", PermissionConst._report._a.list, "/watch/action", 1, null));
-                add(new MenuInfo("b报表", PermissionConst._report._b.list, "/watch/run", 1, null));
+                add(new MenuInfo("设备销量", PermissionConst._report._a.list, "/watch/device", 1, null));
+                add(new MenuInfo("商品销量", PermissionConst._report._b.list, "/watch/product", 1, null));
+                add(new MenuInfo("设备备货信息", PermissionConst._report._b.list, "/watch/dgp", 1, null));
+                add(new MenuInfo("设备故障记录", PermissionConst._report._b.list, "/watch/de", 1, null));
+                add(new MenuInfo("设备故障率", PermissionConst._report._b.list, "/watch/dep", 1, null));
             }}));
 
             add(new MenuInfo("系统管理", PermissionConst._system.list, "", 1, new ArrayList<MenuInfo>() {{
