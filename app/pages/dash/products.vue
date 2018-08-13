@@ -79,17 +79,8 @@
 			this.params.index = 1;
 			this.params.init = true;
 			this.loadMore(this.params);
-
-			uni.connectSocket({
-				url: 'ws://localhost:8081/websocket',
-				data: {},
-				header: {
-					'content-type': 'application/json'
-				},
-				protocols: [],
-				method: "GET"
-			},function(r){
-				console.log(r);
+			uni.onSocketMessage(function (res) {
+				console.log('收到服务器内容：' + res.data);
 			});
 		},
 		components: {
@@ -118,6 +109,25 @@
 			},
 			scroll() {},
 			gobuy() {
+				// 先获取服务商
+				uni.getProvider({
+					service: 'payment',
+					success: function (res) {
+						// 确保有支付宝，再进行支付。
+						if (~res.provider.indexOf('alipay')) {
+							uni.requestPayment({
+								provider: 'alipay',
+								orderInfo: "orderInfo", //订单数据
+								success: function (res) {
+									console.log('success:' + JSON.stringify(res));
+								},
+								fail: function (err) {
+									console.log('fail:' + JSON.stringify(err));
+								}
+							});
+						}
+					}
+				});
 				this.state = !this.state;
 				setTimeout(() => {
 					this.state = !this.state;

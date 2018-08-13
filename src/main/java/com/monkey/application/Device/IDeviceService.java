@@ -24,5 +24,5 @@ public interface IDeviceService extends IService<Device> {
      * @return 商品dto 类
      */
     Page<ProductDto> selectProductsByDevice(Page<ProductDto> page, Integer deviceId , String productName, String productNum, String productType, Integer isSale) ;
-
+    Boolean insertDeviceByApp(Device device);
 }

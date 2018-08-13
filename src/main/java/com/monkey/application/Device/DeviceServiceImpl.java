@@ -1,6 +1,7 @@
 package com.monkey.application.Device;
 
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.dtos.ProductDto;
@@ -33,7 +34,15 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
         List<ProductDto> a=_deviceRepository.selectProductsByDevice(page, deviceId,productName,productNum,productType,isSale);
         return page.setRecords(a) ;
     }
-
+        //设备自注册
+    @Override
+    public Boolean insertDeviceByApp(Device device) {
+        EntityWrapper ew=new EntityWrapper();
+        ew.eq("deviceNum",device.getDeviceNum());
+       Integer count= baseMapper.selectCount(ew);
+       if(count>0)return  false;
+      return   _deviceRepository.insert(device) >0;
+    }
 
 
 }

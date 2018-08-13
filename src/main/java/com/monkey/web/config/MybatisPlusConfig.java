@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import net.sf.jsqlparser.expression.Expression;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import scala.util.parsing.combinator.testing.Str;
 
 import java.util.ArrayList;
 import java.util.List;

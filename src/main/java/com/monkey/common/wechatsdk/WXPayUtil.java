@@ -1,6 +1,5 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
-import com.github.wxpay.sdk.WXPayConstants.SignType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -110,7 +109,7 @@ public class WXPayUtil {
      * @return 含有sign字段的XML
      */
     public static String generateSignedXml(final Map<String, String> data, String key) throws Exception {
-        return generateSignedXml(data, key, SignType.MD5);
+        return generateSignedXml(data, key, WXPayConstants.SignType.MD5);
     }
 
     /**
@@ -121,7 +120,7 @@ public class WXPayUtil {
      * @param signType 签名类型
      * @return 含有sign字段的XML
      */
-    public static String generateSignedXml(final Map<String, String> data, String key, SignType signType) throws Exception {
+    public static String generateSignedXml(final Map<String, String> data, String key, WXPayConstants.SignType signType) throws Exception {
         String sign = generateSignature(data, key, signType);
         data.put(WXPayConstants.FIELD_SIGN, sign);
         return mapToXml(data);
@@ -154,7 +153,7 @@ public class WXPayUtil {
      * @throws Exception
      */
     public static boolean isSignatureValid(Map<String, String> data, String key) throws Exception {
-        return isSignatureValid(data, key, SignType.MD5);
+        return isSignatureValid(data, key, WXPayConstants.SignType.MD5);
     }
 
     /**
@@ -166,7 +165,7 @@ public class WXPayUtil {
      * @return 签名是否正确
      * @throws Exception
      */
-    public static boolean isSignatureValid(Map<String, String> data, String key, SignType signType) throws Exception {
+    public static boolean isSignatureValid(Map<String, String> data, String key, WXPayConstants.SignType signType) throws Exception {
         if (!data.containsKey(WXPayConstants.FIELD_SIGN) ) {
             return false;
         }
@@ -182,7 +181,7 @@ public class WXPayUtil {
      * @return 签名
      */
     public static String generateSignature(final Map<String, String> data, String key) throws Exception {
-        return generateSignature(data, key, SignType.MD5);
+        return generateSignature(data, key, WXPayConstants.SignType.MD5);
     }
 
     /**
@@ -193,7 +192,7 @@ public class WXPayUtil {
      * @param signType 签名方式
      * @return 签名
      */
-    public static String generateSignature(final Map<String, String> data, String key, SignType signType) throws Exception {
+    public static String generateSignature(final Map<String, String> data, String key, WXPayConstants.SignType signType) throws Exception {
         Set<String> keySet = data.keySet();
         String[] keyArray = keySet.toArray(new String[keySet.size()]);
         Arrays.sort(keyArray);
@@ -206,10 +205,10 @@ public class WXPayUtil {
                 sb.append(k).append("=").append(data.get(k).trim()).append("&");
         }
         sb.append("key=").append(key);
-        if (SignType.MD5.equals(signType)) {
+        if (WXPayConstants.SignType.MD5.equals(signType)) {
             return MD5(sb.toString()).toUpperCase();
         }
-        else if (SignType.HMACSHA256.equals(signType)) {
+        else if (WXPayConstants.SignType.HMACSHA256.equals(signType)) {
             return HMACSHA256(sb.toString(), key);
         }
         else {
@@ -239,7 +238,7 @@ public class WXPayUtil {
      * @return MD5结果
      */
     public static String MD5(String data) throws Exception {
-        java.security.MessageDigest md = MessageDigest.getInstance("MD5");
+        MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] array = md.digest(data.getBytes("UTF-8"));
         StringBuilder sb = new StringBuilder();
         for (byte item : array) {

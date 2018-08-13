@@ -1,4 +1,4 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
 import org.w3c.dom.Document;
 

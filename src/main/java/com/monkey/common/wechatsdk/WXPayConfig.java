@@ -1,11 +1,8 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
 import java.io.InputStream;
 
 public abstract class WXPayConfig {
-
-
-
     /**
      * 获取 App ID
      *

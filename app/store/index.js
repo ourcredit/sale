@@ -10,7 +10,8 @@ const store = new Vuex.Store({
 		tenantName: "default",
 		deviceCode:"xc-001",
 		products: [],
-		totalCount:0
+		totalCount:0,
+		isRegister:false
 	},
 	mutations: {
 		setPageSize(state, size) {
@@ -23,11 +24,20 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			request('/api/device/products', "POST",payload , function (r) {
+				console.log(JSON.stringify(r));
 				if(payload.init){
 					state.products=[];
 				}
 				state.products.push(...r.data.data.records);
 				state.totalCount = r.data.data.total;
+			});
+		},
+		async register({state},payload){
+			request('/api/device/register', "POST",payload , function (r) {
+				console.log(JSON.stringify(r));
+				if(r.data.data.success){
+					state.isRegister=true;
+				}
 			});
 		}
 	},

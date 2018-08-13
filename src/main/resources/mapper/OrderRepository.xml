@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.monkey.mapper.OrderRepository">
+<mapper namespace="com.monkey.core.mapper.OrderRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.entity.Order">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Order">
         <id column="id" property="id" />
         <result column="productName" property="productName" />
         <result column="productId" property="productId" />
@@ -13,11 +13,16 @@
         <result column="creatorUserId" property="creatorUserId" />
         <result column="orderState" property="orderState" />
         <result column="payState" property="payState" />
+        <result column="tenantId" property="tenantId" />
+        <result column="deviceId" property="deviceId" />
+        <result column="deviceName" property="deviceName" />
+        <result column="deviceType" property="deviceType" />
+        <result column="pointName" property="pointName" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState
+        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName
     </sql>
 
 </mapper>

@@ -59,6 +59,13 @@ public class DeviceController {
         Device m=_deviceService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
+    @ApiOperation(value = "设备自注册",notes = "设备列表")
+    @RequestMapping(value = "/register",method = RequestMethod.PUT)
+    @RequiresPermissions(value = {PermissionConst._device.modify})
+    public PublicResult<Boolean> register(@RequestBody Device model){
+        Boolean r=_deviceService.insertDeviceByApp(model);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    }
 
     @ApiOperation(value = "添加或编辑设备",notes = "设备列表")
     @RequestMapping(method = RequestMethod.PUT)

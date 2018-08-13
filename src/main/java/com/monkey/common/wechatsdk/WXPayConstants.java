@@ -1,6 +1,7 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
-import org.apache.http.client.HttpClient;
+
+import sun.net.www.http.HttpClient;
 
 /**
  * 常量

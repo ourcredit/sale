@@ -1,12 +1,20 @@
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex'
 	export default {
+		methods: {
+			...mapActions(["register"])
+		},
 		onLaunch: function () {
 			console.log('App Launch');
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
 			//plus.screen.lockOrientation('portrait-primary'); //锁定	竖屏正方向	
 			plus.screen.lockOrientation('landscape-primary'); //锁定  横屏正方向
-			plus.device.setWakelock( true );; //保持唤醒
+			plus.device.setWakelock(true);; //保持唤醒
 
 			/* 5+环境升级提示 */
 			var server = "https://uniapp.dcloud.io/update"; //检查更新地址
@@ -15,6 +23,8 @@
 				"version": plus.runtime.version,
 				"imei": plus.device.imei
 			};
+
+
 			uni.request({
 				url: server,
 				data: req,
@@ -34,10 +44,38 @@
 					}
 				}
 			})
+			//初始化设备入库
+			console.log("1." + plus.device.imei);
+			console.log("2." + plus.device.imsi);
+			console.log("3." + plus.device.model);
+			console.log("4." + plus.device.vendor);
+			console.log("5." + plus.device.uuid);
+			if (plus.device.imei) {
+				this.register({
+					code: plus.device.imei,
+					model: plus.device.model
+				});
+			}
 			//#endif
+
 		},
 		onShow: function () {
 			console.log('App Show')
+			uni.connectSocket({
+				url: 'wss://103.45.8.198/websocket',
+				data: {},
+				header: {
+					'content-type': 'application/json'
+				},
+				protocols: [],
+				method: "GET"
+			}, function (r) {
+				console.log("www" + JSON.stringify(r));
+			});
+			uni.onSocketOpen(function (res) {
+				console.log('WebSocket连接已打开！');
+			});
+
 		},
 		onHide: function () {
 			console.log('App Hide')

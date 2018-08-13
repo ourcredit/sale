@@ -1,4 +1,4 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

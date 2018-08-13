@@ -1,4 +1,4 @@
-package com.github.wxpay.sdk;
+package com.monkey.common.wechatsdk;
 
 /**
  * 域名管理，实现主备域名自动切换
