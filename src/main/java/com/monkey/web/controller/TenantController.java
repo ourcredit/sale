@@ -53,8 +53,8 @@ public class TenantController {
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
 
-    @ApiOperation(value = "添加或编辑租户", notes = "租户列表")
-    @RequestMapping(method = RequestMethod.PUT)
+    @ApiOperation(value = "添加租户", notes = "租户列表")
+    @RequestMapping(value ="/insert", method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
     public PublicResult<Object> insert(@RequestBody Tenant model) throws Exception {
         Boolean r = _tenantService.insertOrUpdate(model);
@@ -63,7 +63,13 @@ public class TenantController {
         }
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
-
+    @ApiOperation(value = "编辑租户", notes = "租户列表")
+    @RequestMapping(value ="/update", method = RequestMethod.PUT)
+    @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
+    public PublicResult<Object> update(@RequestBody Tenant model) throws Exception {
+        Boolean r = _tenantService.insertOrUpdate(model);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    }
     @ApiOperation(value = "删除租户", notes = "租户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._system._tenant.delete})

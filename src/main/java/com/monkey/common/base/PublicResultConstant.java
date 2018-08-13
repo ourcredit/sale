@@ -31,6 +31,8 @@ public enum PublicResultConstant {
      * 用户名或密码错误
      */
     INVALID_USERNAME_PASSWORD("10000003", "用户名或密码错误"),
+    INVALID_TENANT_NAME("10000099", "租户信息不存在"),
+    INVALID_TENANT_STATE("10000098", "租户被禁用"),
     /**
      *
      */

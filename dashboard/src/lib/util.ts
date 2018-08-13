@@ -8,7 +8,7 @@ class Util {
   }
   title(title: string): void {
     let appname: string = "猿人";
-    let page: string = "烘干机";
+    let page: string = "智能售货机平台";
     window.document.title = appname + "⭐" + page;
   }
   inOf(arr: Array<any>, targetArr: any): boolean {

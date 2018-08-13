@@ -47,9 +47,9 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
     async get(
       context: ActionContext<ITenantState, any>,
       payload: any
-    ): Promise<Tenant> {
-      let reponse: any = await Ajax.get("/api/tenant/" + payload.id);
-      return reponse.data.result as Tenant;
+    ): Promise<void> {
+      let reponse: any = await Ajax.get("/api/tenant/" + payload.data);
+      context.state.editTenant = reponse.data as Tenant;
     }
   };
   mutations = {

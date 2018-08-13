@@ -37,7 +37,7 @@ class AppModule implements Module<IAppState, any> {
     pageOpenedList: [
       {
         meta: {
-          title: "控制台"
+          title: "首页"
         },
         path: "",
         name: "dashboard"
@@ -47,7 +47,7 @@ class AppModule implements Module<IAppState, any> {
     currentPath: [
       {
         meta: {
-          title: "控制台"
+          title: "首页"
         },
         path: "",
         name: "dashboard"

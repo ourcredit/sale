@@ -2,7 +2,6 @@
     <div>
         <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
             <Form ref="userForm" label-position="top" :rules="tenantRule" :model="tenant">
-               
                         <FormItem label="租户名" prop="name">
                             <Input v-model="tenant.name" :maxlength="32" :minlength="2"/>
                         </FormItem>

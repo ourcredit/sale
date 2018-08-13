@@ -27,7 +27,7 @@ export const otherRouters: any = {
   children: [
     {
       path: "/dashboard",
-      meta: { title: "控制台" },
+      meta: { title: "首页" },
       name: "dashboard",
       permission: "dashboard:show",
       component: () => System.import("../views/home/dashboard.vue")
