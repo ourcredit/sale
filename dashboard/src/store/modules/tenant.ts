@@ -32,11 +32,17 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
       context.state.totalCount = page.total;
       context.state.list = page.records;
     },
-    async modify(
+    async update(
       context: ActionContext<ITenantState, any>,
       payload: any
     ): Promise<void> {
-       Ajax.put("/api/tenant", payload.data);
+       Ajax.put("/api/tenant/insert", payload.data);
+    },
+    async insert(
+      context: ActionContext<ITenantState, any>,
+      payload: any
+    ): Promise<void> {
+       Ajax.put("/api/tenant/update", payload.data);
     },
     async delete(
       context: ActionContext<ITenantState, any>,

@@ -39,8 +39,9 @@ export default class CreateTenant extends AbpBase {
   save() {
     (this.$refs.userForm as any).validate(async (valid: boolean) => {
       if (valid) {
+        let type =this.tenant.id!=null?"tenant/update":"tenant/insert";
         await this.$store.dispatch({
-          type: "tenant/modify",
+          type: type,
           data: this.tenant
         });
         (this.$refs.userForm as any).resetFields();
@@ -49,17 +50,6 @@ export default class CreateTenant extends AbpBase {
       }
     });
   }
-   //参数n为休眠时间，单位为毫秒:
-     sleep(n) {
-        var start = new Date().getTime();
-        //  console.log('休眠前：' + start);
-        while (true) {
-            if (new Date().getTime() - start > n) {
-                break;
-            }
-        }
-        // console.log('休眠后：' + new Date().getTime());
-    }
 
   activeChange() {
     this.tenant.isActive = !!!this.tenant.isActive;

@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/components/shrinkable-menu/components/sidebarMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/components/shrinkable-menu/components/sidebarMenu.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/url.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/lib/url.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/lib/util.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/store/modules/tenant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/tenant.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/src/views/setting/tenants/modify.vue" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/tenants/modify.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PublicResultConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PublicResultConstant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +28,8 @@
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="56" column="77" selection-start-line="56" selection-start-column="77" selection-end-line="56" selection-end-column="77" />
+            <state relative-caret-position="259">
+              <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -794,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="56" column="77" selection-start-line="56" selection-start-column="77" selection-end-line="56" selection-end-column="77" />
+        <state relative-caret-position="259">
+          <caret line="50" column="19" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
         </state>
       </provider>
     </entry>

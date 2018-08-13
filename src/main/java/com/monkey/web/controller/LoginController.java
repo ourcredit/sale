@@ -48,7 +48,7 @@ public class LoginController {
             return new PublicResult<>(PublicResultConstant.PARAM_ERROR, null);
         }
         EntityWrapper<Tenant> ew=new EntityWrapper<>();
-        ew.eq("tenantName",input.tenantName);
+        ew.eq("name",input.tenantName);
       Tenant t=  _tenantService.selectOne(ew);
       if(t==null){
           return new PublicResult<>(PublicResultConstant.INVALID_TENANT_NAME, null);
