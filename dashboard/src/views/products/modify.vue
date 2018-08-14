@@ -14,7 +14,7 @@
             <Input v-model="product.productNum" :maxlength="32" :minlength="2" />
           </FormItem>
           </Col>
-          <Col span="6">
+          <Col offset="2" span="6">
           <Upload name="files" style="padding: 20px 0;" :on-success="afterSave" :type="upload.drag" :headers="upload.header" :action="upload.action">
             <div style="padding: 20px 0">
               <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
