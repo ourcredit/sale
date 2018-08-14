@@ -12,11 +12,13 @@
         <result column="creationTime" property="creationTime" />
         <result column="creatorUserId" property="creatorUserId" />
         <result column="isDeleted" property="isDeleted" />
+        <result column="description" property="description" />
+        <result column="imageUrl" property="imageUrl" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productNum, productType, price, creationTime, creatorUserId, isDeleted
+        id, productName, productNum, productType, price, creationTime, creatorUserId, isDeleted,description,imageUrl
     </sql>
 
 </mapper>

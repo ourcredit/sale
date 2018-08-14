@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : my
+ Source Server         : 103.45.8.198
  Source Server Type    : MySQL
  Source Server Version : 80011
- Source Host           : localhost:3306
+ Source Host           : 103.45.8.198:3306
  Source Schema         : sale
 
  Target Server Type    : MySQL
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 13/08/2018 13:27:01
+ Date: 14/08/2018 17:23:07
 */
 
 SET NAMES utf8mb4;
@@ -181,6 +181,8 @@ CREATE TABLE `sale_product`  (
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  `description` varchar(3000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `imageUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片路径',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
