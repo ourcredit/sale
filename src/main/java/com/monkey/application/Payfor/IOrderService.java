@@ -2,6 +2,7 @@ package com.monkey.application.Payfor;
 
 import com.monkey.core.entity.Order;
 import com.baomidou.mybatisplus.service.IService;
+import com.monkey.web.controller.dtos.OrderInput;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-08-13
  */
 public interface IOrderService extends IService<Order> {
-
+    Order insertOrder(OrderInput input)throws Exception;
+    String weixinPay(Order input) throws Exception;
+  void updateOrderStatte(String orderNum,Integer state);
 }

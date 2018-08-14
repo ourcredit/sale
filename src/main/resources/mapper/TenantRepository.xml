@@ -43,7 +43,7 @@ REPLACE(UUID(),'-',''),
 id,
 #{tenantId}
 FROM
-	sale_menu
+	sale_menu where `code` not like 'tenant:%'
     </insert>
     <insert id="insertTenantAdminRoles">
         INSERT INTO sale_userrole (id, userId, roleId, tenantId ) SELECT

@@ -11,6 +11,8 @@ import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Product;
+import com.monkey.web.aspect.WebSocketServer;
+import com.monkey.web.controller.dtos.OrderInput;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class OrderController {
     IOrderService _orderService;
     @ApiOperation(value = "获取订单列表",notes = "订单列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._pm._product.list})
+    @RequiresPermissions(value = {PermissionConst._order.list})
     public PublicResult<Page<Order>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Order> filter = new EntityWrapper<>();
         filter=  ComUtil.genderFilter(filter,page.where);
@@ -44,32 +46,42 @@ public class OrderController {
     }
     @ApiOperation(value = "获取订单详情",notes = "订单列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._pm._product.first})
+    @RequiresPermissions(value = {PermissionConst._order.show})
     public PublicResult<Order> Product(@PathVariable Integer id) throws Exception{
         Order m=_orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
 
-    @ApiOperation(value = "添加或编辑订单",notes = "订单列表")
-    @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._pm._product.modify})
-    public PublicResult<Object> insert(@RequestBody Order model) throws Exception{
-        Boolean r=_orderService.insertOrUpdate(model);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    @ApiOperation(value = "客户下单操作",notes = "订单列表")
+    @RequestMapping( method = RequestMethod.PUT)
+    @RequiresPermissions(value = {PermissionConst._order.list})
+    public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception{
+        try {
+            Order r=_orderService.insertOrder(model);
+            if(!r.getId().isEmpty()){
+              String code=  _orderService.weixinPay(r);
+                return new PublicResult<>(PublicResultConstant.SUCCESS, code);
+            }
+            return new PublicResult<>(PublicResultConstant.ERROR, r);
+        }catch (Exception e){
+            return  new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        }
+
     }
-    @ApiOperation(value = "删除订单",notes = "订单列表")
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    @RequiresPermissions(value = {PermissionConst._pm._product.delete})
-    public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
-        Boolean r=_orderService.deleteById(id);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    @ApiOperation(value = "测试发送url",notes = "订单列表")
+    @RequestMapping(value="/testurl", method = RequestMethod.GET)
+    public PublicResult<Object> testurl()  {
+        String url="http://www.baidu.com";
+          return new PublicResult<>(PublicResultConstant.SUCCESS, url);
     }
-    @ApiOperation(value = "批量删除订单",notes = "订单列表")
-    @RequestMapping(value = "/batch",method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._pm._product.batch})
-    public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
-        Boolean r=_orderService.deleteBatchIds(ids);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+    @ApiOperation(value = "测试推送通知",notes = "订单列表")
+    @RequestMapping(value="/testpush/{id}", method = RequestMethod.POST)
+    public PublicResult<Object> testpush(@PathVariable String deviceNum) throws  Exception {
+      WebSocketServer s=  WebSocketServer.getClients().get(deviceNum);
+      if(s!=null){
+          s.sendMessageTo("测试推送",deviceNum);
+      }
+        return new PublicResult<>(PublicResultConstant.SUCCESS, "");
     }
 }
 

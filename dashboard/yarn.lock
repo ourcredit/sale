@@ -671,6 +671,16 @@
   dependencies:
     axios "*"
 
+"@types/geojson@*":
+  version "7946.0.4"
+  resolved "http://registry.npm.taobao.org/@types/geojson/download/@types/geojson-7946.0.4.tgz#4e049756383c3f055dd8f3d24e63fb543e98eb07"
+
+"@types/highcharts@^5.0.26":
+  version "5.0.26"
+  resolved "http://registry.npm.taobao.org/@types/highcharts/download/@types/highcharts-5.0.26.tgz#fca9dde43c25294dbe38cedc44f21283ae649ecb"
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/js-cookie@^2.1.0":
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/@types/js-cookie/download/@types/js-cookie-2.1.0.tgz#a8916246aa994db646c66d54c854916213300a51"
@@ -3245,6 +3255,10 @@ he@1.1.x, he@^1.1.0:
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/hex-color-regex/download/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
+
+highcharts@^6.1.1:
+  version "6.1.1"
+  resolved "http://registry.npm.taobao.org/highcharts/download/highcharts-6.1.1.tgz#49dc34f5e963744ecd7eb87603b6cdaf8304c13a"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"

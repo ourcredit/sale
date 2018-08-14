@@ -2,6 +2,7 @@ package com.monkey.core.mapper;
 
 import com.monkey.core.entity.Order;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-08-13
  */
 public interface OrderRepository extends BaseMapper<Order> {
-
+    Order updateOrderState(@Param("num")String num,@Param("state")Integer state);
 }

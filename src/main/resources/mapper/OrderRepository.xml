@@ -24,5 +24,9 @@
     <sql id="Base_Column_List">
         id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName
     </sql>
+    <update id="updateOrderState">
+        update sale_order set payState=#{state} where wechatOrder=#{num}
+    </update>
+
 
 </mapper>

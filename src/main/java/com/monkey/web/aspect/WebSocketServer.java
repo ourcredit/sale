@@ -2,6 +2,8 @@ package com.monkey.web.aspect;
 
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -10,29 +12,30 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
+import springfox.documentation.spring.web.json.Json;
 
-@ServerEndpoint(value = "/websocket")
+@ServerEndpoint(value = "/websocket/{clientId}")
 @Component
 public class WebSocketServer {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
-    private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
-
+    private static Map<String, WebSocketServer> clients = new ConcurrentHashMap<String, WebSocketServer>();
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-
+    private  String clientId;
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
-        webSocketSet.add(this);     //加入set中
+        clients.put(clientId, this);     //加入set中
         addOnlineCount();           //在线数加1
         try {
-            sendMessage("连接成功");
+            sendMessageAll("连接成功");
         } catch (IOException e) {
         }
     }
@@ -48,7 +51,7 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose() {
-        webSocketSet.remove(this);  //从set中删除
+        clients.remove(clientId);  //从set中删除
         subOnlineCount();           //在线数减1
     }
 
@@ -58,14 +61,13 @@ public class WebSocketServer {
      * @param message 客户端发送过来的消息
      */
     @OnMessage
-    public void onMessage(String message, Session session) {
-        //群发消息
-        for (WebSocketServer item : webSocketSet) {
-            try {
-                item.sendMessage(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void onMessage(String message)throws IOException  {
+
+        JSONObject jsonTo =  JSONObject.parseObject(message);
+        if (!jsonTo.get("To").equals("All")){
+            sendMessageTo("给一个人", jsonTo.get("To").toString());
+        }else{
+            sendMessageAll("给所有人");
         }
     }
 
@@ -79,21 +81,16 @@ public class WebSocketServer {
     }
 
 
-    public void sendMessage(String message) throws IOException {
-        this.session.getBasicRemote().sendText(message);
+    public void sendMessageTo(String message, String To) throws IOException {
+        for (WebSocketServer item : clients.values()) {
+            if (item.clientId.equals(To) )
+                item.session.getAsyncRemote().sendText(message);
+        }
     }
 
-
-    /**
-     * 群发自定义消息
-     */
-    public static void sendInfo(String message) throws IOException {
-        for (WebSocketServer item : webSocketSet) {
-            try {
-                item.sendMessage(message);
-            } catch (IOException e) {
-                continue;
-            }
+    public void sendMessageAll(String message) throws IOException {
+        for (WebSocketServer item : clients.values()) {
+            item.session.getAsyncRemote().sendText(message);
         }
     }
 
@@ -107,5 +104,8 @@ public class WebSocketServer {
 
     public static synchronized void subOnlineCount() {
         WebSocketServer.onlineCount--;
+    }
+    public static synchronized Map<String, WebSocketServer> getClients() {
+        return clients;
     }
 }
