@@ -64,8 +64,8 @@
     value: boolean;
     upload: any = {
       type: "drag",
-     // action: "https://service.leftins.com/api/file",
-      action: "http://localhost:8081/api/file",
+      action: "https://service.leftins.com/api/file",
+     // action: "http://localhost:8081/api/file",
       header: {
         Authorization: auth.getToken()
       }
