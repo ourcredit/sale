@@ -47,7 +47,7 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			console.log("执行订单逻辑")
-			request('/api/order', "PUT", payload, function (r) {
+			request('/api/order', "POST", payload, function (r) {
 				if (r.data.statusCode == 200 && r.data.data) {
 					state.imageUrl = r.data.data;
 				}
