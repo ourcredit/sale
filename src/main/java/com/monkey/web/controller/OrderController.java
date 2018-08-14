@@ -9,6 +9,7 @@ import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
+import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Product;
 import com.monkey.web.aspect.WebSocketServer;
@@ -60,7 +61,8 @@ public class OrderController {
             Order r=_orderService.insertOrder(model);
             if(!r.getId().isEmpty()){
               String code=  _orderService.weixinPay(r);
-                return new PublicResult<>(PublicResultConstant.SUCCESS, code);
+             String url=   QrCodeUtil.make( code);
+                return new PublicResult<>(PublicResultConstant.SUCCESS, url);
             }
             return new PublicResult<>(PublicResultConstant.ERROR, r);
         }catch (Exception e){
@@ -72,7 +74,8 @@ public class OrderController {
     @RequestMapping(value="/testurl", method = RequestMethod.GET)
     public PublicResult<Object> testurl()  {
         String url="http://www.baidu.com";
-          return new PublicResult<>(PublicResultConstant.SUCCESS, url);
+      String u=  QrCodeUtil.make(url);
+          return new PublicResult<>(PublicResultConstant.SUCCESS, u);
     }
     @ApiOperation(value = "测试推送通知",notes = "订单列表")
     @RequestMapping(value="/testpush/{deviceNum}", method = RequestMethod.GET)

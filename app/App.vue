@@ -9,7 +9,6 @@
 			...mapActions(["register"])
 		},
 		onLaunch: function () {
-		
 			console.log('App Launch');
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */

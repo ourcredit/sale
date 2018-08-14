@@ -12,8 +12,6 @@ ajax.interceptors.request.use(
       config.headers.common.Authorization = auth.getToken();
       //  config.headers.common["Authorization"] = "awdawdawd";
     }
-    //  config.headers.common[".AspNetCore.Culture"]=window.abp.utils.getCookieValue("Abp.Localization.CultureName");
-    //  config.headers.common["Abp.TenantId"]=window.abp.multiTenancy.getTenantIdCookie();
     return config;
   },
   (error: any) => {
