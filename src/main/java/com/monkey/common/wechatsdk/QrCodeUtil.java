@@ -27,7 +27,7 @@ public class QrCodeUtil {
         String path="";
         File file = new File(fileUploadPath+"/" +UUID + "."+filePostfix);
         encode(url, file,filePostfix, BarcodeFormat.QR_CODE, 500, 500, null);
-        return  "http://103.45.8.198:9999/" + UUID+filePostfix;
+        return  "http://103.45.8.198:9999/" + UUID+"."+filePostfix;
     }
     /**
      *  生成QRCode二维码<br>
