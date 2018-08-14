@@ -8,10 +8,11 @@ import {
 const store = new Vuex.Store({
 	state: {
 		tenantName: "default",
-		deviceCode:"xc-001",
+		deviceCode: "xc-001",
 		products: [],
-		totalCount:0,
-		isRegister:false
+		totalCount: 0,
+		isRegister: false,
+		imageUrl:""
 	},
 	mutations: {
 		setPageSize(state, size) {
@@ -23,20 +24,32 @@ const store = new Vuex.Store({
 		async loadMore({
 			state
 		}, payload) {
-			request('/api/device/products', "POST",payload , function (r) {
+			request('/api/device/products', "POST", payload, function (r) {
 				console.log(JSON.stringify(r));
-				if(payload.init){
-					state.products=[];
+				if (payload.init) {
+					state.products = [];
 				}
 				state.products.push(...r.data.data.records);
 				state.totalCount = r.data.data.total;
 			});
 		},
-		async register({state},payload){
-			request('/api/device/register', "POST",payload , function (r) {
+		async register({
+			state
+		}, payload) {
+			request('/api/device/register', "POST", payload, function (r) {
 				console.log(JSON.stringify(r));
-				if(r.data.statusCode==200&&r.data.data){
-					state.isRegister=true;
+				if (r.data.statusCode == 200 && r.data.data) {
+					state.isRegister = true;
+				}
+			});
+		},
+		async gobuy({
+			state
+		}, payload) {
+			console.log("执行订单逻辑")
+			request('/api/order', "PUT", payload, function (r) {
+				if (r.data.statusCode == 200 && r.data.data) {
+					state.imageUrl = r.data.data;
 				}
 			});
 		}

@@ -21,12 +21,12 @@
 					</view>
 					<view class="uni-flex uni-row">
 						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
-							<button v-if="!state" @click="gobuy">立即购买</button>
-							<image style="width:200px;height:200px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg"
+							<button v-if="!state" @click="gotobuy">立即购买</button>
+							<image style="width:200px;height:200px;"
+							 :src="qrcode"
 							    v-if="state">二维码</image>
 						</view>
 					</view>
-
 				</view>
 			</view>
 		</view>
@@ -67,12 +67,14 @@
 				},
 				title: "商品清单",
 				current: {}
+				
 			}
 		},
 		computed: {
 			...mapState({
 				list: state => state.products,
-				total: state => state.totalCount
+				total: state => state.totalCount,	
+				qrcode: state => state.imageUrl,
 			})
 		},
 		onShow() {
@@ -87,7 +89,7 @@
 			pageHead
 		},
 		methods: {
-			...mapActions(["loadMore"]),
+			...mapActions(["loadMore", "gobuy"]),
 			more() {
 				if (this.total > 0) {
 					this.params.index++;
@@ -108,11 +110,17 @@
 				this.current = item;
 			},
 			scroll() {},
-			gobuy() {
-				this.state = !this.state;
-				setTimeout(() => {
-					this.state = !this.state;
-				}, 5000)
+			gotobuy() {
+				console.log(JSON.stringify(this.current));
+				if(!this.current||!this.current.productId){
+					return;
+				}
+				let params = {
+					"deviceNum": plus.device.imei.split(',')[0],
+					"price": this.current.price,
+					"productId": this.current.productId
+				}
+				this.gobuy(params);
 			}
 
 		}

@@ -5,6 +5,11 @@
 		mapActions
 	} from 'vuex'
 	export default {
+		data(){
+			return{
+				websocketUrl:"wss://service.leftins.com/websocket/"
+			}
+		},
 		methods: {
 			...mapActions(["register"])
 		},
@@ -60,9 +65,11 @@
 			//#endif
 		},
 		onShow: function () {
-			console.log('App Show')
+			console.log('App Show');
+			let num=plus.device.imei.split(',')[0];
+			let url=this.websocketUrl+num
 			uni.connectSocket({
-				url: 'wss://103.45.8.198/websocket',
+				url: url,
 				data: {},
 				header: {
 					'content-type': 'application/json'

@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "客户下单操作",notes = "订单列表")
-    @RequestMapping( method = RequestMethod.PUT)
+    @RequestMapping( method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._order.list})
     public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception{
         try {
