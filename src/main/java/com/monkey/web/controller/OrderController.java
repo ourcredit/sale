@@ -75,7 +75,7 @@ public class OrderController {
           return new PublicResult<>(PublicResultConstant.SUCCESS, url);
     }
     @ApiOperation(value = "测试推送通知",notes = "订单列表")
-    @RequestMapping(value="/testpush/{id}", method = RequestMethod.POST)
+    @RequestMapping(value="/testpush/{deviceNum}", method = RequestMethod.GET)
     public PublicResult<Object> testpush(@PathVariable String deviceNum) throws  Exception {
       WebSocketServer s=  WebSocketServer.getClients().get(deviceNum);
       if(s!=null){

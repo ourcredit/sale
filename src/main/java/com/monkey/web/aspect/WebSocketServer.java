@@ -10,6 +10,7 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import com.alibaba.fastjson.JSONObject;
@@ -30,9 +31,10 @@ public class WebSocketServer {
      * 连接建立成功调用的方法
      */
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, @PathParam("clientId") String clientId) {
         this.session = session;
-        clients.put(clientId, this);     //加入set中
+        this.clientId=clientId;
+        clients.put(this.clientId, this);     //加入set中
         addOnlineCount();           //在线数加1
         try {
             sendMessageAll("连接成功");
@@ -65,7 +67,7 @@ public class WebSocketServer {
 
         JSONObject jsonTo =  JSONObject.parseObject(message);
         if (!jsonTo.get("To").equals("All")){
-            sendMessageTo("给一个人", jsonTo.get("To").toString());
+            sendMessageTo(jsonTo.get("To").toString(), jsonTo.get("To").toString());
         }else{
             sendMessageAll("给所有人");
         }
@@ -83,7 +85,7 @@ public class WebSocketServer {
 
     public void sendMessageTo(String message, String To) throws IOException {
         for (WebSocketServer item : clients.values()) {
-            if (item.clientId.equals(To) )
+            if (item.clientId!=null&& item.clientId.equals(To) )
                 item.session.getAsyncRemote().sendText(message);
         }
     }
