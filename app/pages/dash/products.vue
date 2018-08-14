@@ -6,8 +6,7 @@
 				<view style="width: 80%;height: 430px;" class="flex-item color1">
 					<view class="uni-flex  uni-row">
 						<view class="text" style="flex: 1;">
-							<image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533892584389&di=c3dbef02f7d3e63101efad106b9999fc&imgtype=0&src=http%3A%2F%2Fwww.gree.com%2Fdata%2Fcms%2Farchive%2F201602%25284%2529%2F1041%2Fglsc.jpg">二维码</image>
-
+							<image :src="qrcode">二维码</image>
 						</view>
 						<view class="text" style="flex: 1;">简介阿达伟大阿瓦达伟大阿瓦达阿瓦</view>
 					</view>
@@ -24,6 +23,8 @@
 							<button v-if="step==1" @click="gotobuy">确认购买</button>
 							<image v-if="step==2" style="width:200px;height:200px;" :src="qrcode">二维码</image>
 							<button v-if="step==3" @click="gotobuy">出货中</button>
+							<button v-if="step==4" @click="gotobuy">出货完成</button>
+
 						</view>
 					</view>
 				</view>
@@ -69,13 +70,22 @@
 			})
 		},
 		onShow() {
-			let _=this;
+			let _ = this;
 			this.params.index = 1;
 			this.params.init = true;
 			this.loadMore(this.params);
 			uni.onSocketMessage(function (res) {
 				console.log('收到服务器内容：' + res.data);
 				_.setStep(3);
+				setTimeout(() => {
+					_.setStep(4);
+					setTimeout(() => {
+						uni.redirectTo({
+							url: "/pages/dash/advence"
+						})
+						_.setStep(1);
+					}, 5000)
+				}, 8000)
 			});
 		},
 		components: {
@@ -158,10 +168,12 @@
 		color: #cfcfcf;
 		font-size: 26px;
 	}
+
 	.scroll-view_H {
 		white-space: nowrap;
 		width: 100%;
 	}
+
 	.scroll-view-item {
 		height: 300px;
 		line-height: 300px;
