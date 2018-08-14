@@ -7,16 +7,20 @@ import {
 } from "../common/ajax.js"
 const store = new Vuex.Store({
 	state: {
-		tenantName: "default",
-		deviceCode: "xc-001",
-		products: [],
-		totalCount: 0,
-		isRegister: false,
-		imageUrl:""
+		step:1, //购买流程控制
+		tenantName: "default", //默认租户信息
+		deviceCode: "xc-001", //默认设备code 编码
+		products: [],	 //产品对象集合
+		totalCount: 0,	 //总数据聚集
+		isRegister: false, //当前设备是否注册
+		imageUrl:""	 //支付url
 	},
 	mutations: {
 		setPageSize(state, size) {
 			state.pageSize = size;
+		},
+		setStep(state, step) {
+			state.step = step;
 		}
 	},
 	actions: {
@@ -25,7 +29,6 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			request('/api/device/products', "POST", payload, function (r) {
-				console.log(JSON.stringify(r));
 				if (payload.init) {
 					state.products = [];
 				}
@@ -37,8 +40,7 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			request('/api/device/register', "POST", payload, function (r) {
-				console.log(JSON.stringify(r));
-				if (r.data.statusCode == 200 && r.data.data) {
+				if (r.statusCode == 200 && r.data.data) {
 					state.isRegister = true;
 				}
 			});
@@ -46,9 +48,19 @@ const store = new Vuex.Store({
 		async gobuy({
 			state
 		}, payload) {
+			request('/api/order/make', "POST", payload, function (r) {
+				if (r.statusCode == 200 && r.data.data) {
+					state.imageUrl = r.data.data;
+				}
+			});
+		},
+		async gobuytest({
+			state
+		}, payload) {
 			console.log("执行订单逻辑")
-			request('/api/order', "POST", payload, function (r) {
-				if (r.data.statusCode == 200 && r.data.data) {
+			request('/api/order/testurl', "GET", payload, function (r) {
+				console.log(JSON.stringify(r));
+				if (r.statusCode == 200 && r.data.data) {
 					state.imageUrl = r.data.data;
 				}
 			});

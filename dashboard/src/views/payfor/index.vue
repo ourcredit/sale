@@ -54,7 +54,6 @@
         get current() {
             return this.$store.state.device.payfor;
         }
-      
         async save() {
             this.$store.dispatch({
                 type: "device/putAccount",
@@ -66,10 +65,6 @@
             });
         }
         async created() {
-             this.$store.dispatch({
-                type: "device/getAccount",
-                data: Number.parseInt(Math.random()*10+"") 
-            });
         }
     }
 </script>

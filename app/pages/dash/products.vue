@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<page-head :title="ww"></page-head>
+		<page-head title="ww"></page-head>
 		<view class="page-section">
 			<view class="uni-flex uni-row">
 				<view style="width: 80%;height: 430px;" class="flex-item color1">
@@ -21,10 +21,9 @@
 					</view>
 					<view class="uni-flex uni-row">
 						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
-							<button v-if="!state" @click="gotobuy">立即购买</button>
-							<image style="width:200px;height:200px;"
-							 :src="qrcode"
-							    v-if="state">二维码</image>
+							<button v-if="step==1" @click="gotobuy">确认购买</button>
+							<image v-if="step==2" style="width:200px;height:200px;" :src="qrcode">二维码</image>
+							<button v-if="step==3" @click="gotobuy">出货中</button>
 						</view>
 					</view>
 				</view>
@@ -33,13 +32,6 @@
 		<view class="page-section">
 			<view class="page-section-spacing">
 				<scroll-view @scrolltoupper="init" @scrolltolower="more" class="scroll-view_H" scroll-x="true" @scroll="scroll">
-
-					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
-						<view class="textshow">{{item.productName}} </view>
-					</view>
-					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
-						<view class="textshow">{{item.productName}} </view>
-					</view>
 					<view @tap="show(item)" :key="item.productName" v-for="item in list" class="scroll-view-item_H color1">
 						<view class="textshow">{{item.productName}} </view>
 					</view>
@@ -58,38 +50,42 @@
 	export default {
 		data() {
 			return {
-				state: false,
 				params: {
 					"deviceId": 1,
 					"index": 1,
 					"size": 10,
 					"init": true
 				},
-				title: "商品清单",
 				current: {}
-				
+
 			}
 		},
 		computed: {
 			...mapState({
 				list: state => state.products,
-				total: state => state.totalCount,	
+				total: state => state.totalCount,
 				qrcode: state => state.imageUrl,
+				step: state => state.step
 			})
 		},
 		onShow() {
+			let _=this;
 			this.params.index = 1;
 			this.params.init = true;
 			this.loadMore(this.params);
 			uni.onSocketMessage(function (res) {
 				console.log('收到服务器内容：' + res.data);
+				_.setStep(3);
 			});
 		},
 		components: {
 			pageHead
 		},
 		methods: {
-			...mapActions(["loadMore", "gobuy"]),
+			...mapMutations([
+				'setStep' // 映射 this.increment() 为 this.$store.commit('increment')
+			]),
+			...mapActions(["loadMore", "gobuy", "gobuytest"]),
 			more() {
 				if (this.total > 0) {
 					this.params.index++;
@@ -107,12 +103,13 @@
 				this.loadMore(this.params);
 			},
 			show(item) {
-				this.current = item;
+				if (this.step == 1) {
+					this.current = item;
+				}
 			},
 			scroll() {},
 			gotobuy() {
-				console.log(JSON.stringify(this.current));
-				if(!this.current||!this.current.productId){
+				if (!this.current || !this.current.productId) {
 					return;
 				}
 				let params = {
@@ -120,7 +117,9 @@
 					"price": this.current.price,
 					"productId": this.current.productId
 				}
-				this.gobuy(params);
+				//this.gobuy(params);
+				this.gobuytest({});
+				this.setStep(2);
 			}
 
 		}
@@ -159,12 +158,10 @@
 		color: #cfcfcf;
 		font-size: 26px;
 	}
-
 	.scroll-view_H {
 		white-space: nowrap;
 		width: 100%;
 	}
-
 	.scroll-view-item {
 		height: 300px;
 		line-height: 300px;

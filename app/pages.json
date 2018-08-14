@@ -20,7 +20,7 @@
 		}
 	],
 	"globalStyle": {
-		"navigationStyle":"custom",
+		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#000000",
