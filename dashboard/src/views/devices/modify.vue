@@ -12,7 +12,7 @@
           <Input v-model="device.deviceNum" readonly :maxlength="32" :minlength="2" />
         </FormItem>
         <FormItem label="设备类型" prop="deviceType">
-          <Select disabled v-model="device.deviceType" style="width:100%">
+          <Select  v-model="device.deviceType" style="width:100%">
             <Option v-for="item in cates"  :value="item" :key="item">{{ item }}</Option>
           </Select>
         </FormItem>

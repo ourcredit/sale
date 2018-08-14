@@ -95,7 +95,7 @@ export default class deviceC extends AbpBase {
     },
     {
       title: "设备编号",
-      key: "deviceName"
+      key: "deviceNum"
     },
     {
       title: "设备类型",

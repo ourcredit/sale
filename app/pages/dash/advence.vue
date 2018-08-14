@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<page-head :title="ww"></page-head>
+		<page-head title=""></page-head>
 		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:height }">
 			<swiper-item @tap="detail(img)" v-for="(img,key) in imgUrls" :key="key">
 				<image :src="img" v-bind:style="{height:height }" />

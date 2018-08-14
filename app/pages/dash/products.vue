@@ -58,7 +58,6 @@
 					"init": true
 				},
 				current: {}
-
 			}
 		},
 		computed: {

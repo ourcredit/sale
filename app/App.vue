@@ -28,8 +28,7 @@
 				"version": plus.runtime.version,
 				"imei": plus.device.imei
 			};
-
-
+			console.log(JSON.stringify(req));
 			uni.request({
 				url: server,
 				data: req,
@@ -49,12 +48,6 @@
 					}
 				}
 			})
-			//初始化设备入库
-			console.log("1." + plus.device.imei);
-			console.log("2." + plus.device.imsi);
-			console.log("3." + plus.device.model);
-			console.log("4." + plus.device.vendor);
-			console.log("5." + plus.device.uuid);
 			if (plus.device.imei) {
 				let num=plus.device.imei.split(',')[0];
 				this.register({
