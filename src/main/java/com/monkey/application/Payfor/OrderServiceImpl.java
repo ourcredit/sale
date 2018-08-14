@@ -95,13 +95,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         packageParams.put("appid", appid);
         packageParams.put("mch_id", mch_id);
         packageParams.put("nonce_str", nonce_str);
-        packageParams.put("body", "可乐");  //（调整为自己的名称）
+        packageParams.put("body", input.getProductName());  //（调整为自己的名称）
         packageParams.put("out_trade_no", out_trade_no);
-        packageParams.put("total_fee", "10"); //价格的单位为分
+        packageParams.put("total_fee", input.getPrice()); //价格的单位为分
         packageParams.put("spbill_create_ip", spbill_create_ip);
         packageParams.put("notify_url", notify_url);
         packageParams.put("trade_type", trade_type);
-
         String sign = PayToolUtil.createSign("UTF-8", packageParams,key);
         packageParams.put("sign", sign);
 
