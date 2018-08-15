@@ -13,13 +13,20 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.monkey.application.Payfor.IOrderService;
+import com.monkey.web.config.SpringContextBean;
+import com.monkey.web.controller.dtos.WebSocketMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.spring.web.json.Json;
 
 @ServerEndpoint(value = "/websocket/{clientId}")
 @Component
 public class WebSocketServer {
+    @Autowired
+    IOrderService _orderService;
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
@@ -37,8 +44,10 @@ public class WebSocketServer {
         clients.put(this.clientId, this);     //加入set中
         addOnlineCount();           //在线数加1
         try {
-            sendMessageAll("连接成功");
+            WebSocketMessage m=new WebSocketMessage(this.clientId,"","链接服务器成功",1,true);
+            sendMessageTo(m);
         } catch (IOException e) {
+
         }
     }
     //	//连接打开时执行
@@ -64,13 +73,15 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message)throws IOException  {
-
-        JSONObject jsonTo =  JSONObject.parseObject(message);
-        if (!jsonTo.get("To").equals("All")){
-            sendMessageTo(jsonTo.get("To").toString(), jsonTo.get("To").toString());
-        }else{
-            sendMessageAll("给所有人");
+        if(this._orderService==null){
+            this._orderService=SpringContextBean.getBean(IOrderService.class);
         }
+        JSONObject jsonTo =  JSONObject.parseObject(message);
+        String order= (String)jsonTo.get("order");
+        _orderService.updateOrderStatte(order,1,null);
+        WebSocketMessage m=new WebSocketMessage(this.clientId,order,"出货状态修改成功",4,true);
+        sendMessageTo(m);
+
     }
 
     /**
@@ -83,16 +94,18 @@ public class WebSocketServer {
     }
 
 
-    public void sendMessageTo(String message, String To) throws IOException {
+    public void sendMessageTo(WebSocketMessage message) throws IOException {
+        String json=JSON.toJSONString(message);
         for (WebSocketServer item : clients.values()) {
-            if (item.clientId!=null&& item.clientId.equals(To) )
-                item.session.getAsyncRemote().sendText(message);
+            if (item.clientId!=null&& item.clientId.equals(message.to) )
+                item.session.getAsyncRemote().sendText(json);
         }
     }
 
-    public void sendMessageAll(String message) throws IOException {
+    public void sendMessageAll(WebSocketMessage message) throws IOException {
+        String json=JSON.toJSONString(message);
         for (WebSocketServer item : clients.values()) {
-            item.session.getAsyncRemote().sendText(message);
+            item.session.getAsyncRemote().sendText(json);
         }
     }
 

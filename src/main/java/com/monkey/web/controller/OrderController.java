@@ -13,6 +13,7 @@ import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Order;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
+import com.monkey.web.controller.dtos.WebSocketMessage;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,8 @@ public class OrderController {
     public PublicResult<Object> testpush(@PathVariable String deviceNum) throws  Exception {
       WebSocketServer s=  WebSocketServer.getClients().get(deviceNum);
       if(s!=null){
-          s.sendMessageTo("测试推送",deviceNum);
+          WebSocketMessage m=new WebSocketMessage(deviceNum,"","测试推送",1,true);
+          s.sendMessageTo(m);
       }
         return new PublicResult<>(PublicResultConstant.SUCCESS, "");
     }

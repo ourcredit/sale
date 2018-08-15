@@ -7,6 +7,7 @@ import {
 } from "../common/ajax.js"
 const store = new Vuex.Store({
 	state: {
+		socketState:false,
 		step: 1, //购买流程控制
 		tenantName: "default", //默认租户信息
 		deviceCode: "", //默认设备code 编码
@@ -24,6 +25,13 @@ const store = new Vuex.Store({
 		},
 		setDeviceCode(state, code) {
 			state.deviceCode = code;
+		},
+		setsocketState(state, socketState) {
+			state.socketState = socketState;
+		},
+		initState(state) {
+			state.step = 1;
+			state.imageUrl = "";
 		}
 	},
 	actions: {
@@ -35,7 +43,6 @@ const store = new Vuex.Store({
 				payload.deviceNum = state.deviceCode;
 			}
 			request('/api/device/salelist', "POST", payload, function (r) {
-				console.log(JSON.stringify(r));
 				if (payload.init) {
 					state.products = [];
 				}
@@ -58,20 +65,7 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
-			console.log(JSON.stringify(payload));
 			request('/api/order/make', "POST", payload, function (r) {
-				console.log(JSON.stringify(r));
-				if (r.statusCode == 200 && r.data.data) {
-					state.imageUrl = r.data.data;
-				}
-			});
-		},
-		async gobuytest({
-			state
-		}, payload) {
-			console.log("执行订单逻辑")
-			request('/api/order/testurl', "GET", payload, function (r) {
-				console.log(JSON.stringify(r));
 				if (r.statusCode == 200 && r.data.data) {
 					state.imageUrl = r.data.data;
 				}

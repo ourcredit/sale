@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2018-08-13
  */
 public interface OrderRepository extends BaseMapper<Order> {
-    void updateOrderState(@Param("num")String num,@Param("state")Integer state);
+    void updateOrderState(@Param("num")String num,@Param("orderState")Integer orderState,@Param("payState")Integer payState);
 }

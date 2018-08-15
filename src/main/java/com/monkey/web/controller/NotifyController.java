@@ -1,9 +1,11 @@
 package com.monkey.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.monkey.application.Payfor.IOrderService;
 import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
 import com.monkey.web.aspect.WebSocketServer;
+import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,23 +81,19 @@ public class NotifyController {
                 String transaction_id = (String) packageParams.get("transaction_id");
 
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
-                _orderService.updateOrderStatte(out_trade_no, 1);
+                _orderService.updateOrderStatte(out_trade_no, null,1);
                 ///////////通知客户端修改状态/////////
                 String did = out_trade_no.split("_")[0];
                 WebSocketServer ws = WebSocketServer.getClients().get(did);
                 if (ws != null) {
-                    ws.sendMessageTo("出货成功修改状态", did);
+                    WebSocketMessage mm=new WebSocketMessage(did,out_trade_no,"支付成功",2,true);
+                    ws.sendMessageTo(mm);
                 }
-                System.out.println("支付成功 ,处理业务成功");
-                //通知微信.异步确认成功.必写.不然会一直通知后台.八次之后就认为交易失败了.
-                resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
-                        + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
-                //------------------------------
-                //处理业务完毕
-                //------------------------------
-//　　　　//向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
+                // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
                 BufferedOutputStream out = new BufferedOutputStream(
                         response.getOutputStream());
+                resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+                        + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
                 out.write(resXml.getBytes());
                 out.flush();
                 out.close();
@@ -103,7 +101,6 @@ public class NotifyController {
             } else {
                 resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                         + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
-
                 BufferedOutputStream out = new BufferedOutputStream(
                         response.getOutputStream());
                 out.write(resXml.getBytes());

@@ -65,10 +65,12 @@
 				list: state => state.products,
 				total: state => state.totalCount,
 				qrcode: state => state.imageUrl,
-				step: state => state.step		
+				step: state => state.step,
+				socketState: state => state.socketState,
+
 			}),
-			url(){
-				return this.current&&this.current.imageUrl?("http://103.45.8.198:9999/"+this.current.imageUrl):"";
+			url() {
+				return this.current && this.current.imageUrl ? ("http://103.45.8.198:9999/" + this.current.imageUrl) : "";
 			}
 		},
 		onShow() {
@@ -82,11 +84,19 @@
 				_.setStep(3);
 				setTimeout(() => {
 					_.setStep(4);
+					if (this.socketState) {
+						uni.sendSocketMessage({
+							data: {
+								type: "outsuccess",
+								order: res.data.order
+							}
+						});
+					}
 					setTimeout(() => {
+						_.initState();
 						uni.redirectTo({
 							url: "/pages/dash/advence"
 						})
-						_.setStep(1);
 					}, 5000)
 				}, 8000)
 			});
@@ -97,9 +107,9 @@
 		methods: {
 			...mapMutations([
 				'setStep', // 映射 this.increment() 为 this.$store.commit('increment')
-					"initState"
+				"initState"
 			]),
-			...mapActions(["loadMore", "gobuy", "gobuytest"]),
+			...mapActions(["loadMore", "gobuy"]),
 			more() {
 				if (this.total > 0) {
 					this.params.index++;
@@ -119,7 +129,7 @@
 			show(item) {
 				if (this.step == 1) {
 					this.current = item;
-				} 
+				}
 			},
 			scroll() {},
 			gotobuy() {
@@ -132,7 +142,6 @@
 					"productId": this.current.productId
 				}
 				this.gobuy(params);
-				//this.gobuytest({});
 				this.setStep(2);
 			}
 

@@ -5,9 +5,9 @@
 		mapActions
 	} from 'vuex'
 	export default {
-		data(){
-			return{
-				websocketUrl:"wss://service.leftins.com/websocket/"
+		data() {
+			return {
+				websocketUrl: "wss://service.leftins.com/websocket/"
 			}
 		},
 		computed: {
@@ -18,10 +18,12 @@
 		methods: {
 			...mapActions(["register"]),
 			...mapMutations([
-				'setDeviceCode' // 映射 this.increment() 为 this.$store.commit('increment')
+				'setDeviceCode', // 映射 this.increment() 为 this.$store.commit('increment')
+				"setsocketState"
 			]),
 		},
 		onLaunch: function () {
+			let _=this;
 			console.log('App Launch');
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
@@ -36,12 +38,10 @@
 				"version": plus.runtime.version,
 				"imei": plus.device.imei
 			};
-			console.log(JSON.stringify(req));
 			uni.request({
 				url: server,
 				data: req,
 				success: (res) => {
-					console.log("success", res);
 					if (res.statusCode == 200 && res.data.isUpdate) {
 						let openUrl = plus.os.name === 'iOS' ? res.data.iOS : res.data.Android;
 						uni.showModal({ //提醒用户更新
@@ -57,18 +57,15 @@
 				}
 			})
 			if (plus.device.imei) {
-				let num=plus.device.imei.split(',')[0];
+				let num = plus.device.imei.split(',')[0];
 				this.setDeviceCode(num);
 				this.register({
 					deviceNum: num,
 					deviceName: plus.device.model
 				});
 			}
-			//#endif
-		},
-		onShow: function () {
-			console.log('App Show');
-			let url=this.websocketUrl+this.deviceCode
+			let url = this.websocketUrl + this.deviceCode
+
 			uni.connectSocket({
 				url: url,
 				data: {},
@@ -77,13 +74,18 @@
 				},
 				protocols: [],
 				method: "GET"
-			}, function (r) {
-				console.log("www" + JSON.stringify(r));
-			});
+			}, function (r) {});
 			uni.onSocketOpen(function (res) {
-				console.log('WebSocket连接已打开！');
+				_.setsocketState(true);
 			});
-
+			uni.onSocketClose(function (res) {
+				_.setsocketState(false);
+			});
+			//#endif
+		},
+		onShow: function () {
+			
+			console.log('App Show');
 		},
 		onHide: function () {
 			console.log('App Hide')

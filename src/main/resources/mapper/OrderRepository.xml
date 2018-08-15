@@ -25,7 +25,16 @@
         id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName
     </sql>
     <update id="updateOrderState">
-        update sale_order set payState=#{state} where wechatOrder=#{num}
+        update sale_order
+
+         set
+          <if test="payState!=null">
+              payState=#{payState}
+          </if>
+        <if test="orderState!=null">
+            orderState=#{orderState}
+        </if>
+           where wechatOrder=#{num}
     </update>
 
 
