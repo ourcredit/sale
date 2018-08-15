@@ -72,6 +72,7 @@
 			}
 		},
 		onShow() {
+			this.initState();
 			let _ = this;
 			this.params.index = 1;
 			this.params.init = true;
@@ -95,7 +96,8 @@
 		},
 		methods: {
 			...mapMutations([
-				'setStep' // 映射 this.increment() 为 this.$store.commit('increment')
+				'setStep', // 映射 this.increment() 为 this.$store.commit('increment')
+					"initState"
 			]),
 			...mapActions(["loadMore", "gobuy", "gobuytest"]),
 			more() {
