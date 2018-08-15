@@ -105,6 +105,7 @@ public class MybatisPlusConfig {
                 add("com.monkey.core.mapper.TenantRepository.insertTenantAdminRoles");
                 add("com.monkey.core.mapper.TenantRepository.selectTenantRoles");
                 add("com.monkey.core.mapper.UserRepository.selectByTenantAndName");
+                add("com.monkey.core.mapper.OrderRepository.updateOrderState");
             }};
             MappedStatement ms = PluginUtils.getMappedStatement(metaObject);
             // 过滤自定义查询此时无租户信息约束【 麻花藤 】出现
