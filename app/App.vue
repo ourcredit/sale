@@ -76,6 +76,7 @@
 				method: "GET"
 			}, function (r) {});
 			uni.onSocketOpen(function (res) {
+				console.log(JSON.stringify(res))
 				_.setsocketState(true);
 			});
 			uni.onSocketClose(function (res) {

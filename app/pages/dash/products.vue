@@ -102,7 +102,7 @@
 			});
 		},
 		components: {
-			pageHead
+			pageHead 
 		},
 		methods: {
 			...mapMutations([
