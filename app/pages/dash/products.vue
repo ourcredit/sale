@@ -10,12 +10,12 @@
 						</view>
 						<view class="text" style="flex: 1;">{{current.description}}</view>
 					</view>
-
 				</view>
 				<view style="flex: 1;height: 430px;" class="flex-item color3">
 					<view class="uni-flex uni-row">
 						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-start;">
 							<text>{{current.productName}}</text>
+							<text>{{current.price}}</text>
 						</view>
 					</view>
 					<view class="uni-flex uni-row">
@@ -61,26 +61,36 @@
 			}
 		},
 		mounted() {
+			let _ = this;
+
 			uni.onSocketMessage(function (res) {
 				console.log('收到服务器内容：' + res.data);
-				_.setStep(3);
-				setTimeout(() => {
-					_.setStep(4);
-					if (this.socketState) {
-						uni.sendSocketMessage({
-							data: {
-								type: "outsuccess",
-								order: res.data.order
-							}
-						});
-					}
+				let o = JSON.parse(res.data);
+				if (o.type == 2 && o.state) {
+					_.setStep(3);
 					setTimeout(() => {
-						_.initState();
-						uni.redirectTo({
-							url: "/pages/dash/advence"
-						})
-					}, 5000)
-				}, 8000)
+						_.setStep(4);
+						console.log("websocket" + _.socketState);
+						if (_.socketState) {
+							let m = JSON.stringify({
+								to: o.to,
+								type: 4,
+								state: true,
+								order: o.order,
+								message: "出货成功"
+							});
+							uni.sendSocketMessage({
+								data: m
+							});
+						}
+						setTimeout(() => {
+							_.initState();
+							uni.redirectTo({
+								url: "/pages/dash/advence"
+							})
+						}, 5000)
+					}, 8000)
+				}
 			});
 		},
 		computed: {

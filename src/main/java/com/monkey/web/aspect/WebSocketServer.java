@@ -78,7 +78,10 @@ public class WebSocketServer {
         }
         JSONObject jsonTo =  JSONObject.parseObject(message);
         String order= (String)jsonTo.get("order");
-        _orderService.updateOrderStatte(order,1,null);
+        Integer type= (Integer) jsonTo.get("type");
+        if(type==4){
+            _orderService.updateOrderStatte(order,1,null);
+        }
         WebSocketMessage m=new WebSocketMessage(this.clientId,order,"出货状态修改成功",4,true);
         sendMessageTo(m);
 

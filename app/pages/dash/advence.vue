@@ -11,6 +11,11 @@
 </template>
 <script>
 	import pageHead from "../../components/page-head.vue"
+	import {
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex'
 	export default {
 		data: {
 			title: '广告位',
@@ -20,17 +25,19 @@
 				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
 			]
 		},
-		components:{
+		components: {
 			pageHead
 		},
 		computed: {
+			...mapState({
+				list: state => state.products,
+			}),
 			height() {
 				return '335px';
 			}
 		},
 		methods: {
 			detail(img) {
-				console.log(img);
 				uni.navigateTo({
 					url: "/pages/dash/detail",
 				})
@@ -46,7 +53,6 @@
 
 <style>
 	@import "../../common/uni.css";
-
 	page {
 		background: #efeff4;
 	}

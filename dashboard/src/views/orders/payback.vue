@@ -28,11 +28,6 @@
               <FormItem label="时间范围:">
                 <DatePicker type="daterange" split-panels placeholder="选择范围" style="width: 200px"></DatePicker>
               </FormItem>
-              <FormItem label="订单状态:">
-                <Select clearable v-model="filters.deviceType" style="width:160px">
-                  <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
-                </Select>
-              </FormItem>
               <FormItem label="设备类型:">
                 <Select clearable v-model="filters.deviceType" style="width:160px">
                   <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
@@ -44,7 +39,7 @@
               </Col>
             </Row>
           </Form>
-          <SaleTable ref="table" :filters="filters" :type="'product'" :columns="columns"></SaleTable>
+          <SaleTable ref="table" :filters="filters" :type="'order'" :columns="columns"></SaleTable>
         </div>
       </Card>
       </Col>
@@ -57,7 +52,6 @@ import SaleTable from "@/components/saletable.vue";
 import AbpBase from "@/lib/abpbase";
 import PageRequest from "../../store/entities/page-request";
 import Util from "../../lib/util";
-import Product from "@/store/entities/product";
 import OrgTree from "@/components/orgtree.vue";
 @Component({
   components: {
@@ -65,19 +59,17 @@ import OrgTree from "@/components/orgtree.vue";
     OrgTree
   }
 })
-export default class ProductC extends AbpBase {
+export default class Orders extends AbpBase {
   filters: Object = {
     productName: ""
   };
   get tree() {
     return this.$store.state.device.tree;
   }
+  orderStates:Array<any>=["未支付","已支付","未发货","已发货"];
   p: any = {
-    modify: this.hasPermission("order:modify"),
-    delete: this.hasPermission("order:delete"),
     list: this.hasPermission("order:list"),
     first: this.hasPermission("order:first"),
-    batch: this.hasPermission("order:batch")
   };
   get cates() {
     return this.$store.state.product.productCate;
@@ -91,7 +83,7 @@ export default class ProductC extends AbpBase {
     },
     {
       title: "订单编号",
-      key: "productName"
+      key: "wechatOrder"
     },
     {
       title: "商品名称",
@@ -99,19 +91,19 @@ export default class ProductC extends AbpBase {
     },
     {
       title: "设备名称",
-      key: "productType"
+      key: "deviceName"
     },
     {
       title: "设备编号",
-      key: "price"
+      key: "wechatOrder"
     },
     {
       title: "设备类型",
-      key: "price"
+      key: "deviceType"
     },
     {
       title: "所属点位",
-      key: "price"
+      key: "pointName"
     },
     {
       title: "金额",
@@ -119,7 +111,7 @@ export default class ProductC extends AbpBase {
     },
     {
       title: "状态",
-      key: "price"
+      key: "payState"
     },
     {
       title: "创建时间",
@@ -190,11 +182,6 @@ export default class ProductC extends AbpBase {
       }
     }
   ];
-  Create() {
-    var u = new Product();
-    this.$store.commit("product/edit", u);
-    this.ModalShow = true;
-  }
   init() {
     var t: any = this.$refs.table;
     t.getpage();

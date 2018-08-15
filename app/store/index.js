@@ -42,7 +42,9 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
+			console.log("执行加载商品:"+JSON.stringify(payload))
 			request('/api/device/salelist', "POST", payload, function (r) {
+				console.log(JSON.stringify(r))
 				if (payload.init) {
 					state.products = [];
 				}
@@ -53,7 +55,9 @@ const store = new Vuex.Store({
 		async register({
 			state
 		}, payload) {
+			console.log("执行自注册:"+JSON.stringify(payload))
 			request('/api/device/register', "POST", payload, function (r) {
+				console.log(JSON.stringify(r))
 				if (r.statusCode == 200 && r.data.data) {
 					state.isRegister = true;
 				}
