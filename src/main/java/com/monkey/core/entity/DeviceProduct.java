@@ -23,7 +23,7 @@ import java.io.Serializable;
 public class DeviceProduct extends Model<DeviceProduct> {
 
     public DeviceProduct(){}
-    public DeviceProduct(String id, Integer productId,Integer deviceId,Integer isSale,BigDecimal price){
+    public DeviceProduct(String id, Integer productId,Integer deviceId,Integer isSale,Integer price){
         this.id=id;
         this.productId=productId;
         this.deviceId=deviceId;
@@ -52,7 +52,7 @@ public class DeviceProduct extends Model<DeviceProduct> {
     /**
      * 价格
      */
-    private BigDecimal price;
+    private Integer price;
     /**
      * 创建时间
      */
@@ -107,11 +107,11 @@ public class DeviceProduct extends Model<DeviceProduct> {
         this.isSale = isSale;
     }
 
-    public BigDecimal getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

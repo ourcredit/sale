@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 14/08/2018 17:23:07
+ Date: 15/08/2018 09:44:54
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `sale_device_product`  (
   `productId` int(11) NOT NULL COMMENT '产品id',
   `deviceId` int(11) NOT NULL COMMENT '设备id',
   `isSale` tinyint(2) NOT NULL DEFAULT 0 COMMENT '是否售卖',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
+  `price` int(10) NULL DEFAULT NULL COMMENT '价格',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
@@ -115,7 +115,7 @@ CREATE TABLE `sale_order`  (
   `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'key',
   `productName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名',
   `productId` int(11) NULL DEFAULT NULL COMMENT '商品id',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格',
+  `price` int(10) NULL DEFAULT NULL COMMENT '价格',
   `wechatOrder` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信订单',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
@@ -176,7 +176,7 @@ CREATE TABLE `sale_product`  (
   `productName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品名',
   `productNum` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品编号',
   `productType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '商品类型',
-  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '默认价格',
+  `price` int(10) NULL DEFAULT NULL COMMENT '默认价格',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',

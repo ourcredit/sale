@@ -38,7 +38,7 @@ public class Order extends Model<Order> {
     /**
      * 价格
      */
-    private BigDecimal price;
+    private Integer price;
     /**
      * 微信订单
      */
@@ -105,11 +105,11 @@ public class Order extends Model<Order> {
         this.productId = productId;
     }
 
-    public BigDecimal getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

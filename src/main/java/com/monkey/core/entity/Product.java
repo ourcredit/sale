@@ -46,7 +46,7 @@ public class Product extends Model<Product> {
     /**
      * 默认价格
      */
-    private BigDecimal price;
+    private Integer price;
     /**
      * 创建时间
      */
@@ -106,11 +106,11 @@ public class Product extends Model<Product> {
         this.productType = productType;
     }
 
-    public BigDecimal getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

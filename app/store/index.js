@@ -34,6 +34,7 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
+			console.log(JSON.stringify(payload));
 			request('/api/device/salelist', "POST", payload, function (r) {
 				console.log(JSON.stringify(r));
 				if (payload.init) {
@@ -78,5 +79,4 @@ const store = new Vuex.Store({
 	},
 	modules: {}
 })
-
 export default store
