@@ -34,7 +34,6 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
-			console.log(JSON.stringify(payload));
 			request('/api/device/salelist', "POST", payload, function (r) {
 				console.log(JSON.stringify(r));
 				if (payload.init) {
@@ -59,7 +58,9 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
+			console.log(JSON.stringify(payload));
 			request('/api/order/make', "POST", payload, function (r) {
+				console.log(JSON.stringify(r));
 				if (r.statusCode == 200 && r.data.data) {
 					state.imageUrl = r.data.data;
 				}
