@@ -42,8 +42,7 @@ public class Product extends Model<Product> {
      * 商品类型
      */
     private String productType;
-    private String description;
-    private  String imageUrl;
+
     /**
      * 默认价格
      */
@@ -157,7 +156,8 @@ public class Product extends Model<Product> {
         ", isDeleted=" + isDeleted +
         "}";
     }
-
+    private String description;
+    private  String imageUrl;
     public String getDescription() {
         return description;
     }

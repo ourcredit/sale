@@ -25,4 +25,10 @@ public interface DeviceRepository extends BaseMapper<Device> {
                                             @Param("name") String productName,
                                             @Param("num") String productNum,
                                             @Param("type") String productType, @Param("sale") Integer isSale) ;
+
+    /**
+     * @param deviceNum
+     * @return 商品dto 类
+     */
+    List<ProductDto> selectProductsByDeviceId(Pagination page, @Param("deviceNum") String deviceNum ) ;
 }

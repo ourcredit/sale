@@ -98,6 +98,14 @@ public class DeviceController {
         Page<ProductDto> res= _deviceService.selectProductsByDevice(new Page<>(page.index,page.size),page.deviceId, page.productName,page.productNum,page.productType,page.isSale);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
+    @ApiOperation(value = "获取设备下商品售卖列表",notes = "设备列表")
+    @RequestMapping(value = "/salelist",method = RequestMethod.POST)
+    @RequiresPermissions(value = {PermissionConst._device.list})
+    public PublicResult<Page<ProductDto>> getProductsbydeviceId(@RequestBody ProductInput page) throws Exception{
+        Page<ProductDto> res= _deviceService.selectProductsByDeviceId(new Page<>(page.index,page.size),page.deviceNum);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, res);
+    }
+
     @ApiOperation(value = "批量更新商品",notes = "设备列表")
     @RequestMapping(value = "/products",method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._device.allow})

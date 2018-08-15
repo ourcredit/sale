@@ -34,7 +34,14 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
         List<ProductDto> a=_deviceRepository.selectProductsByDevice(page, deviceId,productName,productNum,productType,isSale);
         return page.setRecords(a) ;
     }
-        //设备自注册
+
+    @Override
+    public Page<ProductDto> selectProductsByDeviceId(Page<ProductDto> page, String deviceNum) {
+        List<ProductDto> a=_deviceRepository.selectProductsByDeviceId(page, deviceNum);
+        return page.setRecords(a) ;
+    }
+
+    //设备自注册
     @Override
     public Boolean insertDeviceByApp(Device device) {
         EntityWrapper ew=new EntityWrapper();

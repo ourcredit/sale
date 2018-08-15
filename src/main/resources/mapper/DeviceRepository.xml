@@ -24,6 +24,8 @@
         <result column="productId" property="productId" />
         <result column="isSale" property="isSale" />
         <result column="price" property="price" />
+        <result column="description" property="description" />
+        <result column="imageUrl" property="imageUrl" />
     </resultMap>
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
@@ -36,7 +38,7 @@
 	a.productName,
 	a.productNum,
 	a.productType,b.deviceId,
-	b.isSale,
+	b.isSale,a.description,a.imageUrl
 CASE
 	WHEN b.price IS NULL THEN
 	a.price ELSE b.price
@@ -50,6 +52,26 @@ FROM
         <if test="num!=null">  and a.productNum LIKE '%' #{num} '%'  </if>
         <if test="sale!=null">  and b.isSale = #{sale}  </if>
     </where>
+    </select>
+    <select id="selectProductsByDeviceId" resultType="com.monkey.core.dtos.ProductDto">
+SELECT
+	b.id,
+	c.id productId,
+	c.productName,
+	c.productNum,
+	c.productType,
+	a.id deviceId,
+	b.isSale,
+	c.description,
+	c.imageUrl,
+	b.price
+FROM
+	sale_device a
+	INNER JOIN sale_device_product b ON a.id = b.deviceId
+	INNER JOIN sale_product c ON b.productId = c.id
+WHERE
+	b.isSale = 1
+	AND a.deviceNum = #{deviceNum}
     </select>
 
 </mapper>
