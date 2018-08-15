@@ -17,7 +17,6 @@
 					</view>
 				</view>
 			</view>
-
 			<view class="page-section">
 				<view class="page-section-spacing">
 					<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll">

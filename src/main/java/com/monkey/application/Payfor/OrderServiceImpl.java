@@ -1,5 +1,6 @@
 package com.monkey.application.Payfor;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.monkey.application.Device.IDeviceService;
 import com.monkey.common.wechatsdk.HttpUtil;
@@ -10,13 +11,14 @@ import com.monkey.core.entity.Device;
 import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Payfor;
 import com.monkey.core.entity.Product;
-import com.monkey.core.mapper.DeviceRepository;
 import com.monkey.core.mapper.OrderRepository;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
 import com.monkey.web.controller.dtos.OrderInput;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +46,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     ProductRepository _productRepository;
     @Autowired
     PayforRepository _payforRepository;
-
+    protected  static  final Logger logger=LoggerFactory.getLogger(OrderServiceImpl.class);
     @Override
     public Order insertOrder(OrderInput input)throws Exception{
         EntityWrapper ew=new EntityWrapper();
@@ -110,6 +112,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         String resXml = HttpUtil.postData(PayConfig.Ufdoder_Url, requestXML);
 
         Map map = XMLUtil4jdom.doXMLParse(resXml);
+        logger.warn(JSON.toJSONString(map));
         String urlCode = (String) map.get("code_url");
 
         return urlCode;

@@ -11,17 +11,12 @@ import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Order;
-import com.monkey.core.entity.Product;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-
-
-import java.util.List;
 
 /**
  * <p>
@@ -61,8 +56,12 @@ public class OrderController {
             Order r=_orderService.insertOrder(model);
             if(!r.getId().isEmpty()){
               String code=  _orderService.weixinPay(r);
-             String url=   QrCodeUtil.make( code);
-                return new PublicResult<>(PublicResultConstant.SUCCESS, url);
+              if(!code.isEmpty()){
+                  String url=   QrCodeUtil.make( code);
+                  return new PublicResult<>(PublicResultConstant.SUCCESS, url);
+              }
+                return new PublicResult<>(PublicResultConstant.ERROR, "生成支付二维码失败");
+
             }
             return new PublicResult<>(PublicResultConstant.ERROR, r);
         }catch (Exception e){
