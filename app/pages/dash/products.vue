@@ -6,9 +6,9 @@
 				<view style="width: 80%;height: 430px;" class="flex-item color1">
 					<view class="uni-flex  uni-row">
 						<view class="text" style="flex: 1;">
-							<image :src="qrcode">二维码</image>
+							<image :src="url"></image>
 						</view>
-						<view class="text" style="flex: 1;">简介阿达伟大阿瓦达伟大阿瓦达阿瓦</view>
+						<view class="text" style="flex: 1;">{{current.description}}</view>
 					</view>
 
 				</view>
@@ -52,7 +52,7 @@
 		data() {
 			return {
 				params: {
-					"deviceId": 1,
+					"deviceNum": 1,
 					"index": 1,
 					"size": 10,
 					"init": true
@@ -65,8 +65,11 @@
 				list: state => state.products,
 				total: state => state.totalCount,
 				qrcode: state => state.imageUrl,
-				step: state => state.step
-			})
+				step: state => state.step		
+			}),
+			url(){
+				return this.current&&this.current.imageUrl?("http://103.45.8.198:9999/"+this.current.imageUrl):"";
+			}
 		},
 		onShow() {
 			let _ = this;
@@ -114,7 +117,7 @@
 			show(item) {
 				if (this.step == 1) {
 					this.current = item;
-				}
+				} 
 			},
 			scroll() {},
 			gotobuy() {
@@ -126,8 +129,8 @@
 					"price": this.current.price,
 					"productId": this.current.productId
 				}
-				//this.gobuy(params);
-				this.gobuytest({});
+				this.gobuy(params);
+				//this.gobuytest({});
 				this.setStep(2);
 			}
 

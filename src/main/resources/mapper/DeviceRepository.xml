@@ -38,7 +38,7 @@
 	a.productName,
 	a.productNum,
 	a.productType,b.deviceId,
-	b.isSale,a.description,a.imageUrl
+	b.isSale,a.description,a.imageUrl,
 CASE
 	WHEN b.price IS NULL THEN
 	a.price ELSE b.price

@@ -7,13 +7,13 @@ import {
 } from "../common/ajax.js"
 const store = new Vuex.Store({
 	state: {
-		step:1, //购买流程控制
+		step: 1, //购买流程控制
 		tenantName: "default", //默认租户信息
-		deviceCode: "xc-001", //默认设备code 编码
-		products: [],	 //产品对象集合
-		totalCount: 0,	 //总数据聚集
+		deviceCode: "", //默认设备code 编码
+		products: [], //产品对象集合
+		totalCount: 0, //总数据聚集
 		isRegister: false, //当前设备是否注册
-		imageUrl:""	 //支付url
+		imageUrl: "" //支付url
 	},
 	mutations: {
 		setPageSize(state, size) {
@@ -21,6 +21,9 @@ const store = new Vuex.Store({
 		},
 		setStep(state, step) {
 			state.step = step;
+		},
+		setDeviceCode(state, code) {
+			state.deviceCode = code;
 		}
 	},
 	actions: {
@@ -28,7 +31,11 @@ const store = new Vuex.Store({
 		async loadMore({
 			state
 		}, payload) {
-			request('/api/device/products', "POST", payload, function (r) {
+			if (state.deviceCode) {
+				payload.deviceNum = state.deviceCode;
+			}
+			request('/api/device/salelist', "POST", payload, function (r) {
+				console.log(JSON.stringify(r));
 				if (payload.init) {
 					state.products = [];
 				}
@@ -48,6 +55,9 @@ const store = new Vuex.Store({
 		async gobuy({
 			state
 		}, payload) {
+			if (state.deviceCode) {
+				payload.deviceNum = state.deviceCode;
+			}
 			request('/api/order/make', "POST", payload, function (r) {
 				if (r.statusCode == 200 && r.data.data) {
 					state.imageUrl = r.data.data;

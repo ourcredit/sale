@@ -10,8 +10,16 @@
 				websocketUrl:"wss://service.leftins.com/websocket/"
 			}
 		},
+		computed: {
+			...mapState({
+				deviceCode: state => state.deviceCode
+			})
+		},
 		methods: {
-			...mapActions(["register"])
+			...mapActions(["register"]),
+			...mapMutations([
+				'setDeviceCode' // 映射 this.increment() 为 this.$store.commit('increment')
+			]),
 		},
 		onLaunch: function () {
 			console.log('App Launch');
@@ -50,6 +58,7 @@
 			})
 			if (plus.device.imei) {
 				let num=plus.device.imei.split(',')[0];
+				this.setDeviceCode(num);
 				this.register({
 					deviceNum: num,
 					deviceName: plus.device.model
@@ -59,8 +68,7 @@
 		},
 		onShow: function () {
 			console.log('App Show');
-			let num=plus.device.imei.split(',')[0];
-			let url=this.websocketUrl+num
+			let url=this.websocketUrl+this.deviceCode
 			uni.connectSocket({
 				url: url,
 				data: {},

@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/dashboard/src/lib/url.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/src/lib/url.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/IDeviceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/IDeviceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/DeviceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/DeviceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/ProductInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/dash/products.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/dash/products.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/store/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/FileController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="512">
-              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
@@ -40,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeviceController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DeviceController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="419">
-              <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+              <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -53,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/IDeviceService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
-              <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -62,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="397">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
             </state>
           </provider>
         </entry>
@@ -76,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeviceRepository.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DeviceRepository.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="62" column="18" lean-forward="true" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+            <state relative-caret-position="302">
+              <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -89,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
-              <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               <folding>
                 <element signature="e#311#312#0" expanded="true" />
                 <element signature="e#345#346#0" expanded="true" />
@@ -108,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="568">
-              <caret line="174" column="5" lean-forward="true" selection-start-line="158" selection-start-column="2" selection-end-line="174" selection-end-column="5" />
+              <caret line="174" column="5" selection-start-line="158" selection-start-column="2" selection-end-line="174" selection-end-column="5" />
               <folding>
                 <element signature="e#3377#3378#0" expanded="true" />
                 <element signature="e#3411#3412#0" expanded="true" />
@@ -207,10 +202,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/DeviceRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/ProductInput.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml" />
       </list>
     </option>
   </component>
@@ -339,6 +334,21 @@
               <item name="controller" type="462c0819:PsiDirectoryNode" />
               <item name="dtos" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sale" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sale" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -432,6 +442,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="消息" order="7" weight="0.32987013" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="运行" order="7" weight="0.32337663" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
@@ -446,7 +457,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="层次结构" order="3" />
-      <window_info anchor="bottom" id="消息" order="7" weight="0.32987013" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -779,7 +789,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/FileController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
-          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
         </state>
       </provider>
     </entry>
@@ -793,7 +803,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="568">
-          <caret line="174" column="5" lean-forward="true" selection-start-line="158" selection-start-column="2" selection-end-line="174" selection-end-column="5" />
+          <caret line="174" column="5" selection-start-line="158" selection-start-column="2" selection-end-line="174" selection-end-column="5" />
           <folding>
             <element signature="e#3377#3378#0" expanded="true" />
             <element signature="e#3411#3412#0" expanded="true" />
@@ -810,7 +820,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           <folding>
             <element signature="e#311#312#0" expanded="true" />
             <element signature="e#345#346#0" expanded="true" />
@@ -827,7 +837,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/IDeviceService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -835,13 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="62" column="18" lean-forward="true" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -855,14 +858,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="397">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
-          <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+          <caret line="106" column="5" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
         </state>
       </provider>
     </entry>
