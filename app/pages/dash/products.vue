@@ -60,25 +60,7 @@
 				current: {}
 			}
 		},
-		computed: {
-			...mapState({
-				list: state => state.products,
-				total: state => state.totalCount,
-				qrcode: state => state.imageUrl,
-				step: state => state.step,
-				socketState: state => state.socketState,
-
-			}),
-			url() {
-				return this.current && this.current.imageUrl ? ("http://103.45.8.198:9999/" + this.current.imageUrl) : "";
-			}
-		},
-		onShow() {
-			this.initState();
-			let _ = this;
-			this.params.index = 1;
-			this.params.init = true;
-			this.loadMore(this.params);
+		mounted() {
 			uni.onSocketMessage(function (res) {
 				console.log('收到服务器内容：' + res.data);
 				_.setStep(3);
@@ -101,8 +83,29 @@
 				}, 8000)
 			});
 		},
+		computed: {
+			...mapState({
+				list: state => state.products,
+				total: state => state.totalCount,
+				qrcode: state => state.imageUrl,
+				step: state => state.step,
+				socketState: state => state.socketState,
+
+			}),
+			url() {
+				return this.current && this.current.imageUrl ? ("http://103.45.8.198:9999/" + this.current.imageUrl) : "";
+			}
+		},
+		onShow() {
+			this.initState();
+			let _ = this;
+			this.params.index = 1;
+			this.params.init = true;
+			this.loadMore(this.params);
+
+		},
 		components: {
-			pageHead 
+			pageHead
 		},
 		methods: {
 			...mapMutations([
