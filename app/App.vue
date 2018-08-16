@@ -79,6 +79,15 @@
 			});
 			uni.onSocketClose(function (res) {
 				_.setsocketState(false);
+				uni.connectSocket({
+					url: url,
+					data: {},
+					header: {
+						'content-type': 'application/json'
+					},
+					protocols: [],
+					method: "GET"
+				}, function (r) {});
 			});
 			//#endif
 		},
@@ -127,9 +136,9 @@
 	.page-head {
 		text-align: center;
 		line-height: initial;
-		height: 50px;
+		height: 40px;
+		background-color: #8A6DE9;
 	}
-
 	.page-head-title {
 		display: inline-block;
 		padding: 0 40px;

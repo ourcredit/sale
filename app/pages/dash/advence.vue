@@ -33,7 +33,8 @@
 				list: state => state.products,
 			}),
 			height() {
-				return '335px';
+				var h=plus.screen.resolutionHeight;		
+				return h*0.8-40 +"px";
 			}
 		},
 		methods: {
