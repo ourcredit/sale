@@ -57,12 +57,27 @@
 					"size": 10,
 					"init": true
 				},
-				current: {}
+				current: {},
+				config: {
+					value: 'https://www.baidu.com',
+					imagePath: './examples/assets/logo.png',
+					filter: 'color'
+				}
 			}
 		},
 		mounted() {
 			let _ = this;
-
+			if(!_.socketState){
+				uni.connectSocket({
+					url: url,
+					data: {},
+					header: {
+						'content-type': 'application/json'
+					},
+					protocols: [],
+					method: "GET"
+				}, function (r) {});
+			}
 			uni.onSocketMessage(function (res) {
 				console.log('收到服务器内容：' + res.data);
 				let o = JSON.parse(res.data);

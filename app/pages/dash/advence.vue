@@ -40,7 +40,7 @@
 		methods: {
 			detail(img) {
 				uni.navigateTo({
-					url: "/pages/dash/detail",
+					url: "/pages/dash/detail?image="+img,
 				})
 			},
 			gobuy(e) {

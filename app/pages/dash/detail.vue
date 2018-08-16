@@ -1,154 +1,109 @@
 <template>
-	<view>
-		<view class="page-body">
-			<view class="page-section">
-				<view class="uni-flex uni-row">
-					<view class="text" style="width: 300px;height: 320px;display: flex; justify-content: center;align-items: center;">
-						<image :src="current.image" style="width: 150px;height: 150px;"></image>
-					</view>
-					<view class="uni-flex uni-column" style="flex: 1;justify-content: space-between;">
-						<view class="text" style="height: 220px;text-align: left;padding-left: 20px;padding-top: 10px;">
-							{{current.description}}
-						</view>
-						<view class="uni-flex uni-row">
-							<view class="text" style="flex: 1;">{{current.price}}</view>
-							<view @tap="gobuy" class="text" style="flex: 1;">立即购买</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="page-section">
-				<view class="page-section-spacing">
-					<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll">
-						<view @tap="show(item)" :key="item.name" v-for="item in list" class="scroll-view-item_H color1">{{item.name}}</view>
-					</scroll-view>
-				</view>
-			</view>
+	<view class="page">
+		<page-head title=""></page-head>
+
+		<view v-bind:style="{height:height }" class="banner">
+			<image v-bind:style="{height:height }" class="banner-img" :src="current.image"></image>
+			<view class="banner-title">{{current.title}}</view>
 		</view>
+		<button @click="gobuy" class="clickbutton">立即购买</button>
+
 	</view>
 </template>
+
 <script>
+	import pageHead from "../../components/page-head.vue"
 	export default {
-		data() {
-			return {
-				list: [{
-					name:"商品A",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c1.png",
-					price:2.2,
-				},
-				{
-					name:"商品B",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c2.png",
-					price:2.3,
-				},
-				{
-					name:"商品C",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c3.png",
-					price:2.3,
-				},
-				{
-					name:"商品D",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c4.png",
-					price:2.3,
-				},
-				{
-					name:"商品E",
-					description:`描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述
-					描述描述描述描述描述描述描述描述描述描述描述描述描述描述描
-					述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
-					image:"/static/c5.png",
-					price:2.3,
-				}],
-				title: 'scroll-view',
-				toView: 'green',
-				order: ['demo1', 'demo2', 'demo3'],
-				current:{}
+		data: {
+			htmlString: "",
+			current:{
+				detailDate:new Date(),
+				title:"巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉",
+				author_name:"谁",
+				published_at:new Date()
 			}
 		},
+		computed: {
+			height() {
+				var h=plus.screen.resolutionHeight;		
+				return h*0.8-40 +"px";
+			}
+		},
+		components: {
+			pageHead
+		},
+		onLoad(e) {
+			this.current.image=e.image;
+		},
+		onUnload() {
+			this.htmlString = "";
+			this.banner = {}
+		},
 		methods: {
-			show(item) {
-				this.current=item;
-				console.log(item);
-			},
-			scroll() {
-			},
-			gobuy(){
+			gobuy(e) {
 				uni.redirectTo({
-					url:"/pages/dash/product",
+					url: "/pages/dash/products",
 				})
 			}
-
 		}
 	}
 </script>
 
 <style>
 	@import "../../common/uni.css";
-	.page-section-spacing {
-		padding: 0 0rpx
+	page {
+		background: #efeff4;
 	}
-
-	.flex-item {
-		width: 200px;
-		height: 300px;
-		text-align: center;
-		line-height: 300px;
-		font-size: 26px;
+	.banner {
+		height: 360px;
+		overflow: hidden;
+		position: relative;
+		background-color: #ccc;
 	}
-
-	.flex-item-V {
-		margin: 0 auto;
-		width: 300px;
-		height: 200px;
-		text-align: center;
-		line-height: 200px;
-	}
-
-	.text {
-		margin: 10px;
-		padding: 0 20px;
-		background-color: #ebebeb;
-		height: 70px;
-		line-height: 70px;
-		text-align: center;
-		color: #cfcfcf;
-		font-size: 26px;
-	}
-
-	.scroll-Y {
-		height: 200px;
-	}
-
-	.scroll-view_H {
-		white-space: nowrap;
+	.banner-img {
 		width: 100%;
 	}
-
-	.scroll-view-item {
-		height: 300px;
-		line-height: 300px;
-		text-align: center;
-		font-size: 36px;
+	.banner-title {
+		max-height: 84px;
+		overflow: hidden;
+		position: absolute;
+		left: 30px;
+		bottom: 30px;
+		width: 90%;
+		font-size: 32px;
+		font-weight: 400;
+		line-height: 42px;
+		color: white;
+		z-index: 11;
 	}
-
-	.scroll-view-item_H {
-		display: inline-block;
-		width: 20%;
-		height: 200px;
-		line-height: 200px;
+	.article-meta {
+		padding: 20px 40px;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		color: gray;
+	}
+	.article-text {
+		font-size: 26px;
+		line-height: 50px;
+		margin: 0 20px;
+	}
+	.article-author,
+	.article-time {
+		font-size: 30px;
+	}
+	.article-content {
+		padding: 0 30px;
+		overflow: hidden;
+		font-size: 30px;
+	}
+	.clickbutton {
+		background-color: #1AAD19;
+		border-radius: 50%;
+		margin-left: 80%;
+		width: 12%;
+		height: 135px;
+		vertical-align: middle;
 		text-align: center;
-		font-size: 36px;
 	}
 </style>

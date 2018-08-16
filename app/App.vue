@@ -4,6 +4,7 @@
 		mapMutations,
 		mapActions
 	} from 'vuex'
+	import {login} from "common/ajax.js";
 	export default {
 		data() {
 			return {
@@ -24,7 +25,6 @@
 		},
 		onLaunch: function () {
 			let _ = this;
-			console.log('App Launch');
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
 			//plus.screen.lockOrientation('portrait-primary'); //锁定	竖屏正方向	

@@ -36,6 +36,7 @@ function login() {
 		method:"POST",
 		header: header,
 		success: function (res) {
+			console.log(JSON.stringify(res));
 			if (res.data.data) {
 				let token=res.data.data.token;
 				uni.setStorageSync("token", token);
