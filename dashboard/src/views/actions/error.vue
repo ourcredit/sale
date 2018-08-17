@@ -124,24 +124,6 @@ export default class OperateLog extends AbpBase {
             "Button",
             {
               props: {
-                type: "primary",
-                size: "small"
-              },
-              style: {
-                marginRight: "5px"
-              },
-              on: {
-                click: () => {
-                  this.$store.commit("user/edit", params.row);
-                }
-              }
-            },
-            "详情"
-          ),
-          h(
-            "Button",
-            {
-              props: {
                 type: "error",
                 size: "small"
               },
