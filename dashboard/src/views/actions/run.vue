@@ -5,28 +5,28 @@
                 <Form slot="filter" ref="queryForm" :label-width="80" label-position="left" inline>
                     <Row :gutter="16">
                         <Col span="5">
-                            <FormItem label="方法:" style="width:100%">
+                            <FormItem label="设备名称:" style="width:100%">
                                 <Input v-model="filters.method"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
-                            <FormItem label="描述" style="width:100%">
+                            <FormItem label="设备编号" style="width:100%">
                                 <Input v-model="filters.log_description"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
-                            <FormItem label="时间范围" style="width:100%">
-                                <DatePicker  v-model="filters.create_time"
-                                 type="datetimerange" format="yyyy-MM-dd"
-                                  style="width:100%" placement="bottom-end"
-                                   placeholder="选择时间"></DatePicker>
+                             <FormItem label="点位名称" style="width:100%">
+                                <Input v-model="filters.log_description"></Input>
+                            </FormItem>
+                        </Col>
+                         <Col span="5">
+                             <FormItem label="设备类型" style="width:100%">
+                                <Input v-model="filters.log_description"></Input>
                             </FormItem>
                         </Col>
                          <Col span="4">
-                         
                         <Button icon="ios-search" type="primary" size="large"
                          @click="init" class="toolbar-btn">查找</Button>
-                           <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
                         </Col>
                     </Row>
                 
@@ -85,69 +85,26 @@ export default class OperateLog extends AbpBase {
       align: "center"
     },
     {
-      title: "类名",
+      title: "设备编号",
       key: "className"
     },
     {
-      title: "方法",
+      title: "设备名称",
       key: "method"
     },
 
     {
-      title: "请求地址",
+      title: "设备类型",
       key: "ip"
     },
     {
-      title: "接口描述",
+      title: "所属点位",
       key: "logDescription"
     },
     {
-      title: "状态",
+      title: "运行日志",
       render: (h: any, params: any) => {
         return h("span", params.row.succeed ? "成功" : "失败");
-      }
-    },
-    {
-      title: "请求时间",
-      key: "createTime",
-      render: (h: any, params: any) => {
-        return h("span", new Date(params.row.createTime).toLocaleDateString());
-      }
-    },
-    {
-      title: "操作",
-      key: "Actions",
-      width: 150,
-      render: (h: any, params: any) => {
-        return h("div", [
-          h(
-            "Button",
-            {
-              props: {
-                type: "error",
-                size: "small"
-              },
-              on: {
-                click: async () => {
-                  this.$Modal.confirm({
-                    title: "提示",
-                    content: "确认要删除该条信息么",
-                    okText: "是",
-                    cancelText: "否",
-                    onOk: async () => {
-                      await this.$store.dispatch({
-                        type: "log/delete",
-                        data: params.row
-                      });
-                      await this.init();
-                    }
-                  });
-                }
-              }
-            },
-            "删除"
-          )
-        ]);
       }
     }
   ];
