@@ -15,5 +15,6 @@ import com.monkey.web.controller.dtos.OrderInput;
 public interface IOrderService extends IService<Order> {
     Order insertOrder(OrderInput input)throws Exception;
     String weixinPay(Order input) throws Exception;
+    String aliPay(Order input )throws Exception;
   void updateOrderStatte(String orderNum,Integer orderState ,Integer payState);
 }

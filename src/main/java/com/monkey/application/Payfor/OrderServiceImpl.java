@@ -22,10 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * <p>
@@ -116,6 +113,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         String urlCode = (String) map.get("code_url");
 
         return urlCode;
+    }
+
+    @Override
+    public String aliPay(Order input) throws Exception {
+      return "";
     }
 
     @Override
