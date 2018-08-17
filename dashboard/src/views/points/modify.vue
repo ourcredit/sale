@@ -50,7 +50,7 @@ export default class CreatePoint extends AbpBase {
   tempPoint: any = { lng: 116.404, lat: 39.915 };
   save() {
     (this.$refs.pointForm as any).validate(async (valid: boolean) => {
-      if (valid && this.treeId) {
+      if (valid ) {
         this.point.areaId = this.treeId;
         await this.$store.dispatch({
           type: "point/modify",

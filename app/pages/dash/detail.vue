@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<page-head title=""></page-head>
+		<page-head :title="deviceCode"></page-head>
 
 		<view v-bind:style="{height:height }" class="banner">
 			<image v-bind:style="{height:height }" class="banner-img" :src="current.image"></image>
@@ -12,6 +12,11 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapActions
+	} from 'vuex'
 	import pageHead from "../../components/page-head.vue"
 	export default {
 		data: {
@@ -23,7 +28,12 @@
 				published_at:new Date()
 			}
 		},
+		
 		computed: {
+						...mapState({
+							deviceCode: state => state.deviceCode,
+			
+						}),
 			height() {
 				var h=plus.screen.resolutionHeight;		
 				return h*0.8-40 +"px";

@@ -1,5 +1,5 @@
 <template name="page-head">
-	<view class="page-head">
+	<view class="page-head">{{title}}
 	</view>
 </template>
 

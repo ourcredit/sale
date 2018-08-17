@@ -1,13 +1,15 @@
 <template>
 	<view class="page">
-		<page-head title=""></page-head>
+		<page-head :title="deviceCode"></page-head>
 		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:height }">
 			<swiper-item @tap="detail(img)" v-for="(img,key) in imgUrls" :key="key">
 				<image :src="img" v-bind:style="{height:height }" />
 			</swiper-item>
 		</swiper>
+<!-- 	<view :key="i" v-for="(v,i) in logError">第{{i}}个： {{v}}</view>	 -->
 		<button @click="gobuy" class="clickbutton">立即购买</button>
 	</view>
+
 </template>
 <script>
 	import pageHead from "../../components/page-head.vue"
@@ -25,22 +27,41 @@
 				'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/cbd.jpg'
 			]
 		},
+		
 		components: {
 			pageHead
 		},
 		computed: {
 			...mapState({
 				list: state => state.products,
+				deviceCode: state => state.deviceCode,
+				logError: state => state.logError
+
 			}),
 			height() {
-				var h=plus.screen.resolutionHeight;		
-				return h*0.8-40 +"px";
+				var h = plus.screen.resolutionHeight;
+				return h * 0.8 - 40 + "px";
+			}
+		},
+		mounted(){
+			if (plus.device.imei) {
+				let num = plus.device.imei.split(',')[0];
+				this.setDeviceCode(num);
+				this.register({
+					deviceNum: num,
+					deviceName: plus.device.model
+				});
 			}
 		},
 		methods: {
+			...mapActions(["register"]),
+			...mapMutations([
+				'setDeviceCode', 
+				"setlogError"
+			]),
 			detail(img) {
 				uni.navigateTo({
-					url: "/pages/dash/detail?image="+img,
+					url: "/pages/dash/detail?image=" + img,
 				})
 			},
 			gobuy(e) {

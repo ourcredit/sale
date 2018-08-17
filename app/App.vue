@@ -4,7 +4,6 @@
 		mapMutations,
 		mapActions
 	} from 'vuex'
-	import {login} from "common/ajax.js";
 	export default {
 		data() {
 			return {
@@ -17,14 +16,16 @@
 			})
 		},
 		methods: {
-			...mapActions(["register"]),
+			...mapActions(["register","authorization"]),
 			...mapMutations([
 				'setDeviceCode', // 映射 this.increment() 为 this.$store.commit('increment')
-				"setsocketState"
+				"setsocketState",
+				"setlogError"
 			]),
 		},
 		onLaunch: function () {
 			let _ = this;
+			_.authorization();
 			//#ifdef APP-PLUS
 			/* 5+环境锁定屏幕方向 */
 			//plus.screen.lockOrientation('portrait-primary'); //锁定	竖屏正方向	
@@ -58,13 +59,8 @@
 			if (plus.device.imei) {
 				let num = plus.device.imei.split(',')[0];
 				this.setDeviceCode(num);
-				this.register({
-					deviceNum: num,
-					deviceName: plus.device.model
-				});
 			}
 			let url = this.websocketUrl + this.deviceCode
-
 			uni.connectSocket({
 				url: url,
 				data: {},
@@ -97,7 +93,7 @@
 		onHide: function () {
 			console.log('App Hide')
 		}
-	} 
+	}
 </script>
 <style>
 	/* 这是页面的公用css */
@@ -139,6 +135,7 @@
 		height: 40px;
 		background-color: #8A6DE9;
 	}
+
 	.page-head-title {
 		display: inline-block;
 		padding: 0 40px;

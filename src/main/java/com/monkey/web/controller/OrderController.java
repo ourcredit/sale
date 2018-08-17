@@ -35,12 +35,13 @@ public class OrderController {
     @ApiOperation(value = "获取订单列表",notes = "订单列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._order.list})
-    public PublicResult<Page<Order>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
+    public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Order> filter = new EntityWrapper<>();
         filter=  ComUtil.genderFilter(filter,page.where);
         Page<Order> res= _orderService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
+  
     @ApiOperation(value = "获取订单详情",notes = "订单列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._order.show})

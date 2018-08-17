@@ -35,21 +35,21 @@
         图标
         <Row>
             <Col span="12">
-            <LineChart :title="'今日销售额'" :domain="'today'"></LineChart>
+            <LineChart :data="[]" :title="'今日销售额'" :domain="'today'"></LineChart>
             </Col>
             <Col span="12">
-            <LineChart :title="'本月销售额'" :domain="'month'"></LineChart>
+            <LineChart :data="[]" :title="'本月销售额'" :domain="'month'"></LineChart>
             </Col>
         </Row>
         <Row>
             <Col span="8">
-            <PieChart :domain="'sale'"></PieChart>
+            <PieChart :data="[]" :domain="'sale'"></PieChart>
             </Col>
             <Col span="8">
-            <BarChart  :title="'今日销售点位销售额排行榜TOP10'" :domain="'todaysale'"></BarChart>
+            <BarChart :data="[]"  :title="'今日销售点位销售额排行榜TOP10'" :domain="'todaysale'"></BarChart>
             </Col>
             <Col span="8">
-            <BarChart  :title="'本月销售点位销售额排行榜TOP10'" :domain="'monthsale'"></BarChart>
+            <BarChart  :data="[]" :title="'本月销售点位销售额排行榜TOP10'" :domain="'monthsale'"></BarChart>
 
             </Col>
         </Row>

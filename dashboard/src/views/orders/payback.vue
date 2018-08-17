@@ -11,22 +11,22 @@
             <Row :gutter="4">
               <Col span="22">
               <FormItem label="订单编号:">
-                <Input v-model="filters.productName" />
+                <Input v-model="filters.wechatOrder" />
               </FormItem>
               <FormItem label="商品名称:">
                 <Input v-model="filters.productName" />
               </FormItem>
               <FormItem label="设备名称:">
-                <Input v-model="filters.productName" />
+                <Input v-model="filters.deviceName" />
               </FormItem>
               <FormItem label="设备编号:">
-                <Input v-model="filters.productName" />
+                <Input v-model="filters.deviceNum" />
               </FormItem>
               <FormItem label="所属点位:">
-                <Input v-model="filters.productName" />
+                <Input v-model="filters.pointName" />
               </FormItem>
-              <FormItem label="时间范围:">
-                <DatePicker type="daterange" split-panels placeholder="选择范围" style="width: 200px"></DatePicker>
+             <FormItem label="时间范围:">
+                <DatePicker v-model="filters.creationTime" type="daterange" split-panels placeholder="选择范围" style="width: 200px"></DatePicker>
               </FormItem>
               <FormItem label="设备类型:">
                 <Select clearable v-model="filters.deviceType" style="width:160px">
@@ -66,8 +66,14 @@
     }
   })
   export default class Orders extends AbpBase {
-    filters: Object = {
-      productName: ""
+   filters: any = {
+      wechatOrder: "",
+      productName: "",
+      deviceName: "",
+      pointName: "",
+      deviceType: "",
+      creationTime: null,
+      payState:-1
     };
     get tree() {
       return this.$store.state.device.tree;
@@ -117,9 +123,7 @@
         title: "状态",
         key: "payState",
         render: (h: any, params: any) => {
-          let t = params.row.payState == 1 ? "已支付" : "未支付";
-          t += "," + (params.row.orderState == 1 ? "已发货" : "未发货")
-          return h("span", t);
+         if(params.row.payState == -1)  return h("span", "已退款");
         }
       },
       {
@@ -130,36 +134,8 @@
             new Date(params.row.creationTime).toLocaleDateString()
           );
         }
-      },
-      {
-        title: "操作",
-        key: "Actions",
-        width: 150,
-        render: (h: any, params: any) => {
-          var ed = h(
-            "Button", {
-              props: {
-                type: "primary",
-                size: "small"
-              },
-              style: {
-                marginRight: "5px"
-              },
-              on: {
-                click: () => {
-                  this.$store.dispatch({
-                    type: "product/get",
-                    data: params.row.id
-                  });
-                }
-              }
-            },
-            "退款"
-          );
-          var t = [ed];
-          return h("div", t);
-        }
       }
+      
     ];
     init() {
       var t: any = this.$refs.table;
