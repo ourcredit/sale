@@ -130,7 +130,7 @@
     </select>
     <!--获取支付类型统计-->
     <select id="getPayTypePercent" resultType="com.monkey.core.dtos.SalePercentDto">
-        
+
     </select>
 
 </mapper>
