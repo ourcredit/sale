@@ -9,12 +9,12 @@
         <div class="page-body">
           <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
             <Row :gutter="4">
-              <Col span="4">
+              <Col span="20">
               <FormItem label="点位名:">
                 <Input v-model="filters.pointName" />
               </FormItem>
               </Col>
-              <Col span="7">
+              <Col span="4">
               <Button  icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
 
               <Button  class="toolbar-btn" v-if="p.modify&&current" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
@@ -87,10 +87,6 @@ export default class PointC extends AbpBase {
       key: "description"
     },
     {
-      title: "创建人",
-      key: "creatorUserId"
-    },
-    {
       title: "创建时间",
       render: (h: any, params: any) => {
         return h(
@@ -161,7 +157,7 @@ export default class PointC extends AbpBase {
       }
     }
   ];
-  
+
   Create() {
     var u = new Point();
     this.$store.commit("point/edit", u);

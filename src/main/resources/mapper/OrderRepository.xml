@@ -26,7 +26,6 @@
     </sql>
     <update id="updateOrderState">
         update sale_order
-
          set
           <if test="payState!=null">
               payState=#{payState}
@@ -36,6 +35,102 @@
         </if>
            where wechatOrder=#{num}
     </update>
-
+    <!--获取时间段统计数据-->
+    <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">
+        SELECT
+        SUM( price ) AS sale,
+        COUNT( productId ) AS count,
+        ( SELECT COUNT( 1 ) FROM sale_device
+         <where >
+             1=1
+             <if test="start!=null">
+               and  creationTime >= #{start}
+             </if>
+             <if test="end!=null">
+               and  creationTime &lt;= #{end}
+             </if>
+         </where>
+        ) AS device,
+        ( SELECT COUNT( 1 ) FROM sale_log   <where >
+        1=1
+        <if test="start!=null">
+            and  creationTime >= #{start}
+        </if>
+        <if test="end!=null">
+            and  creationTime &lt;= #{end}
+        </if>
+    </where> ) AS error,
+        ( SELECT COUNT( 1 ) FROM sale_order
+        <where >
+            ( payState =- 1 OR orderState =- 1 )
+            <if test="start!=null">
+                and  creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and  creationTime &lt;= #{end}
+            </if>
+        </where>
+       ) AS off
+        FROM
+        sale_order a
+        <where >
+            1=1
+            <if test="start!=null">
+                and  a.creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and  a.creationTime &lt;= #{end}
+            </if>
+        </where>
+    </select>
+    <!--获取销售额统计报表-->
+    <select id="getTodaySalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
+        SELECT
+        DATE_FORMAT( creationTime, '%h' ) as time,
+        COUNT( productId ) as count
+        FROM
+        sale_order
+        WHERE
+        creationTime >= #{start}
+        AND creationTime &lt;= #{end}
+        GROUP BY
+        DATE_FORMAT( creationTime, '%h' )
+        ORDER BY
+        DATE_FORMAT( creationTime, '%h' )
+    </select>
+    <!--获取当月统计信息-->
+    <select id="getMonthSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
+        SELECT
+        DATE_FORMAT( creationTime, '%m' ) as time,
+        COUNT( productId ) as count
+        FROM
+        sale_order
+        WHERE
+        creationTime >= #{start}
+        AND creationTime &lt;= #{end}
+        GROUP BY
+        DATE_FORMAT( creationTime, '%m' )
+        ORDER BY
+        DATE_FORMAT( creationTime, '%m' )
+    </select>
+    <!--获取点位销售榜单前十-->
+    <select id="getPointSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
+        select  pointName,COUNT(productId) from sale_order
+        <where>
+            1=1
+            <if test="start!=null">
+                and  creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and  creationTime &lt;= #{end}
+            </if>
+        </where>
+        GROUP BY pointName ORDER BY COUNT(productId) desc
+        LIMIT 0,10
+    </select>
+    <!--获取支付类型统计-->
+    <select id="getPayTypePercent" resultType="com.monkey.core.dtos.SalePercentDto">
+        
+    </select>
 
 </mapper>

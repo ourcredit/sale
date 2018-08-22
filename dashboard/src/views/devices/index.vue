@@ -105,17 +105,11 @@ export default class deviceC extends AbpBase {
       title: "所属点位",
       key: "pointName"
     },
-    {
-      title: "创建人",
-      key: "creatorUserId"
-    },
+
     {
       title: "创建时间",
       render: (h: any, params: any) => {
-        return h(
-          "span",
-          new Date(params.row.creationTime).toLocaleDateString()
-        );
+        return h("span", new Date(params.row.creationTime).toLocaleString());
       }
     },
     {
