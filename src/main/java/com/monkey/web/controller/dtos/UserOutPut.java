@@ -15,8 +15,16 @@ public class UserOutPut {
         this.allPermissions=a;
         this.permissions=p;
     }
+    public UserOutPut(User u,List<RoleDto> r,List a,List p,Boolean canBack){
+        this.user=u;
+        this.role=r;
+        this.allPermissions=a;
+        this.permissions=p;
+        this.canBack=canBack;
+    }
     public User user;
     public List<RoleDto> role;
     public List<String> allPermissions;
     public List<String> permissions;
+    public Boolean canBack;
 }
