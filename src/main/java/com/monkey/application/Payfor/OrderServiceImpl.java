@@ -76,6 +76,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         o.setDeviceType(d.getDeviceType());
         o.setOrderState(0);
         o.setPayState(0);
+        o.setPayType(1);
         o.setPrice(input.price);
         o.setProductId(p.getId());
         o.setProductName(p.getProductName());
