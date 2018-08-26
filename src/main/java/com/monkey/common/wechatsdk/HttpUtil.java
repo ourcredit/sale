@@ -107,6 +107,7 @@ public class HttpUtil {
         } finally {
             httpclient.close();
         }
+        System.out.print(result);
         return  result;
     }
 

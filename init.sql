@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 15/08/2018 09:44:54
+ Date: 26/08/2018 20:05:43
 */
 
 SET NAMES utf8mb4;
@@ -146,6 +146,7 @@ CREATE TABLE `sale_payfor`  (
   `creationTime` datetime(0) NULL DEFAULT NULL,
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  `cardUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退款证书地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -204,7 +205,7 @@ CREATE TABLE `sale_role`  (
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`, `roleName`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT =1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for sale_rolemenu

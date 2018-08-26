@@ -84,7 +84,8 @@ public class OrderController {
         try {
             Order r = _orderService.selectById(orderId);
             if (r != null) {
-                _orderService.weixinBack(r);
+              String rr=  _orderService.weixinBack(r);
+              if(rr.isEmpty())  return new PublicResult<>(PublicResultConstant.FAILED, "退款申请请求失败");
                 return new PublicResult<>(PublicResultConstant.SUCCESS, "退款申请请求成功");
             }
             return new PublicResult<>(PublicResultConstant.ERROR, "暂无此订单信息");
