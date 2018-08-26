@@ -58,8 +58,8 @@ export default class CreateDevice extends AbpBase {
   value: boolean;
   upload: any = {
     type: "drag",
-    // action: "https://service.leftins.com/api/file",
-    action: "http://localhost:8081/api/file/pems",
+    action: "https://service.leftins.com/api/file",
+    // action: "http://localhost:8081/api/file/pems",
     header: {
       Authorization: auth.getToken()
     }
