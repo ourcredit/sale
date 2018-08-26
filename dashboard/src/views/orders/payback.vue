@@ -118,7 +118,7 @@ export default class Orders extends AbpBase {
       title: "状态",
       key: "payState",
       render: (h: any, params: any) => {
-        if (params.row.payState == -1) return h("span", "已退款");
+        if (params.row.payState == 2) return h("span", "已退款");
       }
     },
     {

@@ -179,7 +179,7 @@ export default class Orders extends AbpBase {
           },
           "退款"
         );
-        if (params.row.payState == 2) {
+        if (params.row.payState == 1) {
           var t = [ed];
         }
         return h("div", t);
