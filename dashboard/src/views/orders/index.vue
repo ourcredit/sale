@@ -126,7 +126,7 @@ export default class Orders extends AbpBase {
       title: "状态",
       key: "payState",
       render: (h: any, params: any) => {
-        if (params.row.payState == -1) return h("span", "已退款");
+        if (params.row.payState == 2) return h("span", "已退款");
         let t = params.row.payState == 1 ? "已支付" : "未支付";
         t += "," + (params.row.orderState == 1 ? "已发货" : "未发货");
         return h("span", t);
@@ -179,7 +179,7 @@ export default class Orders extends AbpBase {
           },
           "退款"
         );
-        if (params.row.payState == 1) {
+        if (params.row.payState == 2) {
           var t = [ed];
         }
         return h("div", t);

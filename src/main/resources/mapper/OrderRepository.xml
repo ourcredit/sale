@@ -39,7 +39,7 @@
         <if test="backNum!=null">
             , backNum=#{backNum}
         </if>
-        where wechatOrder=#{num}
+        where wechatOrder=#{num} and payState &lt;>2
     </update>
     <!--获取时间段统计数据-->
     <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">

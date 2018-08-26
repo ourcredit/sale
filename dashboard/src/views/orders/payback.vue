@@ -67,7 +67,7 @@ export default class Orders extends AbpBase {
     pointName: "",
     deviceType: "",
     creationTime: null,
-    payState: -1
+    payState: 2
   };
   get tree() {
     return this.$store.state.device.tree;
