@@ -20,6 +20,16 @@ class Util {
     });
     return res;
   }
+  change(o: Array<any>) {
+    if (o.length <= 0) return;
+    var keys = new Array<any>();
+    var values = new Array<any>();
+    o.forEach(v => {
+      keys.push(v.time);
+      values.push(v.count);
+    });
+    return { keys, values };
+  }
   oneOf(ele: any, targetArr: Array<any>): boolean {
     if (targetArr.indexOf(ele) >= 0) {
       return true;
@@ -329,8 +339,8 @@ class Util {
     key: string,
     range?: Array<any>,
     parentId?: number | null
-  ):Array<any> {
-    var result:Array<any> = new Array<any>();
+  ): Array<any> {
+    var result: Array<any> = new Array<any>();
     list.forEach((item: any) => {
       let t: any = {};
       t.id = item.id;
@@ -339,7 +349,7 @@ class Util {
       t.parentId = item.parentId;
       t.checked = false;
       if (range) {
-        const temp:any = range.findIndex(w => w === item.code);
+        const temp: any = range.findIndex(w => w === item.code);
         if (temp > 0) {
           if (!item.children || item.children.length <= 0) {
             t.checked = true;

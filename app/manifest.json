@@ -46,7 +46,7 @@
          "orientation" : [ "portrait-primary" ],
          "icons" : {
             "ios" : {
-               "appstore" : "C:/Users/my/Desktop/TIM截图20180816092745.png",
+               "appstore" : "C:/Users/45425/Desktop/QQ截图20180826115805.png",
                "ipad" : {
                   "app" : "unpackage/res/icons/76x76.png",
                   "app@2x" : "unpackage/res/icons/152x152.png",
@@ -74,7 +74,8 @@
                "ldpi" : "unpackage/res/icons/48x48.png",
                "mdpi" : "unpackage/res/icons/48x48.png",
                "xhdpi" : "unpackage/res/icons/96x96.png",
-               "xxhdpi" : "unpackage/res/icons/144x144.png"
+               "xxhdpi" : "unpackage/res/icons/144x144.png",
+               "xxxhdpi" : "unpackage/res/icons/192x192.png"
             }
          }
       },

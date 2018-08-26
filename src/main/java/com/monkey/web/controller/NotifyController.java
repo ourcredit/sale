@@ -25,9 +25,71 @@ public class NotifyController {
     @Autowired
     IOrderService _orderService;
 
+
+        private  SortedMap<Object, Object> getparams(Map<String, String> m ){
+            //过滤空 设置 TreeMap
+            SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
+            Iterator it = m.keySet().iterator();
+            while (it.hasNext()) {
+                String parameter = (String) it.next();
+                String parameterValue = m.get(parameter);
+                String v = "";
+                if (null != parameterValue) {
+                    v = parameterValue.trim();
+                }
+                packageParams.put(parameter, v);
+            }
+            return  packageParams;
+        }
+    @RequestMapping(value = "/back")
+    public void weixin_back(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("调用退款回调方法");
+        //获取退款的参数
+        InputStream inputStream;
+        StringBuffer sb = new StringBuffer();
+        inputStream = request.getInputStream();
+        String s;
+        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+        while ((s = in.readLine()) != null) {
+            sb.append(s);
+        }
+        in.close();
+        inputStream.close();
+        //解析xml成map
+        Map<String, String> m = XMLUtil4jdom.doXMLParse(sb.toString());
+        SortedMap<Object, Object> packageParams=getparams(m);
+        // 账号信息
+        String key = ""; // key
+        //判断签名是否正确
+        //  if(PayToolUtil.isTenpaySign("UTF-8", packageParams,key)) {
+        if (true) {
+            //------------------------------
+            //处理业务开始
+            //------------------------------
+            String resXml = "";
+            if ("SUCCESS".equals((String) packageParams.get("result_code"))) {
+                // 这里是退款成功
+                String out_trade_no = (String) packageParams.get("out_trade_no");
+                String transaction_id = (String) packageParams.get("transaction_id");
+
+                //////////更新订单信息////////////////
+                _orderService.updateOrderStatte(out_trade_no, null,-1);
+            } else {
+                resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
+                        + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
+                BufferedOutputStream out = new BufferedOutputStream(
+                        response.getOutputStream());
+                out.write(resXml.getBytes());
+                out.flush();
+                out.close();
+                System.out.println("执行退款回调函数失败");
+            }
+        } else {
+        }
+    }
     @RequestMapping(value = "/notify")
     public void weixin_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println("调用回调方法");
+        System.out.println("调用支付成功回调方法");
         //读取参数
         InputStream inputStream;
         StringBuffer sb = new StringBuffer();
@@ -41,23 +103,8 @@ public class NotifyController {
         inputStream.close();
 
         //解析xml成map
-        Map<String, String> m = new HashMap<String, String>();
-        m = XMLUtil4jdom.doXMLParse(sb.toString());
-
-        //过滤空 设置 TreeMap
-        SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-        Iterator it = m.keySet().iterator();
-        while (it.hasNext()) {
-            String parameter = (String) it.next();
-            String parameterValue = m.get(parameter);
-
-            String v = "";
-            if (null != parameterValue) {
-                v = parameterValue.trim();
-            }
-            packageParams.put(parameter, v);
-        }
-
+        Map<String, String> m = XMLUtil4jdom.doXMLParse(sb.toString());
+        SortedMap<Object, Object> packageParams=getparams(m);
         // 账号信息
         String key = ""; // key
         //判断签名是否正确
@@ -108,7 +155,7 @@ public class NotifyController {
                 out.write(resXml.getBytes());
                 out.flush();
                 out.close();
-                System.out.println("执行回调函数失败");
+                System.out.println("执行支付回掉函数失败");
             }
         } else {
         }

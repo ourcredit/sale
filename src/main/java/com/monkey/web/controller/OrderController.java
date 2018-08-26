@@ -13,15 +13,19 @@ import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Order;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
+import com.monkey.web.controller.dtos.RequestDateDto;
 import com.monkey.web.controller.dtos.WebSocketMessage;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author zhaohejing
@@ -32,61 +36,89 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController {
     @Autowired
     IOrderService _orderService;
-    @ApiOperation(value = "获取订单列表",notes = "订单列表")
-    @RequestMapping(value = "",method = RequestMethod.POST)
+
+    @ApiOperation(value = "获取订单列表", notes = "订单列表")
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._order.list})
-    public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception{
+    public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception {
         EntityWrapper<Order> filter = new EntityWrapper<>();
-        filter=  ComUtil.genderFilter(filter,page.where);
-        Page<Order> res= _orderService.selectPage(new Page<>(page.index,page.size), filter);
+        filter = ComUtil.genderFilter(filter, page.where);
+        Page<Order> res = _orderService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
-  
-    @ApiOperation(value = "获取订单详情",notes = "订单列表")
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+
+    @ApiOperation(value = "获取订单详情", notes = "订单列表")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._order.show})
-    public PublicResult<Order> Product(@PathVariable Integer id) throws Exception{
-        Order m=_orderService.selectById(id);
+    public PublicResult<Order> Product(@PathVariable Integer id) throws Exception {
+        Order m = _orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
 
-    @ApiOperation(value = "客户下单操作",notes = "订单列表")
-    @RequestMapping(value = "/make",method = RequestMethod.POST)
+    @ApiOperation(value = "客户下单操作", notes = "订单列表")
+    @RequestMapping(value = "/make", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._order.list})
-    public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception{
+    public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception {
         try {
-            Order r=_orderService.insertOrder(model);
-            if(!r.getId().isEmpty()){
-              String code=  _orderService.weixinPay(r);
-              if(!code.isEmpty()){
-                  String url=   QrCodeUtil.make( code);
-                  return new PublicResult<>(PublicResultConstant.SUCCESS, url);
-              }
+            Order r = _orderService.insertOrder(model);
+            if (!r.getId().isEmpty()) {
+                String code = _orderService.weixinPay(r);
+                if (!code.isEmpty()) {
+                    String url = QrCodeUtil.make(code);
+                    return new PublicResult<>(PublicResultConstant.SUCCESS, url);
+                }
                 return new PublicResult<>(PublicResultConstant.ERROR, "生成支付二维码失败");
 
             }
             return new PublicResult<>(PublicResultConstant.ERROR, r);
-        }catch (Exception e){
-            return  new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        } catch (Exception e) {
+            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
 
     }
-    @ApiOperation(value = "测试发送url",notes = "订单列表")
-    @RequestMapping(value="/testurl", method = RequestMethod.GET)
-    public PublicResult<Object> testurl()  {
-        String url="http://www.baidu.com";
-      String u=  QrCodeUtil.make(url);
-          return new PublicResult<>(PublicResultConstant.SUCCESS, u);
+
+    @ApiOperation(value = "退款操作", notes = "订单列表")
+    @RequestMapping(value = "/back/{orderId}", method = RequestMethod.GET)
+    @RequiresPermissions(value = {PermissionConst._order.list})
+    public PublicResult<Object> back(@PathVariable Integer orderId) throws Exception {
+        try {
+            Order r = _orderService.selectById(orderId);
+            if (r != null) {
+                _orderService.weixinBack(r);
+                return new PublicResult<>(PublicResultConstant.SUCCESS, "退款申请请求成功");
+            }
+            return new PublicResult<>(PublicResultConstant.ERROR, "暂无此订单信息");
+        } catch (Exception e) {
+            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        }
     }
-    @ApiOperation(value = "测试推送通知",notes = "订单列表")
-    @RequestMapping(value="/testpush/{deviceNum}", method = RequestMethod.GET)
-    public PublicResult<Object> testpush(@PathVariable String deviceNum) throws  Exception {
-      WebSocketServer s=  WebSocketServer.getClients().get(deviceNum);
-      if(s!=null){
-          WebSocketMessage m=new WebSocketMessage(deviceNum,"","测试推送",1,true);
-          s.sendMessageTo(m);
-      }
-        return new PublicResult<>(PublicResultConstant.SUCCESS, "");
+    @ApiOperation(value = "获取首页统计", notes = "订单列表")
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequiresPermissions(value = {PermissionConst._order.list})
+    public PublicResult<Object> staticals() throws Exception {
+        try {
+            Map r = _orderService.getDashboard();
+            if (r != null) {
+                return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+            }
+            return new PublicResult<>(PublicResultConstant.ERROR, "获取统计失败");
+        } catch (Exception e) {
+            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        }
+    }
+    @ApiOperation(value = "获取首页统计", notes = "订单列表")
+    @RequestMapping(value = "/total", method = RequestMethod.POST)
+    @RequiresPermissions(value = {PermissionConst._order.list})
+    public PublicResult<Object> todays(@RequestBody RequestDateDto input) throws Exception {
+        try {
+            Map r = _orderService.getStaticial(input.start,input.end);
+            if (r != null) {
+                return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+            }
+            return new PublicResult<>(PublicResultConstant.ERROR, "获取统计失败");
+        } catch (Exception e) {
+            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        }
     }
 }
 

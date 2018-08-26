@@ -1,20 +1,31 @@
 package com.monkey.application.Payfor;
 
+import com.monkey.core.dtos.OrderStaticialDto;
 import com.monkey.core.entity.Order;
 import com.baomidou.mybatisplus.service.IService;
 import com.monkey.web.controller.dtos.OrderInput;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author zhaohejing
  * @since 2018-08-13
  */
 public interface IOrderService extends IService<Order> {
-    Order insertOrder(OrderInput input)throws Exception;
+    Order insertOrder(OrderInput input) throws Exception;
+
     String weixinPay(Order input) throws Exception;
-    String aliPay(Order input )throws Exception;
-  void updateOrderStatte(String orderNum,Integer orderState ,Integer payState);
+
+    String aliPay(Order input) throws Exception;
+
+    void updateOrderStatte(String orderNum, Integer orderState, Integer payState);
+
+    String weixinBack(Order input) throws  Exception;
+    Map<String,Object> getDashboard();
+    Map<String,Object> getStaticial(Date start,Date end);
 }

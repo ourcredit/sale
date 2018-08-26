@@ -144,7 +144,9 @@ public class ComUtil {
             Set<String> r = m.keySet();
             for (String key : r) {
                 Object v = m.get(key);
-              v=  v.toString().trim();
+                if(v!=null){
+                    v=  v.toString().trim();
+                }
                 if (v instanceof Number) {
                     e.eq(key, v);
                 } else if (v instanceof String) {

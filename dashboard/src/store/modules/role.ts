@@ -5,7 +5,6 @@ import Role from "@/store/entities/role";
 import Ajax from "@/lib/ajax";
 import PageResult from "@/store/entities/page-result";
 import ListMutations from "@/store/modules/base/list-mutations";
-import { stat } from "fs";
 interface IRoleState extends IListState<Role> {
   editRole: Role;
   permissions: Array<string>;

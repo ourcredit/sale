@@ -53,6 +53,8 @@ public class Order extends Model<Order> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
+
+    private Integer payType;
     /**
      * 订单状态
      */
@@ -218,5 +220,13 @@ public class Order extends Model<Order> {
         ", deviceType=" + deviceType +
         ", pointName=" + pointName +
         "}";
+    }
+
+    public Integer getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
     }
 }

@@ -4,36 +4,37 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.monkey.core.entity.Order">
-        <id column="id" property="id" />
-        <result column="productName" property="productName" />
-        <result column="productId" property="productId" />
-        <result column="price" property="price" />
-        <result column="wechatOrder" property="wechatOrder" />
-        <result column="creationTime" property="creationTime" />
-        <result column="creatorUserId" property="creatorUserId" />
-        <result column="orderState" property="orderState" />
-        <result column="payState" property="payState" />
-        <result column="tenantId" property="tenantId" />
-        <result column="deviceId" property="deviceId" />
-        <result column="deviceName" property="deviceName" />
-        <result column="deviceType" property="deviceType" />
-        <result column="pointName" property="pointName" />
+        <id column="id" property="id"/>
+        <result column="productName" property="productName"/>
+        <result column="productId" property="productId"/>
+        <result column="price" property="price"/>
+        <result column="wechatOrder" property="wechatOrder"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creatorUserId" property="creatorUserId"/>
+        <result column="orderState" property="orderState"/>
+        <result column="payState" property="payState"/>
+        <result column="payType" property="payType"/>
+        <result column="tenantId" property="tenantId"/>
+        <result column="deviceId" property="deviceId"/>
+        <result column="deviceName" property="deviceName"/>
+        <result column="deviceType" property="deviceType"/>
+        <result column="pointName" property="pointName"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName
+        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType
     </sql>
     <update id="updateOrderState">
         update sale_order
-         set
-          <if test="payState!=null">
-              payState=#{payState}
-          </if>
+        set
+        <if test="payState!=null">
+            payState=#{payState}
+        </if>
         <if test="orderState!=null">
             orderState=#{orderState}
         </if>
-           where wechatOrder=#{num}
+        where wechatOrder=#{num}
     </update>
     <!--获取时间段统计数据-->
     <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">
@@ -41,45 +42,44 @@
         SUM( price ) AS sale,
         COUNT( productId ) AS count,
         ( SELECT COUNT( 1 ) FROM sale_device
-         <where >
-             1=1
-             <if test="start!=null">
-               and  creationTime >= #{start}
-             </if>
-             <if test="end!=null">
-               and  creationTime &lt;= #{end}
-             </if>
-         </where>
-        ) AS device,
-        ( SELECT COUNT( 1 ) FROM sale_log   <where >
-        1=1
-        <if test="start!=null">
-            and  creationTime >= #{start}
-        </if>
-        <if test="end!=null">
-            and  creationTime &lt;= #{end}
-        </if>
-    </where> ) AS error,
-        ( SELECT COUNT( 1 ) FROM sale_order
-        <where >
-            ( payState =- 1 OR orderState =- 1 )
+        <where>
             <if test="start!=null">
-                and  creationTime >= #{start}
+                 creationTime >= #{start}
             </if>
             <if test="end!=null">
-                and  creationTime &lt;= #{end}
+                and creationTime &lt;= #{end}
             </if>
         </where>
-       ) AS off
-        FROM
-        sale_order a
-        <where >
-            1=1
+        ) AS device,
+        ( SELECT COUNT( 1 ) FROM sale_log
+        <where>
             <if test="start!=null">
-                and  a.creationTime >= #{start}
+                 creationTime >= #{start}
             </if>
             <if test="end!=null">
-                and  a.creationTime &lt;= #{end}
+                and creationTime &lt;= #{end}
+            </if>
+        </where>
+        ) AS error,
+        ( SELECT COUNT( 1 ) FROM sale_order
+        <where>
+            ( payState =- 1 OR orderState =- 1 )
+            <if test="start!=null">
+                and creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
+        </where>
+        ) AS off
+        FROM
+        sale_order a
+        <where>
+            <if test="start!=null">
+                 a.creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and a.creationTime &lt;= #{end}
             </if>
         </where>
     </select>
@@ -90,9 +90,16 @@
         COUNT( productId ) as count
         FROM
         sale_order
-        WHERE
-        creationTime >= #{start}
-        AND creationTime &lt;= #{end}
+        <where>
+            payState = 1
+            AND orderState = 1
+            <if test="start!=null">
+                and creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
+        </where>
         GROUP BY
         DATE_FORMAT( creationTime, '%h' )
         ORDER BY
@@ -105,9 +112,16 @@
         COUNT( productId ) as count
         FROM
         sale_order
-        WHERE
-        creationTime >= #{start}
-        AND creationTime &lt;= #{end}
+        <where>
+            payState = 1
+            AND orderState = 1
+            <if test="start!=null">
+                and creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
+        </where>
         GROUP BY
         DATE_FORMAT( creationTime, '%m' )
         ORDER BY
@@ -115,14 +129,15 @@
     </select>
     <!--获取点位销售榜单前十-->
     <select id="getPointSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
-        select  pointName,COUNT(productId) from sale_order
+        select pointName as time,COUNT(productId) as count from sale_order
         <where>
-            1=1
+            payState = 1
+            AND orderState = 1
             <if test="start!=null">
-                and  creationTime >= #{start}
+                and creationTime >= #{start}
             </if>
             <if test="end!=null">
-                and  creationTime &lt;= #{end}
+                and creationTime &lt;= #{end}
             </if>
         </where>
         GROUP BY pointName ORDER BY COUNT(productId) desc
@@ -130,7 +145,23 @@
     </select>
     <!--获取支付类型统计-->
     <select id="getPayTypePercent" resultType="com.monkey.core.dtos.SalePercentDto">
-
+        SELECT
+        payType time,
+        COUNT( productId ) as count
+        FROM
+        sale_order
+        <where>
+            payState = 1
+            AND orderState = 1
+            <if test="start!=null">
+                and creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
+        </where>
+        GROUP BY
+        payType
     </select>
 
 </mapper>
