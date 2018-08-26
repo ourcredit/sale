@@ -168,5 +168,14 @@
         GROUP BY
         payType
     </select>
+    <select id="getPayforByOrder" resultType="com.monkey.core.entity.Payfor">
+      SELECT
+	*
+FROM
+	sale_payfor
+WHERE
+	wechatpayId = #{appId}
+	AND wechatpayAgent = #{mch_id}
+    </select>
 
 </mapper>

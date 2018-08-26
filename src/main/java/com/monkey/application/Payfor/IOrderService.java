@@ -3,6 +3,7 @@ package com.monkey.application.Payfor;
 import com.monkey.core.dtos.OrderStaticialDto;
 import com.monkey.core.entity.Order;
 import com.baomidou.mybatisplus.service.IService;
+import com.monkey.core.entity.Payfor;
 import com.monkey.web.controller.dtos.OrderInput;
 
 import java.util.Date;
@@ -28,4 +29,5 @@ public interface IOrderService extends IService<Order> {
     String weixinBack(Order input) throws  Exception;
     Map<String,Object> getDashboard();
     Map<String,Object> getStaticial(Date start,Date end);
+    Payfor getPayforByOrder(String appId,String mch_id);
 }

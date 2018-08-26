@@ -2,8 +2,10 @@ package com.monkey.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.monkey.application.Payfor.IOrderService;
+import com.monkey.common.util.CipherTextUtil;
 import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
+import com.monkey.core.entity.Payfor;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,22 +69,39 @@ public class NotifyController {
         //处理业务开始
         //------------------------------
         String resXml = "";
-        if ("SUCCESS".equals( packageParams.get("result_code"))) {
-            // 这里是退款成功
-            String out_trade_no = (String) packageParams.get("out_trade_no");
-            String back_id = (String) packageParams.get("out_refund_no");
-
-            //////////更新订单信息////////////////
-            _orderService.updateOrderStatte(out_trade_no, null, -1,back_id);
-            // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
+        if ("SUCCESS".equals(packageParams.get("return_code"))) {
+            String appId = packageParams.get("appid").toString();
+            String mch_id = packageParams.get("mch_id").toString();
+            Payfor p = _orderService.getPayforByOrder(appId, mch_id);
+            //解密
+            String text = packageParams.get("req_info").toString();
+            text = CipherTextUtil.dedede(text, p.getWechatpayKey());
+            m = XMLUtil4jdom.doXMLParse(text);
+            packageParams = getparams(m);
+            if ("SUCCESS".equals(packageParams.get("refund_status"))) {
+                // 这里是退款成功
+                String out_trade_no = (String) packageParams.get("out_trade_no");
+                String back_id = (String) packageParams.get("out_refund_no");
+                //////////更新订单信息////////////////
+                _orderService.updateOrderStatte(out_trade_no, null, -1, back_id);
+                // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
+                BufferedOutputStream out = new BufferedOutputStream(
+                        response.getOutputStream());
+                resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+                        + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
+                out.write(resXml.getBytes());
+                out.flush();
+                out.close();
+                System.out.println("通知微信.异步确认成功");
+            }
+            resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
+                    + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
             BufferedOutputStream out = new BufferedOutputStream(
                     response.getOutputStream());
-            resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
-                    + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
             out.write(resXml.getBytes());
             out.flush();
             out.close();
-            System.out.println("通知微信.异步确认成功");
+            System.out.println("退款解密内容退款状态失败");
         } else {
             resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
                     + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -91,7 +110,7 @@ public class NotifyController {
             out.write(resXml.getBytes());
             out.flush();
             out.close();
-            System.out.println("执行退款回调函数失败");
+            System.out.println("回掉请求失败");
         }
     }
 
@@ -136,7 +155,7 @@ public class NotifyController {
                 String transaction_id = (String) packageParams.get("transaction_id");
 
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
-                _orderService.updateOrderStatte(out_trade_no, null, 1,null);
+                _orderService.updateOrderStatte(out_trade_no, null, 1, null);
                 ///////////通知客户端修改状态/////////
                 String did = out_trade_no.split("_")[0];
                 WebSocketServer ws = WebSocketServer.getClients().get(did);
@@ -167,5 +186,15 @@ public class NotifyController {
             }
         } else {
         }
+    }
+
+    @RequestMapping(value = "/aliback")
+    public void ali_back_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    }
+
+    @RequestMapping(value = "/alinotify")
+    public void ali_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
     }
 }

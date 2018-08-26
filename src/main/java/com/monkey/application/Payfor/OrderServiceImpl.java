@@ -166,6 +166,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     }
 
     @Override
+    public Payfor getPayforByOrder(String appId,String mch_id) {
+       return  _orderRepository.getPayforByOrder(appId,mch_id);
+    }
+
+    @Override
     public void updateOrderStatte(String orderNum, Integer orderState, Integer payState,String backNum) {
         _orderRepository.updateOrderState(orderNum, orderState, payState,backNum);
     }

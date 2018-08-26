@@ -5,6 +5,7 @@ import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
 import com.monkey.core.entity.Order;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.monkey.core.entity.Payfor;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -25,5 +26,5 @@ public interface OrderRepository extends BaseMapper<Order> {
     List<SalePercentDto> getMonthSalePercent(@Param("start") Date start, @Param("end")Date end);
     List<SalePercentDto> getPointSalePercent(@Param("start") Date start, @Param("end")Date end);
     List<SalePercentDto> getPayTypePercent(@Param("start") Date start, @Param("end")Date end);
-
+    Payfor getPayforByOrder(@Param("appId")String appId,@Param("mch_id")String mch_id);
 }
