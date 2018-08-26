@@ -166,8 +166,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     }
 
     @Override
-    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState) {
-        _orderRepository.updateOrderState(orderNum, orderState, payState);
+    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState,String backNum) {
+        _orderRepository.updateOrderState(orderNum, orderState, payState,backNum);
     }
     /*
         * 微信退款功能

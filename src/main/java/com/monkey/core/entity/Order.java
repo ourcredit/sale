@@ -43,6 +43,7 @@ public class Order extends Model<Order> {
      * 微信订单
      */
     private String wechatOrder;
+    private String backNum;
     /**
      * 创建时间
      */
@@ -228,5 +229,13 @@ public class Order extends Model<Order> {
 
     public void setPayType(Integer payType) {
         this.payType = payType;
+    }
+
+    public String getBackNum() {
+        return backNum;
+    }
+
+    public void setBackNum(String backNum) {
+        this.backNum = backNum;
     }
 }

@@ -84,6 +84,9 @@ export default class Orders extends AbpBase {
   get cates() {
     return this.$store.state.product.productCate;
   }
+  get canBack() {
+    return this.$store.state.session.canBack;
+  }
   ModalShow: boolean = false;
   columns: Array<any> = [
     {
@@ -152,6 +155,12 @@ export default class Orders extends AbpBase {
             },
             on: {
               click: () => {
+                if (!this.canBack) {
+                  this.$Modal.error({
+                    title: "还未开通退款操作权限",
+                    content: "请先上传退款证书"
+                  });
+                }
                 this.$Modal.confirm({
                   title: "警告提示",
                   content: `确认要对当前订单执行退款操作么`,

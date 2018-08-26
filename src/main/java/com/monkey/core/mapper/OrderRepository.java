@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2018-08-13
  */
 public interface OrderRepository extends BaseMapper<Order> {
-    void updateOrderState(@Param("num")String num,@Param("orderState")Integer orderState,@Param("payState")Integer payState);
+    void updateOrderState(@Param("num")String num,@Param("orderState")Integer orderState,@Param("payState")Integer payState,@Param("backNum") String backNum);
     TodayStatical getOrderStatical(@Param("start") Date start, @Param("end")Date end);
     List<SalePercentDto> getTodaySalePercent(@Param("start") Date start, @Param("end")Date end);
     List<SalePercentDto> getMonthSalePercent(@Param("start") Date start, @Param("end")Date end);

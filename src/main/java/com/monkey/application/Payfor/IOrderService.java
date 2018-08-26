@@ -23,7 +23,7 @@ public interface IOrderService extends IService<Order> {
 
     String aliPay(Order input) throws Exception;
 
-    void updateOrderStatte(String orderNum, Integer orderState, Integer payState);
+    void updateOrderStatte(String orderNum, Integer orderState, Integer payState,String backNum);
 
     String weixinBack(Order input) throws  Exception;
     Map<String,Object> getDashboard();

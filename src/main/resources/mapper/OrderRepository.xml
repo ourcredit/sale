@@ -19,11 +19,13 @@
         <result column="deviceName" property="deviceName"/>
         <result column="deviceType" property="deviceType"/>
         <result column="pointName" property="pointName"/>
+        <result column="backNum" property="backNum"/>
+
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType
+        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType,backNum
     </sql>
     <update id="updateOrderState">
         update sale_order
@@ -33,6 +35,9 @@
         </if>
         <if test="orderState!=null">
             orderState=#{orderState}
+        </if>
+        <if test="backNum!=null">
+            backNum=#{backNum}
         </if>
         where wechatOrder=#{num}
     </update>

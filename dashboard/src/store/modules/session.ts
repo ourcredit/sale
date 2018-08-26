@@ -7,6 +7,7 @@ interface ISessionState {
   user: any;
   tenant: any;
   roles: any;
+  canBack: Boolean;
 }
 class SessionStore implements Module<ISessionState, any> {
   namespaced = true;
@@ -14,7 +15,8 @@ class SessionStore implements Module<ISessionState, any> {
     application: null,
     user: null,
     tenant: null,
-    roles: null
+    roles: null,
+    canBack: false
   };
   actions = {
     async init(content: ActionContext<ISessionState, any>): Promise<any> {
@@ -26,6 +28,7 @@ class SessionStore implements Module<ISessionState, any> {
       let rep: any = await ajax.get("/api/user/current");
       content.state.user = rep.data.user;
       content.state.roles = rep.data.role;
+      content.state.canBack = rep.data.canBack;
       auth.init(rep.data.allPermissions, rep.data.permissions);
     }
   };

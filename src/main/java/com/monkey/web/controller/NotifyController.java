@@ -25,22 +25,22 @@ public class NotifyController {
     @Autowired
     IOrderService _orderService;
 
-
-        private  SortedMap<Object, Object> getparams(Map<String, String> m ){
-            //过滤空 设置 TreeMap
-            SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
-            Iterator it = m.keySet().iterator();
-            while (it.hasNext()) {
-                String parameter = (String) it.next();
-                String parameterValue = m.get(parameter);
-                String v = "";
-                if (null != parameterValue) {
-                    v = parameterValue.trim();
-                }
-                packageParams.put(parameter, v);
+    private SortedMap<Object, Object> getparams(Map<String, String> m) {
+        //过滤空 设置 TreeMap
+        SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
+        Iterator it = m.keySet().iterator();
+        while (it.hasNext()) {
+            String parameter = (String) it.next();
+            String parameterValue = m.get(parameter);
+            String v = "";
+            if (null != parameterValue) {
+                v = parameterValue.trim();
             }
-            return  packageParams;
+            packageParams.put(parameter, v);
         }
+        return packageParams;
+    }
+
     @RequestMapping(value = "/back")
     public void weixin_back(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("调用退款回调方法");
@@ -55,47 +55,46 @@ public class NotifyController {
         }
         in.close();
         inputStream.close();
+        System.out.println("回掉的参数:" + sb.toString());
         //解析xml成map
         Map<String, String> m = XMLUtil4jdom.doXMLParse(sb.toString());
-        SortedMap<Object, Object> packageParams=getparams(m);
+        SortedMap<Object, Object> packageParams = getparams(m);
         // 账号信息
         String key = ""; // key
         //判断签名是否正确
         //  if(PayToolUtil.isTenpaySign("UTF-8", packageParams,key)) {
-        if (true) {
-            //------------------------------
-            //处理业务开始
-            //------------------------------
-            String resXml = "";
-            if ("SUCCESS".equals((String) packageParams.get("result_code"))) {
-                // 这里是退款成功
-                String out_trade_no = (String) packageParams.get("out_trade_no");
-                String transaction_id = (String) packageParams.get("transaction_id");
+        //------------------------------
+        //处理业务开始
+        //------------------------------
+        String resXml = "";
+        if ("SUCCESS".equals( packageParams.get("result_code"))) {
+            // 这里是退款成功
+            String out_trade_no = (String) packageParams.get("out_trade_no");
+            String back_id = (String) packageParams.get("out_refund_no");
 
-                //////////更新订单信息////////////////
-                _orderService.updateOrderStatte(out_trade_no, null,-1);
-                // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
-                BufferedOutputStream out = new BufferedOutputStream(
-                        response.getOutputStream());
-                resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
-                        + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
-                out.write(resXml.getBytes());
-                out.flush();
-                out.close();
-                System.out.println("通知微信.异步确认成功");
-            } else {
-                resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
-                        + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
-                BufferedOutputStream out = new BufferedOutputStream(
-                        response.getOutputStream());
-                out.write(resXml.getBytes());
-                out.flush();
-                out.close();
-                System.out.println("执行退款回调函数失败");
-            }
+            //////////更新订单信息////////////////
+            _orderService.updateOrderStatte(out_trade_no, null, -1,back_id);
+            // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
+            BufferedOutputStream out = new BufferedOutputStream(
+                    response.getOutputStream());
+            resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+                    + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
+            out.write(resXml.getBytes());
+            out.flush();
+            out.close();
+            System.out.println("通知微信.异步确认成功");
         } else {
+            resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
+                    + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
+            BufferedOutputStream out = new BufferedOutputStream(
+                    response.getOutputStream());
+            out.write(resXml.getBytes());
+            out.flush();
+            out.close();
+            System.out.println("执行退款回调函数失败");
         }
     }
+
     @RequestMapping(value = "/notify")
     public void weixin_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("调用支付成功回调方法");
@@ -113,7 +112,7 @@ public class NotifyController {
 
         //解析xml成map
         Map<String, String> m = XMLUtil4jdom.doXMLParse(sb.toString());
-        SortedMap<Object, Object> packageParams=getparams(m);
+        SortedMap<Object, Object> packageParams = getparams(m);
         // 账号信息
         String key = ""; // key
         //判断签名是否正确
@@ -137,12 +136,12 @@ public class NotifyController {
                 String transaction_id = (String) packageParams.get("transaction_id");
 
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
-                _orderService.updateOrderStatte(out_trade_no, null,1);
+                _orderService.updateOrderStatte(out_trade_no, null, 1,null);
                 ///////////通知客户端修改状态/////////
                 String did = out_trade_no.split("_")[0];
                 WebSocketServer ws = WebSocketServer.getClients().get(did);
                 if (ws != null) {
-                    WebSocketMessage mm=new WebSocketMessage(did,out_trade_no,"支付成功",2,true);
+                    WebSocketMessage mm = new WebSocketMessage(did, out_trade_no, "支付成功", 2, true);
                     ws.sendMessageTo(mm);
 
                     // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
