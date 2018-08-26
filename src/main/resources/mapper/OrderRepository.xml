@@ -31,13 +31,13 @@
         update sale_order
         set
         <if test="payState!=null">
-            payState=#{payState},
+            payState=#{payState}
         </if>
         <if test="orderState!=null">
-            orderState=#{orderState},
+            , orderState=#{orderState}
         </if>
         <if test="backNum!=null">
-            backNum=#{backNum}
+            , backNum=#{backNum}
         </if>
         where wechatOrder=#{num}
     </update>
