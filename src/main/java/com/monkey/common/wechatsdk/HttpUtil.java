@@ -45,7 +45,7 @@ public class HttpUtil {
             }
             return sb.toString();
         } catch (IOException e) {
-            //logger.error("Error connecting to " + urlStr + ": " + e.getMessage());
+           System.out.println(e.getMessage());
         } finally {
             try {
                 if (reader != null)

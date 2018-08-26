@@ -80,7 +80,7 @@ public class OrderController {
     @ApiOperation(value = "退款操作", notes = "订单列表")
     @RequestMapping(value = "/back/{orderId}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._order.list})
-    public PublicResult<Object> back(@PathVariable Integer orderId) throws Exception {
+    public PublicResult<Object> back(@PathVariable String orderId) throws Exception {
         try {
             Order r = _orderService.selectById(orderId);
             if (r != null) {

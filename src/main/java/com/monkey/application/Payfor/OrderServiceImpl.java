@@ -8,7 +8,6 @@ import com.monkey.common.wechatsdk.HttpUtil;
 import com.monkey.common.wechatsdk.PayConfig;
 import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
-import com.monkey.core.dtos.OrderStaticialDto;
 import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
 import com.monkey.core.entity.Device;
@@ -21,14 +20,27 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
 import com.monkey.web.controller.dtos.OrderInput;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import scala.util.parsing.combinator.testing.Str;
 
+import javax.net.ssl.SSLContext;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
-
+import java.security.KeyStore;
 /**
  * <p>
  * 服务实现类
@@ -158,9 +170,61 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         _orderRepository.updateOrderState(orderNum, orderState, payState);
     }
 
+   public String back() throws Exception{
+
+       String reuqestXml = "";
+       KeyStore keyStore  = KeyStore.getInstance("PKCS12");
+       FileInputStream instream = new FileInputStream(new File("D:/apiclient_cert.p12"));//放退款证书的路径
+       try {
+           keyStore.load(instream, "你的微信支付商户号".toCharArray());
+       } finally {
+           instream.close();
+       }
+
+       SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, "你的微信支付商户号".toCharArray()).build();
+       SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+               sslcontext,
+               new String[] { "TLSv1" },
+               null,
+               SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+       CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+       try {
+
+           HttpPost httpPost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");//退款接口
+
+           System.out.println("executing request" + httpPost.getRequestLine());
+           StringEntity  reqEntity  = new StringEntity(reuqestXml);
+           // 设置类型
+           reqEntity.setContentType("application/x-www-form-urlencoded");
+           httpPost.setEntity(reqEntity);
+           CloseableHttpResponse response = httpclient.execute(httpPost);
+           try {
+               HttpEntity entity = response.getEntity();
+
+               System.out.println("----------------------------------------");
+               System.out.println(response.getStatusLine());
+               if (entity != null) {
+                   System.out.println("Response content length: " + entity.getContentLength());
+                   BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(),"UTF-8"));
+                   String text;
+                   while ((text = bufferedReader.readLine()) != null) {
+                       System.out.println(text);
+                   }
+
+               }
+               EntityUtils.consume(entity);
+           } finally {
+               response.close();
+           }
+       } finally {
+           httpclient.close();
+       }
+       return  "";
+   }
+
     /*
-    * 微信退款功能
-    * */
+        * 微信退款功能
+        * */
     @Override
     public String weixinBack(Order input) throws Exception {
         EntityWrapper ew = new EntityWrapper();

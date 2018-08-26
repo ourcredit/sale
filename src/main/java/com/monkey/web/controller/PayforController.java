@@ -2,28 +2,15 @@ package com.monkey.web.controller;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.monkey.application.Device.IDeviceProductService;
-import com.monkey.application.Device.IDeviceService;
 import com.monkey.application.Payfor.IPayforService;
-import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
-import com.monkey.common.util.ComUtil;
-import com.monkey.core.dtos.ProductDto;
-import com.monkey.core.entity.Device;
 import com.monkey.core.entity.Payfor;
-import com.monkey.web.controller.dtos.DeviceProductInput;
-import com.monkey.web.controller.dtos.ProductInput;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
-
-import java.util.List;
 
 /**
  * <p>

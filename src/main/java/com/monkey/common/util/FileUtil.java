@@ -27,6 +27,7 @@ public class FileUtil {
     private static ResourceBundle bundle = ResourceBundle.getBundle("config/constant");
 
     public static String fileUploadPath =bundle.getString("file-upload.dir");
+    public static String pemUploadPath =bundle.getString("pem.dir");
 
     /**
      * 判断当前文件是否是zip文件
@@ -225,16 +226,24 @@ public class FileUtil {
         }
     }
 
-    public static String saveFile(InputStream file, int type, String name, String tag) throws Exception {
+    public static String saveFile( InputStream file, int type, String name, String tag) throws Exception {
         Date time = new Date();
         String fileName = fileName(time, type, name,tag);
-        File newFile = getNewFile(fileName);
+        File newFile = getNewFile(fileUploadPath,fileName);
         File oldFile = createTemporaryFile(file, name);
         copyFile(newFile, new FileInputStream(oldFile));
         oldFile.delete();
         return fileName;
     }
-
+    public static String savePem(Integer tenantId, InputStream file, int type, String name, String tag) throws Exception {
+        Date time = new Date();
+        String fileName = "/"+tenantId+"/"+name;
+        File newFile = getNewFile( pemUploadPath,fileName);
+        File oldFile = createTemporaryFile(file, name);
+        copyFile(newFile, new FileInputStream(oldFile));
+        oldFile.delete();
+        return newFile.getPath();
+    }
     public static File createTemporaryFile(InputStream file, String name) throws Exception {
         File temp = new File(name);
         OutputStream out = new FileOutputStream(temp);
@@ -287,8 +296,9 @@ public class FileUtil {
 
     }
 
-    public static File getNewFile(String fileName) throws IOException {
-        String filePath = fileUploadPath + fileName;
+
+    public static File getNewFile(String path, String fileName) throws IOException {
+        String filePath = path + fileName;
         File newFile = new File(filePath);
         File fileParent = newFile.getParentFile();
         if(!fileParent.exists()){

@@ -1,4 +1,4 @@
-import {  ActionContext } from "vuex";
+import { ActionContext } from "vuex";
 import ListModule from "@/store/modules/base/list-module";
 import IListState from "@/store/modules/base/list-state";
 import Ajax from "@/lib/ajax";
@@ -10,7 +10,7 @@ interface IDeviceState extends IListState<any> {
   tree: Array<any>;
   currentOrg: Number;
 }
-class PointMutations extends ListMutations<any> {}
+class PointMutations extends ListMutations<any> { }
 class PointModule extends ListModule<IDeviceState, any, any> {
   state = {
     totalCount: 0,
@@ -38,6 +38,12 @@ class PointModule extends ListModule<IDeviceState, any, any> {
       payload: any
     ): Promise<any> {
       await Ajax.put("/api/device", payload.data);
+    },
+    async back(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.get(`/api/order/back/${payload.data}`);
     }
   };
   mutations = {

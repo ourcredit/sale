@@ -1,5 +1,5 @@
 <style lang="less">
-  @import "./product.less";
+@import "./product.less";
 </style>
 <template>
   <div>
@@ -43,96 +43,96 @@
   </div>
 </template>
 <script lang="ts">
-  import {
-    Component,
-    Vue,
-    Inject,
-    Prop,
-    Watch
-  } from "vue-property-decorator";
-  import Util from "@/lib/util";
-  import AbpBase from "@/lib/abpbase";
-  import PageRequest from "../../store/entities/page-request";
-  import Product from "@/store/entities/product";
-  import auth from "@/lib/auth";
-  @Component
-  export default class CreateDevice extends AbpBase {
-    @Prop({
-      type: Boolean,
-      default: false
-    })
-    value: boolean;
-    upload: any = {
-      type: "drag",
-      action: "https://service.leftins.com/api/file",
-     // action: "http://localhost:8081/api/file",
-      header: {
-        Authorization: auth.getToken()
+import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
+import Util from "@/lib/util";
+import AbpBase from "@/lib/abpbase";
+import PageRequest from "../../store/entities/page-request";
+import Product from "@/store/entities/product";
+import auth from "@/lib/auth";
+@Component
+export default class CreateDevice extends AbpBase {
+  @Prop({
+    type: Boolean,
+    default: false
+  })
+  value: boolean;
+  upload: any = {
+    type: "drag",
+    // action: "https://service.leftins.com/api/file",
+    action: "http://localhost:8081/api/file/pems",
+    header: {
+      Authorization: auth.getToken()
+    }
+  };
+  path: string = "";
+  get product() {
+    return this.$store.state.product.editProduct;
+  }
+  get cates() {
+    return this.$store.state.product.productCate;
+  }
+  save() {
+    (this.$refs.productForm as any).validate(async (valid: boolean) => {
+      if (valid) {
+        this.product.imageUrl = this.path;
+        await this.$store.dispatch({
+          type: "product/modify",
+          data: this.product
+        });
+        (this.$refs.productForm as any).resetFields();
+        this.$emit("save-success");
+        this.$emit("input", false);
       }
-    };
-    path:string="";
-    get product() {
-      return this.$store.state.product.editProduct;
+    });
+  }
+  afterSave(response, file, fileList) {
+    this.path = response.data[0].path;
+  }
+  async getpage() {
+    let pagerequest = new PageRequest();
+    pagerequest.size = 999;
+    pagerequest.index = 1;
+    pagerequest.where = {};
+    await this.$store.dispatch({
+      type: `point/getAll`,
+      data: pagerequest
+    });
+  }
+  created() {
+    this.getpage();
+  }
+  cancel() {
+    (this.$refs.productForm as any).resetFields();
+    this.$emit("input", false);
+  }
+  visibleChange(value: boolean) {
+    if (!value) {
+      this.$emit("input", value);
     }
-    get cates() {
-      return this.$store.state.product.productCate;
-    }
-    save() {
-      (this.$refs.productForm as any).validate(async (valid: boolean) => {
-        if (valid) {
-          this.product.imageUrl=this.path;
-          await this.$store.dispatch({
-            type: "product/modify",
-            data: this.product
-          });
-          (this.$refs.productForm as any).resetFields();
-          this.$emit("save-success");
-          this.$emit("input", false);
-        }
-      });
-    }
-    afterSave(response, file, fileList) {
-      this.path=response.data[0].path;
-    }
-    async getpage() {
-      let pagerequest = new PageRequest();
-      pagerequest.size = 999;
-      pagerequest.index = 1;
-      pagerequest.where = {};
-      await this.$store.dispatch({
-        type: `point/getAll`,
-        data: pagerequest
-      });
-    }
-    created() {
-      this.getpage();
-    }
-    cancel() {
-      (this.$refs.productForm as any).resetFields();
-      this.$emit("input", false);
-    }
-    visibleChange(value: boolean) {
-      if (!value) {
-        this.$emit("input", value);
-      }
-    }
+  }
 
-    productRule = {
-      productName: [{
+  productRule = {
+    productName: [
+      {
         required: true,
         message: "商品名必填",
         trigger: "blur"
-      }],
-      productNum: [{
+      }
+    ],
+    productNum: [
+      {
         required: true,
         message: "商品编号必填",
         trigger: "blur"
-      }],
-      productType: [{
+      }
+    ],
+    productType: [
+      {
         required: true,
         message: "商品类型必填",
         trigger: "blur"
-      }]
-    };
-  }
+      }
+    ]
+  };
+}
 </script>

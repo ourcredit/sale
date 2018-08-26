@@ -152,9 +152,18 @@ export default class Orders extends AbpBase {
             },
             on: {
               click: () => {
-                this.$store.dispatch({
-                  type: "product/get",
-                  data: params.row.id
+                this.$Modal.confirm({
+                  title: "警告提示",
+                  content: `确认要对当前订单执行退款操作么`,
+                  okText: "是",
+                  cancelText: "否",
+                  onOk: async () => {
+                    await this.$store.dispatch({
+                      type: "order/back",
+                      data: params.row.id
+                    });
+                    await this.init();
+                  }
                 });
               }
             }

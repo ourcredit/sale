@@ -36,6 +36,8 @@ public class Payfor extends Model<Payfor> {
      * 阿里key
      */
     private String alipayId;
+
+    private  String cardUrl;
     /**
      * 阿里密钥
      */
@@ -175,5 +177,13 @@ public class Payfor extends Model<Payfor> {
 
     public void setCreatorUserId(Integer creatorUserId) {
         this.creatorUserId = creatorUserId;
+    }
+
+    public String getCardUrl() {
+        return cardUrl;
+    }
+
+    public void setCardUrl(String cardUrl) {
+        this.cardUrl = cardUrl;
     }
 }
