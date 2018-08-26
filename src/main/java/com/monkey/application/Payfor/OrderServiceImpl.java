@@ -169,59 +169,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     public void updateOrderStatte(String orderNum, Integer orderState, Integer payState) {
         _orderRepository.updateOrderState(orderNum, orderState, payState);
     }
-
-   public String back() throws Exception{
-
-       String reuqestXml = "";
-       KeyStore keyStore  = KeyStore.getInstance("PKCS12");
-       FileInputStream instream = new FileInputStream(new File("D:/apiclient_cert.p12"));//放退款证书的路径
-       try {
-           keyStore.load(instream, "你的微信支付商户号".toCharArray());
-       } finally {
-           instream.close();
-       }
-
-       SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, "你的微信支付商户号".toCharArray()).build();
-       SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
-               sslcontext,
-               new String[] { "TLSv1" },
-               null,
-               SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-       CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
-       try {
-
-           HttpPost httpPost = new HttpPost("https://api.mch.weixin.qq.com/secapi/pay/refund");//退款接口
-
-           System.out.println("executing request" + httpPost.getRequestLine());
-           StringEntity  reqEntity  = new StringEntity(reuqestXml);
-           // 设置类型
-           reqEntity.setContentType("application/x-www-form-urlencoded");
-           httpPost.setEntity(reqEntity);
-           CloseableHttpResponse response = httpclient.execute(httpPost);
-           try {
-               HttpEntity entity = response.getEntity();
-
-               System.out.println("----------------------------------------");
-               System.out.println(response.getStatusLine());
-               if (entity != null) {
-                   System.out.println("Response content length: " + entity.getContentLength());
-                   BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(),"UTF-8"));
-                   String text;
-                   while ((text = bufferedReader.readLine()) != null) {
-                       System.out.println(text);
-                   }
-
-               }
-               EntityUtils.consume(entity);
-           } finally {
-               response.close();
-           }
-       } finally {
-           httpclient.close();
-       }
-       return  "";
-   }
-
     /*
         * 微信退款功能
         * */
@@ -245,10 +192,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
         packageParams.put("appid", appid);
         packageParams.put("mch_id", mch_id);
-        packageParams.put("sub_mch_id", mch_id);
         packageParams.put("nonce_str", nonce_str);
-        packageParams.put("refund_desc", "商品已售完");  //（调整为自己的名称）
         packageParams.put("out_trade_no", out_trade_no);
+        packageParams.put("out_refund_no", input.getDeviceId()+""+System.currentTimeMillis());
+    //    packageParams.put("refund_desc", 111);  //（调整为自己的名称）
         packageParams.put("total_fee", input.getPrice().toString()); //价格的单位为分
         packageParams.put("refund_fee", input.getPrice().toString());
         packageParams.put("notify_url", notify_url);
@@ -256,11 +203,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         packageParams.put("sign", sign);
 
         String requestXML = PayToolUtil.getRequestXml(packageParams);
-        System.out.println("请求参数" + requestXML);
-        String resXml = HttpUtil.postData(PayConfig.R_Back_Url, requestXML);
-        System.out.println("退款结果" + resXml);
-        //  Map map = XMLUtil4jdom.doXMLParse(resXml);
-        //  String urlCode = (String) map.get("code_url");
+        String resXml =HttpUtil.back(requestXML,p);
         return resXml;
     }
 

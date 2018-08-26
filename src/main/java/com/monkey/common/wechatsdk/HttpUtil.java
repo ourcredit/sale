@@ -1,11 +1,21 @@
 package com.monkey.common.wechatsdk;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import com.monkey.core.entity.Payfor;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.EntityUtils;
+
+import javax.net.ssl.SSLContext;
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.KeyStore;
 
 /**
  * http工具类，负责发起post请求并获取的返回
@@ -54,6 +64,50 @@ public class HttpUtil {
             }
         }
         return null;
+    }
+
+    public static String back(String xml,Payfor payfor) throws Exception{
+        String result="";
+        KeyStore keyStore  = KeyStore.getInstance("PKCS12");
+        if(payfor.getCardUrl().isEmpty())return  result;
+        FileInputStream instream = new FileInputStream(new File(payfor.getCardUrl()));//放退款证书的路径
+        try {
+            keyStore.load(instream, payfor.getWechatpayAgent().toCharArray());
+        } finally {
+            instream.close();
+        }
+        SSLContext sslcontext = SSLContexts.custom().loadKeyMaterial(keyStore, payfor.getWechatpayAgent().toCharArray()).build();
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+                sslcontext,
+                new String[] { "TLSv1" },
+                null,
+                SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+        CloseableHttpClient httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
+        try {
+            //,
+            HttpPost httpPost = new HttpPost(PayConfig.R_Back_Url);//退款接口
+            StringEntity reqEntity  = new StringEntity(xml);
+            // 设置类型
+            reqEntity.setContentType("application/x-www-form-urlencoded");
+            httpPost.setEntity(reqEntity);
+            CloseableHttpResponse response = httpclient.execute(httpPost);
+            try {
+                HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(entity.getContent(),"UTF-8"));
+                    String text;
+                    while ((text = bufferedReader.readLine()) != null) {
+                        result+=text;
+                    }
+                }
+                EntityUtils.consume(entity);
+            } finally {
+                response.close();
+            }
+        } finally {
+            httpclient.close();
+        }
+        return  result;
     }
 
 }
