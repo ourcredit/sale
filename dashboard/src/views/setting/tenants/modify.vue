@@ -39,8 +39,8 @@ export default class CreateTenant extends AbpBase {
   save() {
     (this.$refs.userForm as any).validate(async (valid: boolean) => {
       if (valid) {
-        debugger;
-        let type =this.tenant&&this.tenant.id?"tenant/update":"tenant/insert";
+        let type =
+          this.tenant && this.tenant.id ? "tenant/update" : "tenant/insert";
         await this.$store.dispatch({
           type: type,
           data: this.tenant

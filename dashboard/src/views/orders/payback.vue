@@ -77,7 +77,7 @@ export default class Orders extends AbpBase {
     list: this.hasPermission("order:list")
   };
   get cates() {
-    return this.$store.state.product.productCate;
+    return this.$store.state.device.deviceCate;
   }
   ModalShow: boolean = false;
   columns: Array<any> = [

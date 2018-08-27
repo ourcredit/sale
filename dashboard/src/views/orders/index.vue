@@ -82,7 +82,7 @@ export default class Orders extends AbpBase {
     first: this.hasPermission("order:first")
   };
   get cates() {
-    return this.$store.state.product.productCate;
+    return this.$store.state.device.deviceCate;
   }
   get canBack() {
     return this.$store.state.session.canBack;

@@ -2,7 +2,7 @@
   <div>
     <Row>
       <Col span="5">
-        <OrgTree @complete="init" ></OrgTree>
+        <OrgTree :state="true" @complete="init" ></OrgTree>
       </Col>
       <Col span="19">
       <Card dis-hover>

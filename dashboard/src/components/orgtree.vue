@@ -1,6 +1,6 @@
 <template>
   <Card dis-hover>
-    <ButtonGroup >
+    <ButtonGroup v-if="state" >
         <Button @click="add" type="ghost" icon="plus"></Button>
         <Button @click="modify" type="ghost" icon="edit"></Button>
         <Button @click="del" type="ghost" icon="close"></Button>
@@ -30,6 +30,11 @@ export default class OrgTree extends AbpBase {
   constructor() {
     super();
   }
+  @Prop({
+    type: Boolean,
+    default: false
+  })
+  state: Boolean;
   modifyShow: boolean = false;
   async created() {
     this.init();
@@ -67,8 +72,12 @@ export default class OrgTree extends AbpBase {
   select(opt) {
     var temp = opt[0];
     if (temp) {
-      this.$store.commit("device/setTree", temp.id);
-      this.$store.commit("device/setCurrent", temp);
+      if (temp.title == "未分配设备") {
+        this.$store.commit("device/setTree", null);
+      } else {
+        this.$store.commit("device/setTree", temp.id);
+        this.$store.commit("device/setCurrent", temp);
+      }
     } else {
       this.$store.commit("device/setTree", null);
     }
