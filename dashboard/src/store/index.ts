@@ -14,6 +14,7 @@ import product from "@/store/modules/product";
 import tenant from "@/store/modules/tenant";
 import order from "@/store/modules/order";
 import dash from "@/store/modules/dash";
+import category from "@/store/modules/category";
 const store: any = new Vuex.Store({
   state: {
     //
@@ -35,7 +36,8 @@ const store: any = new Vuex.Store({
     product,
     tenant,
     order,
-    dash
+    dash,
+    category
   }
 });
 

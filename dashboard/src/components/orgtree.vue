@@ -1,8 +1,10 @@
 <template>
   <Card dis-hover>
-    <Button icon="ios-add" type="primary" size="large" @click="add" class="toolbar-btn">+</Button>
-    <Button icon="ios-add" type="primary" size="large" @click="modify" class="toolbar-btn">-</Button>
-    <Button icon="ios-add" type="primary" size="large" @click="del" class="toolbar-btn">x</Button>
+    <ButtonGroup >
+        <Button @click="add" type="ghost" icon="plus"></Button>
+        <Button @click="modify" type="ghost" icon="edit"></Button>
+        <Button @click="del" type="ghost" icon="close"></Button>
+    </ButtonGroup>
     <div class="page-body">
       <Tree @on-select-change="select" :data="tree" ></Tree>
     </div>

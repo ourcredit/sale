@@ -1,8 +1,13 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.enums.IdType;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +26,7 @@ public class Category extends Model<Category> {
     /**
      * 主键id
      */
+    @TableId(value = "id", type = IdType.UUID)
     private String id;
     /**
      * 分类名
@@ -29,10 +35,12 @@ public class Category extends Model<Category> {
     /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private Date creationTime;
     /**
      * 创建人id
      */
+    @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
     /**
      * 租户id

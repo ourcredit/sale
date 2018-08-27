@@ -11,11 +11,24 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 26/08/2018 20:05:43
+ Date: 27/08/2018 22:00:37
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for sale_category
+-- ----------------------------
+DROP TABLE IF EXISTS `sale_category`;
+CREATE TABLE `sale_category`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类名',
+  `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
+  `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sale_device
@@ -127,6 +140,7 @@ CREATE TABLE `sale_order`  (
   `deviceType` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备类型',
   `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '点位名',
   `payType` int(10) NULL DEFAULT NULL COMMENT '支付类型',
+  `backNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退款单号',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -205,7 +219,7 @@ CREATE TABLE `sale_role`  (
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
   PRIMARY KEY (`id`, `roleName`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT =1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for sale_rolemenu

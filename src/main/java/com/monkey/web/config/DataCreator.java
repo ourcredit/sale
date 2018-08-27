@@ -2,6 +2,7 @@ package com.monkey.web.config;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.monkey.application.Controls.ITenantService;
+import com.monkey.application.Device.ITreeService;
 import com.monkey.application.Menus.IMenuService;
 import com.monkey.application.Menus.IRoleMenuService;
 import com.monkey.application.Controls.IRoleService;
@@ -34,6 +35,8 @@ public class DataCreator implements CommandLineRunner {
     IUserRoleService _userRoleService;
     @Autowired
     IRoleMenuService _roleMenuService;
+    @Autowired
+    ITreeService _treeService;
 
     /**
      * 初始化数据结构
@@ -42,9 +45,18 @@ public class DataCreator implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         String r = env.getProperty("isInitData");
         if (r.equals("true")) {
+            createDefaultTree();
             createDefaultTenant();
             createUserRoles();
             createRoleMenus();
+        }
+    }
+    public  void  createDefaultTree(){
+        EntityWrapper<Tree> ew = new EntityWrapper<>();
+        ew.eq("name","未分配设备");
+        Tree  t = _treeService.selectOne(ew);
+        if(t==null){
+            _treeService.insert(new Tree("未分配设备",null));
         }
     }
     public void  createDefaultTenant(){

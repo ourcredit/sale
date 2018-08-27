@@ -6,20 +6,19 @@ import java.util.List;
 
 public interface InitConst {
     public static class _defaultTenant {
-        public static final String admin = "default";
+        public static final String admin = "dizhushuomingzichanganquan";
     }
 
     public static class _defaultUser {
         public static final String admin = "admin";
         public static final String def = "user";
-        public static final String defaultPassword = "1234567";
+        public static final String defaultPassword = "Welcome!@#";
     }
 
     public static class _defaultRole {
         public static final String admin = "admin";
         public static final String def = "default";
     }
-
     public static class _menu {
         public static List<MenuInfo> menuList = new ArrayList<MenuInfo>() {{
             add(new MenuInfo("控制台", PermissionConst._dashboard.list, "/dashboard", 1, null));
@@ -90,6 +89,12 @@ public interface InitConst {
                     add(new MenuInfo("批量删除用户", PermissionConst._system._user.batch, "", 2, null));
                     add(new MenuInfo("获取详情", PermissionConst._system._user.first, "", 2, null));
                 }}));
+                add(new MenuInfo("分类管理", PermissionConst._system._category.list, "/system/user", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑分类", PermissionConst._system._category.modify, "", 2, null));
+                    add(new MenuInfo("删除分类", PermissionConst._system._category.delete, "", 2, null));
+                    add(new MenuInfo("批量删除分类", PermissionConst._system._category.batch, "", 2, null));
+                    add(new MenuInfo("获取分类", PermissionConst._system._category.first, "", 2, null));
+                }}));
                 add(new MenuInfo("角色管理", PermissionConst._system._role.list, "/system/role", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("编辑角色", PermissionConst._system._role.modify, "", 2, null));
                     add(new MenuInfo("删除角色", PermissionConst._system._role.delete, "", 2, null));
@@ -118,7 +123,6 @@ public interface InitConst {
                 Url = url;
                 Children = childs;
             }
-
             public String Name;
             public String Code;
             public Integer Type;

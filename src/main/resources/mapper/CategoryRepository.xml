@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.monkey.mapper.CategoryRepository">
+<mapper namespace="com.monkey.core.mapper.CategoryRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.entity.Category">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Category">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="creationTime" property="creationTime" />

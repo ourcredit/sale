@@ -221,6 +221,13 @@ export const appRouters: Array<any> = [
         component: () => System.import("../views/setting/role/role.vue")
       },
       {
+        path: "category",
+        permission: "category:list",
+        meta: { title: "商品分类管理" },
+        name: "category",
+        component: () => System.import("../views/setting/category/index.vue")
+      },
+      {
         path: "tenant",
          permission: "tenant:list",
         meta: { title: "运营商管理" },

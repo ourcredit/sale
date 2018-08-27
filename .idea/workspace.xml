@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="" />
+    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/CategoryServiceImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/ICategoryService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Category.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/CategoryRepository.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mapper/CategoryRepository.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/components/orgtree.vue" afterPath="$PROJECT_DIR$/dashboard/src/components/orgtree.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/store/index.ts" afterPath="$PROJECT_DIR$/dashboard/src/store/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init.sql" afterPath="$PROJECT_DIR$/init.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MpGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MpGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,130 +29,106 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java">
+      <file leaf-file-name="CategoryController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="175" column="33" lean-forward="false" selection-start-line="175" selection-start-column="33" selection-end-line="175" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#weixinPay#0;class#OrderServiceImpl#0" expanded="false" />
-                <element signature="e#8144#8160#0" expanded="true" />
-                <element signature="method#getDayKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
-                <element signature="method#getKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
-                <element signature="method#getMonthKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HttpUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/HttpUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="90" column="74" lean-forward="true" selection-start-line="90" selection-start-column="74" selection-end-line="90" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#postData#1;class#HttpUtil#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="85">
+              <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderRepository.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml">
+      <file leaf-file-name="application-dev.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+            <state relative-caret-position="323">
+              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TreeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/ProductController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="42" column="5" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="42" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="49" column="30" lean-forward="false" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
               <folding>
-                <element signature="e#1849#1853#0" expanded="true" />
-                <element signature="e#5585#5589#0" expanded="true" />
-                <marker date="1535293801533" expanded="true" signature="1520:1835" ph="update sale_... " />
-                <marker date="1535293801533" expanded="true" signature="1520:1848" ph="update sale_... " />
-                <marker date="1535293801533" expanded="true" signature="1520:1855" ph="update sale_... " />
-                <marker date="1535293801533" expanded="true" signature="1982:3242" ph="SELECT SUM( " />
-                <marker date="1535293801533" expanded="true" signature="3373:3902" ph="SELECT DATE_... sale_order" />
-                <marker date="1535293801533" expanded="true" signature="4032:4561" ph="SELECT DATE_... " />
-                <marker date="1535293801533" expanded="true" signature="4693:5122" ph="select point... sale_order" />
-                <marker date="1535293801533" expanded="true" signature="5250:5665" ph="SELECT payTy... " />
-                <marker date="1535293801533" expanded="true" signature="5764:5853" ph="SELECT * FRO... sale_payfor" />
+                <element signature="method#createUserRoles#0;class#DataCreator#0" expanded="false" />
+                <element signature="method#createRoleMenus#0;class#DataCreator#0" expanded="false" />
+                <element signature="method#insertMenu#0;class#DataCreator#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PayToolUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/PayToolUtil.java">
+      <file leaf-file-name="Tree.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="24" column="11" lean-forward="false" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
-              <caret line="10" column="24" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="24" />
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NotifyController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java">
+      <file leaf-file-name="application-prod.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-prod.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="177" column="17" lean-forward="true" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
-              <folding>
-                <element signature="method#weixin_back#0;class#NotifyController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MybatisPlusConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="108" column="79" lean-forward="true" selection-start-line="108" selection-start-column="79" selection-end-line="108" selection-end-column="79" />
+            <state relative-caret-position="323">
+              <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java">
+      <file leaf-file-name="sale.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Desktop/sale.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="34" column="10" lean-forward="false" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IOrderService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IOrderService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+            <state relative-caret-position="-95">
+              <caret line="285" column="36" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CipherTextUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/util/CipherTextUtil.java">
+      <file leaf-file-name="init.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/init.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="199">
+              <caret line="295" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -158,11 +151,13 @@
       <find>order</find>
       <find>saveFile</find>
       <find>md5</find>
+      <find>_Category</find>
     </findStrings>
     <replaceStrings>
       <replace>机构</replace>
       <replace>商品</replace>
       <replace>订单</replace>
+      <replace>_category</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -176,18 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/XMLUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/WeChatPay.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/XMLUtil4jdom.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/PayToolUtil.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/QrCodeUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/ProductRepository.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/IDeviceService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/ProductDto.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/DeviceRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/DeviceServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/ProductInput.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/DeviceRepository.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Product.java" />
@@ -212,8 +195,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/util/FileUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/UserOutPut.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/UserController.java" />
-        <option value="$USER_HOME$/Desktop/sale.sql" />
-        <option value="$PROJECT_DIR$/init.sql" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/HttpUtil.java" />
         <option value="$USER_HOME$/Desktop/nohup.out" />
@@ -227,6 +208,20 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/MpGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/CategoryRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/CategoryRepository.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/ICategoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Device/CategoryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Category.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
+        <option value="$USER_HOME$/Desktop/sale.sql" />
+        <option value="$PROJECT_DIR$/init.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config/application-prod.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java" />
       </list>
     </option>
   </component>
@@ -281,6 +276,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -313,25 +312,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="monkey" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sale" type="b2602c69:ProjectViewProjectNode" />
@@ -376,16 +356,6 @@
               <item name="sale" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="shiro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -400,10 +370,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,11 +388,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\projects\sale\src\main\resources\mapper" />
-      <recent name="D:\projects\sale\src\main\java\com\monkey\core\entity" />
-      <recent name="D:\projects\sale\src\main\java\com\monkey\web\controller" />
-      <recent name="D:\projects\sale\src\main\java\com\monkey\application\Payfor" />
-      <recent name="D:\projects\sale\src\main\java\com\monkey\core\mapper" />
+      <recent name="E:\projects\sale\src\main\java\com\monkey\web\controller" />
+      <recent name="E:\projects\sale\src\main\java\com\monkey\application\Device" />
+      <recent name="E:\projects\sale\src\main\resources\mapper" />
+      <recent name="E:\projects\sale\src\main\java\com\monkey\core\mapper" />
+      <recent name="E:\projects\sale\src\main\java\com\monkey\core\entity" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -549,72 +515,50 @@
       <workItem from="1534942904447" duration="2883000" />
       <workItem from="1535241500289" duration="16898000" />
       <workItem from="1535280996360" duration="2939000" />
+      <workItem from="1535376420756" duration="3004000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29841000" />
+    <option name="totallyTimeSpent" value="32845000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="设计师" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="层次结构" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27415967" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="消息" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="消息" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3067227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4947479" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="设计师" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="设计师" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="调试" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27415967" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="消息" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32983193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4947479" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -674,8 +618,16 @@
           <properties />
           <option name="timeStamp" value="29" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
+          <line>121</line>
+          <properties class="com.monkey.web.config.DataCreator" method="insertMenu">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="36" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -700,142 +652,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="51" column="33" lean-forward="false" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/OrderStaticialDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/TodayStatical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/SalePercentDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/PayState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="43" column="27" lean-forward="true" selection-start-line="43" selection-start-column="27" selection-end-line="43" selection-end-column="27" />
-          <folding>
-            <element signature="e#368#369#0" expanded="false" />
-            <element signature="e#419#420#0" expanded="false" />
-            <element signature="e#756#757#0" expanded="false" />
-            <element signature="e#807#808#0" expanded="false" />
-            <element signature="e#1108#1109#0" expanded="false" />
-            <element signature="e#1159#1160#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/PayConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/util/DateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis/3.4.6/mybatis-3.4.6-sources.jar!/org/apache/ibatis/binding/MapperProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/RequestDateDto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-prod.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6.jar!/org/apache/http/conn/ssl/SSLConnectionSocketFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="51" column="45" lean-forward="false" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/constant.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Payfor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="39" column="22" lean-forward="false" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="40" column="4" lean-forward="false" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.3.17.RELEASE/spring-core-4.3.17.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1729">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.17.RELEASE/spring-aop-4.3.17.RELEASE-sources.jar!/org/springframework/aop/aspectj/AbstractAspectJAdvice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10754">
-          <caret line="634" column="0" lean-forward="false" selection-start-line="634" selection-start-column="0" selection-end-line="634" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.17.RELEASE/spring-aop-4.3.17.RELEASE-sources.jar!/org/springframework/aop/interceptor/ExposeInvocationInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1330">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.17.RELEASE/spring-aop-4.3.17.RELEASE-sources.jar!/org/springframework/aop/framework/CglibAopProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11457">
-          <caret line="679" column="0" lean-forward="false" selection-start-line="679" selection-start-column="0" selection-end-line="679" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/util/FileUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2603">
@@ -854,16 +670,9 @@
         <state relative-caret-position="295">
           <caret line="62" column="5" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#delete#0;class#FileController#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -938,28 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/sale.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="271" column="36" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="275" column="31" lean-forward="true" selection-start-line="275" selection-start-column="31" selection-end-line="275" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-190">
@@ -972,10 +759,10 @@
         <state relative-caret-position="323">
           <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="19" selection-end-line="45" selection-end-column="26" />
           <folding>
-            <element signature="e#4713#4714#0" expanded="true" />
-            <element signature="e#4743#4744#0" expanded="true" />
-            <element signature="e#4789#4790#0" expanded="true" />
-            <element signature="e#4827#4828#0" expanded="true" />
+            <element signature="e#4713#4714#0" expanded="false" />
+            <element signature="e#4743#4744#0" expanded="false" />
+            <element signature="e#4789#4790#0" expanded="false" />
+            <element signature="e#4827#4828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1028,38 +815,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/util/CipherTextUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="741">
           <caret line="45" column="26" lean-forward="false" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="34" column="10" lean-forward="false" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MybatisPlusConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="108" column="79" lean-forward="true" selection-start-line="108" selection-start-column="79" selection-end-line="108" selection-end-column="79" />
+        <state relative-caret-position="1577">
+          <caret line="108" column="79" lean-forward="false" selection-start-line="108" selection-start-column="79" selection-end-line="108" selection-end-column="79" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/HttpUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="90" column="74" lean-forward="true" selection-start-line="90" selection-start-column="74" selection-end-line="90" selection-end-column="74" />
+        <state relative-caret-position="1007">
+          <caret line="90" column="74" lean-forward="false" selection-start-line="90" selection-start-column="74" selection-end-line="90" selection-end-column="74" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#postData#1;class#HttpUtil#0" expanded="false" />
           </folding>
         </state>
@@ -1067,9 +844,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="177" column="17" lean-forward="true" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
+        <state relative-caret-position="418">
+          <caret line="178" column="0" lean-forward="true" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
           <folding>
+            <element signature="e#1177#1193#0" expanded="false" />
             <element signature="method#weixin_back#0;class#NotifyController#0" expanded="false" />
           </folding>
         </state>
@@ -1077,7 +855,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IOrderService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="361">
           <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
           <folding />
         </state>
@@ -1085,12 +863,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
+        <state relative-caret-position="0">
           <caret line="175" column="33" lean-forward="false" selection-start-line="175" selection-start-column="33" selection-end-line="175" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#weixinPay#0;class#OrderServiceImpl#0" expanded="false" />
-            <element signature="e#8144#8160#0" expanded="true" />
             <element signature="method#getDayKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
             <element signature="method#getKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
             <element signature="method#getMonthKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
@@ -1106,10 +883,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="105" column="5" lean-forward="true" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="50" column="35" lean-forward="true" selection-start-line="50" selection-start-column="35" selection-end-line="50" selection-end-column="35" />
+        <state relative-caret-position="-367">
+          <caret line="145" column="17" lean-forward="true" selection-start-line="145" selection-start-column="17" selection-end-line="145" selection-end-column="17" />
           <folding>
             <element signature="e#1849#1853#0" expanded="true" />
             <element signature="e#5585#5589#0" expanded="true" />
@@ -1123,6 +910,194 @@
             <marker date="1535293801533" expanded="true" signature="5250:5665" ph="SELECT payTy... " />
             <marker date="1535293801533" expanded="true" signature="5764:5853" ph="SELECT * FRO... sale_payfor" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-support/2.2.0/mybatis-plus-support-2.2.0-sources.jar!/com/baomidou/mybatisplus/service/IService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="124" column="12" lean-forward="false" selection-start-line="124" selection-start-column="12" selection-end-line="124" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/DeviceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="40" column="31" lean-forward="true" selection-start-line="40" selection-start-column="31" selection-end-line="40" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/MpGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="70" column="23" lean-forward="true" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/CategoryRepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="55" lean-forward="false" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/ICategoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="14" column="47" lean-forward="false" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Device/CategoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="94" column="56" lean-forward="false" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="29" column="2" lean-forward="false" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/DeviceProduct.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="55" column="2" lean-forward="false" selection-start-line="55" selection-start-column="2" selection-end-line="64" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/CategoryRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="49" lean-forward="false" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/sale.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="285" column="36" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="24" column="11" lean-forward="false" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="49" column="30" lean-forward="false" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+          <folding>
+            <element signature="method#createUserRoles#0;class#DataCreator#0" expanded="false" />
+            <element signature="method#createRoleMenus#0;class#DataCreator#0" expanded="false" />
+            <element signature="method#insertMenu#0;class#DataCreator#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="295" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="72" column="5" lean-forward="true" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/ProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="42" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="45" column="50" lean-forward="true" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-dev.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-prod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="32" column="46" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

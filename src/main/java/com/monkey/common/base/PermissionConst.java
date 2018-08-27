@@ -87,6 +87,13 @@ public interface PermissionConst {
 
     public  static class  _system{
         public static  final  String list="system:show";
+        public  static class  _category{
+            public static  final  String list="category:list";
+            public static  final  String modify="category:modify";
+            public static  final  String delete="category:delete";
+            public static  final  String batch="category:batch";
+            public static  final  String first="category:first";
+        }
         public  static class  _user{
             public static  final  String list="user:list";
             public static  final  String modify="user:modify";
