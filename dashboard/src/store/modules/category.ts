@@ -31,6 +31,16 @@ class CategoryModule extends ListModule<ICategoryState, any, Category> {
       context.state.totalCount = page.total;
       context.state.list = page.records;
     },
+    async all(
+      context: ActionContext<ICategoryState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      let reponse: any = await Ajax.post("/api/category/all");
+      context.state.loading = false;
+      let page: Array<any> = reponse.data as Array<Category>;
+      context.state.list = page;
+    },
     async modify(
       context: ActionContext<ICategoryState, any>,
       payload: any
