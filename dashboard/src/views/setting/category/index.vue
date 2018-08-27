@@ -17,7 +17,7 @@
                     </Row>
                 </Form>
                 <div class="margin-top-10">
-                    <SaleTable ref="table" :filters="filters" :type="'point'" :columns="columns"></SaleTable>
+                    <SaleTable ref="table" :filters="filters" :type="'category'" :columns="columns"></SaleTable>
                 </div>
             </div>
         </Card>
@@ -123,7 +123,7 @@ export default class Users extends AbpBase {
                 click: () => {
                   this.$store.dispatch({
                     type: "category/get",
-                    data: params.row
+                    data: params.row.id
                   });
                   this.Modify();
                 }

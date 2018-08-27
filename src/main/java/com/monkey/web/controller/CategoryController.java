@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
+import scala.util.parsing.combinator.testing.Str;
 
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class CategoryController {
     @ApiOperation(value = "获取分类详情",notes = "分类列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._system._category.first})
-    public PublicResult<Category> Category(@PathVariable Integer id) throws Exception{
+    public PublicResult<Category> Category(@PathVariable String id) throws Exception{
         Category m=_categoryService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
@@ -70,14 +71,14 @@ public class CategoryController {
     @ApiOperation(value = "删除分类",notes = "分类列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._system._category.delete})
-    public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
+    public PublicResult<Object> delete(@PathVariable String id) throws Exception{
         Boolean r=_categoryService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
     @ApiOperation(value = "批量删除分类",notes = "分类列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._system._category.batch})
-    public PublicResult<Object> batchdelete(@RequestBody List<Integer> ids) throws Exception{
+    public PublicResult<Object> batchdelete(@RequestBody List<String> ids) throws Exception{
         Boolean r=_categoryService.deleteBatchIds(ids);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }

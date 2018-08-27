@@ -47,7 +47,7 @@ public class LogController {
     @ApiOperation(value = "获取日志详情",notes = "日志列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._watch._actionlog.first})
-    public PublicResult<Object> log(@PathVariable Integer id) throws Exception{
+    public PublicResult<Object> log(@PathVariable String id) throws Exception{
         Log l=_logService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, l);
     }
