@@ -87,7 +87,10 @@ export default class ProductC extends AbpBase {
     },
     {
       title: "价格",
-      key: "price"
+      key: "price",
+      render: (h: any, params: any) => {
+        return h("span", params.row.price * 1.0 / 100);
+      }
     },
     {
       title: "创建时间",

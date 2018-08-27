@@ -12,7 +12,7 @@
             <Row>
                 <Col span="5">
                 <Card dis-hover>
-                    总收入:{{today.sale}}元
+                    总收入:{{today.sale==null?0.0:(today.sale*1.0/100)}}元
                 </Card>
                 </Col>
                 <Col span="5">
@@ -75,7 +75,7 @@
          <Row>
                 <Col span="5">
                 <Card dis-hover>
-                    总收入:{{month.sale}}元
+                    总收入:{{month.sale==null?0.0:month.sale*1.0/100}}元
                 </Card>
                 </Col>
                 <Col span="5">

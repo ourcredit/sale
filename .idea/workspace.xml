@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/orders/index.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/orders/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/orders/payback.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/orders/payback.vue" />
-    </list>
+    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -556,7 +553,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29743000" />
+    <option name="totallyTimeSpent" value="29841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />

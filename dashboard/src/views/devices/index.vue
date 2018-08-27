@@ -1,10 +1,12 @@
 <template>
   <div>
     <Row>
-      <Col span="4">
-       <OrgTree @complete="init"></OrgTree>
+      <Col span="5">
+       <Card dis-hover>
+           <OrgTree @complete="init"></OrgTree>
+      </Card>
       </Col>
-      <Col span="20">
+      <Col span="19">
       <Card dis-hover>
         <div class="page-body">
           <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
@@ -77,6 +79,7 @@ export default class deviceC extends AbpBase {
     return this.$store.state.device.deviceCate;
   }
   ModalShow: boolean = false;
+  orgShow: boolean = false;
   get tree() {
     return this.$store.state.device.tree;
   }

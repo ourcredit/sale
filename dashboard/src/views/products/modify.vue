@@ -75,6 +75,7 @@ export default class CreateDevice extends AbpBase {
     (this.$refs.productForm as any).validate(async (valid: boolean) => {
       if (valid) {
         this.product.imageUrl = this.path;
+        this.product.price = this.product.price * 1.0 / 100;
         await this.$store.dispatch({
           type: "product/modify",
           data: this.product

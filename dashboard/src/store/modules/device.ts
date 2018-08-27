@@ -14,8 +14,9 @@ interface IDeviceState extends IListState<Device> {
   payfor: any;
   tree: Array<any>;
   currentOrg: Number;
+  current: any;
 }
-class PointMutations extends ListMutations<Device> {}
+class PointMutations extends ListMutations<Device> { }
 class PointModule extends ListModule<IDeviceState, any, Device> {
   state = {
     totalCount: 0,
@@ -28,7 +29,8 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     deviceCate: ["格子机", "售货机", "抓娃娃机", "咖啡机"],
     payfor: new Object(),
     tree: new Array<any>(),
-    currentOrg: null
+    currentOrg: null,
+    current: {}
   };
   actions = {
     async getAll(
@@ -75,6 +77,19 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
       let list: Array<any> = reponse.data as Array<any>;
       context.state.tree = util.genderMenu(list, "parentId", null);
     },
+    async modifyOrg(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      await Ajax.put("/api/tree", payload.data);
+    },
+    async delOrg(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.delete("/api/tree/" + payload.data);
+    },
     async delete(
       context: ActionContext<IDeviceState, any>,
       payload: any
@@ -114,6 +129,9 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
     },
     setTree(state: IDeviceState, treeId: Number): void {
       state.currentOrg = treeId;
+    },
+    setCurrent(state: IDeviceState, model: any) {
+      state.current = { id: model.id, name: model.title, parentId: model.parentId };
     }
   };
 }

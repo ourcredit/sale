@@ -120,7 +120,10 @@ export default class Orders extends AbpBase {
     },
     {
       title: "金额",
-      key: "price"
+      key: "price",
+      render: (h: any, params: any) => {
+        return h("span", params.row.price * 1.0 / 100);
+      }
     },
     {
       title: "状态",

@@ -45,7 +45,7 @@ class DashModule extends ListModule<IDeviceState, any, any> {
       context.state.todaySale = r.todaySale;
       context.state.monthSale = r.monthSale;
 
-      if (r.payType) {
+      if (r.payType && r.payType.length == 2) {
         let t: Array<any> = new Array<any>();
         let total: Number = 0;
         if (r.payType[0].time == "1") {
