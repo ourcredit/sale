@@ -25,7 +25,7 @@
         </Row>
         <FormItem label="商品类型" prop="productType">
           <Select v-model="product.productType" style="width:100%">
-            <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
+            <Option v-for="item in cates" :value="item.name" :key="item.id">{{ item.name }}</Option>
           </Select>
         </FormItem>
         <FormItem label="价格" prop="price">
@@ -59,7 +59,6 @@ export default class CreateDevice extends AbpBase {
   upload: any = {
     type: "drag",
     action: "https://service.leftins.com/api/file",
-    // action: "http://localhost:8081/api/file/pems",
     header: {
       Authorization: auth.getToken()
     }
@@ -69,13 +68,12 @@ export default class CreateDevice extends AbpBase {
     return this.$store.state.product.editProduct;
   }
   get cates() {
-    return this.$store.state.product.productCate;
+    return this.$store.state.category.list;
   }
   save() {
     (this.$refs.productForm as any).validate(async (valid: boolean) => {
       if (valid) {
         this.product.imageUrl = this.path;
-        this.product.price = this.product.price * 1.0 / 100;
         await this.$store.dispatch({
           type: "product/modify",
           data: this.product

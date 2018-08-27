@@ -15,7 +15,7 @@
               </FormItem>
               <FormItem label="商品类型:">
                 <Select clearable v-model="filters.productType" style="width:160px">
-                  <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
+                  <Option v-for="item in cates" :value="item.name" :key="item.id">{{ item.name }}</Option>
                 </Select>
               </FormItem>
               <FormItem label="是否售卖:">
@@ -64,7 +64,7 @@ export default class ProductC extends AbpBase {
     batch: this.hasPermission("product:batch")
   };
   get cates() {
-    return this.$store.state.product.productCate;
+    return this.$store.state.category.list;
   }
   ModalShow: boolean = false;
   columns: Array<any> = [
@@ -193,6 +193,11 @@ export default class ProductC extends AbpBase {
   Modify() {
     this.ModalShow = true;
   }
-  async created() {}
+  async created() {
+    this.$store.dispatch({
+      type: "category/all",
+      data: {}
+    });
+  }
 }
 </script>
