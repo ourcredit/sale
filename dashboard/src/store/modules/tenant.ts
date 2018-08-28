@@ -16,7 +16,7 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
     pageSize: 10,
     list: new Array<Tenant>(),
     loading: false,
-    editTenant: new Tenant()
+    editTenant: null
   };
   actions = {
     async getAll(
