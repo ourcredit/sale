@@ -1,7 +1,7 @@
 <template>
     <div>
         <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-            <Form ref="userForm" label-position="top" :rules="tenantRule" :model="tenant">
+            <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="tenant">
                         <FormItem label="租户名" prop="name">
                             <Input v-model="tenant.name" :maxlength="32" :minlength="2"/>
                         </FormItem>
@@ -34,18 +34,20 @@ export default class CreateTenant extends AbpBase {
   value: boolean;
   get tenant() {
     var u = this.$store.state.tenant.editTenant;
+    console.log(u);
     return u;
   }
   save() {
-    (this.$refs.userForm as any).validate(async (valid: boolean) => {
+    (this.$refs.tenantForm as any).validate(async (valid: boolean) => {
       if (valid) {
+        console.log(this.tenant);
         let type =
           this.tenant && this.tenant.id ? "tenant/update" : "tenant/insert";
         await this.$store.dispatch({
           type: type,
           data: this.tenant
         });
-        (this.$refs.userForm as any).resetFields();
+        (this.$refs.tenantForm as any).resetFields();
         this.$emit("save-success");
         this.$emit("input", false);
       }
@@ -56,7 +58,7 @@ export default class CreateTenant extends AbpBase {
     this.tenant.isActive = !!!this.tenant.isActive;
   }
   cancel() {
-    (this.$refs.userForm as any).resetFields();
+    (this.$refs.tenantForm as any).resetFields();
     this.$emit("input", false);
   }
   visibleChange(value: boolean) {

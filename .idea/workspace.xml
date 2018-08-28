@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/alipay-sdk-java-3.3.49.ALL.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IOrderService.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IOrderService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/PayConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/common/wechatsdk/PayConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/CategoryController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/OrderInput.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/OrderInput.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml" />
-    </list>
+    <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -554,12 +541,12 @@
       <workItem from="1535241500289" duration="16898000" />
       <workItem from="1535280996360" duration="2939000" />
       <workItem from="1535376420756" duration="3662000" />
-      <workItem from="1535456549778" duration="6546000" />
+      <workItem from="1535456549778" duration="6661000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40049000" />
+    <option name="totallyTimeSpent" value="40164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
