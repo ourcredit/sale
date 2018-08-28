@@ -245,9 +245,11 @@
             <artifactId>HikariCP</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
         <dependency>
-            <groupId>org.alipay</groupId>
-            <artifactId>alipay</artifactId>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.3.49.ALL</version>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>
