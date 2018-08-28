@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.monkey.core.entity.Point;
 import com.baomidou.mybatisplus.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -14,5 +16,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-07-26
  */
 public interface IPointService extends IService<Point> {
-    Page<Point> selectByAreaId(Pagination page, String name, String areaId);
+    List<Point> selectByAreaId(Pagination page, String name, String areaId);
 }

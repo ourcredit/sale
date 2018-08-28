@@ -63,8 +63,8 @@ export default class CreateDevice extends AbpBase {
   }
   save() {
     (this.$refs.deviceForm as any).validate(async (valid: boolean) => {
-      if (valid ) {
-        this.device.areaId = this.current;
+      if (valid) {
+        this.device.areaId = this.current.id;
         await this.$store.dispatch({
           type: "device/modify",
           data: this.device

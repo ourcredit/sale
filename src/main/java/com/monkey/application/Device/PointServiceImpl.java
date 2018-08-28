@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -23,7 +25,7 @@ public class PointServiceImpl extends ServiceImpl<PointRepository, Point> implem
     @Autowired
     PointRepository _pointRepository;
     @Override
-    public Page<Point> selectByAreaId(Pagination page, String name, String areaId) {
+    public List<Point> selectByAreaId(Pagination page, String name, String areaId) {
         return  _pointRepository.selectbyAreaAndName(page,name,areaId);
     }
 }

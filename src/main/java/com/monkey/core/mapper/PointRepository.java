@@ -6,6 +6,8 @@ import com.monkey.core.entity.Point;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -15,5 +17,5 @@ import org.apache.ibatis.annotations.Param;
  * @since 2018-07-26
  */
 public interface PointRepository extends BaseMapper<Point> {
-    Page<Point> selectbyAreaAndName(Pagination page, @Param("name")String name, @Param("areaId")String areaId);
+    List<Point> selectbyAreaAndName(Pagination page, @Param("name")String name, @Param("code")String code);
 }

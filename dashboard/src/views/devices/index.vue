@@ -200,7 +200,7 @@ export default class deviceC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
-    this.filters.areaId = this.current;
+    this.filters.areaId = this.current.id;
     t.getpage();
   }
   async batchDelete() {

@@ -55,7 +55,7 @@ export default class CreatePoint extends AbpBase {
   save() {
     (this.$refs.pointForm as any).validate(async (valid: boolean) => {
       if (valid) {
-        this.point.areaId = this.treeId;
+        this.point.areaId = this.treeId.id;
         if (!this.point.x || !this.point.y) {
           this.$Message.info("请先选择地图点位");
           return;

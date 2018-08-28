@@ -36,10 +36,17 @@ public class PointController {
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._pointer._point.list})
     public PublicResult<Page<Point>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
-        String name=  page.where.get("mame").toString();
-        String code=  page.where.get("code").toString();
-        Page<Point> res= _pointService.selectByAreaId(new Page<>(page.index,page.size), name,code);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, res);
+        String name= (String) page.where.get("mame");
+        String code=  (String)page.where.get("code");
+      code=  code.isEmpty()?null:code;
+        List<Point> res= _pointService.selectByAreaId(new Page<>(page.index,page.size), name,code);
+        EntityWrapper ew=new EntityWrapper();
+
+     Integer count=   _pointService.selectCount(ew);
+        Page<Point> p=new Page<>();
+        p.setRecords(res);
+        p.setTotal(count);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, p);
     }
     @ApiOperation(value = "获取点位详情",notes = "点位列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)

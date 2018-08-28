@@ -390,6 +390,7 @@ class Util {
       t.parentId = item.parentId;
       t.url = item.url;
       t.type = item.type;
+      t.code = item.levelCode;
       t.expand = true;
       if (item[key] === parentId) {
         t.children = this.genderMenu(list, key, item.id);

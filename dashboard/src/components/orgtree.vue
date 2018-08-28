@@ -46,7 +46,7 @@ export default class OrgTree extends AbpBase {
     });
   }
   add() {
-    this.$store.commit("device/setCurrent", { parentId: this.parent });
+    this.$store.commit("device/setCurrent", { parentId: this.parent.id });
     this.modifyShow = true;
   }
   modify() {
@@ -75,7 +75,7 @@ export default class OrgTree extends AbpBase {
       if (temp.title == "未分配设备") {
         this.$store.commit("device/setTree", null);
       } else {
-        this.$store.commit("device/setTree", temp.id);
+        this.$store.commit("device/setTree", temp);
         this.$store.commit("device/setCurrent", temp);
       }
     } else {

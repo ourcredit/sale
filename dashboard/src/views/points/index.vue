@@ -49,8 +49,8 @@ import Modify from "./modify.vue";
 })
 export default class PointC extends AbpBase {
   filters: any = {
-    pointName: "",
-    areaId: null
+    name: "",
+    code: ""
   };
   p: any = {
     modify: this.hasPermission("point:modify"),
@@ -163,7 +163,7 @@ export default class PointC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
-    this.filters.areaId = this.current;
+    this.filters.areaId = this.current.code;
     t.getpage();
   }
   async batchDelete() {

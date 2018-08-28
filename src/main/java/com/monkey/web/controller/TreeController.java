@@ -64,7 +64,7 @@ public class TreeController {
     public PublicResult<Object> insert(@RequestBody Tree model) throws Exception{
         EntityWrapper ew=new EntityWrapper();
         String code=null;
-        if(!model.getLevelCode().isEmpty()){
+        if(model.getLevelCode()==null||model.getLevelCode().isEmpty()){
             code = UUID.randomUUID().toString().split("-")[0];
             if(model.getParentId()!=null){
                 ew.eq("id",model.getParentId());

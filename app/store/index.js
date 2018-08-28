@@ -80,6 +80,7 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			let token = plus.storage.getItem("AuthorizationToken");
+			console.log("子注册"+token)
 			request('/api/device/register', "POST", payload, function (r) {
 				if (r.statusCode == 200 && r.data.data) {
 					state.isRegister = true;
@@ -90,8 +91,8 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			let data = {
-				"passWord": "1234567",
-				"tenantName": "default",
+				"passWord": "Welcome!@#",
+				"tenantName": "dizhushuomingzichanganquan",
 				"userName": "admin"
 			};
 			uni.request({
@@ -100,6 +101,7 @@ const store = new Vuex.Store({
 				method: "POST",
 				header: header,
 				success: function (res) {
+					console.log("登陆结果:"+JSON.stringify(res))
 					if (res.data.data) {
 						let token = res.data.data.token;
 						plus.storage.setItem("AuthorizationToken", token);
