@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 28/08/2018 19:56:33
+ Date: 28/08/2018 22:45:58
 */
 
 SET NAMES utf8mb4;
@@ -263,6 +263,7 @@ CREATE TABLE `sale_tree`  (
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `creatorUserId` int(11) NULL DEFAULT NULL COMMENT '创建人id',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  `levelCode` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '级别code',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
