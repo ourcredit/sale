@@ -24,8 +24,8 @@
               </Col>
               <Col span="6">
               <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
-              <Button class="toolbar-btn" v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
-              <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
+              <Button class="toolbar-btn"  @click="Create" icon="android-add" type="primary" size="large">添加</Button>
+              <Button  @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
               </Col>
             </Row>
           </Form>

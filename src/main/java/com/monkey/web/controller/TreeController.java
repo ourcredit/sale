@@ -4,6 +4,7 @@ package com.monkey.web.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IDeviceService;
+import com.monkey.application.Device.IPointService;
 import com.monkey.application.Device.ITreeService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.PublicResult;
@@ -35,6 +36,8 @@ public class TreeController {
     ITreeService _treeService;
     @Autowired
     IDeviceService _deviceService;
+    @Autowired
+    IPointService _pointService;
     @ApiOperation(value = "获取机构列表",notes = "机构列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
     public PublicResult<List<Tree>> Trees(@RequestBody PagedAndFilterInputDto page) throws Exception{
@@ -66,8 +69,8 @@ public class TreeController {
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception{
         EntityWrapper ew=new EntityWrapper();
         ew.eq("areaId",id);
-         Integer count=   _deviceService.selectCount(ew);
-         if(count>0)   return new PublicResult<>(PublicResultConstant.FAILED, "该机构下有设备存在无法删除");
+         Integer count=   _pointService.selectCount(ew);
+         if(count>0)   return new PublicResult<>(PublicResultConstant.FAILED, "该机构下有点位存在无法删除");
         Boolean r=_treeService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }

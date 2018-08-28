@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class DataCreator implements CommandLineRunner {
@@ -56,7 +57,7 @@ public class DataCreator implements CommandLineRunner {
         ew.eq("name","未分配设备");
         Tree  t = _treeService.selectOne(ew);
         if(t==null){
-            _treeService.insert(new Tree("未分配设备",null));
+            _treeService.insert(new Tree("未分配设备",null,null));
         }
     }
     public void  createDefaultTenant(){

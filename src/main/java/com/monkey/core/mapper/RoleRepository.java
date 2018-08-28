@@ -18,9 +18,5 @@ import java.util.List;
  */
 public interface RoleRepository extends BaseMapper<Role> {
     RoleDto selectRoleAndPermissionsById(@Param("id") Integer id);
-    /**
-     * @param deviceId
-     * @return 商品dto 类
-     */
-    List<ProductDto> selectProductsByDevice(@Param("deviceId") Integer deviceId) ;
+
 }

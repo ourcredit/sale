@@ -36,9 +36,9 @@ public class PointController {
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._pointer._point.list})
     public PublicResult<Page<Point>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
-        EntityWrapper<Point> filter = new EntityWrapper<>();
-        filter=  ComUtil.genderFilter(filter,page.where);
-        Page<Point> res= _pointService.selectPage(new Page<>(page.index,page.size), filter);
+        String name=  page.where.get("mame").toString();
+        String code=  page.where.get("code").toString();
+        Page<Point> res= _pointService.selectByAreaId(new Page<>(page.index,page.size), name,code);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取点位详情",notes = "点位列表")
@@ -48,7 +48,6 @@ public class PointController {
         Point m=_pointService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
-
     @ApiOperation(value = "添加或编辑点位",notes = "点位列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._pointer._point.modify})
@@ -71,4 +70,3 @@ public class PointController {
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
 }
-

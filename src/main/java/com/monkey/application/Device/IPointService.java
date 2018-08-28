@@ -1,5 +1,7 @@
 package com.monkey.application.Device;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.monkey.core.entity.Point;
 import com.baomidou.mybatisplus.service.IService;
 
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2018-07-26
  */
 public interface IPointService extends IService<Point> {
-
+    Page<Point> selectByAreaId(Pagination page, String name, String areaId);
 }

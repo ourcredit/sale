@@ -22,9 +22,10 @@ public class Tree extends Model<Tree> {
 
     private static final long serialVersionUID = 1L;
     public Tree(){}
-    public Tree(String name,Integer parentId){
+    public Tree(String name,Integer parentId,String code){
         this.name=name;
         this.parentId=parentId;
+        this.levelCode=code;
     }
     /**
      * key
@@ -35,6 +36,7 @@ public class Tree extends Model<Tree> {
      * 节点名
      */
     private String name;
+    private String levelCode;
     /**
      * 父级id
      */
@@ -118,5 +120,13 @@ public class Tree extends Model<Tree> {
         ", creatorUserId=" + creatorUserId +
         ", tenantId=" + tenantId +
         "}";
+    }
+
+    public String getLevelCode() {
+        return levelCode;
+    }
+
+    public void setLevelCode(String levelCode) {
+        this.levelCode = levelCode;
     }
 }

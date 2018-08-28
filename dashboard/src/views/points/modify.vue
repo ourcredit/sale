@@ -15,8 +15,10 @@
           <Input v-model="point.description" :maxlength="255"  />
         </FormItem>
         <baidu-map @ready="handler" @click="draw" :scroll-wheel-zoom="true"
-         :center="center" :zoom="15"  class="map">
-          <bm-marker :position="tempPoint" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
+         :center="point.x==null?center:{lng:point.x,lat:point.y}" :zoom="15"  class="map">
+          <bm-marker v-if="point.x!=null" :position="{lng:point.x,lat:point.y}" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
+                   </bm-marker>
+                    <bm-marker v-else :position="tempPoint" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
                    </bm-marker>
         </baidu-map>
         </Tabs>
@@ -42,7 +44,9 @@ export default class CreatePoint extends AbpBase {
   value: boolean;
   center: any = { lng: 116.404, lat: 39.915 };
   get point() {
-    return this.$store.state.point.editPoint;
+    var t = this.$store.state.point.editPoint;
+    console.log(t);
+    return t;
   }
   get treeId() {
     return this.$store.state.device.currentOrg;
@@ -50,8 +54,12 @@ export default class CreatePoint extends AbpBase {
   tempPoint: any = { lng: 116.404, lat: 39.915 };
   save() {
     (this.$refs.pointForm as any).validate(async (valid: boolean) => {
-      if (valid ) {
+      if (valid) {
         this.point.areaId = this.treeId;
+        if (!this.point.x || !this.point.y) {
+          this.$Message.info("请先选择地图点位");
+          return;
+        }
         await this.$store.dispatch({
           type: "point/modify",
           data: this.point

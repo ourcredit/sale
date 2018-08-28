@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -27,16 +28,18 @@ public class TreeServiceImpl extends ServiceImpl<TreeRepository, Tree> implement
     public void mutiInsertOrgs(List<TreeDtoInput> input) {
         EntityWrapper<Tree> ew=new EntityWrapper<>();
         _treeRepository.delete(ew);
-        insert(input,null);
+        String uuid = UUID.randomUUID().toString().split("-")[0];
+        insert(input,null,uuid);
         return;
     }
-    private  void insert(List<TreeDtoInput> input,Integer parentId){
+    private  void insert(List<TreeDtoInput> input,Integer parentId,String code){
         for (int i = 0; i < input.size(); i++) {
             TreeDtoInput m=input.get(i);
-            Tree tr=new Tree(m.name,parentId);
+            Tree tr=new Tree(m.name,parentId,code);
             _treeRepository.insert(tr);
             if(m.children.size()>0){
-                insert(m.children,tr.getId());
+                String uuid = UUID.randomUUID().toString().split("-")[0];
+                insert(m.children,tr.getId(),code+"."+uuid);
             }
         }
     }

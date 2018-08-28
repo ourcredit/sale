@@ -20,5 +20,19 @@
     <sql id="Base_Column_List">
         id, pointName, address, description, creationTime, creatorUserId, isDeleted, x, y,areaId
     </sql>
+    <select id="selectbyAreaAndName" resultType="com.monkey.core.entity.Point">
+        SELECT
+	*
+FROM
+	sale_point
+	<where>
+        <if test="name!=null">
+            pointName LIKE '%#{name}%'
+        </if>
+        <if test="areaId!=null">
+            AND areaId IN ( SELECT areaId FROM sale_tree WHERE levelCode LIKE '#{areaId}%' )
+        </if>
+    </where>
+    </select>
 
 </mapper>
