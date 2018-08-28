@@ -16,7 +16,7 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
     pageSize: 10,
     list: new Array<Tenant>(),
     loading: false,
-    editTenant: null
+    editTenant: new Tenant()
   };
   actions = {
     async getAll(
@@ -36,13 +36,13 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
       context: ActionContext<ITenantState, any>,
       payload: any
     ): Promise<void> {
-       Ajax.put("/api/tenant/update", payload.data);
+      Ajax.put("/api/tenant/update", payload.data);
     },
     async insert(
       context: ActionContext<ITenantState, any>,
       payload: any
     ): Promise<void> {
-       Ajax.put("/api/tenant/insert", payload.data);
+      Ajax.put("/api/tenant/insert", payload.data);
     },
     async delete(
       context: ActionContext<ITenantState, any>,
