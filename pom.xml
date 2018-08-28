@@ -246,6 +246,10 @@
             <version>3.2.0</version>
         </dependency>
         <dependency>
+            <groupId>org.alipay</groupId>
+            <artifactId>alipay</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>${velocity.version}</version>
@@ -274,9 +278,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <compilerArguments>
-                        <extdirs>libs</extdirs><!--指定外部lib-->
-                    </compilerArguments>
                 </configuration>
             </plugin>
         </plugins>
