@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -61,6 +62,19 @@ public class TreeController {
     @ApiOperation(value = "添加或编辑机构",notes = "机构列表")
     @RequestMapping(method = RequestMethod.PUT)
     public PublicResult<Object> insert(@RequestBody Tree model) throws Exception{
+        EntityWrapper ew=new EntityWrapper();
+        String code=null;
+        if(!model.getLevelCode().isEmpty()){
+            code = UUID.randomUUID().toString().split("-")[0];
+            if(model.getParentId()!=null){
+                ew.eq("id",model.getParentId());
+             Tree parent=   _treeService.selectOne(ew);
+             if(parent!=null    ){
+                 code=parent.getLevelCode()+"."+code;
+             }
+             model.setLevelCode(code);
+            }
+        }
         Boolean r=_treeService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
