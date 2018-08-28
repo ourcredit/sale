@@ -59,19 +59,22 @@ public class OrderController {
         try {
             Order r = _orderService.insertOrder(model);
             if (!r.getId().isEmpty()) {
-                String code = _orderService.weixinPay(r);
+                String code = "";
+                if (model.isWechatOrder) {
+                    code = _orderService.weixinPay(r);
+                } else {
+                    code = _orderService.aliPay(r);
+                }
                 if (!code.isEmpty()) {
                     String url = QrCodeUtil.make(code);
                     return new PublicResult<>(PublicResultConstant.SUCCESS, url);
                 }
                 return new PublicResult<>(PublicResultConstant.ERROR, "生成支付二维码失败");
-
             }
             return new PublicResult<>(PublicResultConstant.ERROR, r);
         } catch (Exception e) {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
-
     }
 
     @ApiOperation(value = "退款操作", notes = "订单列表")
@@ -81,8 +84,13 @@ public class OrderController {
         try {
             Order r = _orderService.selectById(orderId);
             if (r != null) {
-              String rr=  _orderService.weixinBack(r);
-              if(rr.isEmpty())  return new PublicResult<>(PublicResultConstant.FAILED, "退款申请请求失败");
+                String result = "";
+                if (r.getPayType() == 1) {
+                    result = _orderService.weixinBack(r);
+                } else {
+                    result = _orderService.aliback(r);
+                }
+                if (result.isEmpty()) return new PublicResult<>(PublicResultConstant.FAILED, "退款申请请求失败");
                 return new PublicResult<>(PublicResultConstant.SUCCESS, "退款申请请求成功");
             }
             return new PublicResult<>(PublicResultConstant.ERROR, "暂无此订单信息");
@@ -90,6 +98,7 @@ public class OrderController {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
     }
+
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._order.list})
@@ -104,12 +113,13 @@ public class OrderController {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
     }
+
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/total", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._order.list})
     public PublicResult<Object> todays(@RequestBody RequestDateDto input) throws Exception {
         try {
-            Map r = _orderService.getStaticial(input.start,input.end);
+            Map r = _orderService.getStaticial(input.start, input.end);
             if (r != null) {
                 return new PublicResult<>(PublicResultConstant.SUCCESS, r);
             }

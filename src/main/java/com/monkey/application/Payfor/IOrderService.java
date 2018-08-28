@@ -30,4 +30,6 @@ public interface IOrderService extends IService<Order> {
     Map<String,Object> getDashboard();
     Map<String,Object> getStaticial(Date start,Date end);
     Payfor getPayforByOrder(String appId,String mch_id);
+    Payfor getPayforByAppId(String appId);
+    String  aliback(Order input)throws  Exception;
 }

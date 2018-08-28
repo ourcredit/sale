@@ -27,4 +27,5 @@ public interface OrderRepository extends BaseMapper<Order> {
     List<SalePercentDto> getPointSalePercent(@Param("start") Date start, @Param("end")Date end);
     List<SalePercentDto> getPayTypePercent(@Param("start") Date start, @Param("end")Date end);
     Payfor getPayforByOrder(@Param("appId")String appId,@Param("mch_id")String mch_id);
+    Payfor getPayforByAppId(@Param("appId")String appId);
 }

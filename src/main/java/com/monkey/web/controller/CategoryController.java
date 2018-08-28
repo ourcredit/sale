@@ -12,14 +12,11 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Category;
-import com.monkey.core.entity.Product;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import scala.util.parsing.combinator.testing.Str;
 
 import java.util.List;
 
@@ -60,6 +57,7 @@ public class CategoryController {
         Category m=_categoryService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
+
 
     @ApiOperation(value = "添加或编辑分类",notes = "分类列表")
     @RequestMapping(method = RequestMethod.PUT)

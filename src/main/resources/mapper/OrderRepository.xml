@@ -177,5 +177,13 @@ WHERE
 	wechatpayId = #{appId}
 	AND wechatpayAgent = #{mch_id}
     </select>
+    <select id="getPayforByAppId" resultType="com.monkey.core.entity.Payfor">
+        SELECT top 1
+        *
+        FROM
+        sale_payfor
+        WHERE
+        alipayId = #{appId}
+    </select>
 
 </mapper>

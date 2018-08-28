@@ -1,6 +1,13 @@
 package com.monkey.application.Payfor;
 
 import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayObject;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.request.AlipayTradeRefundRequest;
+import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.monkey.application.Device.IDeviceService;
 import com.monkey.common.util.DateUtil;
@@ -20,27 +27,14 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
 import com.monkey.web.controller.dtos.OrderInput;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.net.ssl.SSLContext;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+
 import java.util.*;
-import java.security.KeyStore;
+
 /**
  * <p>
  * 服务实现类
@@ -61,7 +55,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     @Autowired
     PayforRepository _payforRepository;
     protected static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-
+    /*
+    * 创建订单*/
     @Override
     public Order insertOrder(OrderInput input) throws Exception {
         EntityWrapper ew = new EntityWrapper();
@@ -71,6 +66,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         Product p = _productRepository.selectById(input.productId);
         if (p == null) throw new Exception("该商品信息不存在");
         Order o = new Order();
+        o.setPayType(input.isWechatOrder?1:2);
         o.setDeviceId(d.getId());
         o.setDeviceName(d.getDeviceName());
         o.setDeviceType(d.getDeviceType());
@@ -85,7 +81,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         _orderRepository.insert(o);
         return o;
     }
-
+/*微信支付*/
     @Override
     public String weixinPay(Order input) throws Exception {
         EntityWrapper ew = new EntityWrapper();
@@ -135,11 +131,63 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         return urlCode;
     }
 
+/*
+* 阿里云支付*/
     @Override
-    public String aliPay(Order input) throws Exception {
-        return "";
-    }
+    public String aliPay(Order product) throws Exception {
+        EntityWrapper ew = new EntityWrapper();
+        List<Payfor> list = _payforRepository.selectList(ew);
+        Payfor p = list.get(0);
+        if (list.isEmpty() || p == null) throw new Exception("该商户支付信息不存在");
+        String out_trade_no = product.getWechatOrder(); //订单号 （调整为自己的生产逻辑）
 
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", p.getAlipayId(), p.getAlipayKey(),
+                "json", "UTF-8", p.getAlipayAgent(), "RSA2"); //获得初始化的AlipayClient
+        AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();//创建API对应的request类
+        Map<String, String> r = new HashMap<>();
+        r.put("out_trade_no", product.getWechatOrder());
+        r.put("total_amount", product.getPrice() + "");
+        r.put("subject", product.getProductName());
+        r.put("store_id", "");
+        r.put("timeout_express", "120m");
+        String w = JSON.toJSONString(r);
+        request.setNotifyUrl(PayConfig.AliNotify_url);
+        request.setBizContent(w);
+        AlipayTradePrecreateResponse response = alipayClient.execute(request);
+        System.out.print(response.getBody());
+        //根据response中的结果继续业务逻辑处理
+        return response.getQrCode();
+    }
+    /*
+    * 阿里云退款*/
+    @Override
+    public String  aliback(Order input)throws  Exception{
+        EntityWrapper ew = new EntityWrapper();
+        List<Payfor> list = _payforRepository.selectList(ew);
+        Payfor p = list.get(0);
+        if (list.isEmpty() || p == null) throw new Exception("该商户支付信息不存在");
+        String out_trade_no = input.getWechatOrder(); //订单号 （调整为自己的生产逻辑）
+
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", p.getAlipayId(), p.getAlipayKey(),
+                "json", "UTF-8", p.getAlipayAgent(), "RSA2");
+        //获得初始化的AlipayClient
+        AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();//创建API对应的request类
+        Map<String, String> r = new HashMap<>();
+        r.put("out_trade_no", input.getWechatOrder());
+        r.put("out_request_no", System.currentTimeMillis()+"");
+        r.put("refund_amount", input.getPrice()+"");
+        String w = JSON.toJSONString(r);
+        request.setBizContent(w); //设置业务参数
+     //   request.setNotifyUrl(PayConfig.Alibackurl);
+        AlipayTradeRefundResponse response = alipayClient.execute(request);
+        //通过alipayClient调用API，获得对应的response类
+        System.out.print(response.getBody());
+       String to= response.getRefundFee();
+       if(!to.isEmpty()){
+           _orderRepository.updateOrderState(input.getWechatOrder(),null,2,response.getOutTradeNo());
+       }
+       return  to;
+    }
     @Override
     public Map<String, Object> getDashboard() {
         Map<String, Object> result = new HashMap<>();
@@ -167,14 +215,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     }
 
     @Override
-    public Payfor getPayforByOrder(String appId,String mch_id) {
-       return  _orderRepository.getPayforByOrder(appId,mch_id);
+    public Payfor getPayforByOrder(String appId, String mch_id) {
+        return _orderRepository.getPayforByOrder(appId, mch_id);
     }
 
     @Override
-    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState,String backNum) {
-        _orderRepository.updateOrderState(orderNum, orderState, payState,backNum);
+    public Payfor getPayforByAppId(String appId) {
+        return _orderRepository.getPayforByAppId(appId);
     }
+
+    @Override
+    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState, String backNum) {
+        _orderRepository.updateOrderState(orderNum, orderState, payState, backNum);
+    }
+
     /*
         * 微信退款功能
         * */
@@ -200,8 +254,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         packageParams.put("mch_id", mch_id);
         packageParams.put("nonce_str", nonce_str);
         packageParams.put("out_trade_no", out_trade_no);
-        packageParams.put("out_refund_no", input.getDeviceId()+""+System.currentTimeMillis());
-    //    packageParams.put("refund_desc", 111);  //（调整为自己的名称）
+        packageParams.put("out_refund_no", input.getDeviceId() + "" + System.currentTimeMillis());
+        //    packageParams.put("refund_desc", 111);  //（调整为自己的名称）
         packageParams.put("total_fee", input.getPrice().toString()); //价格的单位为分
         packageParams.put("refund_fee", input.getPrice().toString());
         packageParams.put("notify_url", notify_url);
@@ -209,7 +263,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         packageParams.put("sign", sign);
 
         String requestXML = PayToolUtil.getRequestXml(packageParams);
-        String resXml =HttpUtil.back(requestXML,p);
+        String resXml = HttpUtil.back(requestXML, p);
         return resXml;
     }
 
@@ -268,7 +322,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
             Integer v = 0;
             for (int j = 0; j < list.size(); j++) {
                 SalePercentDto temp = list.get(j);
-                if (temp.getTime() .equals(t) ) {
+                if (temp.getTime().equals(t)) {
                     v = temp.getCount();
                 }
             }

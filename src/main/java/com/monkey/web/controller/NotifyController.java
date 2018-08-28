@@ -1,6 +1,8 @@
 package com.monkey.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.monkey.application.Payfor.IOrderService;
 import com.monkey.common.util.CipherTextUtil;
 import com.monkey.common.wechatsdk.PayToolUtil;
@@ -73,6 +75,16 @@ public class NotifyController {
             String appId = packageParams.get("appid").toString();
             String mch_id = packageParams.get("mch_id").toString();
             Payfor p = _orderService.getPayforByOrder(appId, mch_id);
+            if(p==null||p.getAlipayAgent().isEmpty()){
+                resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
+                        + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
+                BufferedOutputStream out = new BufferedOutputStream(
+                        response.getOutputStream());
+                out.write(resXml.getBytes());
+                out.flush();
+                out.close();
+                System.out.println("获取租户对象失败");
+            }
             //解密
             String text = packageParams.get("req_info").toString();
             text = CipherTextUtil.dedede(text, p.getWechatpayKey());
@@ -190,14 +202,73 @@ public class NotifyController {
         } else {
         }
     }
-
-    @RequestMapping(value = "/aliback")
-    public void ali_back_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-    }
-
+    /**
+     * 支付宝支付回调
+     * @Author 小柒
+     * @param request
+     * @param response
+     * @throws Exception
+     * void
+     * @Date 2016年10月31日 更新日志 2016年10月31日 小柒 首次创建
+     *
+     */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/alinotify")
-    public void ali_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void alipay_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("调用支付宝支付成功回调方法");
+        String message = "success";
+        Map<String, String> params = new HashMap<String, String>();
+// 取出所有参数是为了验证签名
+        Enumeration<String> parameterNames = request.getParameterNames();
+        while (parameterNames.hasMoreElements()) {
+            String parameterName = parameterNames.nextElement();
+            params.put(parameterName, request.getParameter(parameterName));
+        }
 
+        String appId = params.get("app_id").toString();
+        Payfor p = _orderService.getPayforByAppId(appId);
+        if(p==null||p.getAlipayAgent().isEmpty()){
+            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+            out.write("failed".getBytes());
+            out.flush();
+            out.close();
+        }
+//验证签名
+        boolean signVerified = false;
+        try {
+            signVerified = AlipaySignature.rsaCheckV1(params, p.getAlipayAgent(), "UTF-8");
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+            message = "failed";
+        }
+        if (signVerified) {
+            System.out.println("验证签名成功s");
+// 若参数中的appid和填入的appid不相同，则为异常通知
+            if (!p.getAlipayId().equals(params.get("app_id"))) {
+                System.out.println("验证签名成功s");
+                message = "failed";
+            }else{
+                String outtradeno = params.get("out_trade_no");
+                System.out.println(outtradeno + "号订单回调通知。");
+//在数据库中查找订单号对应的订单，并将其金额与数据库中的金额对比，若对不上，也为异常通知
+                String status = params.get("trade_status");
+                if (status.equals("WAIT_BUYER_PAY")) { // 如果状态是正在等待用户付款
+
+                } else if (status.equals("TRADE_CLOSED")) { // 如果状态是未付款交易超时关闭，或支付完成后全额退款
+
+                } else if (status.equals("TRADE_SUCCESS") || status.equals("TRADE_FINISHED")) {
+                    // 如果状态是已经支付成功成功 更新状态
+                    _orderService.updateOrderStatte("",null,1,"");
+                }
+                System.out.println(outtradeno + "订单的状态已经修改为" + status);
+            }
+        } else { // 如果验证签名没有通过
+            message = "failed";
+            System.out.println("验证签名失败！");
+        }
+        BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+        out.write(message.getBytes());
+        out.flush();
+        out.close();
     }
 }
