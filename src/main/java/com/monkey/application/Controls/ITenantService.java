@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ITenantService extends IService<Tenant> {
     void insertTenantAdmin(Integer tenantId);
-
 }

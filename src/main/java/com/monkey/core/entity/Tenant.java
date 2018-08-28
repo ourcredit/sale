@@ -1,6 +1,7 @@
 package com.monkey.core.entity;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
@@ -54,7 +55,18 @@ public class Tenant extends Model<Tenant> {
      * 1启用  0禁用
      */
     private Integer isActive;
+    /**
+     * 软删除
+     */
+    @TableLogic
+    private Integer isDeleted;
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
 
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
     public Integer getId() {
         return id;
     }

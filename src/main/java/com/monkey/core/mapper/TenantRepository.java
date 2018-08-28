@@ -23,4 +23,5 @@ public interface TenantRepository extends BaseMapper<Tenant> {
         void insertTenantMenus(@Param("tenantId")Integer tenantId,@Param("roleId")Integer roleId);
         void insertTenantAdminRoles(@Param("tenantId")Integer tenantId,@Param("userId")Integer userId);
         List<Role> selectTenantRoles(@Param("tenantId")Integer tenantId);
+        void    deleteByTenantId(@Param("tenantId") Integer tenantId);
 }

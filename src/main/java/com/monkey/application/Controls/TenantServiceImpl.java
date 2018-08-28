@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author zhaohejing
@@ -41,19 +41,19 @@ public class TenantServiceImpl extends ServiceImpl<TenantRepository, Tenant> imp
 
     @Override
     public void insertTenantAdmin(Integer tenantId) {
-        User t=new User("admin","1234567","admin",1);
+        User t = new User("admin", "1234567", "admin", 1);
         t.setTenantId(tenantId);
-         _tenantRepository.insertTenantAdmin(t);
-         List<Role> roles=new ArrayList<Role>(){{
-             add(new Role( InitConst._defaultRole.admin, InitConst._defaultRole.admin,1,0,tenantId));
-             add(new Role(InitConst._defaultRole.def, InitConst._defaultRole.def,1,1,tenantId));
-         }};
-         _tenantRepository.insertTenantRole(roles);
-        _tenantRepository.insertTenantAdminRoles(t.getTenantId(),t.getId());
-        List<Role> rls=_tenantRepository.selectTenantRoles(t.getTenantId());
-        if(rls.size()>0){
-            for (int i = 0; i <rls.size() ; i++) {
-                _tenantRepository.insertTenantMenus(t.getTenantId(),rls.get(i).getId());
+        _tenantRepository.insertTenantAdmin(t);
+        List<Role> roles = new ArrayList<Role>() {{
+            add(new Role(InitConst._defaultRole.admin, InitConst._defaultRole.admin, 1, 0, tenantId));
+            add(new Role(InitConst._defaultRole.def, InitConst._defaultRole.def, 1, 1, tenantId));
+        }};
+        _tenantRepository.insertTenantRole(roles);
+        _tenantRepository.insertTenantAdminRoles(t.getTenantId(), t.getId());
+        List<Role> rls = _tenantRepository.selectTenantRoles(t.getTenantId());
+        if (rls.size() > 0) {
+            for (int i = 0; i < rls.size(); i++) {
+                _tenantRepository.insertTenantMenus(t.getTenantId(), rls.get(i).getId());
 
             }
         }

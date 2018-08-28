@@ -74,8 +74,8 @@ public class TenantController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._system._tenant.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception {
-        Boolean r = _tenantService.deleteById(id);
-        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+            Boolean r = _tenantService.deleteById(id);
+            return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
 
     @ApiOperation(value = "批量删除租户", notes = "租户列表")

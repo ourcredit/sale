@@ -29,6 +29,7 @@ public class Role extends Model<Role> {
         this.displayName=displayName;
         this.isActive=isActive;
         this.isStatic=isStatic;
+        this.isDeleted=0;
     }
     public Role( String roleName,String displayName,Integer isActive,Integer isStatic,Integer tenantId){
         this.roleName=roleName;
@@ -36,6 +37,7 @@ public class Role extends Model<Role> {
         this.isActive=isActive;
         this.isStatic=isStatic;
         this.tenantId=tenantId;
+        this.isDeleted=0;
     }
     /**
      * 软删除
