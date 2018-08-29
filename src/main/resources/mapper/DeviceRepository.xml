@@ -73,5 +73,23 @@ WHERE
 	b.isSale = 1
 	AND a.deviceNum = #{deviceNum}
     </select>
+    <select id="selectByArea" resultType="com.monkey.core.entity.Device">
+        SELECT
+        *
+        FROM
+        sale_device
+        <where>
+            <if test="ew.sqlSegment!=null">
+                ${ew.sqlSegment} AND
+            </if>
+            <if test="code!=null">
+                pointId IN (
+                SELECT id FROM sale_point WHERE isDeleted = 0
+                AND areaId IN ( SELECT id FROM sale_tree WHERE levelCode LIKE '${code}%' ) )
+            </if>
+
+        </where>
+
+    </select>
 
 </mapper>

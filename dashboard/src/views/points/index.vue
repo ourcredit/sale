@@ -163,7 +163,9 @@ export default class PointC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
-    this.filters.areaId = this.current.code;
+    if (this.current) {
+      this.filters.code = this.current.code;
+    }
     t.getpage();
   }
   async batchDelete() {

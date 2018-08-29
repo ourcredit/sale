@@ -2,7 +2,9 @@ package com.monkey.application.Device;
 
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.dtos.ProductDto;
 import com.monkey.core.entity.Device;
@@ -41,6 +43,8 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
         return page.setRecords(a) ;
     }
 
+
+
     //设备自注册
     @Override
     public Boolean insertDeviceByApp(Device device) {
@@ -49,6 +53,13 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
        Integer count= baseMapper.selectCount(ew);
        if(count>0)return  false;
       return   _deviceRepository.insert(device) >0;
+    }
+    @Override
+    public Page<Device> selectByArea(Pagination page, String code, Wrapper ew) {
+        Page<Device>  p=new Page<>();
+        List<Device> r=    _deviceRepository.selectByArea(page,code,ew);
+        p.setRecords(r);
+        return  p;
     }
 
 

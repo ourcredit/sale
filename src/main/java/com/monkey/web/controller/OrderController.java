@@ -36,7 +36,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取订单列表", notes = "订单列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._order.list})
+    @RequiresPermissions(value = {PermissionConst._orders._order.list})
     public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception {
         EntityWrapper<Order> filter = new EntityWrapper<>();
         filter = ComUtil.genderFilter(filter, page.where);
@@ -46,7 +46,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取订单详情", notes = "订单列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._order.show})
+    @RequiresPermissions(value = {PermissionConst._orders._order.list})
     public PublicResult<Order> Product(@PathVariable Integer id) throws Exception {
         Order m = _orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
@@ -54,7 +54,7 @@ public class OrderController {
 
     @ApiOperation(value = "客户下单操作", notes = "订单列表")
     @RequestMapping(value = "/make", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._order.list})
+    @RequiresPermissions(value = {PermissionConst._orders._order.list})
     public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception {
         try {
             Order r = _orderService.insertOrder(model);
@@ -79,7 +79,7 @@ public class OrderController {
 
     @ApiOperation(value = "退款操作", notes = "订单列表")
     @RequestMapping(value = "/back/{orderId}", method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._order.list})
+    @RequiresPermissions(value = {PermissionConst._orders._order.back})
     public PublicResult<Object> back(@PathVariable String orderId) throws Exception {
         try {
             Order r = _orderService.selectById(orderId);
@@ -101,7 +101,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._order.list})
+    @RequiresPermissions(value = {PermissionConst._orders._order.statical})
     public PublicResult<Object> staticals() throws Exception {
         try {
             Map r = _orderService.getDashboard();
@@ -116,7 +116,7 @@ public class OrderController {
 
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/total", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._order.list})
+    @RequiresPermissions(value = {PermissionConst._orders._order.statical})
     public PublicResult<Object> todays(@RequestBody RequestDateDto input) throws Exception {
         try {
             Map r = _orderService.getStaticial(input.start, input.end);

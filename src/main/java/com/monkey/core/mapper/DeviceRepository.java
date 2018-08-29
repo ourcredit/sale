@@ -31,4 +31,5 @@ public interface DeviceRepository extends BaseMapper<Device> {
      * @return 商品dto 类
      */
     List<ProductDto> selectProductsByDeviceId(Pagination page, @Param("deviceNum") String deviceNum ) ;
+    List<Device> selectByArea(Pagination page, @Param("code")String code, @Param("ew") com.baomidou.mybatisplus.mapper.Wrapper w);
 }

@@ -63,17 +63,16 @@ public class TreeController {
     @RequestMapping(method = RequestMethod.PUT)
     public PublicResult<Object> insert(@RequestBody Tree model) throws Exception{
         EntityWrapper ew=new EntityWrapper();
-        String code=null;
+        String code=UUID.randomUUID().toString().split("-")[0];
         if(model.getLevelCode()==null||model.getLevelCode().isEmpty()){
-            code = UUID.randomUUID().toString().split("-")[0];
             if(model.getParentId()!=null){
                 ew.eq("id",model.getParentId());
              Tree parent=   _treeService.selectOne(ew);
              if(parent!=null    ){
                  code=parent.getLevelCode()+"."+code;
              }
-             model.setLevelCode(code);
             }
+            model.setLevelCode(code);
         }
         Boolean r=_treeService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

@@ -11,7 +11,7 @@
         <div class="page-body">
           <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
             <Row :gutter="4">
-              <Col span="18">
+              <Col span="20">
               <FormItem label="设备名:">
                 <Input v-model="filters.deviceName" />
               </FormItem>
@@ -27,7 +27,7 @@
                 <Input v-model="filters.pointName" />
               </FormItem>
               </Col>
-              <Col span="6">
+              <Col span="4">
               <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
               </Col>
             </Row>
@@ -200,7 +200,9 @@ export default class deviceC extends AbpBase {
   }
   init() {
     var t: any = this.$refs.table;
-    this.filters.areaId = this.current.id;
+    if (this.current) {
+      this.filters.code = this.current.code;
+    }
     t.getpage();
   }
   async batchDelete() {

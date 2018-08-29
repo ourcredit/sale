@@ -22,10 +22,11 @@ public interface InitConst {
     public static class _menu {
         public static List<MenuInfo> menuList = new ArrayList<MenuInfo>() {{
             add(new MenuInfo("控制台", PermissionConst._dashboard.list, "/dashboard", 1, null));
-            add(new MenuInfo("订单系统", PermissionConst._order.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("订单列表", PermissionConst._order.list, "/order/list", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("查看订单", PermissionConst._order.show, "", 2, null));
-                    add(new MenuInfo("退款", PermissionConst._order.back, "", 2, null));
+            add(new MenuInfo("订单系统", PermissionConst._orders.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("订单列表", PermissionConst._orders._order.list, "/order/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("查看订单", PermissionConst._orders._order.list, "", 2, null));
+                    add(new MenuInfo("退款", PermissionConst._orders._order.back, "", 2, null));
+                    add(new MenuInfo("统计", PermissionConst._orders._order.statical, "", 2, null));
                 }}));
             }}));
             add(new MenuInfo("点位管理", PermissionConst._pointer.list, "", 1, new ArrayList<MenuInfo>() {{
@@ -36,30 +37,31 @@ public interface InitConst {
                     add(new MenuInfo("获取详情", PermissionConst._pointer._point.first, "", 2, null));
                 }}));
             }}));
-            add(new MenuInfo("设备管理", PermissionConst._device.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("设备列表", PermissionConst._device.list, "/device/list", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑设备", PermissionConst._device.modify, "", 2, null));
-                    add(new MenuInfo("删除设备", PermissionConst._device.delete, "", 2, null));
-                    add(new MenuInfo("批量删除设备", PermissionConst._device.batch, "", 2, null));
-                    add(new MenuInfo("获取设备详情", PermissionConst._device.first, "", 2, null));
-                    add(new MenuInfo("配置商品", PermissionConst._device.allow, "", 2, null));
+            add(new MenuInfo("设备管理", PermissionConst._devices.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("设备列表", PermissionConst._devices._device.list, "/device/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑设备", PermissionConst._devices._device.modify, "", 2, null));
+                    add(new MenuInfo("删除设备", PermissionConst._devices._device.delete, "", 2, null));
+                    add(new MenuInfo("批量删除设备", PermissionConst._devices._device.batch, "", 2, null));
+                    add(new MenuInfo("获取设备详情", PermissionConst._devices._device.first, "", 2, null));
+                    add(new MenuInfo("配置商品", PermissionConst._devices._device.allow, "", 2, null));
+                    add(new MenuInfo("获取设备下商品列表", PermissionConst._devices._device.getDeviceProduct, "", 2, null));
                 }}));
             }}));
 
-            add(new MenuInfo("货物管理", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("商品管理", PermissionConst._pm._product.list, "/product/list", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("编辑商品", PermissionConst._pm._product.modify, "", 2, null));
-                    add(new MenuInfo("删除商品", PermissionConst._pm._product.delete, "", 2, null));
-                    add(new MenuInfo("批量删除商品", PermissionConst._pm._product.batch, "", 2, null));
-                    add(new MenuInfo("获取详情", PermissionConst._pm._product.first, "", 2, null));
+            add(new MenuInfo("货物管理", PermissionConst._products.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("商品管理", PermissionConst._products._product.list, "/product/list", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("编辑商品", PermissionConst._products._product.modify, "", 2, null));
+                    add(new MenuInfo("删除商品", PermissionConst._products._product.delete, "", 2, null));
+                    add(new MenuInfo("批量删除商品", PermissionConst._products._product.batch, "", 2, null));
+                    add(new MenuInfo("获取详情", PermissionConst._products._product.first, "", 2, null));
                 }}));
             }}));
-            add(new MenuInfo("支付配置", PermissionConst._pay.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("支付设置", PermissionConst._pay.first, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
-                    add(new MenuInfo("修改配置", PermissionConst._pay.modify, "", 2, null));
+            add(new MenuInfo("支付配置", PermissionConst._paySetting.list, "", 1, new ArrayList<MenuInfo>() {{
+                add(new MenuInfo("支付设置", PermissionConst._paySetting._pay.first, "/pay/alipay", 1, new ArrayList<MenuInfo>() {{
+                    add(new MenuInfo("修改配置", PermissionConst._paySetting._pay.modify, "", 2, null));
                 }}));
             }}));
-            add(new MenuInfo("监控系统", PermissionConst._pm.list, "", 1, new ArrayList<MenuInfo>() {{
+            add(new MenuInfo("监控系统", PermissionConst._watch.list, "", 1, new ArrayList<MenuInfo>() {{
                 add(new MenuInfo("后台操作日志", PermissionConst._watch._actionlog.list, "/watch/action", 1, new ArrayList<MenuInfo>() {{
                     add(new MenuInfo("删除日志", PermissionConst._watch._actionlog.delete, "", 2, null));
                     add(new MenuInfo("批量删除日志", PermissionConst._watch._actionlog.batch, "", 2, null));
@@ -75,11 +77,11 @@ public interface InitConst {
             }}));
 
             add(new MenuInfo("报表系统", PermissionConst._report.list, "", 1, new ArrayList<MenuInfo>() {{
-                add(new MenuInfo("设备销量", PermissionConst._report._a.list, "/watch/device", 1, null));
-                add(new MenuInfo("商品销量", PermissionConst._report._b.list, "/watch/product", 1, null));
-                add(new MenuInfo("设备备货信息", PermissionConst._report._b.list, "/watch/dgp", 1, null));
-                add(new MenuInfo("设备故障记录", PermissionConst._report._b.list, "/watch/de", 1, null));
-                add(new MenuInfo("设备故障率", PermissionConst._report._b.list, "/watch/dep", 1, null));
+                add(new MenuInfo("设备销量", PermissionConst._report._device.list, "/watch/device", 1, null));
+                add(new MenuInfo("商品销量", PermissionConst._report._product.list, "/watch/product", 1, null));
+                add(new MenuInfo("设备备货信息", PermissionConst._report._deviceget.list, "/watch/dgp", 1, null));
+                add(new MenuInfo("设备故障记录", PermissionConst._report._devicewarn.list, "/watch/de", 1, null));
+                add(new MenuInfo("设备故障率", PermissionConst._report._devicewarnper.list, "/watch/dep", 1, null));
             }}));
 
             add(new MenuInfo("系统管理", PermissionConst._system.list, "", 1, new ArrayList<MenuInfo>() {{

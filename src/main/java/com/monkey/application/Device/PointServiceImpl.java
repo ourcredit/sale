@@ -25,7 +25,10 @@ public class PointServiceImpl extends ServiceImpl<PointRepository, Point> implem
     @Autowired
     PointRepository _pointRepository;
     @Override
-    public List<Point> selectByAreaId(Pagination page, String name, String areaId) {
-        return  _pointRepository.selectbyAreaAndName(page,name,areaId);
+    public Page<Point> selectByAreaId(Pagination page, String name, String areaId) {
+        Page<Point>  p=new Page<>();
+      List<Point> r=    _pointRepository.selectbyAreaAndName(page,name,areaId);
+      p.setRecords(r);
+      return  p;
     }
 }

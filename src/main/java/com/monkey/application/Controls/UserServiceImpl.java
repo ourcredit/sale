@@ -73,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         EntityWrapper ew = new EntityWrapper<>();
         ew.eq("account", input.account);
         if (input.id == null) {
-            u = new User(input.account, input.password, input.userName,  input.isActive);
+            u = new User(input.account, input.password, input.userName,  input.isActive,input.areaId);
             this.insert(u);
         } else {
             u = this.selectOne(ew);
@@ -81,6 +81,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
                 u.setMobile(input.mobile);
                 u.setIsActive(input.isActive);
                 u.setUserName(input.userName);
+                u.setAreaId(input.areaId);
                 u.setPassword(BCrypt.hashpw(input.password, BCrypt.gensalt()));
                 this.updateById(u);
             }

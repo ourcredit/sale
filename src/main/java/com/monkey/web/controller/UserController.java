@@ -53,7 +53,6 @@ public class UserController {
         Page<User> res = _userService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
-
     @ApiOperation(value = "获取用户详情", notes = "用户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._system._user.first})

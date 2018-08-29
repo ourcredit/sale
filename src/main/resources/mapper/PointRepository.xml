@@ -26,11 +26,12 @@
 FROM
 	sale_point
 	<where>
+        isDeleted  =0
         <if test="name!=null">
-            pointName LIKE '%#{name}%' AND
+          and  pointName LIKE '%${name}%'
         </if>
         <if test="code!=null">
-             areaId IN ( SELECT areaId FROM sale_tree WHERE levelCode LIKE '#{code}%' )
+            AND  areaId IN ( SELECT  id FROM sale_tree WHERE levelCode LIKE '${code}%' )
         </if>
     </where>
     </select>

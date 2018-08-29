@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 28/08/2018 22:45:58
+ Date: 29/08/2018 22:15:36
 */
 
 SET NAMES utf8mb4;
@@ -283,6 +283,7 @@ CREATE TABLE `sale_user`  (
   `isDeleted` tinyint(2) NULL DEFAULT 0 COMMENT '软删除  ',
   `lastLoginTime` datetime(0) NULL DEFAULT NULL COMMENT '最后登陆时间',
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
+  `areaId` int(11) NULL DEFAULT NULL COMMENT '区域id',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ix_account`(`account`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;

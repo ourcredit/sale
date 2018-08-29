@@ -5,25 +5,36 @@ public interface PermissionConst {
     public  static class  _dashboard{
         public static  final  String list="dashboard:show";
     }
-    public  static  class  _order{
-        public  static  final  String list="order:list";
-        public  static  final  String show="order:show";
-        public  static  final  String back="order:back";
+    public  static  class  _orders{
+        public  static  final  String list="order:show";
+        public static  class  _order{
+            public  static  final  String list="order:list";
+            public  static  final  String back="order:back";
+            public  static  final  String statical="order:statical";
+        }
+
     }
     public  static  class  _report{
         public static  final  String list="report:show";
-        public  static  class _a{
-            public static  final  String list="product:list";
-
+        public  static  class _device{
+            public static  final  String list="devicesale:list";
         }
-        public  static  class _b{
-            public static  final  String list="box:list";
+        public  static  class _product{
+            public static  final  String list="productsale:list";
         }
-
+        public  static  class _deviceget{
+            public static  final  String list="deviceget:list";
+        }
+        public  static  class _devicewarn{
+            public static  final  String list="devicewarn:list";
+        }
+        public  static  class _devicewarnper{
+            public static  final  String list="devicewarnper:list";
+        }
     }
 
 
-    public  static  class  _pm{
+    public  static  class  _products{
         public static  final  String list="product:show";
         public  static  class _product{
             public static  final  String list="product:list";
@@ -34,10 +45,14 @@ public interface PermissionConst {
         }
     }
 
-    public  static  class  _pay{
-        public static  final  String list="pay:list";
-        public static  final  String first="pay:first";
-        public static  final  String modify="pay:modify";
+    public  static  class  _paySetting{
+        public static  final  String list="pay:setting";
+        public static class _pay{
+            public static  final  String list="pay:list";
+            public static  final  String first="pay:first";
+            public static  final  String modify="pay:modify";
+        }
+
     }
     public  static  class  _watch{
         public static  final  String list="watch:show";
@@ -65,13 +80,18 @@ public interface PermissionConst {
 
     }
 
-    public  static  class _device{
-        public static  final  String list="device:list";
-        public static  final  String modify="device:modify";
-        public static  final  String delete="device:delete";
-        public static  final  String batch="device:batch";
-        public static  final  String first="device:first";
-        public static  final  String allow="device:allow";
+    public  static  class _devices{
+        public static  final  String list="devices:show";
+        public static class  _device{
+            public static  final  String list="device:list";
+            public static  final  String modify="device:modify";
+            public static  final  String delete="device:delete";
+            public static  final  String batch="device:batch";
+            public static  final  String first="device:first";
+            public static  final  String allow="device:allow";
+            public static  final  String getDeviceProduct="device:getDeviceProduct";
+        }
+
     }
     public  static  class  _pointer{
         public static  final  String list="pointer:show";

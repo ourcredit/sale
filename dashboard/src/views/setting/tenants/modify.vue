@@ -24,7 +24,6 @@ import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import Tenant from "../../../store/entities/tenant";
-import { debug } from "util";
 @Component
 export default class CreateTenant extends AbpBase {
   @Prop({
@@ -53,7 +52,6 @@ export default class CreateTenant extends AbpBase {
       }
     });
   }
-
   activeChange() {
     this.tenant.isActive = !!!this.tenant.isActive;
   }

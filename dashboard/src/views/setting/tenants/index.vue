@@ -31,7 +31,7 @@
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import SaleTable from "@/components/saletable.vue";
 import AbpBase from "../../../lib/abpbase";
-import Role from "@/store/entities/role";
+import Tenant from "../../../store/entities/tenant";
 import Modify from "./modify.vue";
 @Component({
   components: {
@@ -39,7 +39,7 @@ import Modify from "./modify.vue";
     Modify
   }
 })
-export default class Users extends AbpBase {
+export default class Tenants extends AbpBase {
   filters: Object = {
     name: "",
     displayName: ""
@@ -146,7 +146,7 @@ export default class Users extends AbpBase {
   ];
 
   Create() {
-    var u = new Role();
+    var u = new Tenant();
     this.$store.commit("tenant/edit", u);
     this.ModalShow = true;
   }

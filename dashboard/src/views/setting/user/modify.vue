@@ -21,14 +21,14 @@
                         </FormItem>
                     </TabPane>
                     <TabPane label="角色信息" name="roles">
-                        <CheckboxGroup v-model="user.roles">
+                        <CheckboxGroup @on-change="roleChange" v-model="selectRoles">
                             <Checkbox :label="role.id"  v-for="role in roles" :key="role.id">
                                 <span>{{role.displayName}}</span>
                             </Checkbox>
                         </CheckboxGroup>
                     </TabPane>
                      <TabPane label="机构信息" name="trees">
-                       <Tree :data="tree"></Tree>
+                       <Tree @on-select-change="select" :data="tree"></Tree>
                     </TabPane>
                 </Tabs>
             </Form>
@@ -52,17 +52,23 @@ export default class CreateUser extends AbpBase {
     default: false
   })
   value: boolean;
+  selectRoles: Array<any> = new Array<any>();
   get roles() {
     return this.$store.state.user.roles;
   }
   get tree() {
     return this.$store.state.device.tree;
   }
+  get current() {
+    var t = this.$store.state.device.current;
+    console.log(t);
+    return t;
+  }
   get user() {
     var u = this.$store.state.user.editUser;
     if (u.id) {
       if (u.roles && u.roles.length > 0) {
-        u.roles = u.roles.map((c: any) => {
+        this.selectRoles = u.roles.map((c: any) => {
           if (c instanceof Object) return c.id;
           return c;
         });
@@ -70,7 +76,7 @@ export default class CreateUser extends AbpBase {
     } else {
       var t = this.roles.filter((c: any) => c.isStatic == 1);
       if (t && t.length) {
-        u.roles = t.map((c: any) => {
+        this.selectRoles = t.map((c: any) => {
           if (c instanceof Object) return c.id;
           return c;
         });
@@ -78,9 +84,24 @@ export default class CreateUser extends AbpBase {
     }
     return u;
   }
+  select(opt) {
+    var temp = opt[0];
+    if (temp) {
+      if (temp.title == "未分配设备") {
+      } else {
+        this.user.areaId = temp.id;
+      }
+    } else {
+    }
+  }
   save() {
     (this.$refs.userForm as any).validate(async (valid: boolean) => {
       if (valid) {
+        this.user.roles = this.selectRoles;
+        if (this.current && this.current.id) {
+          this.user.areaId = this.current.id;
+        }
+
         await this.$store.dispatch({
           type: "user/modify",
           data: this.user
@@ -102,6 +123,10 @@ export default class CreateUser extends AbpBase {
     if (!value) {
       this.$emit("input", value);
     }
+  }
+  roleChange(r) {
+    this.selectRoles = r;
+    console.log(this.selectRoles);
   }
   validatePassCheck = (rule: any, value: any, callback: any) => {
     if (!value) {

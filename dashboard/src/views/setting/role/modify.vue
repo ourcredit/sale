@@ -16,9 +16,9 @@
                          <FormItem>
                             <Checkbox @on-change="activeChange" :value="role.isActive==1">启用</Checkbox>
                         </FormItem>
-                         <FormItem>
+                         <!-- <FormItem>
                             <Checkbox @on-change="staticChange" :value="role.isStatic==1">静态</Checkbox>
-                        </FormItem>
+                        </FormItem> -->
                     </TabPane>
                     <TabPane label="角色权限" name="permission">
                         <Tree ref="tree" multiple :data="tree" show-checkbox>
@@ -91,9 +91,9 @@ export default class CreateRole extends AbpBase {
   activeChange() {
     this.role.isActive = !!!this.role.isActive;
   }
-  staticChange() {
-    this.role.isStatic = !!!this.role.isStatic;
-  }
+  // staticChange() {
+  //   this.role.isStatic = !!!this.role.isStatic;
+  // }
   roleRule = {
     roleName: [
       {

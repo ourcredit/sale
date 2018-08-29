@@ -9,7 +9,7 @@ import { stat } from "fs";
 interface IPointState extends IListState<Point> {
   editPoint: Point;
 }
-class PointMutations extends ListMutations<Point> {}
+class PointMutations extends ListMutations<Point> { }
 class PointModule extends ListModule<IPointState, any, Point> {
   state = {
     totalCount: 0,
@@ -37,7 +37,12 @@ class PointModule extends ListModule<IPointState, any, Point> {
     ): Promise<any> {
       await Ajax.put("/api/point", payload.data);
     },
-
+    async batch(
+      context: ActionContext<IPointState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.post("/api/point/batch", payload.data);
+    },
     async delete(
       context: ActionContext<IPointState, any>,
       payload: any

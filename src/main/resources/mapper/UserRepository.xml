@@ -10,6 +10,7 @@
         <result column="creationTime" property="creationTime" />
         <result column="creatorUserId" property="creatorUserId" />
         <result column="userName" property="userName" />
+        <result column="areaId" property="areaId" />
         <result column="mobile" property="mobile" />
         <result column="isActive" property="isActive" />
         <result column="isDeleted" property="isDeleted" />
@@ -18,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, account, password, creationTime, creatorUserId, userName, mobile, isActive, isDeleted
+        id, account, password, creationTime, creatorUserId, userName, mobile, isActive, isDeleted,areaId
     </sql>
     <resultMap id="UserRoleMap" type="com.monkey.core.dtos.UserDto">
         <id column="id"  property="id" />

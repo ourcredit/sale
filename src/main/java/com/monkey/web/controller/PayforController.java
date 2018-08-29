@@ -30,7 +30,7 @@ public class PayforController {
 
     @ApiOperation(value = "获取支付设置详情",notes = "支付信息列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._pay.first})
+    @RequiresPermissions(value = {PermissionConst._paySetting._pay.first})
     public PublicResult<Payfor> Device(@PathVariable Integer id) throws Exception{
         EntityWrapper ew=new EntityWrapper();
         Payfor m=_payforService.selectOne(ew);
@@ -42,7 +42,7 @@ public class PayforController {
     }
     @ApiOperation(value = "添加或编辑支付设置",notes = "支付信息列表")
     @RequestMapping(method = RequestMethod.PUT)
-    @RequiresPermissions(value = {PermissionConst._pay.modify})
+    @RequiresPermissions(value = {PermissionConst._paySetting._pay.modify})
     public PublicResult<Object> insert(@RequestBody Payfor model) throws Exception{
         Boolean r=_payforService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);

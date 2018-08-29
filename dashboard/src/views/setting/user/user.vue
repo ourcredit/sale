@@ -38,7 +38,6 @@
                          @click="getpage" class="toolbar-btn">查找</Button>
                         </Col>
                     </Row>
-                
                 </Form>
                 <div class="margin-top-10">
                     <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
@@ -210,6 +209,10 @@ export default class Users extends AbpBase {
     this.getpage();
     await this.$store.dispatch({
       type: "user/getRoles"
+    });
+    await this.$store.dispatch({
+      type: "device/initTree",
+      data: {}
     });
   }
 }

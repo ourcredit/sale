@@ -24,6 +24,13 @@ public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
     public  User(){}
+    public  User(String account,String password,String userName,Integer isActive,Integer areaId){
+        this.account=account;
+        this.password=BCrypt.hashpw(password,BCrypt.gensalt());
+        this.userName=userName;
+        this.isActive=isActive;
+        this.areaId=areaId;
+    }
     public  User(String account,String password,String userName,Integer isActive){
         this.account=account;
         this.password=BCrypt.hashpw(password,BCrypt.gensalt());
@@ -43,6 +50,7 @@ public class User extends Model<User> {
      * 密码
      */
     private String password;
+    private  Integer areaId;
     /**
      * 创建时间
      */
@@ -189,5 +197,11 @@ public class User extends Model<User> {
     }
 
 
+    public Integer getAreaId() {
+        return areaId;
+    }
 
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
+    }
 }
