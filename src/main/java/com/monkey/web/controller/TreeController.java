@@ -1,6 +1,7 @@
 package com.monkey.web.controller;
 
 
+import com.baomidou.mybatisplus.enums.SqlLike;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IDeviceService;
@@ -11,6 +12,8 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Tree;
+import com.monkey.core.entity.User;
+import com.monkey.web.annotation.CurrentUser;
 import com.monkey.web.controller.dtos.TreeDtoInput;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -41,10 +44,25 @@ public class TreeController {
     IPointService _pointService;
     @ApiOperation(value = "获取机构列表",notes = "机构列表")
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public PublicResult<List<Tree>> Trees(@RequestBody PagedAndFilterInputDto page) throws Exception{
+    public PublicResult<List<Tree>> Trees( @CurrentUser User current) throws Exception{
         EntityWrapper<Tree> filter = new EntityWrapper<>();
-        filter=  ComUtil.genderFilter(filter,page.where);
-        List<Tree> res= _treeService.selectList( filter);
+        Tree t;List<Tree> res;
+        if(current.getAreaId()!=null){
+             t=_treeService.selectById(current.getAreaId());
+            if(t!=null){
+                filter.like("levelCode",t.getLevelCode(), SqlLike.DEFAULT).or(" name='未分配设备'");
+            }
+             res= _treeService.selectList( filter);
+            res.forEach(c->{
+                if(c.getId()==t.getId()){
+                    c.setParentId(null  );
+                }
+            });
+        }else {
+            res= _treeService.selectList( filter);
+        }
+
+
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取机构详情",notes = "机构列表")

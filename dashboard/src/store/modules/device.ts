@@ -72,7 +72,7 @@ class PointModule extends ListModule<IDeviceState, any, Device> {
       payload: any
     ): Promise<any> {
       context.state.loading = true;
-      let reponse: any = await Ajax.post("/api/tree", payload.data);
+      let reponse: any = await Ajax.post("/api/tree");
       context.state.loading = false;
       let list: Array<any> = reponse.data as Array<any>;
       context.state.tree = util.genderMenu(list, "parentId", null);

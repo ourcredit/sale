@@ -86,10 +86,6 @@ export default class Users extends AbpBase {
   }
   columns = [
     {
-      title: "唯一key",
-      key: "id"
-    },
-    {
       title: "分类名",
       key: "name"
     },

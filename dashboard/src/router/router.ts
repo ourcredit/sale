@@ -21,7 +21,6 @@ export const loginRouter: any = {
 export const otherRouters: any = {
   path: "/main",
   name: "main",
-  permission: "",
   meta: { title: "管理页" },
   component: () => System.import("../views/main.vue"),
   children: [
@@ -36,7 +35,7 @@ export const otherRouters: any = {
       path: "/allowproduct",
       meta: { title: "分配商品" },
       name: "allowproduct",
-      permission: "product:allow",
+      permission: "device:allow",
       component: () => System.import("../views/devices/allow.vue")
     }
   ]
@@ -46,7 +45,7 @@ export const appRouters: Array<any> = [
     path: "/order",
     name: "order",
     meta: { title: "订单系统" },
-    permission: "order:list",
+    permission: "order:show",
     icon: "&#xeb1c;",
     component: () => System.import("../views/main.vue"),
     children: [
@@ -60,7 +59,7 @@ export const appRouters: Array<any> = [
       {
         path: "back",
         meta: { title: "退款单" },
-        permission: "order:list",
+        permission: "order:back",
         name: "back",
         component: () => System.import("../views/orders/payback.vue")
       }
@@ -94,7 +93,7 @@ export const appRouters: Array<any> = [
     path: "/device",
     name: "device",
     meta: { title: "设备管理" },
-    permission: "device:list",
+    permission: "devices:show",
     icon: "&#xeac8;",
     component: () => System.import("../views/main.vue"),
     children: [
@@ -128,7 +127,7 @@ export const appRouters: Array<any> = [
     path: "/pay",
     name: "pay",
     meta: { title: "支付配置" },
-    permission: "pay:list",
+    permission: "pay:setting",
     icon: "&#xeb18;",
     component: () => System.import("../views/main.vue"),
     children: [
@@ -145,7 +144,7 @@ export const appRouters: Array<any> = [
     path: "/watch",
     name: "watch",
     meta: { title: "监控系统" },
-    permission: "product:show",
+    permission: "watch:show",
     icon: "&#xeafa;",
     component: () => System.import("../views/main.vue"),
     children: [
@@ -183,35 +182,35 @@ export const appRouters: Array<any> = [
       {
         path: "/report/device",
         meta: { title: "设备销量" },
-        permission: "report:show",
+        permission: "devicesale:list",
         name: "report.device",
         component: () => System.import("../views/report/device.vue")
       },
       {
         path: "/report/product",
         meta: { title: "产品销量" },
-        permission: "report:show",
+        permission: "productsale:list",
         name: "report.product",
         component: () => System.import("../views/report/product.vue")
       },
       {
         path: "/report/dgp",
         meta: { title: "设备备货" },
-        permission: "report:show",
+        permission: "deviceget:list",
         name: "report.dgp",
         component: () => System.import("../views/report/dgp.vue")
       },
       {
         path: "/report/de",
         meta: { title: "设备故障记录" },
-        permission: "report:show",
+        permission: "devicewarn:list",
         name: "report.de",
         component: () => System.import("../views/report/de.vue")
       },
       {
         path: "/report/dep",
         meta: { title: "设备故障率" },
-        permission: "report:show",
+        permission: "devicewarnper:list",
         name: "report.dep",
         component: () => System.import("../views/report/dep.vue")
       },

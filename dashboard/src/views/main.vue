@@ -1,5 +1,5 @@
 <style lang="less">
-  @import "./main.less";
+@import "./main.less";
 </style>
 <template>
   <div class="main" :class="{'main-hide-text': shrink}">
@@ -10,9 +10,8 @@
         <div slot="top" class="logo-con">
           <a>
             <Icon type="cube" size="32"></Icon>
-            <h1>应用名</h1>
+            <h1>猿人平台</h1>
           </a>
-
         </div>
       </shrinkable-menu>
     </div>
@@ -30,7 +29,7 @@
         </div>
         <div class="header-avator-con">
           <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
-          <lock-screen></lock-screen>
+          <!-- <lock-screen></lock-screen> -->
           <notice></notice>
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
@@ -66,133 +65,134 @@
   </div>
 </template>
 <script lang="ts">
-  import {
-    Component,
-    Vue,
-    Inject,
-    Prop,
-    Watch
-  } from 'vue-property-decorator';
-  import shrinkableMenu from '../components/shrinkable-menu/shrinkable-menu.vue';
-  import tagsPageOpened from '../components/tags-page-opened.vue';
-  import breadcrumbNav from '../components/breadcrumb-nav.vue';
-  import fullScreen from '../components/fullscreen.vue';
-  import lockScreen from '../components/lockscreen/lockscreen.vue';
-  import notice from '../components/notices/notice.vue';
-  import util from '../lib/util';
-  import auth from '../lib/auth';
-  import copyfooter from '../components/Footer.vue'
-  import AbpBase from '../lib/abpbase'
-  @Component({
-    components: {
-      shrinkableMenu,
-      tagsPageOpened,
-      breadcrumbNav,
-      fullScreen,
-      lockScreen,
-      notice,
-      copyfooter
+import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
+import shrinkableMenu from "../components/shrinkable-menu/shrinkable-menu.vue";
+import tagsPageOpened from "../components/tags-page-opened.vue";
+import breadcrumbNav from "../components/breadcrumb-nav.vue";
+import fullScreen from "../components/fullscreen.vue";
+import lockScreen from "../components/lockscreen/lockscreen.vue";
+import notice from "../components/notices/notice.vue";
+import util from "../lib/util";
+import auth from "../lib/auth";
+import copyfooter from "../components/Footer.vue";
+import AbpBase from "../lib/abpbase";
+@Component({
+  components: {
+    shrinkableMenu,
+    tagsPageOpened,
+    breadcrumbNav,
+    fullScreen,
+    lockScreen,
+    notice,
+    copyfooter
+  }
+})
+export default class Main extends AbpBase {
+  shrink: boolean = false;
+  get userName() {
+    return this.$store.state.session.user
+      ? this.$store.state.session.user.userName
+      : "";
+  }
+  isFullScreen: boolean = false;
+  messageCount: string = "0";
+  get openedSubmenuArr() {
+    return this.$store.state.app.openedSubmenuArr;
+  }
+  get menuList() {
+    return this.$store.state.app.menuList;
+  }
+  get pageTagsList() {
+    return this.$store.state.app.pageOpenedList as Array<any>;
+  }
+  get currentPath() {
+    return this.$store.state.app.currentPath;
+  }
+  get lang() {
+    return this.$store.state.app.lang;
+  }
+  get avatorPath() {
+    return localStorage.avatorImgPath;
+  }
+  get cachePage() {
+    return this.$store.state.app.cachePage;
+  }
+  get menuTheme() {
+    return this.$store.state.app.menuTheme;
+  }
+  get mesCount() {
+    return this.$store.state.app.messageCount;
+  }
+  init() {
+    let pathArr = util.setCurrentPath(this, this.$route.name as string);
+    this.$store.commit("app/updateMenulist");
+    if (pathArr.length >= 2) {
+      this.$store.commit("app/addOpenSubmenu", pathArr[1].name);
     }
-  })
-  export default class Main extends AbpBase {
-    shrink: boolean = false;
-    get userName() {
-      return this.$store.state.session.user ? this.$store.state.session.user.userName : ''
-    }
-    isFullScreen: boolean = false;
-    messageCount: string = '0';
-    get openedSubmenuArr() {
-      return this.$store.state.app.openedSubmenuArr
-    }
-    get menuList() {
-      return this.$store.state.app.menuList;
-    }
-    get pageTagsList() {
-      return this.$store.state.app.pageOpenedList as Array < any > ;
-    }
-    get currentPath() {
-      return this.$store.state.app.currentPath;
-    }
-    get lang() {
-      return this.$store.state.app.lang;
-    }
-    get avatorPath() {
-      return localStorage.avatorImgPath;
-    }
-    get cachePage() {
-      return this.$store.state.app.cachePage;
-    }
-    get menuTheme() {
-      return this.$store.state.app.menuTheme;
-    }
-    get mesCount() {
-      return this.$store.state.app.messageCount;
-    }
-    init() {
-      let pathArr = util.setCurrentPath(this, this.$route.name as string);
-      this.$store.commit('app/updateMenulist');
-      if (pathArr.length >= 2) {
-        this.$store.commit('app/addOpenSubmenu', pathArr[1].name);
-      }
-      let messageCount = 3;
-      this.messageCount = messageCount.toString();
-      this.checkTag(this.$route.name);
-    }
-    toggleClick() {
-      this.shrink = !this.shrink;
-    }
-    handleClickUserDropdown(name: string) {
-      if (name === 'ownSpace') {
-        util.openNewPage(this, 'ownspace_index', null, null);
-        this.$router.push({
-          name: 'ownspace_index'
-        });
-      } else if (name === 'loginout') {
-        this.$store.commit('app/logout', this);
-        auth.clearToken();
-        location.reload();
-      }
-    }
-    checkTag(name ? : string) {
-      let openpageHasTag = this.pageTagsList.some((item: any) => {
-        if (item.name === name) {
-          return true;
-        } else {
-          return false
-        }
+    let messageCount = 3;
+    this.messageCount = messageCount.toString();
+    this.checkTag(this.$route.name);
+  }
+  toggleClick() {
+    this.shrink = !this.shrink;
+  }
+  handleClickUserDropdown(name: string) {
+    if (name === "ownSpace") {
+      util.openNewPage(this, "ownspace_index", null, null);
+      this.$router.push({
+        name: "ownspace_index"
       });
-      if (!openpageHasTag) {
-        util.openNewPage(this, name as string, this.$route.params || {}, this.$route.query || {});
-      }
-    }
-    handleSubmenuChange(val: string) {
-      // console.log(val)
-    }
-    beforePush(name: string) {
-      if (name === 'accesstest_index') {
-        return false;
-      } else {
-        return true;
-      }
-    }
-    fullscreenChange(isFullScreen: boolean) {
-      // console.log(isFullScreen);
-    }
-    @Watch('$route')
-    routeChange(to: any) {
-      this.$store.commit('app/setCurrentPageName', to.name);
-      let pathArr = util.setCurrentPath(this, to.name);
-      if (pathArr.length > 2) {
-        this.$store.commit('app/addOpenSubmenu', pathArr[1].name);
-      }
-      this.checkTag(to.name);
-      localStorage.currentPageName = to.name;
-    }
-    mounted() {
-      this.init();
-    }
-    created() {
-      this.$store.commit('app/setOpenedList');
+    } else if (name === "loginout") {
+      this.$store.commit("app/logout", this);
+      auth.clearToken();
+      location.reload();
     }
   }
+  checkTag(name?: string) {
+    let openpageHasTag = this.pageTagsList.some((item: any) => {
+      if (item.name === name) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (!openpageHasTag) {
+      util.openNewPage(
+        this,
+        name as string,
+        this.$route.params || {},
+        this.$route.query || {}
+      );
+    }
+  }
+  handleSubmenuChange(val: string) {
+    // console.log(val)
+  }
+  beforePush(name: string) {
+    if (name === "accesstest_index") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  fullscreenChange(isFullScreen: boolean) {
+    // console.log(isFullScreen);
+  }
+  @Watch("$route")
+  routeChange(to: any) {
+    this.$store.commit("app/setCurrentPageName", to.name);
+    let pathArr = util.setCurrentPath(this, to.name);
+    if (pathArr.length > 2) {
+      this.$store.commit("app/addOpenSubmenu", pathArr[1].name);
+    }
+    this.checkTag(to.name);
+    localStorage.currentPageName = to.name;
+  }
+  mounted() {
+    this.init();
+  }
+  created() {
+    this.$store.commit("app/setOpenedList");
+  }
+}
 </script>
