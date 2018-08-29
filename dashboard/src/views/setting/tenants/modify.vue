@@ -64,7 +64,7 @@ export default class CreateTenant extends AbpBase {
     });
   }
   activeChange() {
-    this.tenant.isActive = !!!this.tenant.isActive;
+    this.tenant.isActive = !!this.tenant.isActive;
   }
   cancel() {
     (this.$refs.tenantForm as any).resetFields();
