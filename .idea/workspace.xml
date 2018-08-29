@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/store/modules/device.ts" afterPath="$PROJECT_DIR$/dashboard/src/store/modules/device.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/main.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/main.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/setting/category/index.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/category/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,7 +68,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="38">
@@ -115,11 +111,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TenantController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TenantController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="290">
+              <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -173,7 +169,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/ITenantService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/TenantServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Role.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" />
         <option value="$USER_HOME$/Desktop/sale.sql" />
@@ -215,6 +210,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/config/application-prod.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
       </list>
     </option>
   </component>
@@ -532,12 +528,12 @@
       <workItem from="1535280996360" duration="2939000" />
       <workItem from="1535376420756" duration="3662000" />
       <workItem from="1535456549778" duration="9801000" />
-      <workItem from="1535543293172" duration="10748000" />
+      <workItem from="1535543293172" duration="10842000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59098000" />
+    <option name="totallyTimeSpent" value="59192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1093,14 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config/application-prod.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -1121,6 +1109,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding />
         </state>
       </provider>

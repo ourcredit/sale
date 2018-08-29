@@ -37,7 +37,10 @@ export default class CreateTenant extends AbpBase {
     return u;
   }
   save() {
-    (this.$refs.tenantForm as any).validate(async (valid: boolean) => {
+    console.log(this.tenant);
+    return;
+    let from: any = this.$refs.tenantForm as any;
+    from.validate(async (valid: boolean) => {
       if (valid) {
         console.log(this.tenant);
         let type =

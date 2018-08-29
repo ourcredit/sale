@@ -54,28 +54,32 @@ public class TenantController {
     }
 
     @ApiOperation(value = "添加租户", notes = "租户列表")
-    @RequestMapping(value ="/insert", method = RequestMethod.PUT)
+    @RequestMapping(value = "/insert", method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
     public PublicResult<Object> insert(@RequestBody Tenant model) throws Exception {
+        if (model.getName().isEmpty() || model.getDisplayName().isEmpty())
+            return new PublicResult<>(PublicResultConstant.FAILED, "请完善信息");
         Boolean r = _tenantService.insertOrUpdate(model);
         if (model.getId() != null) {
             _tenantService.insertTenantAdmin(model.getId());
         }
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+
     @ApiOperation(value = "编辑租户", notes = "租户列表")
-    @RequestMapping(value ="/update", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
     public PublicResult<Object> update(@RequestBody Tenant model) throws Exception {
         Boolean r = _tenantService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+
     @ApiOperation(value = "删除租户", notes = "租户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._system._tenant.delete})
     public PublicResult<Object> delete(@PathVariable Integer id) throws Exception {
-            Boolean r = _tenantService.deleteById(id);
-            return new PublicResult<>(PublicResultConstant.SUCCESS, r);
+        Boolean r = _tenantService.deleteById(id);
+        return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
 
     @ApiOperation(value = "批量删除租户", notes = "租户列表")
