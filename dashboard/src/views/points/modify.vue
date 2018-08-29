@@ -21,7 +21,6 @@
                     <bm-marker v-else :position="tempPoint" :dragging="false" animation="BMAP_ANIMATION_BOUNCE">
                    </bm-marker>
         </baidu-map>
-        </Tabs>
       </Form>
       <div slot="footer">
         <Button @click="cancel">关闭</Button>

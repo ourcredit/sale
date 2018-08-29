@@ -1,23 +1,23 @@
 <template>
-    <div>
-        <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-            <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="tenant">
-                        <FormItem label="租户名" prop="name">
-                            <Input v-model="tenant.name" :maxlength="32" :minlength="2"/>
-                        </FormItem>
-                        <FormItem label="显示名" prop="displayName">
-                            <Input v-model="tenant.displayName" :maxlength="32"/>
-                        </FormItem>
-                        <FormItem>
-                            <Checkbox @on-change="activeChange" :value="tenant.isActive==1">启用</Checkbox>
-                        </FormItem>
-                          </Form>
-            <div slot="footer">
-                <Button @click="cancel">关闭</Button>
-                <Button @click="save" type="primary">保存</Button>
-            </div>
-        </Modal>
-    </div>
+  <div>
+    <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
+      <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="model">
+        <FormItem label="租户名" prop="name">
+          <Input v-model="model.name" :maxlength="32" :minlength="2" />
+        </FormItem>
+        <FormItem label="显示名" prop="displayName">
+          <Input v-model="model.displayName" :maxlength="32" />
+        </FormItem>
+        <FormItem>
+          <Checkbox @on-change="activeChange" :value="model.isActive==1">启用</Checkbox>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <Button @click="cancel">关闭</Button>
+        <Button @click="save" type="primary">保存</Button>
+      </div>
+    </Modal>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
@@ -31,30 +31,26 @@ export default class CreateTenant extends AbpBase {
     default: false
   })
   value: boolean;
-  get tenant() {
-    var u = this.$store.state.tenant.editTenant;
-    console.log(u);
-    return u;
-  }
+  model: any = {};
   save() {
     console.groupCollapsed("租户信息开始");
-    console.group(this.tenant);
+    console.group(this.model);
     console.groupEnd();
     let from: any = this.$refs.tenantForm as any;
     from.validate(async (valid: boolean) => {
       if (valid) {
         console.groupCollapsed("租户信息--");
-        console.group(this.tenant);
+        console.group(this.model);
         console.groupEnd();
-        if (this.tenant && this.tenant.id) {
+        if (this.model && this.model.id) {
           await this.$store.dispatch({
             type: "tenant/update",
-            data: this.tenant
+            data: this.model
           });
         } else {
           await this.$store.dispatch({
             type: "tenant/insert",
-            data: this.tenant
+            data: this.model
           });
         }
         (this.$refs.tenantForm as any).resetFields();
@@ -64,7 +60,7 @@ export default class CreateTenant extends AbpBase {
     });
   }
   activeChange() {
-    this.tenant.isActive = !!this.tenant.isActive;
+    this.model.isActive = !!!this.model.isActive;
   }
   cancel() {
     (this.$refs.tenantForm as any).resetFields();
