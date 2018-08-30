@@ -44,7 +44,6 @@ public class TenantController {
         Page<Tenant> res = _tenantService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
-
     @ApiOperation(value = "获取租户详情", notes = "租户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._system._tenant.first})

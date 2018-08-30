@@ -72,7 +72,6 @@
 		}
 	}
 </script>
-
 <style>
 	@import "../../common/uni.css";
 	page {

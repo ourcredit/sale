@@ -83,6 +83,7 @@ const store = new Vuex.Store({
 			console.log("子注册"+token)
 			request('/api/device/register', "POST", payload, function (r) {
 				if (r.statusCode == 200 && r.data.data) {
+					console.log("子注册结果"+JSON.stringify(r));
 					state.isRegister = true;
 				}
 			});
@@ -91,7 +92,7 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			let data = {
-				"passWord": "Welcome!@#",
+				"passWord": "1234567",
 				"tenantName": "dizhushuomingzichanganquan",
 				"userName": "admin"
 			};
@@ -117,6 +118,7 @@ const store = new Vuex.Store({
 			}
 			request('/api/order/make', "POST", payload, function (r) {
 				if (r.statusCode == 200 && r.data.data) {
+					console.log(JSON.stringify(r));
 					state.imageUrl = r.data.data;
 				}
 			});

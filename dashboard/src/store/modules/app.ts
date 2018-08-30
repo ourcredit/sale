@@ -230,7 +230,9 @@ class AppModule implements Module<IAppState, any> {
       var tokenExpireDate: any = payload.data.rememberMe
         ? new Date(new Date().getTime() + 1000 * 24 * 60 * 60)
         : undefined;
-      auth.setToken(rep.data.token, tokenExpireDate);
+      if (rep.data.token) {
+        auth.setToken(rep.data.token, tokenExpireDate);
+      }
     }
   };
 }

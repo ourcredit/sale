@@ -21,7 +21,10 @@ ajax.interceptors.request.use(
 let vm: Vue = new Vue({});
 ajax.interceptors.response.use(
   respon => {
-    return respon.data;
+    if (respon.data.result == "00000000") {
+      return respon.data;
+    }
+    vm.$Message.error(respon.data.msg);
   },
   error => {
     if (

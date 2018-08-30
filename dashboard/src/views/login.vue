@@ -71,10 +71,11 @@ export default class Login extends AbpBase {
   async login() {
     (this.$refs.loginform as any).validate(async (valid: boolean) => {
       if (valid) {
-        this.$Message.loading({
-          content: "登录中...",
+        const msg = this.$Message.loading({
+          content: "登陆中...",
           duration: 0
         });
+        setTimeout(msg, 3000);
         await this.$store.dispatch({
           type: "app/login",
           data: this.loginModel

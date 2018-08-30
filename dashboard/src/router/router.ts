@@ -203,14 +203,14 @@ export const appRouters: Array<any> = [
       {
         path: "/report/de",
         meta: { title: "设备故障记录" },
-        permission: "devicewarn:list",
+        permission: "dddddevicewarn:list",
         name: "report.de",
         component: () => System.import("../views/report/de.vue")
       },
       {
         path: "/report/dep",
         meta: { title: "设备故障率" },
-        permission: "devicewarnper:list",
+        permission: "ddddddevicewarnper:list",
         name: "report.dep",
         component: () => System.import("../views/report/dep.vue")
       },
@@ -247,7 +247,7 @@ export const appRouters: Array<any> = [
       },
       {
         path: "tenant",
-        permission: "tenant:list",
+        permission: "ddddtenant:list",
         meta: { title: "运营商管理" },
         name: "tenant",
         component: () => System.import("../views/setting/tenants/index.vue")
