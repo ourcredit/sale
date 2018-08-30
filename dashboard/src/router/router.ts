@@ -158,14 +158,14 @@ export const appRouters: Array<any> = [
       {
         path: "run",
         meta: { title: "监控运行日志" },
-        permission: "runlog:list",
+        permission: "dddddrunlog:list",
         name: "run",
         component: () => System.import("../views/actions/run.vue")
       },
       {
         path: "error",
         meta: { title: "故障日志" },
-        permission: "errorlog:list",
+        permission: "ddddderrorlog:list",
         name: "error",
         component: () => System.import("../views/actions/error.vue")
       }
@@ -203,14 +203,14 @@ export const appRouters: Array<any> = [
       {
         path: "/report/de",
         meta: { title: "设备故障记录" },
-        permission: "dddddevicewarn:list",
+        permission: "devicewarn:list",
         name: "report.de",
         component: () => System.import("../views/report/de.vue")
       },
       {
         path: "/report/dep",
         meta: { title: "设备故障率" },
-        permission: "ddddddevicewarnper:list",
+        permission: "devicewarnper:list",
         name: "report.dep",
         component: () => System.import("../views/report/dep.vue")
       },
