@@ -20,10 +20,11 @@
 					</view>
 					<view class="uni-flex uni-row">
 						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
-							<button v-if="step==1" @click="gotobuy">确认购买</button>
+							<button v-if="step==1" @click="gotowechatbuy">微信购买</button>	
+							<button v-if="step==1" @click="gotoalibuy">支付宝购买</button>
 							<image v-if="step==2" style="width:200px;height:200px;" :src="qrcode">二维码</image>
-							<button v-if="step==3" @click="gotobuy">出货中</button>
-							<button v-if="step==4" @click="gotobuy">出货完成</button>
+							<button v-if="step==3" >出货中</button>
+							<button v-if="step==4" >出货完成</button>
 
 						</view>
 					</view>
@@ -160,15 +161,31 @@
 				}
 			},
 			scroll() {},
-			gotobuy() {
+			gotowechatbuy() {
 				if (!this.current || !this.current.productId) {
 					return;
 				}
 				let params = {
 					"deviceNum": plus.device.imei.split(',')[0],
 					"price": this.current.price,
-					"productId": this.current.productId
+					"productId": this.current.productId,
+					"isWechatOrder":true
 				}
+				console.log("wwww"+ JSON.stringify(params))
+				this.gobuy(params);
+				this.setStep(2);
+			},
+			gotoalibuy() {
+				if (!this.current || !this.current.productId) {
+					return;
+				}
+				let params = {
+					"deviceNum": plus.device.imei.split(',')[0],
+					"price": this.current.price,
+					"productId": this.current.productId,
+					"isWechatOrder":false
+				}
+				console.log("wwww"+ JSON.stringify(params))
 				this.gobuy(params);
 				this.setStep(2);
 			}

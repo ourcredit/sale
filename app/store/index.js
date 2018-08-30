@@ -117,8 +117,9 @@ const store = new Vuex.Store({
 				payload.deviceNum = state.deviceCode;
 			}
 			request('/api/order/make', "POST", payload, function (r) {
+				console.log(JSON.stringify(r));
+
 				if (r.statusCode == 200 && r.data.data) {
-					console.log(JSON.stringify(r));
 					state.imageUrl = r.data.data;
 				}
 			});
