@@ -37,28 +37,29 @@ export default class CreateTenant extends AbpBase {
     return t;
   }
   save() {
+    var _ = this;
     console.groupCollapsed("租户信息开始");
-    console.group(this.tenant);
+    console.group(_.tenant);
     console.groupEnd();
-    (this.$refs.tenantForm as any).validate(async (valid: boolean) => {
+    (_.$refs.tenantForm as any).validate(async (valid: boolean) => {
       if (valid) {
         console.groupCollapsed("租户信息--");
-        console.group(this.tenant);
+        console.group(_.tenant);
         console.groupEnd();
-        if (this.tenant && this.tenant.id) {
-          await this.$store.dispatch({
+        if (_.tenant && _.tenant.id) {
+          await _.$store.dispatch({
             type: "tenant/update",
-            data: this.tenant
+            data: _.tenant
           });
         } else {
-          await this.$store.dispatch({
+          await _.$store.dispatch({
             type: "tenant/insert",
-            data: this.tenant
+            data: _.tenant
           });
         }
-        (this.$refs.tenantForm as any).resetFields();
-        this.$emit("save-success");
-        this.$emit("input", false);
+        (_.$refs.tenantForm as any).resetFields();
+        _.$emit("save-success");
+        _.$emit("input", false);
       }
     });
   }
