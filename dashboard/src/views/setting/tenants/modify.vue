@@ -46,6 +46,7 @@ export default class CreateTenant extends AbpBase {
         console.groupCollapsed("租户信息--");
         console.group(_.tenant);
         console.groupEnd();
+        debugger;
         if (_.tenant && _.tenant.id) {
           await _.$store.dispatch({
             type: "tenant/update",

@@ -69,6 +69,7 @@ export default class SaleTable extends AbpBase {
     this.selections = e.map((c: any) => c.id);
   }
   pageChange(page: number) {
+    debugger;
     this.$store.commit(`${this.type}/setCurrentPage`, page);
     this.getpage();
   }

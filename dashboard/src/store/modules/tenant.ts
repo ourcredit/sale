@@ -24,9 +24,7 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
       payload: any
     ): Promise<void> {
       context.state.loading = true;
-      let reponse: any = await Ajax.post("/api/tenant", {
-        params: payload.data
-      });
+      let reponse: any = await Ajax.post("/api/tenant", payload.data);
       context.state.loading = false;
       let page: PageResult<Tenant> = reponse.data as PageResult<Tenant>;
       context.state.totalCount = page.total;
