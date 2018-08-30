@@ -50,7 +50,6 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     return  _userRepository.selectByTenantAndName(tenantId,username);
     }
 
-    @Cacheable(value = "UserDto", key = "'user_dto_'.concat(#root.args[0])")
     public UserDto selectUserRole(Integer id) {
         UserDto r = _userRepository.selectUserRole(id);
         return r;
@@ -82,7 +81,9 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
                 u.setIsActive(input.isActive);
                 u.setUserName(input.userName);
                 u.setAreaId(input.areaId);
-                u.setPassword(BCrypt.hashpw(input.password, BCrypt.gensalt()));
+                if(input.password!=null&&!input.password.isEmpty()){
+                    u.setPassword(BCrypt.hashpw(input.password, BCrypt.gensalt()));
+                }
                 this.updateById(u);
             }
         }
@@ -93,12 +94,12 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
             List<Userrole> urs = new ArrayList<>();
             ew = new EntityWrapper();
             ew.eq("isStatic", 1);
-            List<Role> rs = _roleRepository.selectList(ew);
+         //   List<Role> rs = _roleRepository.selectList(ew);
             List<Integer> temp = new ArrayList<>();
 
-            for (Role r : rs) {
-                temp.add(r.getId());
-            }
+//            for (Role r : rs) {
+//                temp.add(r.getId());
+//            }
             for (Integer r : input.roles) {
                 if (!temp.contains(r)) {
                     urs.add(new Userrole(u.getId(), r));

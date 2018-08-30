@@ -1,15 +1,15 @@
 <template>
   <div>
     <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-      <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="model">
+      <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="tenant">
         <FormItem label="租户名" prop="name">
-          <Input v-model="model.name" :maxlength="32" :minlength="2" />
+          <Input v-model="tenant.name" :maxlength="32" :minlength="2" />
         </FormItem>
         <FormItem label="显示名" prop="displayName">
-          <Input v-model="model.displayName" :maxlength="32" />
+          <Input v-model="tenant.displayName" :maxlength="32" />
         </FormItem>
         <FormItem>
-          <Checkbox @on-change="activeChange" :value="model.isActive==1">启用</Checkbox>
+          <Checkbox @on-change="activeChange" :value="tenant.isActive==1">启用</Checkbox>
         </FormItem>
       </Form>
       <div slot="footer">
@@ -31,26 +31,28 @@ export default class CreateTenant extends AbpBase {
     default: false
   })
   value: boolean;
-  model: any = {};
+  get tenant() {
+    return this.$store.state.tenant.editTenant;
+  }
   save() {
     console.groupCollapsed("租户信息开始");
-    console.group(this.model);
+    console.group(this.tenant);
     console.groupEnd();
     let from: any = this.$refs.tenantForm as any;
     from.validate(async (valid: boolean) => {
       if (valid) {
         console.groupCollapsed("租户信息--");
-        console.group(this.model);
+        console.group(this.tenant);
         console.groupEnd();
-        if (this.model && this.model.id) {
+        if (this.tenant && this.tenant.id) {
           await this.$store.dispatch({
             type: "tenant/update",
-            data: this.model
+            data: this.tenant
           });
         } else {
           await this.$store.dispatch({
             type: "tenant/insert",
-            data: this.model
+            data: this.tenant
           });
         }
         (this.$refs.tenantForm as any).resetFields();
@@ -60,7 +62,7 @@ export default class CreateTenant extends AbpBase {
     });
   }
   activeChange() {
-    this.model.isActive = !!!this.model.isActive;
+    this.tenant.isActive = !!!this.tenant.isActive;
   }
   cancel() {
     (this.$refs.tenantForm as any).resetFields();

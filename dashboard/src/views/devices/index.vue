@@ -18,11 +18,11 @@
               <FormItem label="设备编号:">
                 <Input v-model="filters.deviceNum" />
               </FormItem>
-              <FormItem label="设备类型:">
+              <!-- <FormItem label="设备类型:">
                 <Select clearable v-model="filters.deviceType" style="width:160px">
                   <Option v-for="item in cates" :value="item" :key="item">{{ item }}</Option>
                 </Select>
-              </FormItem>
+              </FormItem> -->
               <FormItem label="所属点位:">
                 <Input v-model="filters.pointName" />
               </FormItem>
@@ -61,7 +61,7 @@ export default class deviceC extends AbpBase {
   filters: any = {
     deviceName: "",
     deviceNum: "",
-    deviceType: "",
+    // deviceType: "",
     pointName: "",
     areaId: null
   };
@@ -97,10 +97,10 @@ export default class deviceC extends AbpBase {
       title: "设备编号",
       key: "deviceNum"
     },
-    {
-      title: "设备类型",
-      key: "deviceType"
-    },
+    // {
+    //   title: "设备类型",
+    //   key: "deviceType"
+    // },
     {
       title: "所属点位",
       key: "pointName"

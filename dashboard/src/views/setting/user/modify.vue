@@ -73,14 +73,6 @@ export default class CreateUser extends AbpBase {
           return c;
         });
       }
-    } else {
-      var t = this.roles.filter((c: any) => c.isStatic == 1);
-      if (t && t.length) {
-        this.selectRoles = t.map((c: any) => {
-          if (c instanceof Object) return c.id;
-          return c;
-        });
-      }
     }
     return u;
   }
@@ -151,18 +143,7 @@ export default class CreateUser extends AbpBase {
         message: "姓名必填",
         trigger: "blur"
       }
-    ],
-    password: [
-      {
-        required: true,
-        message: "密码必填",
-        trigger: "blur"
-      }
-    ],
-    confirmPassword: {
-      validator: this.validatePassCheck,
-      trigger: "blur"
-    }
+    ]
   };
 }
 </script>
