@@ -1,7 +1,7 @@
 <template>
   <div>
     <Modal title="添加新租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-      <Form ref="tenantForm" label-position="top" :rules="tenantRule" :model="tenant">
+      <Form ref="tenantForm" label-position="top"  :model="tenant">
         <FormItem label="租户名" prop="name">
           <Input v-model="tenant.name" :maxlength="32" :minlength="2" />
         </FormItem>
@@ -32,14 +32,15 @@ export default class CreateTenant extends AbpBase {
   })
   value: boolean;
   get tenant() {
-    return this.$store.state.tenant.editTenant;
+    var t = this.$store.state.tenant.editTenant;
+    console.log(t);
+    return t;
   }
   save() {
     console.groupCollapsed("租户信息开始");
     console.group(this.tenant);
     console.groupEnd();
-    let from: any = this.$refs.tenantForm as any;
-    from.validate(async (valid: boolean) => {
+    (this.$refs.tenantForm as any).validate(async (valid: boolean) => {
       if (valid) {
         console.groupCollapsed("租户信息--");
         console.group(this.tenant);

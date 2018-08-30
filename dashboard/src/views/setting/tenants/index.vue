@@ -147,6 +147,7 @@ export default class Tenants extends AbpBase {
 
   Create() {
     var u = new Tenant();
+    console.log(u);
     this.$store.commit("tenant/edit", u);
     this.ModalShow = true;
   }
