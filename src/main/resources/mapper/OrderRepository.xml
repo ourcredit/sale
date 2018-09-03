@@ -47,14 +47,6 @@
         SUM( price ) AS sale,
         COUNT( productId ) AS count,
         ( SELECT COUNT( 1 ) FROM sale_device
-        <where>
-            <if test="start!=null">
-                 creationTime >= #{start}
-            </if>
-            <if test="end!=null">
-                and creationTime &lt;= #{end}
-            </if>
-        </where>
         ) AS device,
         ( SELECT COUNT( 1 ) FROM sale_log
         <where>

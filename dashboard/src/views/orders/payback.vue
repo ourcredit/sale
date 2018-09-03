@@ -100,7 +100,10 @@ export default class Orders extends AbpBase {
     },
     {
       title: "设备编号",
-      key: "wechatOrder"
+      key: "wechatOrder",
+      render: (h: any, params: any) => {
+        return h("span", params.row.wechatOrder.split("_")[0]);
+      }
     },
     {
       title: "设备类型",

@@ -25,7 +25,9 @@ import com.monkey.core.mapper.OrderRepository;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
+import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
+import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,6 +210,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         Map<String, Object> result = new HashMap<>();
         TodayStatical tr = _orderRepository.getOrderStatical(DateUtil.getStartTime(), DateUtil.getEndTime());
         TodayStatical mr = _orderRepository.getOrderStatical(DateUtil.getStartTime(start), DateUtil.getEndTime(end));
+      Integer count=  WebSocketServer.getOnlineCount();
+        tr.setDevice(count);
         result.put("today", tr);
         result.put("month", mr);
         return result;
