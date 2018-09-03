@@ -59,7 +59,7 @@ FROM
 	sale_tenant a
 	INNER JOIN sale_user b ON a.id = b.tenantId
 WHERE
-	a.`name` = #{tenant}
+	a.`tenantName` = #{tenant}
 	AND b.account =#{account}
     </select>
     <select id="selectByTenantAndName" resultType="com.monkey.core.entity.User">

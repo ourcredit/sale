@@ -111,7 +111,10 @@ export default class OperateLog extends AbpBase {
       title: "请求时间",
       key: "createTime",
       render: (h: any, params: any) => {
-        return h("span", new Date(params.row.createTime).toLocaleDateString());
+        return h(
+          "span",
+          new Date(params.row.creationTime).toLocaleDateString()
+        );
       }
     },
     {

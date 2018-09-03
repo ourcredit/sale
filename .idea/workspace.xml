@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/lib/url.ts" afterPath="$PROJECT_DIR$/dashboard/src/lib/url.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/setting/tenant/index.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/tenant/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/setting/tenant/modify.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/setting/tenant/modify.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/TenantRepository.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/actions/action.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/actions/action.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,16 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="OrderController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/OrderController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="106" column="42" lean-forward="false" selection-start-line="106" selection-start-column="42" selection-end-line="106" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IOrderService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/IOrderService.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -52,44 +37,6 @@
                 <element signature="method#getKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
                 <element signature="method#getMonthKeysAndValues#0;class#OrderServiceImpl#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderRepository.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/OrderRepository.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-167">
-              <caret line="49" column="20" lean-forward="false" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
-              <folding>
-                <marker date="1535978177305" expanded="true" signature="1520:1855" ph="update sale_... " />
-                <marker date="1535978177305" expanded="true" signature="3146:3675" ph="SELECT DATE_... " />
-                <marker date="1535978177305" expanded="true" signature="3805:4334" ph="SELECT DATE_... " />
-                <marker date="1535978177305" expanded="true" signature="4466:4895" ph="select point... " />
-                <marker date="1535978177305" expanded="true" signature="5023:5438" ph="SELECT payTy... " />
-                <marker date="1535978177305" expanded="true" signature="5537:5626" ph="SELECT * FRO... sale_payfor" />
-                <marker date="1535978177305" expanded="true" signature="5727:5824" ph="SELECT top 1... sale_payfor" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebSocketServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/WebSocketServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="28" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -139,9 +86,53 @@
       <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="328">
+              <caret line="59" column="91" lean-forward="true" selection-start-line="59" selection-start-column="91" selection-end-line="59" selection-end-column="91" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IUserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="157">
+              <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRepository.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserRepository.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="59" column="47" lean-forward="true" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
+              <folding>
+                <marker date="1535980177779" expanded="true" signature="2020:2294" ph="SELECT a.*, sale_user" />
+                <marker date="1535980177779" expanded="true" signature="2402:2539" ph="SELECT b.* F... sale_tenant" />
+                <marker date="1535980177779" expanded="true" signature="2643:2716" ph="select * fro... sale_user" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -215,7 +206,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/PayforController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/InitConst.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/common/base/PermissionConst.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" />
         <option value="$PROJECT_DIR$/init.sql" />
         <option value="$PROJECT_DIR$/src/main/resources/config/application-prod.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TreeController.java" />
@@ -237,6 +227,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/core/entity/Tenant.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/TenantController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml" />
       </list>
     </option>
   </component>
@@ -539,19 +530,18 @@
       <workItem from="1535543293172" duration="11441000" />
       <workItem from="1535630630536" duration="2877000" />
       <workItem from="1535638985185" duration="1073000" />
-      <workItem from="1535976348395" duration="2360000" />
+      <workItem from="1535976348395" duration="2773000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69229000" />
+    <option name="totallyTimeSpent" value="69642000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47689074" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="调试" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47689074" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -671,12 +661,6 @@
           <line>67</line>
           <properties />
           <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java</url>
-          <line>46</line>
-          <properties />
-          <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java</url>
@@ -860,39 +844,6 @@
         <state relative-caret-position="684">
           <caret line="57" column="42" lean-forward="false" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="19" column="12" lean-forward="false" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="43" column="19" lean-forward="true" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-          <folding>
-            <marker date="1535552203952" expanded="true" signature="2020:2294" ph="SELECT a.*, sale_user" />
-            <marker date="1535552203952" expanded="true" signature="2402:2533" ph="SELECT b.* F... sale_tenant" />
-            <marker date="1535552203952" expanded="true" signature="2637:2710" ph="select * fro... sale_user" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="41" column="12" lean-forward="false" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="50" column="5" lean-forward="true" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1191,10 +1142,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/IUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="27" column="9" lean-forward="false" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/application/Controls/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="58" column="39" lean-forward="false" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/UserRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserRepository.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="59" column="47" lean-forward="true" selection-start-line="59" selection-start-column="47" selection-end-line="59" selection-end-column="47" />
+          <folding>
+            <marker date="1535980177779" expanded="true" signature="2020:2294" ph="SELECT a.*, sale_user" />
+            <marker date="1535980177779" expanded="true" signature="2402:2539" ph="SELECT b.* F... sale_tenant" />
+            <marker date="1535980177779" expanded="true" signature="2643:2716" ph="select * fro... sale_user" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="328">
+          <caret line="59" column="91" lean-forward="true" selection-start-line="59" selection-start-column="91" selection-end-line="59" selection-end-column="91" />
           <folding />
         </state>
       </provider>
