@@ -2,11 +2,11 @@
     <div>
         <Modal title="编辑租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
             <Form ref="userForm" label-position="top" :rules="userRule" :model="cate">
-                        <FormItem label="名称" prop="name">
-                            <Input v-model="cate.name"  />
+                        <FormItem label="名称" >
+                            <Input v-model="cate.name" :maxlength="32" />
                         </FormItem>
-                          <FormItem label="显示名" prop="displayName">
-                            <Input v-model="cate.displayName"  />
+                          <FormItem label="显示名" >
+                            <Input v-model="cate.displayName" :maxlength="32" />
                         </FormItem>
             </Form>
             <div slot="footer">
