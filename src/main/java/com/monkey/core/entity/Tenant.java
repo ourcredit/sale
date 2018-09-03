@@ -23,8 +23,8 @@ public class Tenant extends Model<Tenant> {
 
     private static final long serialVersionUID = 1L;
     public  Tenant(){}
-    public  Tenant(String name,String displayName){
-        this.name=name;
+    public  Tenant(String tenantName,String displayName){
+        this.tenantName=tenantName;
         this.displayName=displayName;
         this.isActive=1;
     }
@@ -40,7 +40,16 @@ public class Tenant extends Model<Tenant> {
     /**
      * 名称
      */
-    private String name;
+    private String tenantName;
+
+    public String getTenantName() {
+        return tenantName;
+    }
+
+    public void setTenantName(String tenantName) {
+        this.tenantName = tenantName;
+    }
+
     /**
      * 创建时间
      */
@@ -83,13 +92,7 @@ public class Tenant extends Model<Tenant> {
         this.displayName = displayName;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Date getCreationTime() {
         return creationTime;
@@ -117,7 +120,7 @@ public class Tenant extends Model<Tenant> {
         return "Tenant{" +
         "id=" + id +
         ", displayName=" + displayName +
-        ", name=" + name +
+        ", tenantName=" + tenantName +
         ", creationTime=" + creationTime +
         ", creatorUserId=" + creatorUserId +
         "}";

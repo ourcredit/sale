@@ -6,14 +6,14 @@
     <resultMap id="BaseResultMap" type="com.monkey.core.entity.Tenant">
         <id column="id" property="id"/>
         <result column="displayName" property="displayName"/>
-        <result column="name" property="name"/>
+        <result column="tenantName" property="tenantName"/>
         <result column="creationTime" property="creationTime"/>
         <result column="creatorUserId" property="creatorUserId"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, displayName, name, creationTime, creatorUserId
+        id, displayName, tenantName, creationTime, creatorUserId
     </sql>
 
     <insert id="insertTenantAdmin" useGeneratedKeys="true" keyProperty="id" parameterType="com.monkey.core.entity.User">

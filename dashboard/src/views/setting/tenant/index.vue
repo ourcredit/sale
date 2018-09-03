@@ -75,7 +75,7 @@ export default class Users extends AbpBase {
     },
     {
       title: "租户名",
-      key: "name"
+      key: "tenantName"
     },
     {
       title: "显示名",

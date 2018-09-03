@@ -56,7 +56,7 @@ public class TenantController {
     @RequestMapping(value = "/insert", method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._tenant.modify})
     public PublicResult<Object> insert(@RequestBody Tenant model) throws Exception {
-        if (model.getName().isEmpty() || model.getDisplayName().isEmpty())
+        if (model.getTenantName().isEmpty() || model.getDisplayName().isEmpty())
             return new PublicResult<>(PublicResultConstant.FAILED, "请完善信息");
         Boolean r = _tenantService.insertOrUpdate(model);
         if (model.getId() != null) {

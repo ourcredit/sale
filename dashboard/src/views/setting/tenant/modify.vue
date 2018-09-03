@@ -2,10 +2,10 @@
     <div>
         <Modal title="编辑租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
             <Form ref="userForm" label-position="top" :rules="userRule" :model="cate">
-                        <FormItem label="名称" >
-                            <Input v-model="cate.name" :maxlength="32" />
+                        <FormItem label="名称" prop="tenantName">
+                            <Input v-model="cate.tenantName" :maxlength="32" />
                         </FormItem>
-                          <FormItem label="显示名" >
+                          <FormItem label="显示名" prop="displayName">
                             <Input v-model="cate.displayName" :maxlength="32" />
                         </FormItem>
             </Form>
@@ -70,7 +70,7 @@ export default class CreateTenant extends AbpBase {
     }
   }
   userRule = {
-    name: [
+    tenantName: [
       {
         required: true,
         message: "名称必填",
