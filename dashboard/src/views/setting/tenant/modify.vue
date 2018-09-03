@@ -1,20 +1,23 @@
 <template>
-    <div>
-        <Modal title="编辑租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
-            <Form ref="userForm" label-position="top" :rules="userRule" :model="cate">
-                        <FormItem label="名称" prop="tenantName">
-                            <Input v-model="cate.tenantName" :maxlength="32" />
-                        </FormItem>
-                          <FormItem label="显示名" prop="displayName">
-                            <Input v-model="cate.displayName" :maxlength="32" />
-                        </FormItem>
-            </Form>
-            <div slot="footer">
-                <Button @click="cancel">关闭</Button>
-                <Button @click="save" type="primary">保存</Button>
-            </div>
-        </Modal>
-    </div>
+  <div>
+    <Modal title="编辑租户" :value="value" @on-ok="save" @on-visible-change="visibleChange">
+      <Form ref="userForm" label-position="top" :rules="userRule" :model="cate">
+        <FormItem label="名称" prop="a">
+          <Input v-model="cate.tenantName" :maxlength="32" />
+        </FormItem>
+        <FormItem label="显示名" prop="b">
+          <Input v-model="cate.displayName" :maxlength="32" />
+        </FormItem>
+        <FormItem>
+          <Checkbox @on-change="activeChange" :value="cate.isActive==1">启用</Checkbox>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <Button @click="cancel">关闭</Button>
+        <Button @click="save" type="primary">保存</Button>
+      </div>
+    </Modal>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
@@ -34,21 +37,19 @@ export default class CreateTenant extends AbpBase {
   }
   save() {
     var _ = this;
-    console.groupCollapsed("租户信息开始");
-    console.group(_.cate);
-    console.groupEnd();
+
     (this.$refs.userForm as any).validate(async (valid: boolean) => {
       if (valid) {
-        console.groupCollapsed("租户信息--");
-        console.group(_.cate);
-        console.groupEnd();
-        debugger;
         if (_.cate && _.cate.id) {
           await _.$store.dispatch({
             type: "tenant/update",
             data: _.cate
           });
         } else {
+          if (!_.cate.tenantName || !_.cate.displayName) {
+            this.$Message.info("请完善必填信息");
+            return;
+          }
           await _.$store.dispatch({
             type: "tenant/insert",
             data: _.cate
@@ -59,6 +60,9 @@ export default class CreateTenant extends AbpBase {
         this.$emit("input", false);
       }
     });
+  }
+  activeChange() {
+    this.cate.isActive = !!!this.cate.isActive;
   }
   cancel() {
     (this.$refs.userForm as any).resetFields();
