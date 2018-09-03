@@ -5,7 +5,6 @@ import { Store, Module, ActionContext } from "vuex";
 interface ISessionState {
   application: any;
   user: any;
-  tenant: any;
   roles: any;
   canBack: Boolean;
 }
@@ -14,7 +13,6 @@ class SessionStore implements Module<ISessionState, any> {
   state = {
     application: null,
     user: null,
-    tenant: null,
     roles: null,
     canBack: false
   };

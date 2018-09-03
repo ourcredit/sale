@@ -247,7 +247,7 @@ export const appRouters: Array<any> = [
       },
       {
         path: "tenant",
-        permission: "ddddtenant:list",
+        permission: "tenant:list",
         meta: { title: "运营商管理" },
         name: "tenant",
         component: () => System.import("../views/setting/tenants/index.vue")
