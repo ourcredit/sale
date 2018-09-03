@@ -11,6 +11,7 @@ import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Order;
+import com.monkey.web.annotation.Log;
 import com.monkey.web.controller.dtos.OrderInput;
 import com.monkey.web.controller.dtos.RequestDateDto;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ public class OrderController {
         Order m = _orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
-
+    @Log(description="订单接口:/客户下单操作")
     @ApiOperation(value = "客户下单操作", notes = "订单列表")
     @RequestMapping(value = "/make", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
@@ -76,7 +77,7 @@ public class OrderController {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
     }
-
+    @Log(description="订单接口:/退款操作")
     @ApiOperation(value = "退款操作", notes = "订单列表")
     @RequestMapping(value = "/back/{orderId}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._orders._order.back})
@@ -99,34 +100,5 @@ public class OrderController {
         }
     }
 
-    @ApiOperation(value = "获取首页统计", notes = "订单列表")
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> staticals() throws Exception {
-        try {
-            Map r = _orderService.getDashboard();
-            if (r != null) {
-                return new PublicResult<>(PublicResultConstant.SUCCESS, r);
-            }
-            return new PublicResult<>(PublicResultConstant.ERROR, "获取统计失败");
-        } catch (Exception e) {
-            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
-        }
-    }
-
-    @ApiOperation(value = "获取首页统计", notes = "订单列表")
-    @RequestMapping(value = "/total", method = RequestMethod.POST)
-    @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> todays(@RequestBody RequestDateDto input) throws Exception {
-        try {
-            Map r = _orderService.getStaticial(input.start, input.end);
-            if (r != null) {
-                return new PublicResult<>(PublicResultConstant.SUCCESS, r);
-            }
-            return new PublicResult<>(PublicResultConstant.ERROR, "获取统计失败");
-        } catch (Exception e) {
-            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
-        }
-    }
 }
 

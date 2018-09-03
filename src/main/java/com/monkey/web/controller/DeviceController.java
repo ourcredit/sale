@@ -14,6 +14,7 @@ import com.monkey.core.dtos.ProductDto;
 import com.monkey.core.entity.Device;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
+import com.monkey.web.annotation.Log;
 import com.monkey.web.annotation.Pass;
 import com.monkey.web.controller.dtos.DeviceProductInput;
 import com.monkey.web.controller.dtos.ProductInput;
@@ -66,6 +67,7 @@ public class DeviceController {
         Device m=_deviceService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
+    @Log(description="设备接口:/上位机自动注册")
     @ApiOperation(value = "设备自注册",notes = "设备列表")
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @Pass
@@ -111,7 +113,7 @@ public class DeviceController {
         Page<ProductDto> res= _deviceService.selectProductsByDeviceId(new Page<>(page.index,page.size),page.deviceNum);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
-
+    @Log(description="设备接口:/批量更新商品")
     @ApiOperation(value = "批量更新商品",notes = "设备列表")
     @RequestMapping(value = "/products",method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._devices._device.allow})

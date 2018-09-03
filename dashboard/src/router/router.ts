@@ -158,14 +158,14 @@ export const appRouters: Array<any> = [
       {
         path: "run",
         meta: { title: "监控运行日志" },
-        permission: "dddddrunlog:list",
+        permission: "runlog:list",
         name: "run",
         component: () => System.import("../views/actions/run.vue")
       },
       {
         path: "error",
         meta: { title: "故障日志" },
-        permission: "ddddderrorlog:list",
+        permission: "errorlog:list",
         name: "error",
         component: () => System.import("../views/actions/error.vue")
       }

@@ -12,6 +12,7 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Category;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class CategoryController {
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
 
-
+    @Log(description="分类接口:/添加或编辑分类")
     @ApiOperation(value = "添加或编辑分类",notes = "分类列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._category.modify})
@@ -66,6 +67,7 @@ public class CategoryController {
         Boolean r=_categoryService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="分类接口:/{id}")
     @ApiOperation(value = "删除分类",notes = "分类列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._system._category.delete})

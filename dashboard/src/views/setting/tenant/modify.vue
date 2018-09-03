@@ -37,7 +37,6 @@ export default class CreateTenant extends AbpBase {
   }
   save() {
     var _ = this;
-
     (this.$refs.userForm as any).validate(async (valid: boolean) => {
       if (valid) {
         if (_.cate && _.cate.id) {

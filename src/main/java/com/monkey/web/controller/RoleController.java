@@ -12,6 +12,7 @@ import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.dtos.RoleDto;
 import com.monkey.core.entity.Role;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class RoleController {
     IRoleService _roleService;
 
 
-    // @Log(description="获取用户列表:/list")
+
     @ApiOperation(value = "获取角色列表", notes = "角色列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._system._role.list})
@@ -51,7 +52,7 @@ public class RoleController {
         RoleDto r = _roleService.selectRoleAndPermissionsById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
-
+    @Log(description="角色接口:/添加或编辑角色")
     @ApiOperation(value = "添加或编辑角色", notes = "角色列表")
     @RequestMapping( method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._role.modify})
@@ -59,6 +60,7 @@ public class RoleController {
         Boolean r = _roleService.insertRoleAndPermissions(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="角色接口:/删除角色")
 
     @ApiOperation(value = "删除角色", notes = "角色列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -67,6 +69,7 @@ public class RoleController {
         Boolean r = _roleService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="角色接口:/批量删除角色")
 
     @ApiOperation(value = "批量删除角色", notes = "角色列表")
     @RequestMapping(value = "/batch", method = RequestMethod.POST)

@@ -8,12 +8,16 @@ import com.alipay.api.request.AlipayTradeRefundRequest;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.monkey.application.Device.IDeviceService;
 import com.monkey.common.util.DateUtil;
 import com.monkey.common.wechatsdk.HttpUtil;
 import com.monkey.common.wechatsdk.PayConfig;
 import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
+import com.monkey.core.dtos.DeviceSaleStatical;
+import com.monkey.core.dtos.ProductSaleStatical;
 import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
 import com.monkey.core.entity.Device;
@@ -27,6 +31,7 @@ import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
+import com.monkey.web.controller.dtos.StaticalInput;
 import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -189,6 +194,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
        }
        return  to;
     }
+
+    @Override
+    public Page<DeviceSaleStatical> getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input) {
+        List<DeviceSaleStatical>  t=  _orderRepository.getDeviceSaleStatical(page,input.deviceName,input.pointName,input.start,input.end);
+        return  page.setRecords(t);
+    }
+
+    @Override
+    public Page<ProductSaleStatical> getProductSaleStatical(Page<ProductSaleStatical>  page, StaticalInput input) {
+        List<ProductSaleStatical>  t=  _orderRepository.getProductSaleStatical(page,input.productName,input.deviceName,input.start,input.end);
+        return page.setRecords(t);
+    }
+
     @Override
     public Map<String, Object> getDashboard() {
         Map<String, Object> result = new HashMap<>();

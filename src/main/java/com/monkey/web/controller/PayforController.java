@@ -7,6 +7,7 @@ import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.core.entity.Payfor;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class PayforController {
     @Autowired
     IPayforService _payforService;
 
-
+    @Log(description="支付设置接口:/获取支付设置详情")
     @ApiOperation(value = "获取支付设置详情",notes = "支付信息列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._paySetting._pay.first})
@@ -40,6 +41,7 @@ public class PayforController {
         }
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
+    @Log(description="支付设置接口:/添加或编辑支付设置")
     @ApiOperation(value = "添加或编辑支付设置",notes = "支付信息列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._paySetting._pay.modify})

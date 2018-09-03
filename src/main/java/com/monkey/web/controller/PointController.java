@@ -10,6 +10,7 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Point;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class PointController {
         Point m=_pointService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
+    @Log(description="点位接口:/添加或编辑点位")
     @ApiOperation(value = "添加或编辑点位",notes = "点位列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._pointer._point.modify})
@@ -57,6 +59,7 @@ public class PointController {
         Boolean r=_pointService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="点位接口:/删除点位")
     @ApiOperation(value = "删除点位",notes = "点位列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._pointer._point.delete})
@@ -64,6 +67,7 @@ public class PointController {
         Boolean r=_pointService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="点位接口:/批量删除点位")
     @ApiOperation(value = "批量删除点位",notes = "点位列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._pointer._point.batch})

@@ -51,7 +51,7 @@
         ( SELECT COUNT( 1 ) FROM sale_log
         <where>
             <if test="start!=null">
-                 creationTime >= #{start}
+                creationTime >= #{start}
             </if>
             <if test="end!=null">
                 and creationTime &lt;= #{end}
@@ -73,7 +73,7 @@
         sale_order a
         <where>
             <if test="start!=null">
-                 a.creationTime >= #{start}
+                a.creationTime >= #{start}
             </if>
             <if test="end!=null">
                 and a.creationTime &lt;= #{end}
@@ -176,6 +176,81 @@ WHERE
         sale_payfor
         WHERE
         alipayId = #{appId}
+    </select>
+    <select id="getDeviceSaleStatical" resultType="com.monkey.core.dtos.DeviceSaleStatical">
+        SELECT
+        a.deviceNum,
+        a.deviceName,
+        a.deviceType,
+        a.pointName,
+        b.productId ,c.productName,c.saleCount,c.saleMoney
+        FROM
+        sale_device a
+        INNER JOIN sale_device_product b ON a.id = b.deviceId
+        AND b.isSale =1
+        INNER JOIN (SELECT
+        productId,productName,
+        COUNT( productId ) as saleCount,
+        SUM( price ) as saleMoney
+        FROM
+        sale_order
+        WHERE
+        payState = 1
+        AND orderState = 1
+        <if test="start!=null">
+            and creationTime >= #{start}
+        </if>
+        <if test="end!=null">
+            and creationTime &lt;= #{end}
+        </if>
+        GROUP BY
+        productId,productName) c on b.productId =c.productId
+        <where>
+            <if test="deviceName!=null">
+                a.deviceName like '%${deviceName}%'
+            </if>
+            <if test="pointName!=null">
+                a.pointName like '%${pointName}%'
+            </if>
+            ORDER BY c.saleCount desc
+        </where>
+    </select>
+    <select id="getProductSaleStatical" resultType="com.monkey.core.dtos.ProductSaleStatical">
+SELECT
+	a.*,c.deviceName
+FROM
+	(
+SELECT
+	productId,
+	productName,
+	COUNT( a.productId ) saleCount,
+	SUM( a.price ) saleMoney
+FROM
+	sale_order a
+WHERE
+	a.payState = 1
+	AND a.orderState = 1
+        <if test="start!=null">
+            and a.creationTime >= #{start}
+        </if>
+        <if test="end!=null">
+            and a.creationTime &lt;= #{end}
+        </if>
+        <if test="productName!=null">
+            and a.productName like '%${productName}%'
+        </if>
+GROUP BY
+	a.productId,
+	a.productName
+	) a
+	INNER JOIN sale_device_product b ON a.productId = b.productId
+	INNER JOIN sale_device c ON b.deviceId = c.id
+  <where>
+      <if test="deviceName!=null">
+          c.deviceName like '%${deviceName}%'
+      </if>
+  </where>
+        order by a.saleCount desc
     </select>
 
 </mapper>

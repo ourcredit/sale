@@ -26,7 +26,7 @@
                          
                         <Button icon="ios-search" type="primary" size="large"
                          @click="init" class="toolbar-btn">查找</Button>
-                           <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
+                           <Button  @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
                         </Col>
                     </Row>
                 
@@ -85,7 +85,12 @@ export default class OperateLog extends AbpBase {
       align: "center"
     },
     {
-      title: "类名",
+      type: "index",
+      width: 60,
+      align: "center"
+    },
+    {
+      title: "模块",
       key: "className"
     },
     {
@@ -100,12 +105,6 @@ export default class OperateLog extends AbpBase {
     {
       title: "接口描述",
       key: "logDescription"
-    },
-    {
-      title: "状态",
-      render: (h: any, params: any) => {
-        return h("span", params.row.succeed ? "成功" : "失败");
-      }
     },
     {
       title: "请求时间",

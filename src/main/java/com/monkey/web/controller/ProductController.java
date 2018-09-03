@@ -10,6 +10,7 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.core.entity.Product;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class ProductController {
         Product m=_productService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
-
+    @Log(description="商品接口:/添加或编辑商品")
     @ApiOperation(value = "添加或编辑商品",notes = "商品列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._products._product.modify})
@@ -56,6 +57,8 @@ public class ProductController {
         Boolean r=_productService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="商品接口:/删除商品")
+
     @ApiOperation(value = "删除商品",notes = "商品列表")
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @RequiresPermissions(value = {PermissionConst._products._product.delete})
@@ -63,6 +66,8 @@ public class ProductController {
         Boolean r=_productService.deleteById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }
+    @Log(description="商品接口:/批量删除商品")
+
     @ApiOperation(value = "批量删除商品",notes = "商品列表")
     @RequestMapping(value = "/batch",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._products._product.batch})

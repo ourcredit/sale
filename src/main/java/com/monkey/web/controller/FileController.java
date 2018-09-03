@@ -13,6 +13,7 @@ import com.monkey.core.entity.File;
 import com.monkey.core.entity.Payfor;
 import com.monkey.core.entity.User;
 import com.monkey.web.annotation.CurrentUser;
+import com.monkey.web.annotation.Log;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class FileController  {
     @Autowired
     IPayforService _payforService;
     @PostMapping
+    @Log(description="文件接口:/文件上传")
     @ApiOperation(value = "文件接口", notes = "文件上传")
     public PublicResult upload(@RequestParam("files") MultipartFile[] multipartFiles) throws Exception {
         List<File> files = new ArrayList<>();
@@ -61,7 +63,7 @@ public class FileController  {
         }
         return new PublicResult<List>(PublicResultConstant.SUCCESS, files);
     }
-
+    @Log(description="文件接口:/证书上传")
     @RequestMapping(value = "/pems",method = RequestMethod.POST)
     @ApiOperation(value = "文件接口", notes = "文件上传")
     public PublicResult pems( @RequestParam("files") MultipartFile[] multipartFiles) throws Exception {
@@ -81,7 +83,7 @@ public class FileController  {
         }
         return new PublicResult<List>(PublicResultConstant.SUCCESS, files);
     }
-
+    @Log(description="文件接口:/删除文件")
     @DeleteMapping
     public PublicResult delete(@RequestParam("filePaths") List<String> filePaths) {
         if (!ComUtil.isEmpty(filePaths) && filePaths.size() != 0) {

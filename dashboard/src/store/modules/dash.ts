@@ -14,6 +14,8 @@ interface IDeviceState extends IListState<any> {
   todayTop: any;
   monthTop: any;
   saleCount: Number;
+  deviceSales: Array<any>;
+  productSales: Array<any>;
 }
 class PointMutations extends ListMutations<any> { }
 class DashModule extends ListModule<IDeviceState, any, any> {
@@ -30,7 +32,9 @@ class DashModule extends ListModule<IDeviceState, any, any> {
     monthSale: null,
     payType: null,
     todayTop: null,
-    monthTop: null
+    monthTop: null,
+    deviceSales: new Array<any>(),
+    productSales: new Array<any>(),
   };
 
   actions = {
@@ -39,7 +43,7 @@ class DashModule extends ListModule<IDeviceState, any, any> {
       payload: any
     ): Promise<any> {
       context.state.loading = true;
-      let reponse: any = await Ajax.get("/api/order/dashboard");
+      let reponse: any = await Ajax.get("/api/dash/dashboard");
       context.state.loading = false;
       let r: any = reponse.data as any;
       context.state.todaySale = r.todaySale;
@@ -67,12 +71,35 @@ class DashModule extends ListModule<IDeviceState, any, any> {
       payload: any
     ): Promise<any> {
       context.state.loading = true;
-      let reponse: any = await Ajax.post(`/api/order/total`, payload.data);
+      let reponse: any = await Ajax.post(`/api/dash/total`, payload.data);
       context.state.loading = false;
       let r: any = reponse.data as any;
       context.state.todayStatical = r.today;
       context.state.monthStatical = r.month;
+    },
+    async getDevices(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      let reponse: any = await Ajax.post(`/api/dash/device`, payload.data);
+      context.state.loading = false;
+      let r: any = reponse.data as any;
+      context.state.deviceSales = r.records;
+      context.state.totalCount = r.total;
+    },
+    async getProducts(
+      context: ActionContext<IDeviceState, any>,
+      payload: any
+    ): Promise<any> {
+      context.state.loading = true;
+      let reponse: any = await Ajax.post(`/api/dash/product`, payload.data);
+      context.state.loading = false;
+      let r: any = reponse.data as any;
+      context.state.productSales = r.records;
+      context.state.totalCount = r.total;
     }
+
   };
   mutations = {
     setCurrentPage(state: IDeviceState, page: number): void {

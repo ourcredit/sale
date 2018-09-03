@@ -87,6 +87,7 @@ public class UserController {
         PublicResult r = new PublicResult<>(PublicResultConstant.SUCCESS, op);
         return r;
     }
+    @Log(description="用户接口:/添加或编辑用户")
 
     @ApiOperation(value = "添加或编辑用户", notes = "用户列表")
     @RequestMapping(method = RequestMethod.PUT)
@@ -95,7 +96,6 @@ public class UserController {
         _userService.ModifyUserAndRoles(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, true);
     }
-
     @Log(description = "删除用户信息:/delete")
     @ApiOperation(value = "删除用户", notes = "用户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
