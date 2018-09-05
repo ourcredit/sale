@@ -21,22 +21,22 @@ import java.util.List;
 public interface OrderRepository extends BaseMapper<Order> {
     void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState, @Param("backNum") String backNum);
 
-    TodayStatical getOrderStatical(@Param("start") Date start, @Param("end") Date end);
+    TodayStatical getOrderStatical(@Param("tenantId") Integer tenantId, @Param("start") Date start, @Param("end") Date end);
 
-    List<SalePercentDto> getTodaySalePercent(@Param("start") Date start, @Param("end") Date end);
+    List<SalePercentDto> getTodaySalePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
 
-    List<SalePercentDto> getMonthSalePercent(@Param("start") Date start, @Param("end") Date end);
+    List<SalePercentDto> getMonthSalePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
 
-    List<SalePercentDto> getPointSalePercent(@Param("start") Date start, @Param("end") Date end);
+    List<SalePercentDto> getPointSalePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
 
-    List<SalePercentDto> getPayTypePercent(@Param("start") Date start, @Param("end") Date end);
+    List<SalePercentDto> getPayTypePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
 
     Payfor getPayforByOrder(@Param("appId") String appId, @Param("mch_id") String mch_id);
 
     Payfor getPayforByAppId(@Param("appId") String appId);
 
-    List<DeviceSaleStatical> getDeviceSaleStatical(Pagination page, @Param("deviceName") String deviceName, @Param("pointName") String pointName, @Param("start") Date start, @Param("end") Date end);
+    List<DeviceSaleStatical> getDeviceSaleStatical(@Param("tenantId") Integer tenantId, Pagination page, @Param("deviceName") String deviceName, @Param("pointName") String pointName, @Param("start") Date start, @Param("end") Date end);
 
-    List<ProductSaleStatical> getProductSaleStatical(Pagination page,@Param("productName") String productName, @Param("deviceName") String deviceName, @Param("start") Date start, @Param("end") Date end);
+    List<ProductSaleStatical> getProductSaleStatical(Integer tenantId, Pagination page,@Param("productName") String productName, @Param("deviceName") String deviceName, @Param("start") Date start, @Param("end") Date end);
 
 }

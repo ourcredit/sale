@@ -196,25 +196,25 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     }
 
     @Override
-    public Page<DeviceSaleStatical> getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input) {
-        List<DeviceSaleStatical>  t=  _orderRepository.getDeviceSaleStatical(page,input.deviceName,input.pointName,input.start,input.end);
+    public Page<DeviceSaleStatical> getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input ) {
+        List<DeviceSaleStatical>  t=  _orderRepository.getDeviceSaleStatical(input.getTenantId(), page,input.deviceName,input.pointName,input.start,input.end);
         return  page.setRecords(t);
     }
 
     @Override
     public Page<ProductSaleStatical> getProductSaleStatical(Page<ProductSaleStatical>  page, StaticalInput input) {
-        List<ProductSaleStatical>  t=  _orderRepository.getProductSaleStatical(page,input.productName,input.deviceName,input.start,input.end);
+        List<ProductSaleStatical>  t=  _orderRepository.getProductSaleStatical(input.getTenantId(),page,input.productName,input.deviceName,input.start,input.end);
         return page.setRecords(t);
     }
 
     @Override
-    public Map<String, Object> getDashboard() {
+    public Map<String, Object> getDashboard(Integer tenantId) {
         Map<String, Object> result = new HashMap<>();
-        List<SalePercentDto> dr = _orderRepository.getTodaySalePercent(DateUtil.getStartTime(), DateUtil.getEndTime());
-        List<SalePercentDto> mr = _orderRepository.getMonthSalePercent(DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
-        List<SalePercentDto> pr = _orderRepository.getPayTypePercent(DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
-        List<SalePercentDto> topdr = _orderRepository.getPointSalePercent(DateUtil.getStartTime(), DateUtil.getEndTime());
-        List<SalePercentDto> topmr = _orderRepository.getPointSalePercent(DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
+        List<SalePercentDto> dr = _orderRepository.getTodaySalePercent(tenantId,DateUtil.getStartTime(), DateUtil.getEndTime());
+        List<SalePercentDto> mr = _orderRepository.getMonthSalePercent(tenantId,DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
+        List<SalePercentDto> pr = _orderRepository.getPayTypePercent(tenantId,DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
+        List<SalePercentDto> topdr = _orderRepository.getPointSalePercent(tenantId,DateUtil.getStartTime(), DateUtil.getEndTime());
+        List<SalePercentDto> topmr = _orderRepository.getPointSalePercent(tenantId,DateUtil.getBeginDayOfMonth(), DateUtil.getEndDayOfMonth());
         result.put("todaySale", getDayKeysAndValues(dr));
         result.put("monthSale", getMonthKeysAndValues(mr));
         result.put("payType", pr);
@@ -224,10 +224,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     }
 
     @Override
-    public Map<String, Object> getStaticial(Date start, Date end) {
+    public Map<String, Object> getStaticial(Integer tenantId, Date start, Date end) {
         Map<String, Object> result = new HashMap<>();
-        TodayStatical tr = _orderRepository.getOrderStatical(DateUtil.getStartTime(), DateUtil.getEndTime());
-        TodayStatical mr = _orderRepository.getOrderStatical(DateUtil.getStartTime(start), DateUtil.getEndTime(end));
+        TodayStatical tr = _orderRepository.getOrderStatical(tenantId,DateUtil.getStartTime(), DateUtil.getEndTime());
+        TodayStatical mr = _orderRepository.getOrderStatical(tenantId,DateUtil.getStartTime(start), DateUtil.getEndTime(end));
       Integer count=  WebSocketServer.getOnlineCount();
         tr.setDevice(count);
         result.put("today", tr);

@@ -29,7 +29,7 @@
           </Select>
         </FormItem>
         <FormItem label="价格" prop="price">
-          <InputNumber style="width:100%" v-model="product.price" :maxlength="32" :minlength="2" />
+          <InputNumber style="width:100%" v-model="product.price"  :min="0"  />
         </FormItem>
         <FormItem label="描述">
           <Input v-model="product.description" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="请输入描述"></Input>
@@ -65,14 +65,24 @@ export default class CreateDevice extends AbpBase {
   };
   path: string = "";
   get product() {
-    return this.$store.state.product.editProduct;
+    var t = this.$store.state.product.editProduct;
+    if (!t.price) {
+      t.price = null;
+    }
+    console.log(t);
+    return t;
   }
   get cates() {
     return this.$store.state.category.list;
   }
   save() {
+    if (!this.product.price) {
+      this.$Message.info("请填写价格信息");
+      return;
+    }
     (this.$refs.productForm as any).validate(async (valid: boolean) => {
       if (valid) {
+        this.product.price = this.product.price * 100;
         this.product.imageUrl = this.path;
         await this.$store.dispatch({
           type: "product/modify",

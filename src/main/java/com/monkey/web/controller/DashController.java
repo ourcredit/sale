@@ -9,6 +9,8 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.core.dtos.DeviceSaleStatical;
 import com.monkey.core.dtos.ProductSaleStatical;
+import com.monkey.core.entity.User;
+import com.monkey.web.annotation.CurrentUser;
 import com.monkey.web.controller.dtos.RequestDateDto;
 import com.monkey.web.controller.dtos.StaticalInput;
 import io.swagger.annotations.Api;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.Map;
 
 /**
@@ -40,9 +43,10 @@ public class DashController  {
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> staticals() throws Exception {
+
+    public PublicResult<Object> staticals(@CurrentUser User u) throws Exception {
         try {
-            Map r = _orderService.getDashboard();
+            Map r = _orderService.getDashboard(u.getTenantId());
             if (r != null) {
                 return new PublicResult<>(PublicResultConstant.SUCCESS, r);
             }
@@ -55,9 +59,9 @@ public class DashController  {
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/total", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> todays(@RequestBody RequestDateDto input) throws Exception {
+    public PublicResult<Object> todays(@RequestBody RequestDateDto input,@CurrentUser User u) throws Exception {
         try {
-            Map r = _orderService.getStaticial(input.start, input.end);
+            Map r = _orderService.getStaticial(u.getTenantId(), input.start, input.end);
             if (r != null) {
                 return new PublicResult<>(PublicResultConstant.SUCCESS, r);
             }
@@ -69,9 +73,11 @@ public class DashController  {
     @ApiOperation(value = "获取设备统计", notes = "订单列表")
     @RequestMapping(value = "/device", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> devices(@RequestBody PagedAndFilterInputDto page) throws Exception {
+    public PublicResult<Object> devices(@RequestBody PagedAndFilterInputDto page, @CurrentUser User u) throws Exception {
         try {
-            Page<DeviceSaleStatical> r = _orderService.getDeviceSaleStatical(new Page<>(page.index,page.size), new StaticalInput());
+            StaticalInput inut=new StaticalInput();
+            inut.setTenantId(u.getTenantId());
+            Page<DeviceSaleStatical> r = _orderService.getDeviceSaleStatical(new Page<>(page.index,page.size), inut);
             if (r != null) {
                 return new PublicResult<>(PublicResultConstant.SUCCESS, r);
             }
@@ -83,9 +89,11 @@ public class DashController  {
     @ApiOperation(value = "获取产品统计", notes = "订单列表")
     @RequestMapping(value = "/product", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.statical})
-    public PublicResult<Object> products(@RequestBody PagedAndFilterInputDto page) throws Exception {
+    public PublicResult<Object> products(@RequestBody PagedAndFilterInputDto page, @CurrentUser User u) throws Exception {
         try {
-            Page<ProductSaleStatical> r = _orderService.getProductSaleStatical(new Page<>(page.index,page.size), new StaticalInput());
+            StaticalInput inut=new StaticalInput();
+            inut.setTenantId(u.getTenantId());
+            Page<ProductSaleStatical> r = _orderService.getProductSaleStatical(new Page<>(page.index,page.size), inut);
             if (r != null) {
                 return new PublicResult<>(PublicResultConstant.SUCCESS, r);
             }

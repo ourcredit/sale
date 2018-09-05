@@ -79,6 +79,7 @@ WHERE
         FROM
         sale_device
         <where>
+            isDeleted =0
             <if test="ew.sqlSegment!=null">
                 ${ew.sqlSegment} AND
             </if>

@@ -59,6 +59,7 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
         Page<Device>  p=new Page<>();
         List<Device> r=    _deviceRepository.selectByArea(page,code,ew);
         p.setRecords(r);
+        p.setTotal(page.getTotal());
         return  p;
     }
 

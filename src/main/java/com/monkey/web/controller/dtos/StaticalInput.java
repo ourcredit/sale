@@ -8,4 +8,13 @@ public class StaticalInput {
     public String productName;
     public Date start;
     public Date end;
+    private Integer tenantId;
+
+    public Integer getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
+    }
 }

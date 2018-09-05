@@ -50,7 +50,7 @@ public class TreeController {
         if(current.getAreaId()!=null){
              t=_treeService.selectById(current.getAreaId());
             if(t!=null){
-                filter.like("levelCode",t.getLevelCode(), SqlLike.DEFAULT).or(" name='未分配设备'");
+                filter.like("levelCode",t.getLevelCode(), SqlLike.DEFAULT);
             }
              res= _treeService.selectList( filter);
             res.forEach(c->{
@@ -61,7 +61,9 @@ public class TreeController {
         }else {
             res= _treeService.selectList( filter);
         }
-
+        Tree tt=new Tree("未分配设备",null,"");
+        tt.setId(999);
+        res.add(tt);
 
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }

@@ -45,18 +45,26 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
      * @since 2018-05-03
      */
     @Override
-      @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0]).concat(#root.args[1])")
-    public User getUserByUserName(String username,Integer tenantId) {
-    return  _userRepository.selectByTenantAndName(tenantId,username);
+    @Cacheable(value = "userName", key = "'user_'.concat(#root.args[0]).concat(#root.args[1])")
+    public User getUserByUserName(String username, Integer tenantId) {
+        return _userRepository.selectByTenantAndName(tenantId, username);
     }
 
+    @Cacheable(value = "userName", key = "'user_all_'.concat(#root.args[0])")
+    @Override
     public UserDto selectUserRole(Integer id) {
         UserDto r = _userRepository.selectUserRole(id);
+        if(!r.getRoles().isEmpty()){
+         List<Integer> ids=new ArrayList<>();
+            r.getRoles().forEach(w->ids.add(w.getId()));
+          r.setPermissions(_userRepository.selectRolePermision(ids));
+        }
         return r;
     }
+
     @Override
-    public User login(String tenantName,String account){
-        return _userRepository.selectByTenantAndAccount(tenantName,account);
+    public User login(String tenantName, String account) {
+        return _userRepository.selectByTenantAndAccount(tenantName, account);
     }
 
     /**
@@ -72,7 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         EntityWrapper ew = new EntityWrapper<>();
         ew.eq("account", input.account);
         if (input.id == null) {
-            u = new User(input.account, input.password, input.userName,  input.isActive,input.areaId);
+            u = new User(input.account, input.password, input.userName, input.isActive, input.areaId);
             this.insert(u);
         } else {
             u = this.selectOne(ew);
@@ -81,7 +89,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
                 u.setIsActive(input.isActive);
                 u.setUserName(input.userName);
                 u.setAreaId(input.areaId);
-                if(input.password!=null&&!input.password.isEmpty()){
+                if (input.password != null && !input.password.isEmpty()) {
                     u.setPassword(BCrypt.hashpw(input.password, BCrypt.gensalt()));
                 }
                 this.updateById(u);
@@ -94,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
             List<Userrole> urs = new ArrayList<>();
             ew = new EntityWrapper();
             ew.eq("isStatic", 1);
-         //   List<Role> rs = _roleRepository.selectList(ew);
+            //   List<Role> rs = _roleRepository.selectList(ew);
             List<Integer> temp = new ArrayList<>();
 
 //            for (Role r : rs) {
@@ -105,8 +113,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
                     urs.add(new Userrole(u.getId(), r));
                 }
             }
-            for(Integer r : temp){
-                urs.add(new Userrole(u.getId(),r));
+            for (Integer r : temp) {
+                urs.add(new Userrole(u.getId(), r));
             }
             _userRoleRepository.insertBatch(urs);
         }

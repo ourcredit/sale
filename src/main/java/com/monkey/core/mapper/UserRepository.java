@@ -6,6 +6,8 @@ import com.monkey.core.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -18,6 +20,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserRepository extends BaseMapper<User> {
 
     UserDto selectUserRole(@Param("id") Integer id) ;
+    List<String> selectRolePermision(@Param("roles") List<Integer> roles);
     User selectByTenantAndName(@Param("tenantId")Integer tenantId,@Param("account")String account);
     User selectByTenantAndAccount(@Param("tenant") String tenantId, @Param("account")String account);
 }

@@ -65,7 +65,7 @@ export default class Login extends AbpBase {
   loginModel = {
     tenantName: "dizhushuomingzichanganquan",
     userName: "admin",
-    password: "Welcome!@#",
+    password: "1234567",
     rememberMe: false
   };
   async login() {

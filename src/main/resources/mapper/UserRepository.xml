@@ -4,16 +4,16 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.monkey.core.entity.User">
-        <id column="id" property="id" />
-        <result column="account" property="account" />
-        <result column="password" property="password" />
-        <result column="creationTime" property="creationTime" />
-        <result column="creatorUserId" property="creatorUserId" />
-        <result column="userName" property="userName" />
-        <result column="areaId" property="areaId" />
-        <result column="mobile" property="mobile" />
-        <result column="isActive" property="isActive" />
-        <result column="isDeleted" property="isDeleted" />
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creatorUserId" property="creatorUserId"/>
+        <result column="userName" property="userName"/>
+        <result column="areaId" property="areaId"/>
+        <result column="mobile" property="mobile"/>
+        <result column="isActive" property="isActive"/>
+        <result column="isDeleted" property="isDeleted"/>
     </resultMap>
 
 
@@ -22,34 +22,29 @@
         id, account, password, creationTime, creatorUserId, userName, mobile, isActive, isDeleted,areaId
     </sql>
     <resultMap id="UserRoleMap" type="com.monkey.core.dtos.UserDto">
-        <id column="id"  property="id" />
-        <result column="account" property="account" />
-        <result column="creationTime" property="creationTime" />
-        <result column="creatorUserId" property="creatorUserId" />
-        <result column="userName" property="userName" />
-        <result column="mobile" property="mobile" />
-        <result column="isActive" property="isActive" />
-        <collection  property="roles" ofType="com.monkey.core.dtos.RoleDto">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="creationTime" property="creationTime"/>
+        <result column="creatorUserId" property="creatorUserId"/>
+        <result column="userName" property="userName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="isActive" property="isActive"/>
+        <collection property="roles" ofType="com.monkey.core.dtos.RoleDto">
             <id property="id" column="roleId"/>
             <result property="roleName" column="roleName"/>
             <result property="displayName" column="displayName"/>
-        </collection >
-        <collection  property="permissions" ofType="java.lang.String" >
-            <id  column="code"/>
-        </collection >
+        </collection>
     </resultMap>
     <select id="selectUserRole" parameterType="int" resultMap="UserRoleMap">
         SELECT
 	a.*,
 	c.id as roleId,
 	c.roleName,
-	c.displayName,e.`code`
+	c.displayName
 FROM
 	sale_user a
 	LEFT JOIN sale_userrole b ON a.id = b.userId
 	LEFT JOIN sale_role c ON b.roleId = c.id
-	left join sale_rolemenu d on c.id=d.roleId
-	left join sale_menu e on d.menuId=e.id
 	where a.id=#{id}
      </select>
     <select id="selectByTenantAndAccount" resultType="com.monkey.core.entity.User">
@@ -64,5 +59,17 @@ WHERE
     </select>
     <select id="selectByTenantAndName" resultType="com.monkey.core.entity.User">
         select * from sale_user where account=#{account} and tenantId=#{tenantId}
+    </select>
+    <select id="selectRolePermision" resultType="java.lang.String">
+        SELECT
+        b.`code`
+        FROM
+        sale_rolemenu a
+        INNER JOIN sale_menu b ON a.menuId = b.id
+        WHERE
+        a.roleId IN
+        <foreach item="item" index="index" collection="roles" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 </mapper>

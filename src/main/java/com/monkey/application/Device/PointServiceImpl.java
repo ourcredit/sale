@@ -29,6 +29,7 @@ public class PointServiceImpl extends ServiceImpl<PointRepository, Point> implem
         Page<Point>  p=new Page<>();
       List<Point> r=    _pointRepository.selectbyAreaAndName(page,name,areaId);
       p.setRecords(r);
+      p.setTotal(page.getTotal());
       return  p;
     }
 }

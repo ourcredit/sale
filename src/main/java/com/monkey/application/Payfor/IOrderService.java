@@ -34,11 +34,11 @@ public interface IOrderService extends IService<Order> {
     void updateOrderStatte(String orderNum, Integer orderState, Integer payState,String backNum);
 
     String weixinBack(Order input) throws  Exception;
-    Map<String,Object> getDashboard();
-    Map<String,Object> getStaticial(Date start,Date end);
+    Map<String,Object> getDashboard(Integer tenantId);
+    Map<String,Object> getStaticial(Integer tenantId, Date start,Date end);
     Payfor getPayforByOrder(String appId,String mch_id);
     Payfor getPayforByAppId(String appId);
     String  aliback(Order input)throws  Exception;
-    Page<DeviceSaleStatical>  getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input);
-    Page<ProductSaleStatical>  getProductSaleStatical(Page<ProductSaleStatical> page, StaticalInput input);
+    Page<DeviceSaleStatical>  getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input );
+    Page<ProductSaleStatical>  getProductSaleStatical(Page<ProductSaleStatical> page, StaticalInput input );
 }

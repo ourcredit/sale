@@ -8,24 +8,18 @@
     <div class="page-body">
       <Tree @on-select-change="select" :data="tree" ></Tree>
     </div>
-    <Modal :mask-closable="false" title="编辑机构" :value="modifyShow" @on-ok="save" @on-visible-change="visibleChange">
-      <Form ref="deviceForm" label-position="top" :rules="orgRule" :model="org">
-        <FormItem label="机构名" prop="name">
-          <Input v-model="org.name" :maxlength="32" :minlength="2" />
-        </FormItem>
-        </Tabs>
-      </Form>
-      <div slot="footer">
-        <Button @click="cancel">关闭</Button>
-        <Button @click="save" type="primary">保存</Button>
-      </div>
-    </Modal>
+    <modify v-model="modifyShow" @save-success="init"></modify>
   </Card>
 </template>
 <script lang="ts">
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import AbpBase from "../lib/abpbase";
-@Component
+import Modify from "./treemodify.vue";
+@Component({
+  components: {
+    Modify
+  }
+})
 export default class OrgTree extends AbpBase {
   constructor() {
     super();
@@ -95,41 +89,5 @@ export default class OrgTree extends AbpBase {
     var t = this.$store.state.device.currentOrg;
     return t;
   }
-  save() {
-    (this.$refs.deviceForm as any).validate(async (valid: boolean) => {
-      if (valid) {
-        await this.$store.dispatch({
-          type: "device/modifyOrg",
-          data: this.org
-        });
-        (this.$refs.deviceForm as any).resetFields();
-        this.$emit("save-success");
-        this.$emit("input", false);
-        this.modifyShow = false;
-        this.init();
-      }
-    });
-  }
-  cancel() {
-    (this.$refs.deviceForm as any).resetFields();
-    this.$emit("input", false);
-    this.modifyShow = false;
-    this.init();
-  }
-  visibleChange(value: boolean) {
-    if (!value) {
-      this.$emit("input", value);
-    }
-  }
-
-  orgRule = {
-    name: [
-      {
-        required: true,
-        message: "机构名必填",
-        trigger: "blur"
-      }
-    ]
-  };
 }
 </script>
