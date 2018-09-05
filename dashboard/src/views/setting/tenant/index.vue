@@ -52,9 +52,6 @@ export default class Users extends AbpBase {
     first: this.hasPermission("tenant:first"),
     batch: this.hasPermission("tenant:batch")
   };
-  get loading() {
-    return this.$store.state.category.loading;
-  }
   Create() {
     var u = new Tenant();
     this.$store.commit("tenant/edit", u);

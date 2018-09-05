@@ -25,6 +25,7 @@ import Util from "../../../lib/util";
 import AbpBase from "../../../lib/abpbase";
 import Tenant from "../../../store/entities/tenant";
 import { debug } from "util";
+import { setTimeout } from "timers";
 @Component
 export default class CreateTenant extends AbpBase {
   @Prop({

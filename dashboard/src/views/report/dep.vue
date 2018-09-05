@@ -2,7 +2,7 @@
     <div>
         <Card dis-hover>
             <div class="page-body">
-                <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
+                <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
                     <Row :gutter="4">
                         <Col span="4">
                         <FormItem label="设备编号:">
@@ -31,7 +31,7 @@
                         </Col>
                     </Row>
                 </Form>
-                <SaleTable ref="table" :filters="filters" :type="'role'" :columns="columns"></SaleTable>
+                <SaleTable ref="table" :filters="filters" :type="'device'" :columns="columns"></SaleTable>
             </div>
         </Card>
     </div>
@@ -79,7 +79,6 @@ export default class Users extends AbpBase {
       title: "日均故障率",
       key: "isActive"
     }
-    
   ];
 
   Create() {

@@ -68,8 +68,9 @@ export default class CreateDevice extends AbpBase {
     var t = this.$store.state.product.editProduct;
     if (!t.price) {
       t.price = null;
+    } else {
+      t.price = t.price / 100;
     }
-    console.log(t);
     return t;
   }
   get cates() {

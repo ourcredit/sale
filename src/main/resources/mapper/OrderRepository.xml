@@ -46,7 +46,7 @@
         SELECT
         SUM( price ) AS sale,
         COUNT( productId ) AS count,
-        ( SELECT COUNT( 1 ) FROM sale_device
+        ( SELECT COUNT( 1 ) FROM sale_device  where  tenantId=1
         ) AS device,
         ( SELECT COUNT( 1 ) FROM sale_log
         <where>
@@ -60,7 +60,7 @@
         ) AS error,
         ( SELECT COUNT( 1 ) FROM sale_order
         <where>
-            ( payState =- 1 OR orderState =- 1 )
+            ( payState =2 OR orderState =- 1 ) and tenantId=1
             <if test="start!=null">
                 and creationTime >= #{start}
             </if>
@@ -212,8 +212,9 @@ WHERE
             <if test="pointName!=null">
                 a.pointName like '%${pointName}%'
             </if>
-            ORDER BY c.saleCount desc
+
         </where>
+        ORDER BY c.saleCount desc
     </select>
     <select id="getProductSaleStatical" resultType="com.monkey.core.dtos.ProductSaleStatical">
 SELECT

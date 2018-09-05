@@ -57,6 +57,9 @@ class TenantModule extends ListModule<ITenantState, any, Tenant> {
     }
   };
   mutations = {
+    loading(state: ITenantState, load: boolean): void {
+      state.loading = load;
+    },
     setCurrentPage(state: ITenantState, page: number): void {
       state.currentPage = page;
     },

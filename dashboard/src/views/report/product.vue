@@ -2,31 +2,38 @@
     <div>
         <Card dis-hover>
             <div class="page-body">
-                <Form slot="filter" ref="queryForm" :label-width="60" label-position="left" inline>
+                <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
                     <Row :gutter="4">
                         <Col span="4">
                         <FormItem label="商品名:">
-                            <Input v-model="filters.roleName"/>
+                            <Input v-model="filters.productName"/>
                         </FormItem>
                         </Col>
                         <Col span="4">
                         <FormItem label="设备名:">
-                            <Input v-model="filters.displayName"/>
+                            <Input v-model="filters.deviceName"/>
                         </FormItem>
                         </Col>
-                          <Col span="4">
+                         <Col span="4">
                         <FormItem label="时间范围:">
                             <Input v-model="filters.displayName"/>
                         </FormItem>
                         </Col>
-                        <Col span="7">
-                        <Button v-if="p.modify" @click="Create" icon="android-add" type="primary" size="large">添加</Button>
-                        <Button v-if="p.batch" @click="batchDelete" type="primary" class="toolbar-btn" size="large">批量删除</Button>
-                        <Button icon="ios-search" type="primary" size="large" @click="init" class="toolbar-btn">查找</Button>
+                        <Col span="4">
+                        <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">查找</Button>
                         </Col>
                     </Row>
                 </Form>
-                <SaleTable ref="table" :filters="filters" :type="'role'" :columns="columns"></SaleTable>
+               <div class="margin-top-10">
+                    <Table :loading="loading" :columns="columns" no-data-text="暂无数据" border :data="list">
+                    </Table>
+                    <Page  show-sizer class-name="fengpage" :total="totalCount"
+                     class="margin-top-10"
+                      @on-change="pageChange"
+                       @on-page-size-change="pagesizeChange"
+                        :page-size="pageSize"
+                         :current="currentPage"></Page>
+                </div>
             </div>
         </Card>
     </div>
@@ -35,23 +42,18 @@
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import SaleTable from "@/components/saletable.vue";
 import AbpBase from "../../lib/abpbase";
-import Role from "@/store/entities/role";
+import PageRequest from "../../store/entities/page-request";
 @Component({
   components: {
     SaleTable
   }
 })
-export default class Users extends AbpBase {
+export default class DeviceStatical extends AbpBase {
   filters: Object = {
-    account: "",
-    userName: "",
-    creationTime: null,
-    isActive: null
+    productName: "",
+    deviceName: "",
+    date: null
   };
-  p: any = {
-    list: this.hasPermission("role:list")
-  };
-  ModalShow: boolean = false;
   columns: Array<any> = [
     {
       type: "selection",
@@ -60,57 +62,58 @@ export default class Users extends AbpBase {
     },
     {
       title: "商品名",
-      key: "roleName"
+      key: "productName"
     },
     {
       title: "累计销量",
-      key: "displayName"
+      key: "saleCount"
     },
     {
       title: "累计销售额",
-      key: "description"
+      key: "saleMoney"
     },
     {
       title: "销售最多的设备",
-      key: "isActive"
-     
+      key: "maxDevice"
     }
   ];
+  get list() {
+    return this.$store.state.dash.productSales;
+  }
 
-  Create() {
-    var u = new Role();
-    this.$store.commit("role/edit", u);
-    this.ModalShow = true;
+  get loading() {
+    return this.$store.state.dash.loading;
   }
-  init() {
-    var t: any = this.$refs.table;
-    t.getpage();
+
+  pageChange(page: number) {
+    this.$store.commit("dash/setCurrentPage", page);
+    this.getpage();
   }
-  async batchDelete() {
-    var t: any = this.$refs.table;
-    if (t.selections) {
-      this.$Modal.confirm({
-        title: "删除提示",
-        content: `确认要删除${t.selections.length}条数据么`,
-        okText: "是",
-        cancelText: "否",
-        onOk: async () => {
-          await this.$store.dispatch({
-            type: "role/batch",
-            data: t.selections
-          });
-          await this.init();
-        }
-      });
-    }
+  pagesizeChange(pagesize: number) {
+    this.$store.commit("dash/setPageSize", pagesize);
+    this.getpage();
   }
-  Modify() {
-    this.ModalShow = true;
+  async getpage() {
+    let pagerequest = new PageRequest();
+    pagerequest.size = this.pageSize;
+    pagerequest.index = this.currentPage;
+    pagerequest.where = this.filters;
+    await this.$store.dispatch({
+      type: "dash/getProducts",
+      data: pagerequest
+    });
+  }
+  get pageSize() {
+    return this.$store.state.dash.pageSize;
+  }
+  get totalCount() {
+    return this.$store.state.dash.totalCount;
+  }
+  get currentPage() {
+    return this.$store.state.dash.currentPage;
   }
   async created() {
-    await this.$store.dispatch({
-      type: "role/getAllPermissions"
-    });
+    this.getpage();
   }
 }
 </script>

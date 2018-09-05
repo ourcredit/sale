@@ -53,6 +53,7 @@ public class UserController {
         Page<User> res = _userService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
+
     @ApiOperation(value = "获取用户详情", notes = "用户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._system._user.first})
@@ -87,15 +88,23 @@ public class UserController {
         PublicResult r = new PublicResult<>(PublicResultConstant.SUCCESS, op);
         return r;
     }
-    @Log(description="用户接口:/添加或编辑用户")
+
+    @Log(description = "用户接口:/添加或编辑用户")
 
     @ApiOperation(value = "添加或编辑用户", notes = "用户列表")
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._system._user.modify})
     public PublicResult<Object> modify(@RequestBody CreateUserInput model) throws Exception {
+        EntityWrapper e = new EntityWrapper();
+        e.eq("account", model.account);
+        if (model.id == null || model.id == 0) {
+            Integer count = _userService.selectCount(e);
+            if (count > 0) return new PublicResult<Object>(PublicResultConstant.FAILED, "该用户名已存在");
+        }
         _userService.ModifyUserAndRoles(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, true);
     }
+
     @Log(description = "删除用户信息:/delete")
     @ApiOperation(value = "删除用户", notes = "用户列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

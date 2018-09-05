@@ -129,7 +129,7 @@ export default class deviceC extends AbpBase {
         return h("InputNumber", {
           props: {
             type: "text",
-            value: params.row.price
+            value: params.row.price / 100
           },
           style: {
             width: "100%",
@@ -139,10 +139,10 @@ export default class deviceC extends AbpBase {
             "on-change": (e: any) => {
               var mo = this.finnalList[params.index];
               if (mo) {
-                mo.price = e;
+                mo.price = e * 100;
               } else {
                 mo = {
-                  price: e,
+                  price: e * 100,
                   id: params.row.id,
                   deviceId: this.current.id,
                   productId: params.row.productId

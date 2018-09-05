@@ -110,6 +110,7 @@ import HighCharts from "highcharts";
 import LineChart from "../../components/charts/linechart.vue";
 import PieChart from "../../components/charts/piechart.vue";
 import BarChart from "../../components/charts/barchart.vue";
+import { debug } from "util";
 @Component({
   components: {
     LineChart,
@@ -147,7 +148,8 @@ export default class Dashboard extends AbpBase {
     return this.$store.state.dash.monthStatical;
   }
   change() {
-    let t = this.filters.filters;
+    debugger;
+    let t = this.filters;
     if (t && t.creationTime) {
       t = t.creationTime;
     } else {
