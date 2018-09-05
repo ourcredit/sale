@@ -11,7 +11,7 @@
         <FormItem label="设备编号" prop="deviceNum">
           <Input v-model="device.deviceNum" readonly :maxlength="32" :minlength="2" />
         </FormItem>
-        <FormItem label="设备类型" prop="deviceType">
+        <FormItem label="设备类型" >
           <Select  v-model="device.deviceType" style="width:100%">
             <Option v-for="item in cates"  :value="item" :key="item">{{ item }}</Option>
           </Select>
