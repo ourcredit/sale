@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 29/08/2018 22:15:36
+ Date: 05/09/2018 23:03:39
 */
 
 SET NAMES utf8mb4;
@@ -150,17 +150,17 @@ CREATE TABLE `sale_order`  (
 DROP TABLE IF EXISTS `sale_payfor`;
 CREATE TABLE `sale_payfor`  (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'key',
-  `operatorId` int(10) NOT NULL COMMENT '运营商key',
-  `alipayId` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里key',
-  `alipayKey` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里密钥',
-  `alipayAgent` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里保留',
-  `wechatpayId` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信id',
-  `wechatpayKey` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信key',
-  `wechatpayAgent` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信保留',
+  `operatorId` int(10) NULL DEFAULT NULL COMMENT '运营商key',
+  `alipayId` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里key',
+  `alipayKey` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '阿里密钥',
+  `alipayAgent` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '阿里保留',
+  `wechatpayId` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信id',
+  `wechatpayKey` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信key',
+  `wechatpayAgent` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信保留',
   `creationTime` datetime(0) NULL DEFAULT NULL,
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `tenantId` int(11) NULL DEFAULT NULL COMMENT '租户id',
-  `cardUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退款证书地址',
+  `cardUrl` varchar(999) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退款证书地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -244,7 +244,7 @@ DROP TABLE IF EXISTS `sale_tenant`;
 CREATE TABLE `sale_tenant`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'key',
   `displayName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '显示名',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `tenantName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
   `creationTime` datetime(0) NULL DEFAULT NULL COMMENT 'd',
   `creatorUserId` int(11) NULL DEFAULT NULL,
   `isActive` tinyint(2) NULL DEFAULT NULL COMMENT '1启用  0禁用',
