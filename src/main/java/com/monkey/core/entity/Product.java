@@ -46,7 +46,7 @@ public class Product extends Model<Product> {
     /**
      * 默认价格
      */
-    private Integer price;
+    private Double price;
     /**
      * 创建时间
      */
@@ -106,11 +106,11 @@ public class Product extends Model<Product> {
         this.productType = productType;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

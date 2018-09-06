@@ -189,7 +189,7 @@ WHERE
         INNER JOIN sale_device_product b ON a.id = b.deviceId
         AND b.isSale =1
         INNER JOIN (SELECT
-        productId,productName,
+        productId,productName,deviceId,
         COUNT( productId ) as saleCount,
         SUM( price ) as saleMoney
         FROM
@@ -204,7 +204,7 @@ WHERE
             and creationTime &lt;= #{end}
         </if>
         GROUP BY
-        productId,productName) c on b.productId =c.productId
+        productId,productName,deviceId) c on b.productId =c.productId and c.deviceId=a.id
         <where>
             <if test="deviceName!=null">
                 a.deviceName like '%${deviceName}%'
@@ -217,20 +217,16 @@ WHERE
         ORDER BY c.saleCount desc
     </select>
     <select id="getProductSaleStatical" resultType="com.monkey.core.dtos.ProductSaleStatical">
-SELECT
-	a.*,c.deviceName
-FROM
-	(
-SELECT
-	productId,
-	productName,
-	COUNT( a.productId ) saleCount,
-	SUM( a.price ) saleMoney
-FROM
-	sale_order a
-WHERE
-	a.payState = 1
-	AND a.orderState = 1
+        SELECT
+        productId,
+        productName,
+        COUNT( a.productId ) saleCount,
+        SUM( a.price ) saleMoney
+        FROM
+        sale_order a
+        WHERE
+        a.payState = 1
+        AND a.orderState = 1
         <if test="start!=null">
             and a.creationTime >= #{start}
         </if>
@@ -240,18 +236,10 @@ WHERE
         <if test="productName!=null">
             and a.productName like '%${productName}%'
         </if>
-GROUP BY
-	a.productId,
-	a.productName
-	) a
-	INNER JOIN sale_device_product b ON a.productId = b.productId
-	INNER JOIN sale_device c ON b.deviceId = c.id
-  <where>
-      <if test="deviceName!=null">
-          c.deviceName like '%${deviceName}%'
-      </if>
-  </where>
-        order by a.saleCount desc
+        GROUP BY
+        a.productId,
+        a.productName
+
     </select>
 
 </mapper>

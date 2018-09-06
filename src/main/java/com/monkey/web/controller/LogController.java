@@ -41,7 +41,6 @@ public class LogController {
     public PublicResult<Page<Log>> logs(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Log> filter = new EntityWrapper<>();
       filter=  ComUtil.genderFilter(filter,page.where);
-
         Page<Log> res= _logService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }

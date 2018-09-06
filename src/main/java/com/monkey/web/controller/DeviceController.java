@@ -58,14 +58,13 @@ public class DeviceController {
         String code=  (String)page.where.get("code");
         if(code!=null&&!code.isEmpty()){
             if(code.equals(Constant.UnknownCode)){
-                filter.eq("pointName",null).or("pointName=''");
+                filter.where("pointId is null").or("pointId=''");
             }else {
                 List<Integer> ids=   _pointService.selectPointIdsByCode(code);
                 if(!ids.isEmpty()){
                     filter.in("pointId",ids);
                 }
             }
-
         }
 
         Page<Device> res= _deviceService.selectPage(new Page<>(page.index,page.size), filter);

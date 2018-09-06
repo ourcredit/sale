@@ -49,7 +49,7 @@ public class OrderController {
         String code = (String) page.where.get("code");
         if (code != null && !code.isEmpty()) {
             if(code.equals(Constant.UnknownCode)){
-                filter.eq("pointName",null).or("pointName=''");
+                filter.where("pointName is null").or("pointName=''");
             }else{
                 List<String> ids= _pointService.selectPointNameByCode(code);
                 if(!ids.isEmpty()){

@@ -15,9 +15,9 @@
                         </FormItem>
                         </Col>
                          <Col span="4">
-                        <FormItem label="时间范围:">
-                            <Input v-model="filters.displayName"/>
-                        </FormItem>
+                       <FormItem label="时间范围:">
+                <DatePicker v-model="filters.creationTime" type="daterange" split-panels placeholder="选择范围" style="width: 200px"></DatePicker>
+              </FormItem>
                         </Col>
                         <Col span="4">
                         <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">查找</Button>
@@ -52,7 +52,7 @@ export default class DeviceStatical extends AbpBase {
   filters: Object = {
     productName: "",
     deviceName: "",
-    date: null
+    creationTime: null
   };
   columns: Array<any> = [
     {
@@ -71,11 +71,11 @@ export default class DeviceStatical extends AbpBase {
     {
       title: "累计销售额",
       key: "saleMoney"
-    },
-    {
-      title: "销售最多的设备",
-      key: "maxDevice"
     }
+    // ,{
+    //   title: "销售最多的设备",
+    //   key: "maxDevice"
+    // }
   ];
   get list() {
     return this.$store.state.dash.productSales;

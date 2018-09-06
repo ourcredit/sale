@@ -31,7 +31,7 @@
                     </Row>
                 
                 </Form>
-                <SaleTable ref="table" :filters="filters" type="log" :columns="columns"></SaleTable>
+                <SaleTable ref="table" :filters="filters" :is-empty="true" type="log" :columns="columns"></SaleTable>
             </div>
         </Card>
     </div>

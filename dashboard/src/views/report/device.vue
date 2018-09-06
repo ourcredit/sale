@@ -20,9 +20,9 @@
                         </FormItem>
                         </Col>
                          <Col span="4">
-                        <FormItem label="时间范围:">
-                            <Input v-model="filters.displayName"/>
-                        </FormItem>
+                       <FormItem label="时间范围:">
+                <DatePicker v-model="filters.creationTime" type="daterange" split-panels placeholder="选择范围" style="width: 200px"></DatePicker>
+              </FormItem>
                         </Col>
                         <Col span="4">
                         <Button icon="ios-search" type="primary" size="large" @click="getpage" class="toolbar-btn">查找</Button>
@@ -58,7 +58,7 @@ export default class DeviceStatical extends AbpBase {
     deviceNum: "",
     pointName: "",
     productName: null,
-    date: null
+    creationTime: null
   };
   columns: Array<any> = [
     {
@@ -76,7 +76,7 @@ export default class DeviceStatical extends AbpBase {
     },
     {
       title: "设备类型",
-      key: "displayType"
+      key: "deviceType"
     },
     {
       title: "所属点位",

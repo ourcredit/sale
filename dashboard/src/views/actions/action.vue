@@ -11,12 +11,12 @@
                         </Col>
                         <Col span="5">
                             <FormItem label="描述" style="width:100%">
-                                <Input v-model="filters.log_description"></Input>
+                                <Input v-model="filters.logDescription"></Input>
                             </FormItem>
                         </Col>
                         <Col span="5">
                             <FormItem label="时间范围" style="width:100%">
-                                <DatePicker  v-model="filters.create_time"
+                                <DatePicker  v-model="filters.creationTime"
                                  type="datetimerange" format="yyyy-MM-dd"
                                   style="width:100%" placement="bottom-end"
                                    placeholder="选择时间"></DatePicker>
@@ -48,8 +48,8 @@ import AbpBase from "../../lib/abpbase";
 export default class OperateLog extends AbpBase {
   filters: Object = {
     method: "",
-    log_description: "",
-    create_time: ""
+    logDescription: "",
+    creationTime: ""
   };
   p: any = {
     delete: this.hasPermission("log:delete"),

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -48,7 +49,7 @@ public class ProductController {
     public PublicResult<Product> Product(@PathVariable Integer id) throws Exception{
         Product m=_productService.selectById(id);
         if(m!=null){
-            m.setPrice(m.getPrice()/100);
+            m.setPrice(m.getPrice() / 100);
         }
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }

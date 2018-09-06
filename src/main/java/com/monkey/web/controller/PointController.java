@@ -43,16 +43,14 @@ public class PointController {
         String code=  (String)page.where.get("code");
         if(code!=null&&!code.isEmpty()){
             if(code.equals(Constant.UnknownCode)){
-                filter.eq("pointName",null).or("pointName=''");
+                filter.where("areaId is null").or("areaId=''");
             }else {
                 List<Integer> ids=   _pointService.selectPointIdsByCode(code);
                 if(!ids.isEmpty()){
                     filter.in("id",ids);
                 }
             }
-
         }
-
         Page<Point> res= _pointService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
