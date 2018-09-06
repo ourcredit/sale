@@ -70,6 +70,7 @@ const store = new Vuex.Store({
 				payload.deviceNum = state.deviceCode;
 			}
 			request('/api/device/salelist', "POST", payload, function (r) {
+				console.log("加载商品"+ JSON.stringify(r));
 				if (payload.init) {
 					state.products = [];
 				}

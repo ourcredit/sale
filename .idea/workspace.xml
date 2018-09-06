@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/store/index.js" afterPath="$PROJECT_DIR$/app/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/NgUserModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/dtos/NgUserModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/core/mapper/OrderRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/WebSocketServer.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/WebSocketServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/WebSocketMessage.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/dtos/WebSocketMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/App.vue" afterPath="$PROJECT_DIR$/app/App.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,8 +62,8 @@
       <file leaf-file-name="WebSocketServer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/WebSocketServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+            <state relative-caret-position="256">
+              <caret line="51" column="66" lean-forward="true" selection-start-line="51" selection-start-column="66" selection-end-line="51" selection-end-column="66" />
               <folding>
                 <element signature="e#3771#3772#0" expanded="true" />
                 <element signature="e#3810#3811#0" expanded="true" />
@@ -337,16 +329,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="monkey" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="aspect" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sale" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sale" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="monkey" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -516,19 +498,19 @@
       <workItem from="1535976348395" duration="7436000" />
       <workItem from="1536149292542" duration="10851000" />
       <workItem from="1536234415417" duration="111000" />
-      <workItem from="1536234560692" duration="9735000" />
+      <workItem from="1536234560692" duration="10122000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95002000" />
+    <option name="totallyTimeSpent" value="95389000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31932774" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31932774" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1127,8 +1109,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/monkey/web/aspect/WebSocketServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="60" column="9" lean-forward="true" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+        <state relative-caret-position="256">
+          <caret line="51" column="66" lean-forward="true" selection-start-line="51" selection-start-column="66" selection-end-line="51" selection-end-column="66" />
           <folding>
             <element signature="e#3771#3772#0" expanded="true" />
             <element signature="e#3810#3811#0" expanded="true" />

@@ -12,7 +12,8 @@
 		},
 		computed: {
 			...mapState({
-				deviceCode: state => state.deviceCode
+				deviceCode: state => state.deviceCode		,
+				tenantId: state => state.tenantId
 			})
 		},
 		methods: {
@@ -60,7 +61,7 @@
 				let num = plus.device.imei.split(',')[0];
 				this.setDeviceCode(num);
 			}
-			let url = this.websocketUrl + this.deviceCode
+			let url = this.websocketUrl+this.tenantId+"/" + this.deviceCode
 			uni.connectSocket({
 				url: url,
 				data: {},
@@ -97,7 +98,6 @@
 </script>
 <style>
 	/* 这是页面的公用css */
-
 	page {
 		background-color: #F8F8F8;
 		height: 100%;
