@@ -31,7 +31,7 @@
                         </Col>
                     </Row>
                 </Form>
-                <SaleTable ref="table" :filters="filters" :type="'device'" :columns="columns"></SaleTable>
+                <SaleTable ref="table" :filters="filters"  :is-empty="true" :type="'device'" :columns="columns"></SaleTable>
             </div>
         </Card>
     </div>

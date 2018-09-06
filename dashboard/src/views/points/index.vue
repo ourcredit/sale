@@ -60,9 +60,6 @@ export default class PointC extends AbpBase {
     batch: this.hasPermission("point:batch")
   };
   ModalShow: boolean = false;
-  get tree() {
-    return this.$store.state.device.tree;
-  }
   get current() {
     return this.$store.state.device.currentOrg;
   }

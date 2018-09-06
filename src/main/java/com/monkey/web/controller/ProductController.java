@@ -47,6 +47,9 @@ public class ProductController {
     @RequiresPermissions(value = {PermissionConst._products._product.first})
     public PublicResult<Product> Product(@PathVariable Integer id) throws Exception{
         Product m=_productService.selectById(id);
+        if(m!=null){
+            m.setPrice(m.getPrice()/100);
+        }
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
     @Log(description="商品接口:/添加或编辑商品")
@@ -54,6 +57,7 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.PUT)
     @RequiresPermissions(value = {PermissionConst._products._product.modify})
     public PublicResult<Object> insert(@RequestBody Product model) throws Exception{
+        model.setPrice(model.getPrice()*100);
         Boolean r=_productService.insertOrUpdate(model);
         return new PublicResult<>(PublicResultConstant.SUCCESS, r);
     }

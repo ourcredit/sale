@@ -143,6 +143,7 @@ public class ComUtil {
         if (m != null && !m.isEmpty()) {
             Set<String> r = m.keySet();
             for (String key : r) {
+                if(key.equals("code"))continue;
                 Object v = m.get(key);
 
                 if (v instanceof Number) {

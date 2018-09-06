@@ -68,8 +68,6 @@ export default class CreateDevice extends AbpBase {
     var t = this.$store.state.product.editProduct;
     if (!t.price) {
       t.price = null;
-    } else {
-      t.price = t.price / 100;
     }
     return t;
   }
@@ -83,7 +81,6 @@ export default class CreateDevice extends AbpBase {
     }
     (this.$refs.productForm as any).validate(async (valid: boolean) => {
       if (valid) {
-        this.product.price = this.product.price * 100;
         this.product.imageUrl = this.path;
         await this.$store.dispatch({
           type: "product/modify",

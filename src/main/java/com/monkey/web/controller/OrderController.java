@@ -3,8 +3,10 @@ package com.monkey.web.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.monkey.application.Device.IPointService;
 import com.monkey.application.Payfor.IOrderService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
+import com.monkey.common.base.Constant;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
@@ -19,6 +21,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +37,8 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     IOrderService _orderService;
+    @Autowired
+    IPointService _pointService;
 
     @ApiOperation(value = "获取订单列表", notes = "订单列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -41,6 +46,17 @@ public class OrderController {
     public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception {
         EntityWrapper<Order> filter = new EntityWrapper<>();
         filter = ComUtil.genderFilter(filter, page.where);
+        String code = (String) page.where.get("code");
+        if (code != null && !code.isEmpty()) {
+            if(code.equals(Constant.UnknownCode)){
+                filter.eq("pointName",null).or("pointName=''");
+            }else{
+                List<String> ids= _pointService.selectPointNameByCode(code);
+                if(!ids.isEmpty()){
+                    filter.in("pointName",ids);
+                }
+            }
+        }
         Page<Order> res = _orderService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
@@ -52,7 +68,8 @@ public class OrderController {
         Order m = _orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
-    @Log(description="订单接口:/客户下单操作")
+
+    @Log(description = "订单接口:/客户下单操作")
     @ApiOperation(value = "客户下单操作", notes = "订单列表")
     @RequestMapping(value = "/make", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
@@ -77,7 +94,8 @@ public class OrderController {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
     }
-    @Log(description="订单接口:/退款操作")
+
+    @Log(description = "订单接口:/退款操作")
     @ApiOperation(value = "退款操作", notes = "订单列表")
     @RequestMapping(value = "/back/{orderId}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._orders._order.back})

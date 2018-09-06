@@ -81,6 +81,9 @@ export default class Orders extends AbpBase {
     list: this.hasPermission("order:list"),
     first: this.hasPermission("order:first")
   };
+  get current() {
+    return this.$store.state.device.currentOrg;
+  }
   get cates() {
     return this.$store.state.device.deviceCate;
   }
@@ -194,6 +197,9 @@ export default class Orders extends AbpBase {
   ];
   init() {
     var t: any = this.$refs.table;
+    if (this.current) {
+      this.filters.code = this.current.code;
+    }
     t.getpage();
   }
   async batchDelete() {

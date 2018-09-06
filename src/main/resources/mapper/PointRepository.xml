@@ -35,5 +35,21 @@ FROM
         </if>
     </where>
     </select>
+    <select id="selectPointNameByTreeCode" resultType="java.lang.String">
+        SELECT
+	pointName
+FROM
+	sale_point
+WHERE
+	areaId IN ( SELECT id FROM sale_tree WHERE levelCode LIKE '${code}%' )
+    </select>
+    <select id="selectPointIdByTreeCode" resultType="java.lang.Integer">
+        SELECT
+        id
+        FROM
+        sale_point
+        WHERE
+        areaId IN ( SELECT id FROM sale_tree WHERE levelCode LIKE '${code}%' )
+    </select>
 
 </mapper>

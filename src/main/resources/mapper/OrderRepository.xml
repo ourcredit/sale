@@ -105,7 +105,7 @@
     <!--获取当月统计信息-->
     <select id="getMonthSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
         SELECT
-        DATE_FORMAT( creationTime, '%m' ) as time,
+        DATE_FORMAT( creationTime, '%d' ) as time,
         COUNT( productId ) as count
         FROM
         sale_order
@@ -120,9 +120,9 @@
             </if>
         </where>
         GROUP BY
-        DATE_FORMAT( creationTime, '%m' )
+        DATE_FORMAT( creationTime, '%d' )
         ORDER BY
-        DATE_FORMAT( creationTime, '%m' )
+        DATE_FORMAT( creationTime, '%d' )
     </select>
     <!--获取点位销售榜单前十-->
     <select id="getPointSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">

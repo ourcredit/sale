@@ -79,6 +79,9 @@ export default class Orders extends AbpBase {
   get cates() {
     return this.$store.state.device.deviceCate;
   }
+  get current() {
+    return this.$store.state.device.currentOrg;
+  }
   ModalShow: boolean = false;
   columns: Array<any> = [
     {
@@ -136,6 +139,9 @@ export default class Orders extends AbpBase {
   ];
   init() {
     var t: any = this.$refs.table;
+    if (this.current) {
+      this.filters.code = this.current.code;
+    }
     t.getpage();
   }
   async batchDelete() {

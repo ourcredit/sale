@@ -18,4 +18,6 @@ import java.util.List;
  */
 public interface PointRepository extends BaseMapper<Point> {
     List<Point> selectbyAreaAndName(Pagination page, @Param("name")String name, @Param("code")String code);
+    List<String> selectPointNameByTreeCode(@Param("code")String code);
+    List<Integer> selectPointIdByTreeCode(@Param("code")String code);
 }

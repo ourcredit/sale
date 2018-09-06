@@ -8,6 +8,7 @@ import com.monkey.application.Device.IDeviceService;
 import com.monkey.application.Device.IPointService;
 import com.monkey.application.Device.ITreeService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
+import com.monkey.common.base.Constant;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
@@ -61,7 +62,7 @@ public class TreeController {
         }else {
             res= _treeService.selectList( filter);
         }
-        Tree tt=new Tree("未分配设备",null,"");
+        Tree tt=new Tree("未分配设备",null, Constant.UnknownCode);
         tt.setId(999);
         res.add(tt);
 

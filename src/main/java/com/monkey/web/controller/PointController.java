@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IPointService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
+import com.monkey.common.base.Constant;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
@@ -37,11 +38,22 @@ public class PointController {
     @RequestMapping(value = "",method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._pointer._point.list})
     public PublicResult<Page<Point>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
-        String name= (String) page.where.get("mame");
+        EntityWrapper<Point> filter = new EntityWrapper<>();
+        filter=  ComUtil.genderFilter(filter,page.where);
         String code=  (String)page.where.get("code");
-      code= code==null|| code.isEmpty()?null:code;
-        Page<Point> res= _pointService.selectByAreaId(new Page<>(page.index,page.size), name,code);
+        if(code!=null&&!code.isEmpty()){
+            if(code.equals(Constant.UnknownCode)){
+                filter.eq("pointName",null).or("pointName=''");
+            }else {
+                List<Integer> ids=   _pointService.selectPointIdsByCode(code);
+                if(!ids.isEmpty()){
+                    filter.in("id",ids);
+                }
+            }
 
+        }
+
+        Page<Point> res= _pointService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取点位详情",notes = "点位列表")

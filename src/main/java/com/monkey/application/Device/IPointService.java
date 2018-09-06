@@ -17,4 +17,6 @@ import java.util.List;
  */
 public interface IPointService extends IService<Point> {
     Page<Point> selectByAreaId(Pagination page, String name, String areaId);
+    List<String> selectPointNameByCode(String code);
+    List<Integer> selectPointIdsByCode(String code);
 }

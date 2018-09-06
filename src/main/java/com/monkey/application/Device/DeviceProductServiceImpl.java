@@ -26,7 +26,8 @@ public class DeviceProductServiceImpl extends ServiceImpl<DeviceProductRepositor
         List<DeviceProduct> list=new ArrayList<>();
         for (int i = 0; i < input.size(); i++) {
             DeviceProductInput c=input.get(i);
-            DeviceProduct d=new DeviceProduct(c.id, c.productId,c.deviceId,c.isSale,c.price);
+            Integer price=c.price*100;
+            DeviceProduct d=new DeviceProduct(c.id, c.productId,c.deviceId,c.isSale,price);
             list.add(d);
         }
      return this.insertOrUpdateBatch(list);

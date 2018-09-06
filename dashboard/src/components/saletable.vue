@@ -13,6 +13,7 @@
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import AbpBase from "../lib/abpbase";
 import PageRequest from "../store/entities/page-request";
+import { debug } from "util";
 @Component
 export default class SaleTable extends AbpBase {
   constructor() {
@@ -26,6 +27,11 @@ export default class SaleTable extends AbpBase {
     required: true
   })
   type: String;
+  @Prop({
+    type: Boolean,
+    default: false
+  })
+  isEmpty: boolean;
   @Prop({
     type: Object,
     required: true
@@ -59,6 +65,7 @@ export default class SaleTable extends AbpBase {
   selections: Array<any> = new Array<any>();
 
   get list() {
+    if (this.isEmpty) return [];
     return this.$store.state[`${this.type}`].list;
   }
 
@@ -91,6 +98,7 @@ export default class SaleTable extends AbpBase {
     return this.$store.state[`${this.type}`].pageSize;
   }
   get totalCount() {
+    if (this.isEmpty) return 0;
     return this.$store.state[`${this.type}`].totalCount;
   }
   get currentPage() {

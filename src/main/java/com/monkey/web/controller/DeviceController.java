@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IDeviceProductService;
 import com.monkey.application.Device.IDeviceService;
+import com.monkey.application.Device.IPointService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
+import com.monkey.common.base.Constant;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
@@ -43,6 +45,8 @@ public class DeviceController {
     @Autowired
     IDeviceService _deviceService;
     @Autowired
+    IPointService _pointService;
+    @Autowired
     IDeviceProductService _deviceProductService;
 
     @ApiOperation(value = "获取设备列表",notes = "设备列表")
@@ -50,14 +54,21 @@ public class DeviceController {
     @RequiresPermissions(value = {PermissionConst._devices._device.list})
     public PublicResult<Page<Device>> devices(@RequestBody PagedAndFilterInputDto page) throws Exception{
         EntityWrapper<Device> filter = new EntityWrapper<>();
+        filter=  ComUtil.genderFilter(filter,page.where);
         String code=  (String)page.where.get("code");
         if(code!=null&&!code.isEmpty()){
-            page.where.replace("code",code,"");
-            code=  code.isEmpty()?null:code;
-        }
-        filter=  ComUtil.genderFilter(filter,page.where);
+            if(code.equals(Constant.UnknownCode)){
+                filter.eq("pointName",null).or("pointName=''");
+            }else {
+                List<Integer> ids=   _pointService.selectPointIdsByCode(code);
+                if(!ids.isEmpty()){
+                    filter.in("pointId",ids);
+                }
+            }
 
-        Page<Device> res= _deviceService.selectByArea(new Page<>(page.index,page.size),code, filter);
+        }
+
+        Page<Device> res= _deviceService.selectPage(new Page<>(page.index,page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取设备详情",notes = "设备列表")

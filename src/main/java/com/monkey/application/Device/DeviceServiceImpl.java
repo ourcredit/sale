@@ -34,6 +34,9 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceRepository, Device> imp
     @Override
     public Page<ProductDto> selectProductsByDevice(Page<ProductDto> page, Integer deviceId, String productName, String productNum, String productType, Integer isSale) {
         List<ProductDto> a=_deviceRepository.selectProductsByDevice(page, deviceId,productName,productNum,productType,isSale);
+        if(!a.isEmpty()){
+            a.forEach(w->w.setPrice(w.getPrice()/100));
+        }
         return page.setRecords(a) ;
     }
 

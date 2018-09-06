@@ -80,11 +80,10 @@ WHERE
         sale_device
         <where>
             isDeleted =0
-
             <if test="code!=null">
              and   pointId IN (
                 SELECT id FROM sale_point WHERE isDeleted = 0
-                AND areaId IN ( SELECT id FROM sale_tree WHERE levelCode LIKE '${code}%' ) ) AND
+                AND areaId IN ( SELECT id FROM sale_tree WHERE levelCode LIKE '${code}%' ) )
             </if>
             <if test="ew.sqlSegment!=null">
                    ${ew.sqlSegment}
