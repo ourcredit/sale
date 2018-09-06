@@ -30,6 +30,7 @@ function request(url, type, data, call) {
 const store = new Vuex.Store({
 	state: {
 		socketState: false,
+		tenantId:1,
 		step: 1, //购买流程控制
 		tenantName: "default", //默认租户信息
 		deviceCode: "", //默认设备code 编码
@@ -105,6 +106,8 @@ const store = new Vuex.Store({
 					console.log("登陆结果:"+JSON.stringify(res))
 					if (res.data.data) {
 						let token = res.data.data.token;
+						let tenantId=res.data.data.tenantId;
+						state.tenantId=tenantId;
 						plus.storage.setItem("AuthorizationToken", token);
 					}
 				}

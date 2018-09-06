@@ -228,7 +228,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         Map<String, Object> result = new HashMap<>();
         TodayStatical tr = _orderRepository.getOrderStatical(tenantId,DateUtil.getStartTime(), DateUtil.getEndTime());
         TodayStatical mr = _orderRepository.getOrderStatical(tenantId,DateUtil.getStartTime(start), DateUtil.getEndTime(end));
-      Integer count=  WebSocketServer.getOnlineCount();
+      Integer count=  WebSocketServer.getOnlineCount(tenantId);
         tr.setDevice(count);
         result.put("today", tr);
         result.put("month", mr);

@@ -3,10 +3,12 @@ package com.monkey.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.monkey.application.Payfor.IOrderService;
 import com.monkey.common.util.CipherTextUtil;
 import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
+import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Payfor;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.WebSocketMessage;
@@ -170,23 +172,32 @@ public class NotifyController {
                 String transaction_id = (String) packageParams.get("transaction_id");
 
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
-                _orderService.updateOrderStatte(out_trade_no, null, 1, null);
-                ///////////通知客户端修改状态/////////
-                String did = out_trade_no.split("_")[0];
-                WebSocketServer ws = WebSocketServer.getClients().get(did);
-                if (ws != null) {
-                    WebSocketMessage mm = new WebSocketMessage(did, out_trade_no, "支付成功", 2, true);
-                    ws.sendMessageTo(mm);
+                EntityWrapper e=new EntityWrapper();
+                e.eq("wechatOrder",out_trade_no);
+                Order o= _orderService.selectOne(e);
+                if(o!=null){
+                    _orderService.updateOrderStatte(out_trade_no, null, 1, null);
+                    ///////////通知客户端修改状态/////////
+                    String did = out_trade_no.split("_")[0];
+                    WebSocketServer ws = WebSocketServer.getClients(o.getTenantId()).get(did);
+                    if (ws != null) {
+                        WebSocketMessage mm = new WebSocketMessage(did, out_trade_no, "支付成功", 2, true,o.getTenantId());
+                        ws.sendMessageTo(mm);
 
-                    // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
-                    BufferedOutputStream out = new BufferedOutputStream(
-                            response.getOutputStream());
-                    resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
-                            + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
-                    out.write(resXml.getBytes());
-                    out.flush();
-                    out.close();
-                    System.out.println("通知微信.异步确认成功");
+                        // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
+                        BufferedOutputStream out = new BufferedOutputStream(
+                                response.getOutputStream());
+                        resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+                                + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
+                        out.write(resXml.getBytes());
+                        out.flush();
+                        out.close();
+                        System.out.println("通知微信.异步确认成功");
+                }
+
+
+
+
                 }
 
             } else {

@@ -1,7 +1,10 @@
 package com.monkey.web.aspect;
 
 
+import java.beans.IntrospectionException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -18,36 +21,43 @@ import com.alibaba.fastjson.JSONObject;
 import com.monkey.application.Payfor.IOrderService;
 import com.monkey.web.config.SpringContextBean;
 import com.monkey.web.controller.dtos.WebSocketMessage;
+import org.apache.commons.collections.map.CompositeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.spring.web.json.Json;
 
-@ServerEndpoint(value = "/websocket/{clientId}")
+@ServerEndpoint(value = "/websocket/{tenantId}/{clientId}")
 @Component
 public class WebSocketServer {
     @Autowired
     IOrderService _orderService;
+    private static Map<String,Integer> clientsState=new ConcurrentHashMap<>();
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
-    private static int onlineCount = 0;
+    private static Map<Integer, Integer> onlineCount = new ConcurrentHashMap();
     //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
-    private static Map<String, WebSocketServer> clients = new ConcurrentHashMap<String, WebSocketServer>();
+    private static Map<Integer, Map<String, WebSocketServer>> clients = new ConcurrentHashMap();
+    //   private static Map<String, WebSocketServer> clients = new ConcurrentHashMap<String, WebSocketServer>();
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-    private  String clientId;
+    private String clientId;
+    private Integer tenantId;
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
-    public void onOpen(Session session, @PathParam("clientId") String clientId) {
+    public void onOpen(Session session, @PathParam("clientId") String clientId, @PathParam("tenantId") Integer tenantId) {
         this.session = session;
-        this.clientId=clientId;
-        clients.put(this.clientId, this);     //加入set中
-        addOnlineCount();           //在线数加1
+        this.clientId = clientId;
+        this.tenantId = tenantId;
+        Map<String, WebSocketServer> mm=new ConcurrentHashMap<>();
+        mm.put(this.clientId, this);
+        clients.put(this.tenantId, mm);     //加入set中
+        clientsState.put(this.clientId,1);
+        addOnlineCount(this.tenantId);           //在线数加1
         try {
-            WebSocketMessage m=new WebSocketMessage(this.clientId,"","链接服务器成功",1,true);
+            WebSocketMessage m = new WebSocketMessage(this.clientId, "", "链接服务器成功", 1, true,this.tenantId);
             sendMessageTo(m);
         } catch (IOException e) {
-
         }
     }
     //	//连接打开时执行
@@ -62,27 +72,28 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose() {
-        clients.remove(clientId);  //从set中删除
-        subOnlineCount();           //在线数减1
+        Map<String,WebSocketServer> client=  clients.get(this.tenantId);  //从set中删除
+        client.remove(this.clientId);
+        clientsState.put(this.clientId,0);
+        subOnlineCount(this.tenantId);           //在线数减1
     }
-
     /**
      * 收到客户端消息后调用的方法
      *
      * @param message 客户端发送过来的消息
      */
     @OnMessage
-    public void onMessage(String message)throws IOException  {
-        if(this._orderService==null){
-            this._orderService=SpringContextBean.getBean(IOrderService.class);
+    public void onMessage(String message) throws IOException {
+        if (this._orderService == null) {
+            this._orderService = SpringContextBean.getBean(IOrderService.class);
         }
-        JSONObject jsonTo =  JSONObject.parseObject(message);
-        String order= (String)jsonTo.get("order");
-        Integer type= (Integer) jsonTo.get("type");
-        if(type==4){
-            _orderService.updateOrderStatte(order,1,null,null);
+        JSONObject jsonTo = JSONObject.parseObject(message);
+        String order = (String) jsonTo.get("order");
+        Integer type = (Integer) jsonTo.get("type");
+        if (type == 4) {
+            _orderService.updateOrderStatte(order, 1, null, null);
         }
-        WebSocketMessage m=new WebSocketMessage(this.clientId,order,"出货状态修改成功",4,true);
+        WebSocketMessage m = new WebSocketMessage(this.clientId, order, "出货状态修改成功", 4, true,this.tenantId);
         sendMessageTo(m);
 
     }
@@ -95,35 +106,49 @@ public class WebSocketServer {
     public void onError(Session session, Throwable error) {
         error.printStackTrace();
     }
-
-
     public void sendMessageTo(WebSocketMessage message) throws IOException {
-        String json=JSON.toJSONString(message);
-        for (WebSocketServer item : clients.values()) {
-            if (item.clientId!=null&& item.clientId.equals(message.to) )
+        String json = JSON.toJSONString(message);
+        Integer tenantId = message.tenantId;
+        Map<String, WebSocketServer> maps = clients.get(tenantId);
+        for (WebSocketServer item : maps.values()) {
+            if (item.clientId != null && item.clientId.equals(message.to))
                 item.session.getAsyncRemote().sendText(json);
         }
     }
-
     public void sendMessageAll(WebSocketMessage message) throws IOException {
-        String json=JSON.toJSONString(message);
-        for (WebSocketServer item : clients.values()) {
+        String json = JSON.toJSONString(message);
+        Integer tenantId = message.tenantId;
+        Map<String, WebSocketServer> maps = clients.get(tenantId);
+        for (WebSocketServer item : maps.values()) {
             item.session.getAsyncRemote().sendText(json);
         }
     }
 
-    public static synchronized int getOnlineCount() {
-        return onlineCount;
+    public static synchronized int getOnlineCount(Integer tenantId) {
+        return onlineCount.get(tenantId);
     }
 
-    public static synchronized void addOnlineCount() {
-        WebSocketServer.onlineCount++;
+    public static synchronized void addOnlineCount(Integer tenantId) {
+        Integer count = onlineCount.get(tenantId);
+        if(count==null){
+            count=0;
+        }
+        count++;
+        onlineCount.put(tenantId, count);
     }
 
-    public static synchronized void subOnlineCount() {
-        WebSocketServer.onlineCount--;
+    public static synchronized void subOnlineCount(Integer tenantId) {
+        Integer count = onlineCount.get(tenantId);
+        if(count==null){
+            count=0;
+        }else if(count>0){
+            count--;
+
+        }
+        onlineCount.put(tenantId, count);
     }
-    public static synchronized Map<String, WebSocketServer> getClients() {
-        return clients;
+
+    public static synchronized Map<String, WebSocketServer> getClients(int tenantId) {
+        return clients.get(tenantId);
     }
 }

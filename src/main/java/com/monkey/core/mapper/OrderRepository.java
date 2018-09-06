@@ -34,7 +34,6 @@ public interface OrderRepository extends BaseMapper<Order> {
     Payfor getPayforByOrder(@Param("appId") String appId, @Param("mch_id") String mch_id);
 
     Payfor getPayforByAppId(@Param("appId") String appId);
-
     List<DeviceSaleStatical> getDeviceSaleStatical(@Param("tenantId") Integer tenantId, Pagination page, @Param("deviceName") String deviceName, @Param("pointName") String pointName, @Param("start") Date start, @Param("end") Date end);
 
     List<ProductSaleStatical> getProductSaleStatical(Integer tenantId, Pagination page,@Param("productName") String productName, @Param("deviceName") String deviceName, @Param("start") Date start, @Param("end") Date end);

@@ -28,7 +28,7 @@ public class NgUserModel {
 
     private String token;
     private UserDto user;
-
+    private Integer tenantId;
 
     public NgUserModel() {
     }
@@ -36,5 +36,17 @@ public class NgUserModel {
     public NgUserModel(String token, UserDto user) {
         this.token = token;
         this.user = user;
+    }
+    public NgUserModel(String token, UserDto user,Integer tenantId) {
+        this.token = token;
+        this.user = user;
+        this.tenantId=tenantId;
+    }
+    public Integer getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Integer tenantId) {
+        this.tenantId = tenantId;
     }
 }

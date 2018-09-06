@@ -62,7 +62,7 @@ public class LoginController {
         }
         user.setLastLoginTime(new Date());
         _userService.updateById(user);
-        NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(),user.getId(),user.getTenantId(), user.getPassword()),null );
+        NgUserModel u= new NgUserModel(JWTUtil.sign(user.getUserName(),user.getId(),user.getTenantId(), user.getPassword()),null ,user.getTenantId());
         return new PublicResult<>(PublicResultConstant.SUCCESS, u);
     }
 
