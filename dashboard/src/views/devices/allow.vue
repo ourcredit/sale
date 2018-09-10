@@ -104,7 +104,6 @@ export default class deviceC extends AbpBase {
           },
           on: {
             "on-change": (e: any) => {
-              console.log(this.finnalList);
               var mo = this.finnalList[params.index];
               if (mo) {
                 mo.isSale = e ? 1 : 0;
@@ -113,7 +112,8 @@ export default class deviceC extends AbpBase {
                   isSale: e ? 1 : 0,
                   id: params.row.id,
                   deviceId: this.current.id,
-                  productId: params.row.productId
+                  productId: params.row.productId,
+                  price: params.row.price
                 };
                 this.finnalList[params.index] = mo;
               }
@@ -129,7 +129,7 @@ export default class deviceC extends AbpBase {
         return h("InputNumber", {
           props: {
             type: "text",
-            value: params.row.price / 100
+            value: params.row.price
           },
           style: {
             width: "100%",
@@ -139,10 +139,10 @@ export default class deviceC extends AbpBase {
             "on-change": (e: any) => {
               var mo = this.finnalList[params.index];
               if (mo) {
-                mo.price = e * 100;
+                mo.price = e;
               } else {
                 mo = {
-                  price: e * 100,
+                  price: e,
                   id: params.row.id,
                   deviceId: this.current.id,
                   productId: params.row.productId
@@ -158,7 +158,7 @@ export default class deviceC extends AbpBase {
   async save() {
     await this.$store.dispatch({
       type: `device/allowProducts`,
-      data: this.finnalList
+      data: this.finnalList.filter(w => w != null)
     });
     this.$router.push({ name: "dl" });
   }

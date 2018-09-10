@@ -125,6 +125,7 @@ public class WebSocketServer {
     }
 
     public static synchronized int getOnlineCount(Integer tenantId) {
+        if(onlineCount.isEmpty())return 0;
         return onlineCount.get(tenantId);
     }
 

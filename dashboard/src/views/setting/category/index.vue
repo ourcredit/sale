@@ -143,8 +143,8 @@ export default class Users extends AbpBase {
                     cancelText: "否",
                     onOk: async () => {
                       await this.$store.dispatch({
-                        type: "category/delete",
-                        data: params.row
+                        type: "category/batch",
+                        data: [params.row.id]
                       });
                       await this.getpage();
                     }

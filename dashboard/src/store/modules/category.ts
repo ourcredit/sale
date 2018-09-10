@@ -54,6 +54,13 @@ class CategoryModule extends ListModule<ICategoryState, any, Category> {
     ): Promise<any> {
       await Ajax.delete("/api/category/" + payload.data.id);
     },
+
+    async batch(
+      context: ActionContext<ICategoryState, any>,
+      payload: any
+    ): Promise<any> {
+      await Ajax.post("/api/category/batch", payload.data);
+    },
     async get(
       context: ActionContext<ICategoryState, any>,
       payload: any
