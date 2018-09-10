@@ -9,6 +9,7 @@
         <result column="productId" property="productId"/>
         <result column="price" property="price"/>
         <result column="wechatOrder" property="wechatOrder"/>
+        <result column="deviceNum" property="deviceNum"/>
         <result column="creationTime" property="creationTime"/>
         <result column="creatorUserId" property="creatorUserId"/>
         <result column="orderState" property="orderState"/>
@@ -25,7 +26,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType,backNum
+        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType,backNum,deviceNum
     </sql>
     <update id="updateOrderState">
         update sale_order
@@ -179,42 +180,34 @@ WHERE
     </select>
     <select id="getDeviceSaleStatical" resultType="com.monkey.core.dtos.DeviceSaleStatical">
         SELECT
-        a.deviceNum,
-        a.deviceName,
-        a.deviceType,
-        a.pointName,
-        b.productId ,c.productName,c.saleCount,c.saleMoney
-        FROM
-        sale_device a
-        INNER JOIN sale_device_product b ON a.id = b.deviceId
-        AND b.isSale =1
-        INNER JOIN (SELECT
-        productId,productName,deviceId,
-        COUNT( productId ) as saleCount,
-        SUM( price ) as saleMoney
+        deviceName,
+        deviceNum,
+        deviceType,
+        COUNT( productId ) saleCount,
+        SUM( price ) saleMoney
         FROM
         sale_order
-        WHERE
-        payState = 1
-        AND orderState = 1
-        <if test="start!=null">
-            and creationTime >= #{start}
-        </if>
-        <if test="end!=null">
-            and creationTime &lt;= #{end}
-        </if>
-        GROUP BY
-        productId,productName,deviceId) c on b.productId =c.productId and c.deviceId=a.id
         <where>
+            payState = 1
+            AND orderState =1
+            <if test="start!=null">
+                and creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
             <if test="deviceName!=null">
-                a.deviceName like '%${deviceName}%'
+              and  deviceName like '%${deviceName}%'
             </if>
             <if test="pointName!=null">
-                a.pointName like '%${pointName}%'
+                and pointName like '%${pointName}%'
             </if>
-
         </where>
-        ORDER BY c.saleCount desc
+        GROUP BY
+        deviceName,
+        deviceNum,
+        deviceType
+
     </select>
     <select id="getProductSaleStatical" resultType="com.monkey.core.dtos.ProductSaleStatical">
         SELECT

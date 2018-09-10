@@ -74,6 +74,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         Order o = new Order();
         o.setPayType(input.isWechatOrder?1:2);
         o.setDeviceId(d.getId());
+        o.setDeviceNum(d.getDeviceNum());
         o.setDeviceName(d.getDeviceName());
         o.setDeviceType(d.getDeviceType());
         o.setOrderState(0);

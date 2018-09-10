@@ -71,7 +71,7 @@ export default class DeviceStatical extends AbpBase {
       key: "deviceNum"
     },
     {
-      title: "设备编号",
+      title: "设备名称",
       key: "deviceName"
     },
     {
@@ -88,7 +88,10 @@ export default class DeviceStatical extends AbpBase {
     },
     {
       title: "累计销售额",
-      key: "saleMoney"
+      key: "saleMoney",
+      render: (h: any, params: any) => {
+        return h("span", params.row.saleMoney / 100);
+      }
     }
   ];
   get list() {

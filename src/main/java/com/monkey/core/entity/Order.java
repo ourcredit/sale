@@ -35,6 +35,7 @@ public class Order extends Model<Order> {
      * 商品id
      */
     private Integer productId;
+    private String deviceNum;
     /**
      * 价格
      */
@@ -237,5 +238,13 @@ public class Order extends Model<Order> {
 
     public void setBackNum(String backNum) {
         this.backNum = backNum;
+    }
+
+    public String getDeviceNum() {
+        return deviceNum;
+    }
+
+    public void setDeviceNum(String deviceNum) {
+        this.deviceNum = deviceNum;
     }
 }

@@ -79,7 +79,7 @@ export default class ProductC extends AbpBase {
     },
     {
       title: "商品编号",
-      key: "productName"
+      key: "productNum"
     },
     {
       title: "商品类型",
