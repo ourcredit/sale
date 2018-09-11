@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 05/09/2018 23:03:39
+ Date: 11/09/2018 21:14:33
 */
 
 SET NAMES utf8mb4;
@@ -141,6 +141,8 @@ CREATE TABLE `sale_order`  (
   `pointName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '点位名',
   `payType` int(10) NULL DEFAULT NULL COMMENT '支付类型',
   `backNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退款单号',
+  `deviceNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设备编码',
+  `pointId` int(11) NULL DEFAULT NULL COMMENT '点位id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
