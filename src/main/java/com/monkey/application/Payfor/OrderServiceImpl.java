@@ -80,8 +80,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         o.setOrderState(0);
         o.setPointId(d.getPointId());
         o.setPayState(0);
-        o.setPayType(1);
-        o.setPrice(input.price);
+        o.setPrice(input.isWechatOrder?input.price:input.price/100);
         o.setProductId(p.getId());
         o.setProductName(p.getProductName());
         o.setPointName(d.getPointName());

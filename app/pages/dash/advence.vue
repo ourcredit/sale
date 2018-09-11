@@ -1,9 +1,9 @@
 <template>
 	<view class="page">
 		<page-head :title="deviceCode"></page-head>
-		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:height }">
+		<swiper autoplay="true" indicator-dots="true" circular="true" v-bind:style="{height:'300px' }">
 			<swiper-item @tap="detail(img)" v-for="(img,key) in imgUrls" :key="key">
-				<image :src="img" v-bind:style="{height:height }" />
+				<image :src="img" v-bind:style="{height:'300px' }" />
 			</swiper-item>
 		</swiper>
 <!-- 	<view :key="i" v-for="(v,i) in logError">第{{i}}个： {{v}}</view>	 -->
@@ -35,13 +35,9 @@
 			...mapState({
 				list: state => state.products,
 				deviceCode: state => state.deviceCode,
-				logError: state => state.logError
+				height: state => state.height
 
 			}),
-			height() {
-				var h = plus.screen.resolutionHeight;
-				return h * 0.8 - 40 + "px";
-			}
 		},
 		mounted(){
 			if (plus.device.imei) {
@@ -96,7 +92,7 @@
 		border-radius: 50%;
 		margin-left: 80%;
 		width: 12%;
-		height: 135px;
+		height: 90px;
 		vertical-align: middle;
 		text-align: center;
 	}

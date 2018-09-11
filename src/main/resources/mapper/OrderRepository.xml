@@ -177,7 +177,7 @@ WHERE
         FROM
         sale_payfor
         WHERE
-        alipayId = #{appId}
+        alipayId = #{appId}  LIMIT 0,1
     </select>
     <select id="getDeviceSaleStatical" resultType="com.monkey.core.dtos.DeviceSaleStatical">
         SELECT

@@ -158,7 +158,7 @@ export default class deviceC extends AbpBase {
   async save() {
     await this.$store.dispatch({
       type: `device/allowProducts`,
-      data: this.finnalList.filter(w => w != null)
+      data: this.finnalList.filter(w => w != null && w.isSale == 1)
     });
     this.$router.push({ name: "dl" });
   }

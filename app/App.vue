@@ -21,7 +21,8 @@
 			...mapMutations([
 				'setDeviceCode', // 映射 this.increment() 为 this.$store.commit('increment')
 				"setsocketState",
-				"setlogError"
+				"setlogError",
+				"setHeight"
 			]),
 		},
 		onLaunch: function () {
@@ -61,6 +62,8 @@
 				let num = plus.device.imei.split(',')[0];
 				this.setDeviceCode(num);
 			}
+			let height =plus.screen.resolutionHeight*plus.screen.scale
+			_.setHeight(height);
 			let url = this.websocketUrl+this.tenantId+"/" + this.deviceCode
 			uni.connectSocket({
 				url: url,

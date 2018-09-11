@@ -38,7 +38,8 @@ const store = new Vuex.Store({
 		totalCount: 0, //总数据聚集
 		isRegister: false, //当前设备是否注册
 		imageUrl: "", //支付url
-		logError: []
+		logError: [],
+		height:0
 	},
 	mutations: {
 		setPageSize(state, size) {
@@ -56,6 +57,10 @@ const store = new Vuex.Store({
 		setlogError(state, error) {
 			state.logError += error;
 		},
+		setHeight(state, height) {
+			console.log("高度:"+ height);
+			state.height = height;
+		},
 		initState(state) {
 			state.step = 1;
 			state.imageUrl = "";
@@ -69,6 +74,7 @@ const store = new Vuex.Store({
 			if (state.deviceCode) {
 				payload.deviceNum = state.deviceCode;
 			}
+			console.log("请求参数："+ JSON.stringify(payload));
 			request('/api/device/salelist', "POST", payload, function (r) {
 				console.log("加载商品"+ JSON.stringify(r));
 				if (payload.init) {

@@ -3,7 +3,7 @@
 		<page-head title="ww"></page-head>
 		<view class="page-section">
 			<view class="uni-flex uni-row">
-				<view style="width: 80%;height: 430px;" class="flex-item color1">
+				<view style="width: 80%;height: 100px;" class="flex-item color1">
 					<view class="uni-flex  uni-row">
 						<view class="text" style="flex: 1;">
 							<image :src="url"></image>
@@ -11,21 +11,20 @@
 						<view class="text" style="flex: 1;">{{current.description}}</view>
 					</view>
 				</view>
-				<view style="flex: 1;height: 430px;" class="flex-item color3">
+				<view style="flex: 1;" class="flex-item color3">
 					<view class="uni-flex uni-row">
-						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-start;">
+						<view class="text" style="flex: 1;display: flex; justify-content: center;align-items: flex-start;">
 							<text>{{current.productName}}</text>
 							<text>{{current.price}}</text>
 						</view>
 					</view>
 					<view class="uni-flex uni-row">
-						<view class="text" style="flex: 1;height: 200px;display: flex; justify-content: center;align-items: flex-end;">
-							<button v-if="step==1" @click="gotowechatbuy">微信购买</button>	
+						<view class="text" style="flex: 1;display: flex;height: 100px; justify-content: center;align-items: flex-end;">
+							<button v-if="step==1" @click="gotowechatbuy">微信购买</button>
 							<button v-if="step==1" @click="gotoalibuy">支付宝购买</button>
-							<image v-if="step==2" style="width:200px;height:200px;" :src="qrcode">二维码</image>
-							<button v-if="step==3" >出货中</button>
-							<button v-if="step==4" >出货完成</button>
-
+							<image v-if="step==2" style="width:200px;height: 100px;" :src="qrcode">二维码</image>
+							<button v-if="step==3">出货中</button>
+							<button v-if="step==4">出货完成</button>
 						</view>
 					</view>
 				</view>
@@ -68,7 +67,7 @@
 		},
 		mounted() {
 			let _ = this;
-			if(!_.socketState){
+			if (!_.socketState) {
 				uni.connectSocket({
 					url: url,
 					data: {},
@@ -115,6 +114,7 @@
 				total: state => state.totalCount,
 				qrcode: state => state.imageUrl,
 				step: state => state.step,
+				height: state => state.height,
 				socketState: state => state.socketState,
 
 			}),
@@ -169,9 +169,9 @@
 					"deviceNum": plus.device.imei.split(',')[0],
 					"price": this.current.price,
 					"productId": this.current.productId,
-					"isWechatOrder":true
+					"isWechatOrder": true
 				}
-				console.log("wwww"+ JSON.stringify(params))
+				console.log("wwww" + JSON.stringify(params))
 				this.gobuy(params);
 				this.setStep(2);
 			},
@@ -183,9 +183,9 @@
 					"deviceNum": plus.device.imei.split(',')[0],
 					"price": this.current.price,
 					"productId": this.current.productId,
-					"isWechatOrder":false
+					"isWechatOrder": false
 				}
-				console.log("wwww"+ JSON.stringify(params))
+				console.log("wwww" + JSON.stringify(params))
 				this.gobuy(params);
 				this.setStep(2);
 			}
@@ -253,7 +253,7 @@
 		margin-right: 30px;
 		display: inline-block;
 		width: 15%;
-		height: 200px;
+		height: 90px;
 	}
 
 	.textshow {
