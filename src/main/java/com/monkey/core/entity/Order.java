@@ -50,6 +50,7 @@ public class Order extends Model<Order> {
      */
     @TableField(fill = FieldFill.INSERT)
     private Date creationTime;
+    private  Integer pointId;
     /**
      * 创建人id
      */
@@ -246,5 +247,13 @@ public class Order extends Model<Order> {
 
     public void setDeviceNum(String deviceNum) {
         this.deviceNum = deviceNum;
+    }
+
+    public Integer getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(Integer pointId) {
+        this.pointId = pointId;
     }
 }

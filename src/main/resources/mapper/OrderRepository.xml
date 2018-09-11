@@ -10,6 +10,7 @@
         <result column="price" property="price"/>
         <result column="wechatOrder" property="wechatOrder"/>
         <result column="deviceNum" property="deviceNum"/>
+        <result column="pointId" property="pointId"/>
         <result column="creationTime" property="creationTime"/>
         <result column="creatorUserId" property="creatorUserId"/>
         <result column="orderState" property="orderState"/>
@@ -26,7 +27,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType,backNum,deviceNum
+        id, productName, productId, price, wechatOrder, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName,payType,backNum,deviceNum,pointId
     </sql>
     <update id="updateOrderState">
         update sale_order
