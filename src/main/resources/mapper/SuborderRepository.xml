@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.mapper.SuborderRepository">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.monkey.entity.Suborder">
+        <id column="id" property="id" />
+        <result column="price" property="price" />
+        <result column="orderNum" property="orderNum" />
+        <result column="creationTime" property="creationTime" />
+        <result column="creatorUserId" property="creatorUserId" />
+        <result column="orderState" property="orderState" />
+        <result column="payState" property="payState" />
+        <result column="tenantId" property="tenantId" />
+        <result column="deviceId" property="deviceId" />
+        <result column="deviceName" property="deviceName" />
+        <result column="deviceType" property="deviceType" />
+        <result column="pointName" property="pointName" />
+        <result column="payType" property="payType" />
+        <result column="pickCode" property="pickCode" />
+        <result column="pickTime" property="pickTime" />
+        <result column="deviceNum" property="deviceNum" />
+        <result column="pointId" property="pointId" />
+        <result column="serialNum" property="serialNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, price, orderNum, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName, payType, pickCode, pickTime, deviceNum, pointId, serialNum
+    </sql>
+
+</mapper>

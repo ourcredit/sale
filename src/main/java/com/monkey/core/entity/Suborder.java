@@ -1,12 +1,10 @@
-package com.monkey.core.entity;
+package com.monkey.entity;
 
-import java.util.Date;
-import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 /**
@@ -15,49 +13,34 @@ import java.io.Serializable;
  * </p>
  *
  * @author zhaohejing
- * @since 2018-08-13
+ * @since 2018-09-12
  */
-@TableName("sale_order")
-public class Order extends Model<Order> {
+@TableName("sale_suborder")
+public class Suborder extends Model<Suborder> {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * key
      */
-    @TableId(value = "id", type = IdType.UUID)
-    private String id;
-    /**
-     * 商品名
-     */
-    private String productName;
-    /**
-     * 商品id
-     */
-    private Integer productId;
-    private String deviceNum;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
     /**
      * 价格
      */
     private Integer price;
     /**
-     * 微信订单
+     * 订单编号
      */
-    private String wechatOrder;
-    private String backNum;
+    private String orderNum;
     /**
      * 创建时间
      */
-    @TableField(fill = FieldFill.INSERT)
     private Date creationTime;
-    private  Integer pointId;
     /**
      * 创建人id
      */
-    @TableField(fill = FieldFill.INSERT)
     private Integer creatorUserId;
-
-    private Integer payType;
     /**
      * 订单状态
      */
@@ -86,30 +69,38 @@ public class Order extends Model<Order> {
      * 点位名
      */
     private String pointName;
+    /**
+     * 支付类型
+     */
+    private Integer payType;
+    /**
+     * 取货码
+     */
+    private String pickCode;
+    /**
+     * 取货时间
+     */
+    private Date pickTime;
+    /**
+     * 设备编码
+     */
+    private String deviceNum;
+    /**
+     * 点位id
+     */
+    private Integer pointId;
+    /**
+     * 流水号
+     */
+    private String serialNum;
 
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Integer getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Integer productId) {
-        this.productId = productId;
     }
 
     public Integer getPrice() {
@@ -120,12 +111,12 @@ public class Order extends Model<Order> {
         this.price = price;
     }
 
-    public String getWechatOrder() {
-        return wechatOrder;
+    public String getOrderNum() {
+        return orderNum;
     }
 
-    public void setWechatOrder(String wechatOrder) {
-        this.wechatOrder = wechatOrder;
+    public void setOrderNum(String orderNum) {
+        this.orderNum = orderNum;
     }
 
     public Date getCreationTime() {
@@ -200,31 +191,6 @@ public class Order extends Model<Order> {
         this.pointName = pointName;
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-        "id=" + id +
-        ", productName=" + productName +
-        ", productId=" + productId +
-        ", price=" + price +
-        ", wechatOrder=" + wechatOrder +
-        ", creationTime=" + creationTime +
-        ", creatorUserId=" + creatorUserId +
-        ", orderState=" + orderState +
-        ", payState=" + payState +
-        ", tenantId=" + tenantId +
-        ", deviceId=" + deviceId +
-        ", deviceName=" + deviceName +
-        ", deviceType=" + deviceType +
-        ", pointName=" + pointName +
-        "}";
-    }
-
     public Integer getPayType() {
         return payType;
     }
@@ -233,12 +199,20 @@ public class Order extends Model<Order> {
         this.payType = payType;
     }
 
-    public String getBackNum() {
-        return backNum;
+    public String getPickCode() {
+        return pickCode;
     }
 
-    public void setBackNum(String backNum) {
-        this.backNum = backNum;
+    public void setPickCode(String pickCode) {
+        this.pickCode = pickCode;
+    }
+
+    public Date getPickTime() {
+        return pickTime;
+    }
+
+    public void setPickTime(Date pickTime) {
+        this.pickTime = pickTime;
     }
 
     public String getDeviceNum() {
@@ -255,5 +229,42 @@ public class Order extends Model<Order> {
 
     public void setPointId(Integer pointId) {
         this.pointId = pointId;
+    }
+
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSerialNum(String serialNum) {
+        this.serialNum = serialNum;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Suborder{" +
+        "id=" + id +
+        ", price=" + price +
+        ", orderNum=" + orderNum +
+        ", creationTime=" + creationTime +
+        ", creatorUserId=" + creatorUserId +
+        ", orderState=" + orderState +
+        ", payState=" + payState +
+        ", tenantId=" + tenantId +
+        ", deviceId=" + deviceId +
+        ", deviceName=" + deviceName +
+        ", deviceType=" + deviceType +
+        ", pointName=" + pointName +
+        ", payType=" + payType +
+        ", pickCode=" + pickCode +
+        ", pickTime=" + pickTime +
+        ", deviceNum=" + deviceNum +
+        ", pointId=" + pointId +
+        ", serialNum=" + serialNum +
+        "}";
     }
 }
