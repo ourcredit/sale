@@ -4,11 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.monkey.application.Payfor.IOrderService;
+import com.monkey.application.Payfor.IMainorderService;
 import com.monkey.common.util.CipherTextUtil;
-import com.monkey.common.wechatsdk.PayToolUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
-import com.monkey.core.entity.Order;
+import com.monkey.core.entity.Mainorder;
 import com.monkey.core.entity.Payfor;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.WebSocketMessage;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.applet.Main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ import java.util.*;
 @RequestMapping(value = "/pay")
 public class NotifyController {
     @Autowired
-    IOrderService _orderService;
+    IMainorderService _orderService;
 
     private SortedMap<Object, Object> getparams(Map<String, String> m) {
         //过滤空 设置 TreeMap
@@ -174,7 +174,7 @@ public class NotifyController {
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
                 EntityWrapper e=new EntityWrapper();
                 e.eq("wechatOrder",out_trade_no);
-                Order o= _orderService.selectOne(e);
+                Mainorder o= _orderService.selectOne(e);
                 if(o!=null){
                     _orderService.updateOrderStatte(out_trade_no, null, 1, null);
                     ///////////通知客户端修改状态/////////

@@ -1,4 +1,4 @@
-package com.monkey.web;
+package com.monkey.web.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;

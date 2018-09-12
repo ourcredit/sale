@@ -1,10 +1,14 @@
 package com.monkey.web.controller.dtos;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class OrderInput {
-    public Integer productId;
-    public Integer price;
+    public List<ProductInput> products;
     public String deviceNum;
     public Boolean isWechatOrder;
+  public   class ProductInput{
+        public  Integer productId;
+        public  Integer price;
+    }
 }

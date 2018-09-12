@@ -1,7 +1,18 @@
-package com.monkey.mapper;
+package com.monkey.core.mapper;
 
-import com.monkey.entity.Mainorder;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.monkey.core.dtos.DeviceSaleStatical;
+import com.monkey.core.dtos.ProductSaleStatical;
+import com.monkey.core.dtos.SalePercentDto;
+import com.monkey.core.dtos.TodayStatical;
+import com.monkey.core.entity.Mainorder;
+import com.monkey.core.entity.Payfor;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +23,23 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2018-09-12
  */
 public interface MainorderRepository extends BaseMapper<Mainorder> {
+    void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState, @Param("backNum") String backNum);
+
+    TodayStatical getOrderStatical(@Param("tenantId") Integer tenantId, @Param("start") Date start, @Param("end") Date end);
+
+    List<SalePercentDto> getTodaySalePercent(@Param("tenantId") Integer tenantId, @Param("start") Date start, @Param("end") Date end);
+
+    List<SalePercentDto> getMonthSalePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
+
+    List<SalePercentDto> getPointSalePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
+
+    List<SalePercentDto> getPayTypePercent(@Param("tenantId") Integer tenantId,@Param("start") Date start, @Param("end") Date end);
+
+    Payfor getPayforByOrder(@Param("appId") String appId, @Param("mch_id") String mch_id);
+
+    Payfor getPayforByAppId(@Param("appId") String appId);
+    List<DeviceSaleStatical> getDeviceSaleStatical(@Param("tenantId") Integer tenantId, Pagination page, @Param("deviceName") String deviceName, @Param("pointName") String pointName, @Param("start") Date start, @Param("end") Date end);
+
+    List<ProductSaleStatical> getProductSaleStatical(Integer tenantId, Pagination page, @Param("productName") String productName, @Param("deviceName") String deviceName, @Param("start") Date start, @Param("end") Date end);
 
 }

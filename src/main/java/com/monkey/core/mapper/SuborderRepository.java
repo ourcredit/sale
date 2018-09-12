@@ -1,7 +1,7 @@
-package com.monkey.mapper;
+package com.monkey.core.mapper;
 
-import com.monkey.entity.Suborder;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.monkey.core.entity.Suborder;
 
 /**
  * <p>

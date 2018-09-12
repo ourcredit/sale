@@ -18,7 +18,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.monkey.application.Payfor.IOrderService;
+import com.monkey.application.Payfor.IMainorderService;
 import com.monkey.web.config.SpringContextBean;
 import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.apache.commons.collections.map.CompositeMap;
@@ -30,7 +30,7 @@ import springfox.documentation.spring.web.json.Json;
 @Component
 public class WebSocketServer {
     @Autowired
-    IOrderService _orderService;
+    IMainorderService _orderService;
     private static Map<String,Integer> clientsState=new ConcurrentHashMap<>();
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static Map<Integer, Integer> onlineCount = new ConcurrentHashMap();
@@ -85,7 +85,7 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message) throws IOException {
         if (this._orderService == null) {
-            this._orderService = SpringContextBean.getBean(IOrderService.class);
+            this._orderService = SpringContextBean.getBean(IMainorderService.class);
         }
         JSONObject jsonTo = JSONObject.parseObject(message);
         String order = (String) jsonTo.get("order");

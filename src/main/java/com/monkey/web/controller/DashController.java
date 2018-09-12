@@ -2,7 +2,7 @@ package com.monkey.web.controller;
 
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.monkey.application.Payfor.IOrderService;
+import com.monkey.application.Payfor.IMainorderService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.PermissionConst;
 import com.monkey.common.base.PublicResult;
@@ -38,7 +38,7 @@ import java.util.Map;
 @Api("文件上传接口")
 public class DashController  {
     @Autowired
-    IOrderService _orderService;
+    IMainorderService _orderService;
 
     @ApiOperation(value = "获取首页统计", notes = "订单列表")
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
