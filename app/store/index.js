@@ -100,7 +100,7 @@ const store = new Vuex.Store({
 			state
 		}, payload) {
 			let data = {
-				"passWord": "1234567",
+				"passWord": "Welcome!@#",
 				"tenantName": "dizhushuomingzichanganquan",
 				"userName": "admin"
 			};
