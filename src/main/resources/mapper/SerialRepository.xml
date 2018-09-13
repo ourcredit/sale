@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monkey.mapper.SerialRepository">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.monkey.entity.Serial">
+        <id column="id" property="id" />
+        <result column="order" property="order" />
+        <result column="price" property="price" />
+        <result column="backOrder" property="backOrder" />
+        <result column="creationTime" property="creationTime" />
+        <result column="creatorUserId" property="creatorUserId" />
+        <result column="tenantId" property="tenantId" />
+        <result column="productId" property="productId" />
+        <result column="productName" property="productName" />
+        <result column="type" property="type" />
+        <result column="deviceId" property="deviceId" />
+        <result column="deviceName" property="deviceName" />
+        <result column="pointId" property="pointId" />
+        <result column="pointName" property="pointName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order, price, backOrder, creationTime, creatorUserId, tenantId, productId, productName, type, deviceId, deviceName, pointId, pointName
+    </sql>
+
+</mapper>
