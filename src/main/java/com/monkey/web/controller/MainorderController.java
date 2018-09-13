@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IPointService;
 import com.monkey.application.Payfor.IMainorderService;
+import com.monkey.application.Payfor.ISuborderService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.Constant;
 import com.monkey.common.base.PermissionConst;
@@ -13,6 +14,7 @@ import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.common.wechatsdk.QrCodeUtil;
 import com.monkey.core.entity.Mainorder;
+import com.monkey.core.entity.Suborder;
 import com.monkey.web.annotation.Log;
 import com.monkey.web.controller.dtos.OrderInput;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +41,8 @@ public class MainorderController {
     IMainorderService _orderService;
     @Autowired
     IPointService _pointService;
-
+    @Autowired
+    ISuborderService _subOrderService;
     @ApiOperation(value = "获取订单列表", notes = "订单列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
@@ -115,5 +118,28 @@ public class MainorderController {
             return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
         }
     }
-
+    @Log(description = "订单接口:/退款操作")
+    @ApiOperation(value = "退款操作", notes = "订单列表")
+    @RequestMapping(value = "/backsingle/{subId}", method = RequestMethod.GET)
+    @RequiresPermissions(value = {PermissionConst._orders._order.back})
+    public PublicResult<Object> back(@PathVariable Integer subId) throws Exception {
+        try {
+            Suborder suborder=_subOrderService.selectById(subId);
+            if(suborder==null)  return new PublicResult<>(PublicResultConstant.FAILED, "订单不存在");
+            Mainorder r = _orderService.selectById(suborder.getOrderNum());
+            if (r != null) {
+                String result = "";
+                if (r.getPayType() == 1) {
+                    result = _orderService.weixinBackSingle(r,suborder);
+                } else {
+                    result = _orderService.alibacksingle(r,suborder);
+                }
+                if (result.isEmpty()) return new PublicResult<>(PublicResultConstant.FAILED, "退款申请请求失败");
+                return new PublicResult<>(PublicResultConstant.SUCCESS, "退款申请请求成功");
+            }
+            return new PublicResult<>(PublicResultConstant.ERROR, "暂无此订单信息");
+        } catch (Exception e) {
+            return new PublicResult<>(PublicResultConstant.FAILED, e.getMessage());
+        }
+    }
 }

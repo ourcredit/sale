@@ -23,7 +23,8 @@ import java.util.List;
  * @since 2018-09-12
  */
 public interface MainorderRepository extends BaseMapper<Mainorder> {
-    void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState, @Param("backNum") String backNum);
+    void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
+    void updateSubOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
 
     TodayStatical getOrderStatical(@Param("tenantId") Integer tenantId, @Param("start") Date start, @Param("end") Date end);
 

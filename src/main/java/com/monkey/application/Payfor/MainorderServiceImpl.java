@@ -86,9 +86,11 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
             s.setOrderNum(orderNum);
             s.setOrderState(0);
             s.setPayState(0);
+            s.setPrice(dd.price);
             s.setPayType(input.isWechatOrder ? 1 : 2);
             s.setPointId(d.getPointId());
             s.setPointName(d.getPointName());
+            finals.add(s);
         }
         List<Product> p = _productRepository.selectBatchIds(ids);
         if (p == null || p.isEmpty()) throw new Exception("该商品信息不存在");
@@ -212,10 +214,47 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
         System.out.print(response.getBody());
         String to = response.getRefundFee();
         if (!to.isEmpty()) {
-            _orderRepository.updateOrderState(input.getOrderNum(), null, 2, response.getOutTradeNo());
+            String backId= response.getOutTradeNo();
+            _orderRepository.updateOrderState(input.getOrderNum(), null, 2);
         }
         return to;
     }
+
+
+    /*
+    * 阿里云退款*/
+    @Override
+    public String alibacksingle(Mainorder input,Suborder sub) throws Exception {
+        String outNum=UUID.randomUUID().toString();
+        EntityWrapper ew = new EntityWrapper();
+        List<Payfor> list = _payforRepository.selectList(ew);
+        Payfor p = list.get(0);
+        if (list.isEmpty() || p == null) throw new Exception("该商户支付信息不存在");
+        String out_trade_no = input.getOrderNum(); //订单号 （调整为自己的生产逻辑）
+
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", p.getAlipayId(), p.getAlipayKey(),
+                "json", "UTF-8", p.getAlipayAgent(), "RSA2");
+        //获得初始化的AlipayClient
+        AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();//创建API对应的request类
+        Map<String, String> r = new HashMap<>();
+        r.put("out_trade_no", input.getOrderNum());
+        r.put("out_request_no", outNum);
+        r.put("refund_amount", sub.getPrice() + "");
+        String w = JSON.toJSONString(r);
+        request.setBizContent(w); //设置业务参数
+        //   request.setNotifyUrl(PayConfig.Alibackurl);
+        AlipayTradeRefundResponse response = alipayClient.execute(request);
+        //通过alipayClient调用API，获得对应的response类
+        System.out.print(response.getBody());
+        String to = response.getRefundFee();
+        if (!to.isEmpty()) {
+            sub.setPayType(2);
+            sub.setSerialNum(outNum);
+            _subOrderService.insertOrUpdate(sub);
+        }
+        return to;
+    }
+
 
     @Override
     public Page<DeviceSaleStatical> getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input) {
@@ -268,8 +307,12 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     }
 
     @Override
-    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState, String backNum) {
-        _orderRepository.updateOrderState(orderNum, orderState, payState, backNum);
+    public void updateOrderStatte(String orderNum, Integer orderState, Integer payState) {
+        _orderRepository.updateOrderState(orderNum, orderState, payState);
+    }
+    @Override
+    public void updateSubOrderStatte(String orderNum, Integer orderState, Integer payState) {
+        _orderRepository.updateSubOrderState(orderNum, orderState, payState);
     }
 
     /*
@@ -310,6 +353,46 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
         return resXml;
     }
 
+    /*
+    * 微信退款功能
+    * */
+    @Override
+    public String weixinBackSingle(Mainorder order, Suborder input) throws Exception {
+        String outNum=UUID.randomUUID().toString();
+        EntityWrapper ew = new EntityWrapper();
+        List<Payfor> list = _payforRepository.selectList(ew);
+        Payfor p = list.get(0);
+        if (list.isEmpty() || p == null) throw new Exception("该商户支付信息不存在");
+        String out_trade_no = input.getOrderNum(); //订单号 （调整为自己的生产逻辑）
+        // 账号信息
+        String appid = p.getWechatpayId();  // appid
+        String mch_id = p.getWechatpayAgent(); // 商业号
+        String key = p.getWechatpayKey(); // key
+        String currTime = PayToolUtil.getCurrTime();
+        String strTime = currTime.substring(8, currTime.length());
+        String strRandom = PayToolUtil.buildRandom(4) + "";
+        String nonce_str = strTime + strRandom;
+        // 回调接口
+        String notify_url = PayConfig.BackSingle_Url;
+        SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
+        packageParams.put("appid", appid);
+        packageParams.put("mch_id", mch_id);
+        packageParams.put("nonce_str", nonce_str);
+        packageParams.put("out_trade_no", out_trade_no);
+        packageParams.put("out_refund_no", outNum);
+        //    packageParams.put("refund_desc", 111);  //（调整为自己的名称）
+        packageParams.put("total_fee", order.getPrice().toString()); //价格的单位为分
+        packageParams.put("refund_fee", input.getPrice().toString());
+        packageParams.put("notify_url", notify_url);
+        String sign = PayToolUtil.createSign("UTF-8", packageParams, key);
+        packageParams.put("sign", sign);
+
+        String requestXML = PayToolUtil.getRequestXml(packageParams);
+        String resXml = HttpUtil.back(requestXML, p);
+        input.setSerialNum(outNum);
+        _subOrderService.insertOrUpdate(input);
+        return resXml;
+    }
     private Map<String, Object> getDayKeysAndValues(List<SalePercentDto> list) {
         List<String> keys = new ArrayList<>();
         List<Integer> values = new ArrayList<>();

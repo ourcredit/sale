@@ -28,7 +28,7 @@
         id, price, orderNum, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName, payType, payTime, deviceNum, pointId, serialNum
     </sql>
     <update id="updateOrderState">
-        update sale_order
+        update sale_mainorder
         set
         <if test="payState!=null">
             payState=#{payState}
@@ -36,10 +36,27 @@
         <if test="orderState!=null">
             , orderState=#{orderState}
         </if>
-        <if test="backNum!=null">
-            , backNum=#{backNum}
+        where orderNum=#{num} and payState &lt;>2;
+        update sale_suborder
+        set
+        <if test="payState!=null">
+            payState=#{payState}
         </if>
-        where wechatOrder=#{num} and payState &lt;>2
+        <if test="orderState!=null">
+            , orderState=#{orderState}
+        </if>
+        where orderNum=#{num} and payState &lt;>2;
+    </update>
+    <update id="updateSubOrderState">
+        update sale_suborder
+        set
+        <if test="payState!=null">
+            payState=#{payState}
+        </if>
+        <if test="orderState!=null">
+            , orderState=#{orderState}
+        </if>
+        where serialNum=#{num} and payState &lt;>2;
     </update>
     <!--获取时间段统计数据-->
     <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">
@@ -234,5 +251,4 @@
         a.productName
 
     </select>
-
 </mapper>
