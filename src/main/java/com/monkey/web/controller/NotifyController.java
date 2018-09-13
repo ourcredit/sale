@@ -51,7 +51,6 @@ public class NotifyController {
     }
     ///插入流水表
     private void insertSerial(Order order,Integer type,String backOrder) {
-
         Serial s = new Serial();
         s.setDeviceId(order.getDeviceId());
         s.setDeviceName(order.getDeviceName());
@@ -60,7 +59,6 @@ public class NotifyController {
         s.setPointName(order.getPointName());
         s.setPrice(order.getPrice());
         s.setType(type);
-        s.setTenantId(order.getTenantId());
         s.setProductId(order.getProductId());
         s.setProductName(order.getProductName());
         s.setPrice(order.getPrice());

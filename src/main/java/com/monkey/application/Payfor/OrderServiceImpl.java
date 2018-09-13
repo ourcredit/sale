@@ -205,7 +205,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         s.setPointName(order.getPointName());
         s.setPrice(order.getPrice());
         s.setType(1);
-        s.setTenantId(order.getTenantId());
         s.setProductId(order.getProductId());
         s.setProductName(order.getProductName());
         s.setPrice(order.getPrice());
