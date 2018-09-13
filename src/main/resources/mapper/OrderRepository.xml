@@ -36,10 +36,10 @@
             payState=#{payState}
         </if>
         <if test="orderState!=null">
-            , orderState=#{orderState}
+          <if test="payState!=null">,</if>  orderState=#{orderState}
         </if>
         <if test="backNum!=null">
-            , backNum=#{backNum}
+            <if test="backNum!=null">,</if>   backNum=#{backNum}
         </if>
         where wechatOrder=#{num} and payState &lt;>2
     </update>
