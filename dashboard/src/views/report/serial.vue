@@ -5,23 +5,23 @@
                 <Form slot="filter" ref="queryForm" :label-width="70" label-position="left" inline>
                     <Row :gutter="4">
                         <Col span="4">
-                        <FormItem label="设备编号:">
-                            <Input v-model="filters.roleName"/>
+                        <FormItem label="设备名:">
+                            <Input v-model="filters.deviceName"/>
                         </FormItem>
                         </Col>
                         <Col span="4">
                         <FormItem label="所属点位:">
-                            <Input v-model="filters.displayName"/>
+                            <Input v-model="filters.pointName"/>
                         </FormItem>
                         </Col>
                          <Col span="4">
                         <FormItem label="商品名称:">
-                            <Input v-model="filters.displayName"/>
+                            <Input v-model="filters.productName"/>
                         </FormItem>
                         </Col>
                          <Col span="4">
                         <FormItem label="时间范围:">
-                            <Input v-model="filters.displayName"/>
+                            <Input v-model="filters.creationTime"/>
                         </FormItem>
                         </Col>
                         <Col span="7">
@@ -31,7 +31,7 @@
                         </Col>
                     </Row>
                 </Form>
-                <SaleTable ref="table" :filters="filters" :type="'role'" :is-empty="true" :columns="columns"></SaleTable>
+                <SaleTable ref="table" :filters="filters" :type="'serial'"  :columns="columns"></SaleTable>
             </div>
         </Card>
     </div>
@@ -40,21 +40,20 @@
 import { Component, Vue, Inject, Prop, Watch } from "vue-property-decorator";
 import SaleTable from "@/components/saletable.vue";
 import AbpBase from "../../lib/abpbase";
-import Role from "@/store/entities/role";
 @Component({
   components: {
     SaleTable
   }
 })
-export default class Users extends AbpBase {
-  filters: Object = {
-    account: "",
-    userName: "",
-    creationTime: null,
-    isActive: null
+export default class Serials extends AbpBase {
+  filters: any = {
+    deviceName: "",
+    pointName: "",
+    productName: "",
+    creationTime: null
   };
   p: any = {
-    list: this.hasPermission("role:list")
+    list: this.hasPermission("serial:list")
   };
   ModalShow: boolean = false;
   columns: Array<any> = [
@@ -64,65 +63,46 @@ export default class Users extends AbpBase {
       align: "center"
     },
     {
-      title: "设备编号",
-      key: "roleName"
+      title: "订单号",
+      key: "order"
     },
     {
-      title: "设备类型",
-      key: "displayName"
+      title: "金钱",
+      key: "price",
+      render: (h: any, params: any) => {
+        return h("span", params.row.price / 100);
+      }
     },
     {
-      title: "所属点位",
-      key: "description"
+      title: "商品名",
+      key: "productName"
     },
     {
-      title: "故障信息",
-      key: "isActive"
+      title: "设备名",
+      key: "deviceName"
     },
     {
-      title: "故障编号",
-      key: "isActive"
+      title: "点位名",
+      key: "pointName"
     },
     {
-      title: "故障状态",
-      key: "isStatic"
+      title: "类型",
+      key: "type",
+      render: (h: any, params: any) => {
+        return h("span", params.row.type == 1 ? "支付" : "退款");
+      }
+    },
+    {
+      title: "创建时间",
+      render: (h: any, params: any) => {
+        return h("span", new Date(params.row.creationTime).toLocaleString());
+      }
     }
   ];
-
-  Create() {
-    var u = new Role();
-    this.$store.commit("role/edit", u);
-    this.ModalShow = true;
-  }
   init() {
     var t: any = this.$refs.table;
     t.getpage();
   }
-  async batchDelete() {
-    var t: any = this.$refs.table;
-    if (t.selections) {
-      this.$Modal.confirm({
-        title: "删除提示",
-        content: `确认要删除${t.selections.length}条数据么`,
-        okText: "是",
-        cancelText: "否",
-        onOk: async () => {
-          await this.$store.dispatch({
-            type: "role/batch",
-            data: t.selections
-          });
-          await this.init();
-        }
-      });
-    }
-  }
-  Modify() {
-    this.ModalShow = true;
-  }
-  async created() {
-    await this.$store.dispatch({
-      type: "role/getAllPermissions"
-    });
-  }
+  async created() {}
 }
 </script>

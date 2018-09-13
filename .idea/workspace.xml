@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b176726-01e9-4f8b-b9a1-5fc3ae06db7f" name="默认的" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/router/router.ts" afterPath="$PROJECT_DIR$/dashboard/src/router/router.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/application/Payfor/OrderServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/config/DataCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" afterPath="$PROJECT_DIR$/src/main/java/com/monkey/web/controller/NotifyController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/store/index.ts" afterPath="$PROJECT_DIR$/dashboard/src/store/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dashboard/src/views/report/serial.vue" afterPath="$PROJECT_DIR$/dashboard/src/views/report/serial.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -575,7 +572,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105242000" />
+    <option name="totallyTimeSpent" value="105807000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />

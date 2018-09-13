@@ -15,6 +15,7 @@ import tenant from "@/store/modules/tenant";
 import order from "@/store/modules/order";
 import dash from "@/store/modules/dash";
 import category from "@/store/modules/category";
+import serial from "@/store/modules/serial";
 const store: any = new Vuex.Store({
   state: {
     //
@@ -37,7 +38,8 @@ const store: any = new Vuex.Store({
     tenant,
     order,
     dash,
-    category
+    category,
+    serial
   }
 });
 
