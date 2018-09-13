@@ -62,7 +62,7 @@ public class DataCreator implements CommandLineRunner {
     }
     public void  createDefaultTenant(){
         EntityWrapper<Tenant> ew = new EntityWrapper<>();
-        ew.eq("name",InitConst._defaultTenant.admin);
+        ew.eq("tenantName",InitConst._defaultTenant.admin);
         Tenant  t = _tenantService.selectOne(ew);
         if(t==null){
          _tenantService.insert(new Tenant(InitConst._defaultTenant.admin,InitConst._defaultTenant.admin));

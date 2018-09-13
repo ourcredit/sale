@@ -180,6 +180,13 @@ export const appRouters: Array<any> = [
     component: () => System.import("../views/main.vue"),
     children: [
       {
+        path: "/report/serial",
+        meta: { title: "流水信息" },
+        permission: "serial:list",
+        name: "report.serial",
+        component: () => System.import("../views/report/serial.vue")
+      },
+      {
         path: "/report/device",
         meta: { title: "设备销量" },
         permission: "devicesale:list",

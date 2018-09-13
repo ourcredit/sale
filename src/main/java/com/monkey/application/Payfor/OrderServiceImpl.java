@@ -20,10 +20,7 @@ import com.monkey.core.dtos.DeviceSaleStatical;
 import com.monkey.core.dtos.ProductSaleStatical;
 import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
-import com.monkey.core.entity.Device;
-import com.monkey.core.entity.Order;
-import com.monkey.core.entity.Payfor;
-import com.monkey.core.entity.Product;
+import com.monkey.core.entity.*;
 import com.monkey.core.mapper.OrderRepository;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -60,6 +57,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     ProductRepository _productRepository;
     @Autowired
     PayforRepository _payforRepository;
+    @Autowired
+    ISerialService _serialService;
     protected static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     /*
     * 创建订单*/
@@ -192,10 +191,27 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
        String to= response.getRefundFee();
        if(!to.isEmpty()){
            _orderRepository.updateOrderState(input.getWechatOrder(),null,2,response.getOutTradeNo());
+           insertSerial(input);
        }
        return  to;
     }
-
+    ///插入流水表
+    private void insertSerial(Order order) {
+        Serial s = new Serial();
+        s.setDeviceId(order.getDeviceId());
+        s.setDeviceName(order.getDeviceName());
+        s.setOrder(order.getWechatOrder());
+        s.setPointId(order.getPointId());
+        s.setPointName(order.getPointName());
+        s.setPrice(order.getPrice());
+        s.setType(1);
+        s.setTenantId(order.getTenantId());
+        s.setProductId(order.getProductId());
+        s.setProductName(order.getProductName());
+        s.setPrice(order.getPrice());
+        s.setBackOrder("");
+        _serialService.insert(s);
+    }
     @Override
     public Page<DeviceSaleStatical> getDeviceSaleStatical(Page<DeviceSaleStatical> page, StaticalInput input ) {
         List<DeviceSaleStatical>  t=  _orderRepository.getDeviceSaleStatical(input.getTenantId(), page,input.deviceName,input.pointName,input.start,input.end);
