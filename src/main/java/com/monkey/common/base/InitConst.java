@@ -78,6 +78,7 @@ public interface InitConst {
 
             add(new MenuInfo("报表系统", PermissionConst._report.list, "", 1, new ArrayList<MenuInfo>() {{
                 add(new MenuInfo("设备销量", PermissionConst._report._device.list, "/watch/device", 1, null));
+                add(new MenuInfo("流水信息", PermissionConst._report._serial.list, "/watch/serial", 1, null));
                 add(new MenuInfo("商品销量", PermissionConst._report._product.list, "/watch/product", 1, null));
                 add(new MenuInfo("设备备货信息", PermissionConst._report._deviceget.list, "/watch/dgp", 1, null));
                 add(new MenuInfo("设备故障记录", PermissionConst._report._devicewarn.list, "/watch/de", 1, null));

@@ -19,6 +19,9 @@ public interface PermissionConst {
         public  static  class _device{
             public static  final  String list="devicesale:list";
         }
+        public  static  class  _serial{
+            public static  final  String list="serial:list";
+        }
         public  static  class _product{
             public static  final  String list="productsale:list";
         }

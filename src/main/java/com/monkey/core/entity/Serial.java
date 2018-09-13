@@ -1,4 +1,4 @@
-package com.monkey.entity;
+package com.monkey.core.entity;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
