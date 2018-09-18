@@ -1,23 +1,20 @@
 package com.monkey.web.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.monkey.application.Payfor.IMainorderService;
+import com.monkey.application.Payfor.IOrderService;
 import com.monkey.application.Payfor.ISerialService;
 import com.monkey.common.util.CipherTextUtil;
 import com.monkey.common.wechatsdk.XMLUtil4jdom;
-import com.monkey.core.entity.Mainorder;
+import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Payfor;
 import com.monkey.core.entity.Serial;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.WebSocketMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.applet.Main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +28,7 @@ import java.util.*;
 @RequestMapping(value = "/pay")
 public class NotifyController {
     @Autowired
-    IMainorderService _orderService;
+    IOrderService _orderService;
     @Autowired
     ISerialService _serialService;
 
@@ -262,7 +259,7 @@ public class NotifyController {
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
                 EntityWrapper e = new EntityWrapper();
                 e.eq("wechatOrder", out_trade_no);
-                Mainorder o = _orderService.selectOne(e);
+                Order o = _orderService.selectOne(e);
                 if (o != null) {
                     _orderService.updateOrderStatte(out_trade_no, null, 1);
                     insertSerial(o, false);
@@ -299,7 +296,7 @@ public class NotifyController {
     }
 
     ///插入流水表
-    private void insertSerial(Mainorder order, Boolean isBack) {
+    private void insertSerial(Order order, Boolean isBack) {
 
         Serial s = new Serial();
         if (!isBack) {
@@ -374,7 +371,7 @@ public class NotifyController {
                 } else if (status.equals("TRADE_SUCCESS") || status.equals("TRADE_FINISHED")) {
                     EntityWrapper e = new EntityWrapper();
                     e.eq("wechatOrder", outtradeno);
-                    Mainorder o = _orderService.selectOne(e);
+                    Order o = _orderService.selectOne(e);
                     // 如果状态是已经支付成功成功 更新状态
                     _orderService.updateOrderStatte(outtradeno, null, 1);
                     insertSerial(o, false);

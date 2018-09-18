@@ -21,7 +21,7 @@ import com.monkey.core.dtos.ProductSaleStatical;
 import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
 import com.monkey.core.entity.*;
-import com.monkey.core.mapper.MainorderRepository;
+import com.monkey.core.mapper.OrderRepository;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
 import com.monkey.web.aspect.WebSocketServer;
@@ -43,10 +43,10 @@ import java.util.*;
  * @since 2018-09-12
  */
 @Service
-public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Order> implements IMainorderService {
+public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implements IOrderService {
     //创建订单
     @Autowired
-    MainorderRepository _orderRepository;
+    OrderRepository _orderRepository;
     @Autowired
     IDeviceService _deviceService;
     @Autowired
@@ -55,7 +55,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Order
     PayforRepository _payforRepository;
     @Autowired
     ISuborderService _subOrderService;
-    protected static final Logger logger = LoggerFactory.getLogger(MainorderServiceImpl.class);
+    protected static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     /*
       * 创建订单*/

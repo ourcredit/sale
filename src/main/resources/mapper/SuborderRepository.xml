@@ -9,6 +9,8 @@
         <result column="orderNum" property="orderNum" />
         <result column="creationTime" property="creationTime" />
         <result column="creatorUserId" property="creatorUserId" />
+        <result column="productId" property="productId" />
+        <result column="productName" property="productName" />
         <result column="orderState" property="orderState" />
         <result column="payState" property="payState" />
         <result column="tenantId" property="tenantId" />
@@ -26,7 +28,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, price, orderNum, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName, payType, pickCode, pickTime, deviceNum, pointId, serialNum
+        id, price, orderNum, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName, payType, pickCode, pickTime, deviceNum, pointId, serialNum,productId,productName
     </sql>
 
 </mapper>

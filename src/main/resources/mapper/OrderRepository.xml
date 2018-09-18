@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.monkey.core.mapper.MainorderRepository">
+<mapper namespace="com.monkey.core.mapper.OrderRepository">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.monkey.core.entity.Order">
@@ -28,7 +28,7 @@
         id, price, orderNum, creationTime, creatorUserId, orderState, payState, tenantId, deviceId, deviceName, deviceType, pointName, payType, payTime, deviceNum, pointId, serialNum
     </sql>
     <update id="updateOrderState">
-        update sale_mainorder
+        update sale_order
         set
         <if test="payState!=null">
             payState=#{payState}
@@ -62,8 +62,17 @@
     <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">
         SELECT
         SUM( price ) AS sale,
-        COUNT( 1 ) AS count,
-        ( SELECT COUNT( 1 ) FROM sale_device  where  tenantId=1
+        ( SELECT count( 1 ) FROM sale_suborder
+        <where>
+            ( payState =1 and orderState =1 ) and tenantId=#{tenantId}
+            <if test="start!=null">
+              and  creationTime >= #{start}
+            </if>
+            <if test="end!=null">
+                and creationTime &lt;= #{end}
+            </if>
+        </where> ) as count,
+        ( SELECT COUNT( 1 ) FROM sale_device  where  tenantId=#{tenantId}
         ) AS device,
         ( SELECT COUNT( 1 ) FROM sale_log
         <where>
@@ -77,7 +86,7 @@
         ) AS error,
         ( SELECT COUNT( 1 ) FROM sale_order
         <where>
-            ( payState =2 OR orderState =- 1 ) and tenantId=1
+            ( payState =2 OR orderState =- 1 ) and tenantId=#{tenantId}
             <if test="start!=null">
                 and creationTime >= #{start}
             </if>
@@ -103,7 +112,7 @@
         DATE_FORMAT( creationTime, '%h' ) as time,
         COUNT( 1 ) as count
         FROM
-        sale_order
+        sale_suborder
         <where>
             payState = 1
             AND orderState = 1
@@ -125,7 +134,7 @@
         DATE_FORMAT( creationTime, '%d' ) as time,
         COUNT( 1 ) as count
         FROM
-        sale_order
+        sale_suborder
         <where>
             payState = 1
             AND orderState = 1
@@ -233,7 +242,7 @@
         COUNT( 1 ) saleCount,
         SUM( a.price ) saleMoney
         FROM
-        sale_order a
+        sale_suborder a
         WHERE
         a.payState = 1
         AND a.orderState = 1

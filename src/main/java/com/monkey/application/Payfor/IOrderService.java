@@ -21,7 +21,7 @@ import java.util.Map;
  * @author zhaohejing
  * @since 2018-09-12
  */
-public interface IMainorderService extends IService<Order> {
+public interface IOrderService extends IService<Order> {
     Order insertOrder(OrderInput input) throws Exception;
 
     String weixinPay(Order input) throws Exception;

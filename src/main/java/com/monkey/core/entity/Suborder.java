@@ -49,6 +49,8 @@ public class Suborder extends Model<Suborder> {
      * 订单状态
      */
     private Integer orderState;
+    private Integer productId;
+    private  String productName;
     /**
      * 支付状态
      */
@@ -270,5 +272,21 @@ public class Suborder extends Model<Suborder> {
         ", pointId=" + pointId +
         ", serialNum=" + serialNum +
         "}";
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 }

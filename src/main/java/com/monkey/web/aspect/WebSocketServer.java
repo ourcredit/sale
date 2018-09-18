@@ -1,13 +1,9 @@
 package com.monkey.web.aspect;
 
 
-import java.beans.IntrospectionException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -18,19 +14,17 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.monkey.application.Payfor.IMainorderService;
+import com.monkey.application.Payfor.IOrderService;
 import com.monkey.web.config.SpringContextBean;
 import com.monkey.web.controller.dtos.WebSocketMessage;
-import org.apache.commons.collections.map.CompositeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import springfox.documentation.spring.web.json.Json;
 
 @ServerEndpoint(value = "/websocket/{tenantId}/{clientId}")
 @Component
 public class WebSocketServer {
     @Autowired
-    IMainorderService _orderService;
+    IOrderService _orderService;
     private static Map<String,Integer> clientsState=new ConcurrentHashMap<>();
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static Map<Integer, Integer> onlineCount = new ConcurrentHashMap();
@@ -85,7 +79,7 @@ public class WebSocketServer {
     @OnMessage
     public void onMessage(String message) throws IOException {
         if (this._orderService == null) {
-            this._orderService = SpringContextBean.getBean(IMainorderService.class);
+            this._orderService = SpringContextBean.getBean(IOrderService.class);
         }
         JSONObject jsonTo = JSONObject.parseObject(message);
         String order = (String) jsonTo.get("order");

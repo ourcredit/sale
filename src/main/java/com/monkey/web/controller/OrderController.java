@@ -4,7 +4,7 @@ package com.monkey.web.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.monkey.application.Device.IPointService;
-import com.monkey.application.Payfor.IMainorderService;
+import com.monkey.application.Payfor.IOrderService;
 import com.monkey.application.Payfor.ISuborderService;
 import com.monkey.application.dtos.PagedAndFilterInputDto;
 import com.monkey.common.base.Constant;
@@ -13,7 +13,7 @@ import com.monkey.common.base.PublicResult;
 import com.monkey.common.base.PublicResultConstant;
 import com.monkey.common.util.ComUtil;
 import com.monkey.common.wechatsdk.QrCodeUtil;
-import com.monkey.core.entity.Mainorder;
+import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Suborder;
 import com.monkey.web.annotation.Log;
 import com.monkey.web.controller.dtos.OrderInput;
@@ -35,10 +35,10 @@ import java.util.List;
  * @since 2018-07-26
  */
 @RestController
-@RequestMapping("api/mainorder")
-public class MainorderController {
+@RequestMapping("api/order")
+public class OrderController {
     @Autowired
-    IMainorderService _orderService;
+    IOrderService _orderService;
     @Autowired
     IPointService _pointService;
     @Autowired
@@ -46,8 +46,8 @@ public class MainorderController {
     @ApiOperation(value = "获取订单列表", notes = "订单列表")
     @RequestMapping(value = "", method = RequestMethod.POST)
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
-    public PublicResult<Page<Mainorder>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception {
-        EntityWrapper<Mainorder> filter = new EntityWrapper<>();
+    public PublicResult<Page<Order>> orders(@RequestBody PagedAndFilterInputDto page) throws Exception {
+        EntityWrapper<Order> filter = new EntityWrapper<>();
         filter = ComUtil.genderFilter(filter, page.where);
         String code = (String) page.where.get("code");
         if (code != null && !code.isEmpty()) {
@@ -60,14 +60,14 @@ public class MainorderController {
                 }
             }
         }
-        Page<Mainorder> res = _orderService.selectPage(new Page<>(page.index, page.size), filter);
+        Page<Order> res = _orderService.selectPage(new Page<>(page.index, page.size), filter);
         return new PublicResult<>(PublicResultConstant.SUCCESS, res);
     }
     @ApiOperation(value = "获取订单详情", notes = "订单列表")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
-    public PublicResult<Mainorder> Product(@PathVariable Integer id) throws Exception {
-        Mainorder m = _orderService.selectById(id);
+    public PublicResult<Order> Product(@PathVariable Integer id) throws Exception {
+        Order m = _orderService.selectById(id);
         return new PublicResult<>(PublicResultConstant.SUCCESS, m);
     }
     @Log(description = "订单接口:/客户下单操作")
@@ -76,7 +76,7 @@ public class MainorderController {
     @RequiresPermissions(value = {PermissionConst._orders._order.list})
     public PublicResult<Object> insert(@RequestBody OrderInput model) throws Exception {
         try {
-            Mainorder r = _orderService.insertOrder(model);
+            Order r = _orderService.insertOrder(model);
             if (!r.getId().isEmpty()) {
                 String code = "";
                 if (model.isWechatOrder) {
@@ -102,7 +102,7 @@ public class MainorderController {
     @RequiresPermissions(value = {PermissionConst._orders._order.back})
     public PublicResult<Object> back(@PathVariable String orderId) throws Exception {
         try {
-            Mainorder r = _orderService.selectById(orderId);
+            Order r = _orderService.selectById(orderId);
             if (r != null) {
                 String result = "";
                 if (r.getPayType() == 1) {
@@ -126,7 +126,7 @@ public class MainorderController {
         try {
             Suborder suborder=_subOrderService.selectById(subId);
             if(suborder==null)  return new PublicResult<>(PublicResultConstant.FAILED, "订单不存在");
-            Mainorder r = _orderService.selectById(suborder.getOrderNum());
+            Order r = _orderService.selectById(suborder.getOrderNum());
             if (r != null) {
                 String result = "";
                 if (r.getPayType() == 1) {

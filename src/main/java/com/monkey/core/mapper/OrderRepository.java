@@ -22,7 +22,7 @@ import java.util.List;
  * @author zhaohejing
  * @since 2018-09-12
  */
-public interface MainorderRepository extends BaseMapper<Order> {
+public interface OrderRepository extends BaseMapper<Order> {
     void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
     void updateSubOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
 

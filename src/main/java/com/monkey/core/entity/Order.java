@@ -19,7 +19,7 @@ import java.io.Serializable;
  * @since 2018-09-12
  */
 @TableName("sale_order")
-public class Mainorder extends Model<Mainorder> {
+public class Order extends Model<Order> {
 
     private static final long serialVersionUID = 1L;
 
@@ -241,7 +241,7 @@ public class Mainorder extends Model<Mainorder> {
 
     @Override
     public String toString() {
-        return "Mainorder{" +
+        return "Order{" +
         "id=" + id +
         ", price=" + price +
         ", orderNum=" + orderNum +
