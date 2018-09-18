@@ -9,6 +9,7 @@ import com.monkey.core.entity.Payfor;
 import com.monkey.core.entity.Suborder;
 import com.monkey.web.controller.dtos.OrderInput;
 import com.monkey.web.controller.dtos.StaticalInput;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.Date;
 import java.util.Map;
@@ -31,6 +32,7 @@ public interface IOrderService extends IService<Order> {
     void updateOrderStatte(String orderNum, Integer orderState, Integer payState);
     void updateSubOrderStatte(String orderNum, Integer orderState, Integer payState);
 
+    Order selectOrderById(String order);
     String weixinBack(Order input) throws  Exception;
      String weixinBackSingle(Order order, Suborder input) throws Exception;
     Map<String,Object> getDashboard(Integer tenantId);

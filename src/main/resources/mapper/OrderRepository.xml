@@ -260,4 +260,7 @@
         a.productName
 
     </select>
+    <select id="selectOrderById" resultType="com.monkey.core.entity.Order">
+       SELECT * from sale_order where orderNum=#{order} ORDER BY creationTime desc LIMIT 0,1
+    </select>
 </mapper>

@@ -55,6 +55,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     PayforRepository _payforRepository;
     @Autowired
     ISuborderService _subOrderService;
+    @Autowired
+    ISerialService _serialService;
     protected static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     /*
@@ -213,6 +215,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         String to = response.getRefundFee();
         if (!to.isEmpty()) {
             String backId= response.getOutTradeNo();
+            input.setPayType(2);
+            input.setSerialNum(backId);
+            _serialService.insertBySql(input);
             _orderRepository.updateOrderState(input.getOrderNum(), null, 2);
         }
         return to;
@@ -246,8 +251,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
         System.out.print(response.getBody());
         String to = response.getRefundFee();
         if (!to.isEmpty()) {
+            String backId= response.getOutTradeNo();
+
             sub.setPayType(2);
-            sub.setSerialNum(outNum);
+            sub.setSerialNum(backId);
+            input.setPayType(2);
+            input.setSerialNum(backId);
+            _serialService.insertBySql(input);
             _subOrderService.insertOrUpdate(sub);
         }
         return to;
@@ -311,6 +321,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderRepository, Order> implem
     @Override
     public void updateSubOrderStatte(String orderNum, Integer orderState, Integer payState) {
         _orderRepository.updateSubOrderState(orderNum, orderState, payState);
+    }
+
+    @Override
+    public Order selectOrderById(String order) {
+     return    _orderRepository.selectOrderById(order);
     }
 
     /*

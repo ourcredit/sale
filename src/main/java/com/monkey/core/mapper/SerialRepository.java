@@ -1,7 +1,9 @@
 package com.monkey.core.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Serial;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -12,5 +14,5 @@ import com.monkey.core.entity.Serial;
  * @since 2018-09-12
  */
 public interface SerialRepository extends BaseMapper<Serial> {
-
+        void  insertBySql(Order order);
 }

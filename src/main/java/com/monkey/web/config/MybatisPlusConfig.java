@@ -107,6 +107,8 @@ public class MybatisPlusConfig {
                 add("com.monkey.core.mapper.UserRepository.selectByTenantAndName");
                 add("com.monkey.core.mapper.OrderRepository.updateOrderState");
                 add("com.monkey.core.mapper.OrderRepository.getPayforByOrder");
+                add("com.monkey.core.mapper.SerialRepository.insertBySql");
+                add("com.monkey.core.mapper.OrderRepository.selectOrderById");
             }};
             MappedStatement ms = PluginUtils.getMappedStatement(metaObject);
             // 过滤自定义查询此时无租户信息约束【 麻花藤 】出现

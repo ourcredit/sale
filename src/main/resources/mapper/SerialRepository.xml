@@ -24,5 +24,26 @@
     <sql id="Base_Column_List">
         id, order, price, backOrder, creationTime, creatorUserId, tenantId, productId, productName, type, deviceId, deviceName, pointId, pointName
     </sql>
+    <insert id="insertBySql"  parameterType="com.monkey.core.entity.Order">
+        INSERT INTO `sale_device` (
+deviceId,
+deviceNum,
+deviceName,
+deviceType,
+productId,
+productName,
+pointId,
+pointName,
+type,
+`order`,
+price,
+backOrder,
+creationTime,
+creatorUserId,
+tenantId
+)
+VALUES
+	(#{deviceId},#{deviceNum},#{deviceName},#{deviceType},#{productId},#{productName},#{pointId},#{pointName},#{payType},#{orderNum},#{price},#{serialNum},new Date(),1,#{tenantId});
+    </insert>
 
 </mapper>

@@ -97,7 +97,9 @@ public class NotifyController {
             if ("SUCCESS".equals(packageParams.get("refund_status"))) {
                 // 这里是退款成功
                 String out_trade_no = (String) packageParams.get("out_trade_no");
+             Order o=   _orderService.selectOrderById(out_trade_no);
                 String back_id = (String) packageParams.get("out_refund_no");
+                insertSerial(o,true,back_id);
                 //////////更新订单信息////////////////
                 _orderService.updateOrderStatte(out_trade_no, null, 2);
                 // 向微信服务器发送确认信息，若不发送，微信服务器会间隔不同的时间调用回调方法
@@ -257,12 +259,10 @@ public class NotifyController {
 //                String transaction_id = (String) packageParams.get("transaction_id");
 
                 //////////执行自己的业务逻辑（报存订单信息到数据库）////////////////
-                EntityWrapper e = new EntityWrapper();
-                e.eq("wechatOrder", out_trade_no);
-                Order o = _orderService.selectOne(e);
+                Order o = _orderService.selectOrderById(out_trade_no);
                 if (o != null) {
                     _orderService.updateOrderStatte(out_trade_no, null, 1);
-                    insertSerial(o, false);
+                    insertSerial(o, false,"");
                     ///////////通知客户端修改状态/////////
                     String did = out_trade_no.split("_")[0];
                     WebSocketServer ws = WebSocketServer.getClients(o.getTenantId()).get(did);
@@ -296,23 +296,15 @@ public class NotifyController {
     }
 
     ///插入流水表
-    private void insertSerial(Order order, Boolean isBack) {
+    private void insertSerial(Order order, Boolean isBack,String num ) {
 
-        Serial s = new Serial();
-        if (!isBack) {
-            s.setDeviceId(order.getDeviceId());
-            s.setDeviceName(order.getDeviceName());
-            s.setOrder(order.getOrderNum());
-            s.setPointId(order.getPointId());
-            s.setPointName(order.getPointName());
-            s.setPrice(order.getPrice());
-            s.setType(1);
-            s.setTenantId(order.getTenantId());
-        } else {
-
+        if(!isBack){
+            order.setPayType(1);
+        }else {
+            order.setPayType(2);
         }
-
-        _serialService.insert(s);
+        order.setSerialNum(num  );
+        _serialService.insertBySql(order);
     }
 
     /**
@@ -369,12 +361,10 @@ public class NotifyController {
                 } else if (status.equals("TRADE_CLOSED")) { // 如果状态是未付款交易超时关闭，或支付完成后全额退款
 
                 } else if (status.equals("TRADE_SUCCESS") || status.equals("TRADE_FINISHED")) {
-                    EntityWrapper e = new EntityWrapper();
-                    e.eq("wechatOrder", outtradeno);
-                    Order o = _orderService.selectOne(e);
+                    Order o = _orderService.selectOrderById(outtradeno);
                     // 如果状态是已经支付成功成功 更新状态
                     _orderService.updateOrderStatte(outtradeno, null, 1);
-                    insertSerial(o, false);
+                    insertSerial(o, false,"");
                 }
                 System.out.println(outtradeno + "订单的状态已经修改为" + status);
             }
