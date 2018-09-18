@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @author zhaohejing
  * @since 2018-09-12
  */
-@TableName("sale_mainorder")
+@TableName("sale_order")
 public class Mainorder extends Model<Mainorder> {
 
     private static final long serialVersionUID = 1L;

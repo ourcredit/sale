@@ -3,7 +3,7 @@
 <mapper namespace="com.monkey.core.mapper.MainorderRepository">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Mainorder">
+    <resultMap id="BaseResultMap" type="com.monkey.core.entity.Order">
         <id column="id" property="id" />
         <result column="price" property="price" />
         <result column="orderNum" property="orderNum" />
@@ -62,7 +62,7 @@
     <select id="getOrderStatical" resultType="com.monkey.core.dtos.TodayStatical">
         SELECT
         SUM( price ) AS sale,
-        COUNT( productId ) AS count,
+        COUNT( 1 ) AS count,
         ( SELECT COUNT( 1 ) FROM sale_device  where  tenantId=1
         ) AS device,
         ( SELECT COUNT( 1 ) FROM sale_log
@@ -101,7 +101,7 @@
     <select id="getTodaySalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
         SELECT
         DATE_FORMAT( creationTime, '%h' ) as time,
-        COUNT( productId ) as count
+        COUNT( 1 ) as count
         FROM
         sale_order
         <where>
@@ -123,7 +123,7 @@
     <select id="getMonthSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
         SELECT
         DATE_FORMAT( creationTime, '%d' ) as time,
-        COUNT( productId ) as count
+        COUNT( 1 ) as count
         FROM
         sale_order
         <where>
@@ -143,7 +143,7 @@
     </select>
     <!--获取点位销售榜单前十-->
     <select id="getPointSalePercent" resultType="com.monkey.core.dtos.SalePercentDto">
-        select pointName as time,COUNT(productId) as count from sale_order
+        select pointName as time,COUNT(1) as count from sale_order
         <where>
             payState = 1
             AND orderState = 1
@@ -154,14 +154,14 @@
                 and creationTime &lt;= #{end}
             </if>
         </where>
-        GROUP BY pointName ORDER BY COUNT(productId) desc
+        GROUP BY pointName ORDER BY COUNT(1) desc
         LIMIT 0,10
     </select>
     <!--获取支付类型统计-->
     <select id="getPayTypePercent" resultType="com.monkey.core.dtos.SalePercentDto">
         SELECT
         payType time,
-        COUNT( productId ) as count
+        COUNT( 1 ) as count
         FROM
         sale_order
         <where>
@@ -200,7 +200,7 @@
         deviceName,
         deviceNum,
         deviceType,
-        COUNT( productId ) saleCount,
+        COUNT( 1 ) saleCount,
         SUM( price ) saleMoney
         FROM
         sale_order
@@ -230,7 +230,7 @@
         SELECT
         productId,
         productName,
-        COUNT( a.productId ) saleCount,
+        COUNT( 1 ) saleCount,
         SUM( a.price ) saleMoney
         FROM
         sale_order a

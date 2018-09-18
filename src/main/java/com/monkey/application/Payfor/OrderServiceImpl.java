@@ -24,7 +24,6 @@ import com.monkey.core.entity.*;
 import com.monkey.core.mapper.MainorderRepository;
 import com.monkey.core.mapper.PayforRepository;
 import com.monkey.core.mapper.ProductRepository;
-import com.monkey.core.mapper.SuborderRepository;
 import com.monkey.web.aspect.WebSocketServer;
 import com.monkey.web.controller.dtos.OrderInput;
 import com.monkey.web.controller.dtos.StaticalInput;
@@ -32,7 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.applet.Main;
 
 import java.util.*;
 
@@ -45,7 +43,7 @@ import java.util.*;
  * @since 2018-09-12
  */
 @Service
-public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Mainorder> implements IMainorderService {
+public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Order> implements IMainorderService {
     //创建订单
     @Autowired
     MainorderRepository _orderRepository;
@@ -62,7 +60,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     /*
       * 创建订单*/
     @Override
-    public Mainorder insertOrder(OrderInput input) throws Exception {
+    public Order insertOrder(OrderInput input) throws Exception {
 
         EntityWrapper ew = new EntityWrapper();
         ew.eq("deviceNum", input.deviceNum);
@@ -94,7 +92,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
         }
         List<Product> p = _productRepository.selectBatchIds(ids);
         if (p == null || p.isEmpty()) throw new Exception("该商品信息不存在");
-        Mainorder o = new Mainorder();
+        Order o = new Order();
         o.setPayType(input.isWechatOrder ? 1 : 2);
         o.setDeviceId(d.getId());
         o.setDeviceNum(d.getDeviceNum());
@@ -114,7 +112,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     }
     /*微信支付*/
     @Override
-    public String weixinPay(Mainorder input) throws Exception {
+    public String weixinPay(Order input) throws Exception {
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);
         Payfor p = list.get(0);
@@ -163,7 +161,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     /*
     * 阿里云支付*/
     @Override
-    public String aliPay(Mainorder product) throws Exception {
+    public String aliPay(Order product) throws Exception {
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);
         Payfor p = list.get(0);
@@ -191,7 +189,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     /*
     * 阿里云退款*/
     @Override
-    public String aliback(Mainorder input) throws Exception {
+    public String aliback(Order input) throws Exception {
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);
         Payfor p = list.get(0);
@@ -224,7 +222,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     /*
     * 阿里云退款*/
     @Override
-    public String alibacksingle(Mainorder input,Suborder sub) throws Exception {
+    public String alibacksingle(Order input, Suborder sub) throws Exception {
         String outNum=UUID.randomUUID().toString();
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);
@@ -319,7 +317,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
         * 微信退款功能
         * */
     @Override
-    public String weixinBack(Mainorder input) throws Exception {
+    public String weixinBack(Order input) throws Exception {
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);
         Payfor p = list.get(0);
@@ -357,7 +355,7 @@ public class MainorderServiceImpl extends ServiceImpl<MainorderRepository, Maino
     * 微信退款功能
     * */
     @Override
-    public String weixinBackSingle(Mainorder order, Suborder input) throws Exception {
+    public String weixinBackSingle(Order order, Suborder input) throws Exception {
         String outNum=UUID.randomUUID().toString();
         EntityWrapper ew = new EntityWrapper();
         List<Payfor> list = _payforRepository.selectList(ew);

@@ -7,7 +7,7 @@ import com.monkey.core.dtos.DeviceSaleStatical;
 import com.monkey.core.dtos.ProductSaleStatical;
 import com.monkey.core.dtos.SalePercentDto;
 import com.monkey.core.dtos.TodayStatical;
-import com.monkey.core.entity.Mainorder;
+import com.monkey.core.entity.Order;
 import com.monkey.core.entity.Payfor;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +22,7 @@ import java.util.List;
  * @author zhaohejing
  * @since 2018-09-12
  */
-public interface MainorderRepository extends BaseMapper<Mainorder> {
+public interface MainorderRepository extends BaseMapper<Order> {
     void updateOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
     void updateSubOrderState(@Param("num") String num, @Param("orderState") Integer orderState, @Param("payState") Integer payState);
 
