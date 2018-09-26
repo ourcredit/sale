@@ -20,6 +20,7 @@
     * SwaggerUi ：`api接口文档，authoration认证`
 
 >###前端技术统计:
+
     * 语言： `node,typescript` 
     * ui库： `iview,vue`
     * 组件： `vuex,router,axios,singlr...`
@@ -56,20 +57,23 @@
 ```
 
 ### 服务端部署流程
-    1.通过git下载源码,项目基于 ^jdk1.8,^node6.0
-    使用maven项目管理,IDE推荐ijidea.
-    直接ide导入pom文件 自动还原依赖
-    修改~/resources/config/application-dev.properties 内数据库名以及相关信息.
-    使用init.sql初始化数据库信息。
-    ide直接运行SpringbootApplication.java 可以启动项目
-    访问 localhost:8081/api-docs/# 直观api文档
-    或者 在根目录(pom所在目录) shell执行 mvn clean package 
-    在target内直接执行打包好的jar文件 也可以。
+ #### 环境需求:java jdk 1.8以上 maven 3.0以上
+    1.通过git下载源码,进入项目根目录
+    2.使用开发工具idea 或eslipe打开根目录的 pom.xml文件
+    3.在工具内执行资源包还原或者在项目根目录通过mvn install 命令 安装依赖。
+    4.修改~/resources/config/application-dev.properties 内数据库名以及相关信息.
+    5.使用init.sql初始化数据库信息。
+    6.ide直接运行SpringbootApplication.java 启动项目 
+    7.访问 localhost:8081/api-docs/# 直观api文档
+    8.或者 在根目录(pom所在目录) shell执行 mvn clean package 执行打包
+    9.在target内直接执行打包好的jar文件 nohup java -jar sale-1.0.jar &  后台运行项目
 
 
 ### 客户端架构
-    通过vscode打开dashboard文件夹
-    shell内执行 npm install 还原依赖
-    npm run serve 启动项目
-    npm run build 打包项目
+  #### 环境需求 node 6.0以上 npm5.6以上
+    1.在项目目录/dashboard内打开cmd 命令行
+    2.shell内执行 npm install 还原依赖
+    3.npm run serve 启动项目 预览
+    4.npm run build 打包项目 打包好的文件在dist文件夹内 
+    5.将打包好的项目部署到nginx 或者其他容器内。
 
