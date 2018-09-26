@@ -1,39 +1,30 @@
 ### 引言
-
-造轮子是不可能停止的,这辈子都不可能停止的。轮子造的好,外快拿不少。
-
-为了满足不同系统下的不同架构需求,就有了这篇轮子说。
-    
->    为了**Microsoft**！所以有了基于.net Core + EF 的骨架。
-
->    为了**oracle**！ 所以有了基于 java +Mybatis 的骨架。
-
->    为了 **chome**! 所以有了基于node +experss 的骨架。
-
+ ##### 旨在分享.
+ 
 ### 项目技术栈
 
->后端技术统计：
+>###后端技术统计：
 
-* 后端骨架： `springboot`
-* 数据库 : `[mysql,mssql]`
-* Orm： `Mybatis,Mybatis-plus,`
-* 权限组件： `Shiro`
-* ddd模式： ` `
-* JWTtoken :`实现restful api接口,无状态授权认证`
-* 自注解 ：`实现@Pass,@Log,@Current 注解功能`
-* SpringAOP `切面注入事务,过滤请求,防止xss攻击`
-* Bcrypt加密 ：`保证密码安全性`
-* 基于u-r-p的权限体系:`用户-角色-授权体系,接口只需要关心权限。`
-* DataCreator:`项目初始数据初始化。`
-* MpGenerater:`项目代码生成器,减少60%开发。`
-* SwaggerUi ：`api接口文档，authoration认证`
+    * 后端骨架： `springboot`
+    * 数据库 : `[mysql,mssql]`
+    * Orm： `Mybatis,Mybatis-plus,`
+    * 权限组件： `Shiro`
+    * ddd模式： ` `
+    * JWTtoken :`实现restful api接口,无状态授权认证`
+    * 自注解 ：`实现@Pass,@Log,@Current 注解功能`
+    * SpringAOP `切面注入事务,过滤请求,防止xss攻击`
+    * Bcrypt加密 ：`保证密码安全性`
+    * 基于u-r-p的权限体系:`用户-角色-授权体系,接口只需要关心权限。`
+    * DataCreator:`项目初始数据初始化。`
+    * MpGenerater:`项目代码生成器,减少60%开发。`
+    * SwaggerUi ：`api接口文档，authoration认证`
 
->前端技术统计：
-* 语言： `node,typescript`
-* ui库： `iview,vue`
-* 组件： `vuex,router,axios,singlr...`
-* 全局utils：`封装通用方法,异常类,cookie,session帮助类`
-* 通用查询条件:`table展示,filter过滤自动装配.`
+>###前端技术统计:
+    * 语言： `node,typescript` 
+    * ui库： `iview,vue`
+    * 组件： `vuex,router,axios,singlr...`
+    * 全局utils：`封装通用方法,异常类,cookie,session帮助类`
+    * 通用查询条件:`table展示,filter过滤自动装配.`
 
 ### 目录树
 ```
@@ -64,8 +55,8 @@
 └─target //打包文件
 ```
 
-### 服务端结构
-    通过git 下载源码,项目基于 ^jdk1.8,^node6.0
+### 服务端部署流程
+    1.通过git下载源码,项目基于 ^jdk1.8,^node6.0
     使用maven项目管理,IDE推荐ijidea.
     直接ide导入pom文件 自动还原依赖
     修改~/resources/config/application-dev.properties 内数据库名以及相关信息.
