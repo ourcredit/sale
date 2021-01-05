@@ -10,7 +10,7 @@
     "@aspnet/signalr": "^1.0.0-preview2-final",
     "@types/highcharts": "^5.0.26",
     "abp-web-resources": "^3.5.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "echarts": "^4.1.0",
     "famfamfam-flags": "^1.0.0",
     "highcharts": "^6.1.1",
